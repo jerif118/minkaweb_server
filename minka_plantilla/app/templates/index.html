@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minka</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div id="initial-container" class="container">
+        <div class="header">
+            <h1>Minka</h1>
+        </div>
+        <div class="content">
+            <div class="left-section">
+                <div class="download-app">
+                    <p>Descarga Minka en tu Android</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.minka.llntq.app" target="_blank">
+                    <button>Obtener la aplicación</button>
+                    </a>
+                    <img src="{{ url_for('static', filename='../images/logo.png') }}" alt="minka">
+                </div>
+                <h2>Usa Minka en tu computadora</h2>
+                <ol>
+                    <li>Abre Minka en tu teléfono.</li>
+                    <li>Toca <strong>Menú</strong> en Android</li>
+                    <li>Toca <strong>Dispositivos vinculados</strong> y, luego, <strong>Vincular un dispositivo</strong>.</li>
+                    <li>Apunta tu teléfono hacia esta pantalla para escanear el código QR.</li>
+                </ol>
+            </div>
+            <div class="right-section">
+                <div class="qr-code" id="qrCode">
+                    {% if attempts_left > 0 %}
+                    <img src="data:image/png;base64,{{ qr_code }}" alt="QR Code">
+                    {% else %}
+                    <button id="retry-button" onclick="requestNewToken()">HAZ CLIC PARA ACTUALIZAR EL CÓDIGO QR</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notifications-container" class="outer-container" style="display:none;">
+        <div class="container">
+            <div class="header">
+                <h1>NOTIFICACIONES</h1>
+                <div class="header-buttons">
+                    <button id="options-button">Opciones</button>
+                    <button id="unlink-button">Desvincular</button>
+                    <button id="download-button">Descargar en XLSX</button>
+                </div>
+            </div>
+            <div class="content" id="notifications-content">
+                <!-- Aquí se insertarán las notificaciones -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function requestNewToken() {
+            fetch('/retry', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.qr_code) {
+                    const qrImage = document.querySelector('#qrCode img');
+                    if (qrImage) {
+                        qrImage.src = `data:image/png;base64,${data.qr_code}`;
+                    } else {
+                        document.getElementById('qrCode').innerHTML = `<img src="data:image/png;base64,${data.qr_code}" alt="QR Code">`;
+                    }
+                } else {
+                    alert('Error al generar un nuevo token');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }        
+    </script>
+</body>
+</html>

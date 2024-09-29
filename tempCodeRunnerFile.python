@@ -1,0 +1,27 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import binom
+
+# Parámetros
+n = 75
+c = 3
+p_values = np.linspace(0, 0.05, 100)  # Variar p de 0 a 0.05 (5%)
+
+# Función para calcular Pa
+def calculate_pa(n, c, p):
+    pa = sum(binom.pmf(i, n, p) for i in range(c + 1))
+    return pa
+
+# Calcular Pa para cada valor de p
+pa_values = [calculate_pa(n, c, p) for p in p_values]
+
+# Graficar la Curva OC
+plt.figure(figsize=(10, 6))
+plt.plot(p_values, pa_values, marker='o')
+plt.axvline(x=0.015, color='r', linestyle='--', label='Umbral 1.5%')
+plt.title('Curva Operacional Característica (OC)')
+plt.xlabel('Proporción de Defectuosos (p)')
+plt.ylabel('Probabilidad de Aceptación (Pa)')
+plt.grid(True)
+plt.legend()
+plt.show()

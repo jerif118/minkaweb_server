@@ -1,0 +1,138 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 80%;
+    max-width: 900px;
+    text-align: center;
+}
+
+.header {
+    background-color: #2582d3;
+    color: white;
+    padding: 20px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.left-section, .right-section {
+    flex: 1;
+}
+
+.left-section {
+    padding-right: 20px;
+}
+
+.download-app {
+    background-color: #dcdcdc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.download-app p {
+    margin: 0;
+}
+
+.download-app button {
+    background-color: #2582d3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.download-app button:hover {
+    background-color: #1e69be;
+}
+
+.content h2 {
+    color: #333;
+    text-align: left;
+}
+
+.content ol {
+    text-align: left;
+    margin: 0 auto;
+    padding-left: 20px;
+}
+
+.qr-code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qr-code img {
+    width: 200px;
+    height: 200px;
+}
+
+.link-phone {
+    display: block;
+    margin-top: 20px;
+    color: #2576d3;
+    text-decoration: none;
+    text-align: left;
+}
+
+.link-phone:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .left-section, .right-section {
+        padding: 0;
+        width: 100%;
+    }
+
+    .left-section {
+        padding-right: 0;
+    }
+
+    .qr-code img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .download-app {
+        text-align: center;
+    }
+
+    .content h2, .content ol, .link-phone {
+        text-align: center;
+    }
+
+    .content ol {
+        padding-left: 0;
+    }
+}
