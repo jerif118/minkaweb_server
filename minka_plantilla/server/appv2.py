@@ -13,7 +13,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 # Tiempo máximo de inactividad de una sala en segundos (ej. 5 minutos)
-SESSION_TIMEOUT = 900
+SESSION_TIMEOUT = 7_200
 
 # Estructura de sessions: cada room_id → dict con keys: password, clients, last_activity
 sessions = {}
@@ -40,6 +40,10 @@ class BaseHandler(tornado.web.RequestHandler):
 class MainHandler(BaseHandler):
     def get(self):
         self.write('Hola Minka, by ellanotequiere')
+
+class HealthHandler(BaseHandler):
+    def get(self):
+        self.write({"ok": True})
 
 
 # MonitorHandler: Interfaz web para ver las salas y conexiones activas
@@ -279,6 +283,7 @@ def make_app():
         (r"/", MainHandler),
         (r"/ws", WebSocketHandler),
         (r"/monitor", MonitorHandler),
+        (r"/health", HealthHandler),
     ])
 
 def cleanup_sessions():
@@ -296,6 +301,18 @@ def cleanup_sessions():
                 del clients[cid]
         del sessions[rid]
         logging.info(f'Sesión {rid} expirada y removida')
+
+import signal, logging
+import tornado.ioloop
+
+def shutdown(sig, frame):
+    logging.info("→ Recibida señal %s, deteniendo IOLoop…", sig)
+    tornado.ioloop.IOLoop.current().add_callback_from_signal(
+        tornado.ioloop.IOLoop.current().stop
+    )
+
+signal.signal(signal.SIGTERM, shutdown)  # usado por Docker / systemd
+signal.signal(signal.SIGINT,  shutdown)  # Ctrl-C local
 
 # Programar limpieza de sesiones cada minuto
 PeriodicCallback(cleanup_sessions, 60000).start()
