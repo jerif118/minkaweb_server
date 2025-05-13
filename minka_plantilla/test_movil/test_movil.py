@@ -1,31 +1,74 @@
-import socketio
+import websocket
+import json
+import uuid
+import sys
+import _thread  # o "import threading" si prefieres
 
-sio = socketio.Client()
+def on_message(ws, message):
+    data = json.loads(message)
+    print("Mensaje recibido:", data)
 
-server_link = 'http://127.0.0.1:5000'
-predefined_token = "gAAAAABmviJk-PdAGrx27W_zGi5ghB9oCSWMQnBHWOWbZuHU_d3ullXpOXqLKYJMKy_QmdnML-J1PrDKAFqd54U2DnAfdztIBg_gBOnfx-r2Cxj6IrX3TCBdeNGVZ2X9oe63wGzl-xUjs8RM6jCGePEpyUp6MEykeX7JCJYIGDE8S41-5EXF9vG1jjd7udiE36FG9IYTnLxoAOlWBUeVNvgXUJ0eXTtIYlguwNUm1T4pyHp-BoXletDmbrmDPLUcnyCbs2GxGCGFk3JCaFT0XxTCVWQ2HP_ytg=="
+def on_error(ws, error):
+    print("Error:", error)
 
-def connect_mobile():
-    try:
-        # Conectar al servidor WebSocket con el token predefinido
-        sio.connect(server_link, headers={'Authorization': predefined_token})
-        print("Mobile client connected to the WebSocket server")
-        # Mantener la conexión activa
-        sio.wait()
-    except Exception as e:
-        print(f"Failed to connect: {e}")
+def on_close(ws, close_status_code, close_msg):
+    print("Conexión cerrada:", close_status_code, close_msg)
 
-@sio.event
-def connect():
-    print("Mobile client WebSocket connection established")
+def on_open(ws):
+    print("Conexión WebSocket abierta.")
+    print("Cuando se te solicite, ingresa JSON (p.ej. {\"app\":\"X\",\"monto\":1000,\"hora\":\"12:00\"}) o texto (o 'exit').")
 
-@sio.event
-def disconnect():
-    print("Mobile client disconnected from the WebSocket server")
+    def run():
+        while True:
+            user_input = input("\nIngresa JSON (p.ej. {\"app\":\"X\",\"monto\":1000,\"hora\":\"12:00\"}) o texto (o 'exit'): ")
+            if user_input.lower() == "exit":
+                ws.close()
+                break
 
-@sio.event
-def connect_error(data):
-    print("The connection failed!")
+            # Intentar parsear JSON; si falla, tratarlo como texto simple
+            try:
+                message_content = json.loads(user_input)
+            except json.JSONDecodeError:
+                message_content = user_input
 
-if __name__ == '__main__':
-    connect_mobile()
+            # Construir payload con campo 'message'
+            payload = {
+                "message": message_content
+            }
+
+            # Enviar datos al servidor
+            ws.send(json.dumps(payload))
+
+    # Ejecutar la función run en un thread para no bloquear el evento principal
+    _thread.start_new_thread(run, ())
+
+if __name__ == "__main__":
+    if len(sys.argv) < 3:
+        print("Uso: python simulate_client.py <room_id> <password>")
+        sys.exit(1)
+    
+    room_id = sys.argv[1]
+    password = sys.argv[2]
+    # Generar un client_id único para el cliente simulado
+    client_id = f"python-client-{uuid.uuid4()}"
+
+    # Construir la URL de conexión con los parámetros necesarios
+    ws_url = (
+        "ws://localhost:5001/ws"
+        f"?action=join"
+        f"&client_id={client_id}"
+        f"&room_id={room_id}"
+        f"&password={password}"
+    )
+
+    print("Conectando al servidor con URL:", ws_url)
+    
+    ws_app = websocket.WebSocketApp(
+        ws_url,
+        on_open=on_open,
+        on_message=on_message,
+        on_error=on_error,
+        on_close=on_close
+    )
+    
+    ws_app.run_forever()
