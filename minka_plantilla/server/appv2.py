@@ -85,6 +85,7 @@ class MonitorHandler(BaseHandler):
             info = redis_client.hgetall(key)
             clients = redis_client.lrange(f"session:{rid}:clients", 0, -1)
             sessions_html += f"<tr><td>{rid}</td><td>{info['password']}</td><td>{', '.join(clients)}</td></tr>"
+        html += sessions_html
         html += "</table>"
 
         html += """
@@ -103,6 +104,7 @@ class MonitorHandler(BaseHandler):
             info = redis_client.hgetall(key)
             clients_html += f"<tr><td>{cid}</td><td>{info.get('room_id','')}</td><td>{info.get('status','')}</td></tr>"
 
+        html += clients_html
         html += """
           </table>
         </body>
