@@ -9,7 +9,7 @@ import json
 import uuid
 import time
 import logging
-
+from redis_Minka import redis_client
 logging.basicConfig(level=logging.INFO)
 
 # Tiempo máximo de inactividad de una sala en segundos (ej. 5 minutos)
@@ -20,6 +20,8 @@ sessions = {}
 
 # Diccionario para almacenar la información de los clientes conectados
 clients = {}
+
+client_cache = {}
 
 #
 # Handlers Base para manejo de CORS y solicitudes OPTIONS
@@ -75,9 +77,14 @@ class MonitorHandler(BaseHandler):
             </tr>
         """
         # Iterar sobre las salas y crear una fila por cada una
-        for room_id, info in sessions.items():
-            clients_list = ", ".join([xhtml_escape(cid) for cid in info["clients"]])
-            html += f"<tr><td>{xhtml_escape(room_id)}</td><td>{xhtml_escape(info['password'])}</td><td>{clients_list}</td></tr>"
+        sessions_html = ""
+        for key in redis_client.scan_iter("session:*"):
+            if key.endswith(":clients"):
+                continue
+            rid = key.split(":",1)[1]
+            info = redis_client.hgetall(key)
+            clients = redis_client.lrange(f"session:{rid}:clients", 0, -1)
+            sessions_html += f"<tr><td>{rid}</td><td>{info['password']}</td><td>{', '.join(clients)}</td></tr>"
         html += "</table>"
 
         html += """
@@ -90,10 +97,12 @@ class MonitorHandler(BaseHandler):
             </tr>
         """
         # Iterar sobre los clientes y mostrar su información
-        for client_id, cl_info in clients.items():
-            room = xhtml_escape(cl_info.get('room_id', ''))
-            status = xhtml_escape(cl_info.get('status', ''))
-            html += f"<tr><td>{xhtml_escape(client_id)}</td><td>{room}</td><td>{status}</td></tr>"
+        clients_html = ""
+        for key in redis_client.scan_iter("client:*"):
+            cid = key.split(":",1)[1]
+            info = redis_client.hgetall(key)
+            clients_html += f"<tr><td>{cid}</td><td>{info.get('room_id','')}</td><td>{info.get('status','')}</td></tr>"
+
         html += """
           </table>
         </body>
@@ -128,6 +137,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         action      = self.get_argument('action', None)
         room_id     = self.get_argument('room_id', None)
         room_passwd = self.get_argument('password', None)
+        self.client_id = client_id
+        client_cache[client_id] = self
         logging.info(f"[OPEN] client_id={client_id} action={action} room_id={room_id} password={room_passwd}")
         # Validar formato de client_id
         if client_id and not re.match(r'^[A-Za-z0-9_\-]{1,64}$', client_id):
@@ -159,7 +170,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             
             room_id = str(uuid.uuid4())
             room_password = str(uuid.uuid4())[:6]
-            sessions[room_id] = {
+            #antiguo metodo de session
+            """sessions[room_id] = {
                 "password": room_password,
                 "clients": [client_id],
                 "last_activity": time.time()
@@ -168,9 +180,21 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 'ws': self,
                 'status': 'waiting',
                 'room_id': room_id
-            }
+            }"""
+            #nuevo metodo en redis 
+            redis_client.hset(f"session:{room_id}", mapping={
+                "password": room_password,
+                "last_activity": time.time()
+            })
+            redis_client.rpush(f"session:{room_id}:clients",client_id)
+            redis_client.hset(f"client:{client_id}",mapping={
+                "status": "waiting",
+                "room_id": room_id
+            })
+            #---------------------------
             self.client_id = client_id
             self.room_id = room_id
+            
             self.write_message({
                 "room_created": True,
                 "room_id": room_id,
@@ -195,15 +219,31 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 self.write_message({'error': 'password inválido'})
                 self.close()
                 return
-
-            if room_id in sessions and sessions[room_id]["password"] == room_password:
+            #antiguo metodo de session
+            """if room_id in sessions and sessions[room_id]["password"] == room_password:
                 if len(sessions[room_id]["clients"]) < 2:
                     sessions[room_id]["clients"].append(client_id)
                     clients[client_id] = {
                         'ws': self,
                         'status': 'connected',
                         'room_id': room_id
-                    }
+                    }"""
+            #nuevo metodo en redis
+            passwd = redis_client.hget(f"session:{room_id}", "password")
+            if passwd and passwd == room_password:
+                cnt=redis_client.llen(f"session:{room_id}:clients")
+                if cnt < 2:
+                    redis_client.rpush(f"session:{room_id}:clients",client_id)
+                    redis_client.hset(f"client:{client_id}",mapping={
+                        "status": "connected",
+                        "room_id": room_id
+                    })
+                    other_id= redis_client.lindex(f"session:{room_id}:clients",0)
+                    redis_client.hset(f"client:{other_id}", "status", "connected")
+
+                    #notificar al cliente original
+                    ws_other = client_cache[other_id]
+                    ws_other.write_message({"event":"joined","client": client_id})
                     self.client_id = client_id
                     self.room_id = room_id
                     self.write_message({'info': 'Te has unido a la sala.'})
@@ -244,9 +284,13 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             self.write_message({'error': 'Mensaje demasiado largo'})
             return
 
-        # ¡Ya podemos hacer broadcast!
-        if self.room_id in sessions and len(sessions[self.room_id]["clients"]) == 2:
-            other = [cid for cid in sessions[self.room_id]["clients"] if cid != self.client_id][0]
+        #metodo antiguo de session
+        #if self.room_id in sessions and len(sessions[self.room_id]["clients"]) == 2:
+        #    other = [cid for cid in sessions[self.room_id]["clients"] if cid != self.client_id][0]
+        #nuevo metodo de redis
+        clients= redis_client.lrange(f"session:{self.room_id}:clients",0,-1)
+        if len(clients) == 2:
+            other = clients[0] if clients[1] == self.client_id else clients[1]
             # Reenvía el objeto completo, no su str()
             clients[other]['ws'].write_message({
                 'sender_id': self.client_id,
@@ -260,18 +304,23 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         client_id = getattr(self, 'client_id', None)
         room_id = getattr(self, 'room_id', None)
         if client_id:
-            if client_id in clients:
-                del clients[client_id]
+            #if client_id in clients:
+            #    del clients[client_id]
+            client_cache.pop(client_id, None)
+            redis_client.delete(f"client:{client_id}")
             logging.info(f'Cliente {client_id} desconectado.')
             # Notificar al otro usuario y limpiar la sesión
             if room_id in sessions:
                 if client_id in sessions[room_id]["clients"]:
-                    sessions[room_id]["clients"].remove(client_id)
+                    #sessions[room_id]["clients"].remove(client_id)
+                    redis_client.lrem(f"session:{room_id}:clients", 0, client_id)
+                    remaining = redis_client.llen(f"session:{room_id}:clients")
                     if len(sessions[room_id]["clients"]) == 1:
                         other_client_id = sessions[room_id]["clients"][0]
                         if other_client_id in clients and clients[other_client_id]['ws']:
                             clients[other_client_id]['ws'].write_message({'info': 'El otro usuario se ha desconectado.'})
                 # Eliminar la sala si queda vacía
+                redis_client.delete(f"session:{room_id}", f"session:{room_id}:clients")
                 if not sessions[room_id]["clients"]:
                     del sessions[room_id]
 
@@ -288,9 +337,9 @@ def make_app():
 
 def cleanup_sessions():
     now = time.time()
-    expired = [rid for rid, info in sessions.items()
-               if now - info.get('last_activity', now) > SESSION_TIMEOUT]
-    for rid in expired:
+    #expired = [rid for rid, info in sessions.items()
+    #           if now - info.get('last_activity', now) > SESSION_TIMEOUT]
+    """for rid in expired:
         for cid in sessions[rid]['clients']:
             if cid in clients:
                 try:
@@ -300,7 +349,22 @@ def cleanup_sessions():
                     pass
                 del clients[cid]
         del sessions[rid]
-        logging.info(f'Sesión {rid} expirada y removida')
+        logging.info(f'Sesión {rid} expirada y removida')"""
+    for key in redis_client.scan_iter("session:*"):
+        if key.endswith(":clients"):
+             continue
+        last = float(redis_client.hget(key, "last_activity") or now)
+        if now - last > SESSION_TIMEOUT:
+            rid = key.split(":",1)[1]
+            clients = redis_client.lrange(f"session:{rid}:clients", 0, -1)
+            for cid in clients:
+                ws = client_cache.get(cid)
+                if ws:
+                    ws.write_message({'info': 'Sesión expirada'})
+                    ws.close()
+            redis_client.delete(f"session:{rid}", f"session:{rid}:clients")
+            logging.info(f'Sesión {rid} expirada y removida')
+        
 
 import signal, logging
 import tornado.ioloop
