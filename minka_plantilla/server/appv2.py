@@ -10,6 +10,44 @@ import uuid
 import time
 import logging
 from redis_Minka import redis_client
+import jwt
+from datetime import datetime, timedelta
+
+# Importaciones para manejo de claves RSA y generación si no existen
+import os
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.backends import default_backend
+
+# Carga tus claves RSA, generando si no existen
+private_path = "./path/to/private_key.pem"
+public_path  = "./path/to/public_key.pem"
+
+if not os.path.exists(private_path) or not os.path.exists(public_path):
+    # Generar par de claves RSA
+    key = rsa.generate_private_key(public_exponent=65537, key_size=2048, backend=default_backend())
+    priv_pem = key.private_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PrivateFormat.TraditionalOpenSSL,
+        encryption_algorithm=serialization.NoEncryption()
+    )
+    pub_pem = key.public_key().public_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PublicFormat.SubjectPublicKeyInfo
+    )
+    # Guardar las claves
+    os.makedirs(os.path.dirname(private_path), exist_ok=True)
+    with open(private_path, "wb") as f:
+        f.write(priv_pem)
+    with open(public_path, "wb") as f:
+        f.write(pub_pem)
+
+# Leer las claves
+with open(private_path, "rb") as f:
+    PRIVATE_KEY = f.read()
+with open(public_path, "rb") as f:
+    PUBLIC_KEY = f.read()
+
 logging.basicConfig(level=logging.INFO)
 
 # Tiempo máximo de inactividad de una sala en segundos (ej. 5 minutos)
@@ -113,6 +151,16 @@ class MonitorHandler(BaseHandler):
         self.write(html)
 
 #
+# Helper para generar token JWT de cliente
+#
+def generate_client_token(room_id, client_id, expires_days=30):
+    payload = {
+        "room_id": room_id,
+        "client_id": client_id,
+        "exp": datetime.utcnow() + timedelta(days=expires_days)
+    }
+    return jwt.encode(payload, PRIVATE_KEY, algorithm="RS256")
+
 # Handler del WebSocket para emparejamiento y comunicación entre dos usuarios
 #
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
@@ -138,10 +186,9 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         client_id   = self.get_argument('client_id', None)
         action      = self.get_argument('action', None)
         room_id     = self.get_argument('room_id', None)
-        room_passwd = self.get_argument('password', None)
         self.client_id = client_id
         client_cache[client_id] = self
-        logging.info(f"[OPEN] client_id={client_id} action={action} room_id={room_id} password={room_passwd}")
+        logging.info(f"[OPEN] client_id={client_id} action={action} room_id={room_id}")
         # Validar formato de client_id
         if client_id and not re.match(r'^[A-Za-z0-9_\-]{1,64}$', client_id):
             self.write_message({'error': 'client_id inválido'})
@@ -157,69 +204,92 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 return
             # Redis-only logic for room creation
             room_id = str(uuid.uuid4())
-            room_password = str(uuid.uuid4())[:6]
-            redis_client.hset(f"session:{room_id}", mapping={
-                "password": room_password,
-                "last_activity": time.time()
-            })
-            redis_client.rpush(f"session:{room_id}:clients", client_id)
+            # Generar token para este cliente
+            client_token = generate_client_token(room_id, client_id)
+            # Almacenar token del cliente en Redis
+            redis_client.hset(f"session:{room_id}:clients_tokens", mapping={client_id: client_token})
             redis_client.hset(f"client:{client_id}", mapping={
                 "status": "waiting",
-                "room_id": room_id
+                "room_id": room_id,
+                "token": client_token
             })
+            # Crear la lista de clientes y almacenar el cliente
+            redis_client.rpush(f"session:{room_id}:clients", client_id)
+            # Solo almacenar last_activity para la sala
+            redis_client.hset(f"session:{room_id}", "last_activity", time.time())
+            # Expiración automática de la sesión en Redis en 30 días
+            redis_client.expire(f"session:{room_id}", 30 * 24 * 3600)
             self.client_id = client_id
             self.room_id = room_id
-            # Update last_activity after joining/creating session
-            redis_client.hset(f"session:{self.room_id}", "last_activity", time.time())
+            # Enviar credenciales al cliente
             self.write_message({
                 "room_created": True,
                 "room_id": room_id,
-                "password": room_password,
+                "token": client_token,
                 "info": "Room created. Waiting for another user to join."
             })
 
         elif action == "join":
             room_id = self.get_argument('room_id', None)
-            room_password = self.get_argument('password', None)
+            jwt_token = self.get_argument('token', None)
 
-            if not client_id or not room_id or not room_password:
-                self.write_message({'error': 'client_id, room_id y password son requeridos'})
+            if not client_id or not room_id or not jwt_token:
+                self.write_message({'error': 'client_id, room_id y token son requeridos'})
                 self.close()
                 return
             if room_id and not re.match(r'^[0-9a-fA-F\-]{36}$', room_id):
                 self.write_message({'error': 'room_id inválido'})
                 self.close()
                 return
-            if room_password and not re.match(r'^[A-Za-z0-9]{6}$', room_password):
-                self.write_message({'error': 'password inválido'})
-                self.close()
-                return
-            passwd = redis_client.hget(f"session:{room_id}", "password")
-            if passwd and passwd == room_password:
-                cnt = redis_client.llen(f"session:{room_id}:clients")
+            # Validar el token recibido (debe ser un token de cliente válido para la sala)
+            try:
+                decoded = jwt.decode(jwt_token, PUBLIC_KEY, algorithms=["RS256"])
+                if decoded.get("room_id") == room_id and decoded.get("client_id") == client_id:
+                    valid = True
+                else:
+                    valid = False
+            except jwt.PyJWTError:
+                valid = False
+            # Validar que la sala existe
+            session_exists = redis_client.exists(f"session:{room_id}")
+            clients_list = redis_client.lrange(f"session:{room_id}:clients", 0, -1) if session_exists else []
+            if valid and session_exists:
+                cnt = len(clients_list)
                 if cnt < 2:
+                    # Añadir el cliente a la sala
                     redis_client.rpush(f"session:{room_id}:clients", client_id)
+                    # Generar token para este cliente
+                    client_token = generate_client_token(room_id, client_id)
+                    # Almacenar token del cliente en Redis
+                    redis_client.hset(f"session:{room_id}:clients_tokens", mapping={client_id: client_token})
                     redis_client.hset(f"client:{client_id}", mapping={
                         "status": "connected",
-                        "room_id": room_id
+                        "room_id": room_id,
+                        "token": client_token
                     })
-                    other_id = redis_client.lindex(f"session:{room_id}:clients", 0)
-                    redis_client.hset(f"client:{other_id}", "status", "connected")
                     # Notificar al cliente original
-                    ws_other = client_cache.get(other_id)
-                    if ws_other:
-                        ws_other.write_message({"event": "joined", "client": client_id})
+                    other_id = clients_list[0] if clients_list else None
+                    if other_id:
+                        redis_client.hset(f"client:{other_id}", "status", "connected")
+                        ws_other = client_cache.get(other_id)
+                        if ws_other:
+                            ws_other.write_message({"event": "joined", "client": client_id})
                     self.client_id = client_id
                     self.room_id = room_id
-                    # Update last_activity after joining/creating session
-                    redis_client.hset(f"session:{self.room_id}", "last_activity", time.time())
-                    self.write_message({'info': 'Te has unido a la sala.'})
+                    # Actualizar última actividad
+                    redis_client.hset(f"session:{room_id}", "last_activity", time.time())
+                    # Enviar credenciales al cliente que se une
+                    self.write_message({
+                        "info": "Te has unido a la sala.",
+                        "room_id": room_id,
+                        "token": client_token
+                    })
                 else:
                     self.write_message({'error': 'Sala llena. Solo se permiten dos usuarios.'})
                     self.close()
                     return
             else:
-                self.write_message({'error': 'Sala no existe o contraseña incorrecta'})
+                self.write_message({'error': 'Sala no existe o token incorrecto'})
                 self.close()
         else:
             self.write_message({'error': 'Acción no válida'})
@@ -269,6 +339,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             # Eliminamos hash de cliente y del cache
             client_cache.pop(client_id, None)
             redis_client.delete(f"client:{client_id}")
+            # También eliminar su token de clients_tokens
+            redis_client.hdel(f"session:{room_id}:clients_tokens", client_id)
 
             # Quitamos el cliente de la lista de la sala
             redis_client.lrem(f"session:{room_id}:clients", 0, client_id)
@@ -283,7 +355,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
             # Si ya no hay clientes, eliminamos la sala completa
             if remaining == 0:
-                redis_client.delete(f"session:{room_id}", f"session:{room_id}:clients")
+                redis_client.delete(f"session:{room_id}", f"session:{room_id}:clients", f"session:{room_id}:clients_tokens")
                 logging.info(f'Sesión {room_id} expirada y removida o cerrada por desconexión.')
 
 #
