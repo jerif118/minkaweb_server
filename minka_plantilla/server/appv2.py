@@ -66,11 +66,15 @@ client_cache = {}
 #
 class BaseHandler(tornado.web.RequestHandler):
     def set_default_headers(self):
-        self.set_header("Access-Control-Allow-Origin", "*")
+        origin = self.request.headers.get("Origin", "")
+        # Allow only the requesting origin
+        self.set_header("Access-Control-Allow-Origin", origin)
+        self.set_header("Access-Control-Allow-Credentials", "true")
         self.set_header("Access-Control-Allow-Headers", "origin, x-requested-with, content-type, accept, authorization")
         self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
     
     def options(self, *args, **kwargs):
+        # Preflight response
         self.set_status(204)
         self.finish()
 
@@ -150,9 +154,17 @@ class MonitorHandler(BaseHandler):
         """
         self.write(html)
 
-#
-# Helper para generar token JWT de cliente
-#
+
+# Helper para generar token JWT de pairing (corto)
+def generate_pairing_token(room_id, expires_minutes=3):
+    payload = {
+        "room_id": room_id,
+        "exp": datetime.utcnow() + timedelta(minutes=expires_minutes),
+        "purpose": "pairing"
+    }
+    return jwt.encode(payload, PRIVATE_KEY, algorithm="RS256")
+
+# Helper para generar token JWT de cliente (largo)
 def generate_client_token(room_id, client_id, expires_days=30):
     payload = {
         "room_id": room_id,
@@ -183,117 +195,129 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         self.finish()
     
     def open(self):
-        client_id   = self.get_argument('client_id', None)
-        action      = self.get_argument('action', None)
-        room_id     = self.get_argument('room_id', None)
+        # Try to read long-lived session cookie
+        raw = self.get_secure_cookie("minka_session")
+        if raw:
+            # Existing session connection (as before)
+            try:
+                jwt_token = raw.decode() if isinstance(raw, bytes) else raw
+                decoded = jwt.decode(jwt_token, PUBLIC_KEY, algorithms=["RS256"])
+                room_id = decoded.get("room_id")
+                client_id = decoded.get("client_id")
+                if not room_id or not client_id:
+                    raise jwt.PyJWTError()
+            except jwt.PyJWTError:
+                self.close(code=4003, reason="Token de sesión inválido")
+                return
+            self.client_id = client_id
+            self.room_id = room_id
+            client_cache[client_id] = self
+            logging.info(f"[OPEN] (cookie) client_id={client_id} room_id={room_id}")
+            # Puede agregar lógica adicional si se requiere para reconexión.
+            return
+
+        # If no cookie, attempt pairing with token
+        # Read pairing_token and client_id
+        pairing_token = self.get_argument('pairing_token', None)
+        client_id = self.get_argument('client_id', None)
+
+        # Decode pairing_token to extract room_id
+        try:
+            payload = jwt.decode(pairing_token, PUBLIC_KEY, algorithms=["RS256"])
+            if payload.get("purpose") != "pairing":
+                raise jwt.PyJWTError()
+            room_id = payload["room_id"]
+        except jwt.PyJWTError:
+            self.close(code=4004, reason="Pairing token inválido")
+            return
+
         self.client_id = client_id
+        self.room_id = room_id
         client_cache[client_id] = self
-        logging.info(f"[OPEN] client_id={client_id} action={action} room_id={room_id}")
+        logging.info(f"[OPEN] (pairing) client_id={client_id} room_id={room_id}")
         # Validar formato de client_id
         if client_id and not re.match(r'^[A-Za-z0-9_\-]{1,64}$', client_id):
             self.write_message({'error': 'client_id inválido'})
             self.close()
             return
-
-        action = self.get_argument('action', None)
-
-        if action == "create":
-            if not client_id:
-                self.write_message({'error': 'client_id es requerido'})
-                self.close()
-                return
-            # Redis-only logic for room creation
-            room_id = str(uuid.uuid4())
-            # Generar token para este cliente
-            client_token = generate_client_token(room_id, client_id)
-            # Almacenar token del cliente en Redis
-            redis_client.hset(f"session:{room_id}:clients_tokens", mapping={client_id: client_token})
-            redis_client.hset(f"client:{client_id}", mapping={
-                "status": "waiting",
-                "room_id": room_id,
-                "token": client_token
-            })
-            # Crear la lista de clientes y almacenar el cliente
-            redis_client.rpush(f"session:{room_id}:clients", client_id)
-            # Solo almacenar last_activity para la sala
-            redis_client.hset(f"session:{room_id}", "last_activity", time.time())
-            # Expiración automática de la sesión en Redis en 30 días
-            redis_client.expire(f"session:{room_id}", 30 * 24 * 3600)
-            self.client_id = client_id
-            self.room_id = room_id
-            # Enviar credenciales al cliente
-            self.write_message({
-                "room_created": True,
-                "room_id": room_id,
-                "token": client_token,
-                "info": "Room created. Waiting for another user to join."
-            })
-
-        elif action == "join":
-            room_id = self.get_argument('room_id', None)
-            jwt_token = self.get_argument('token', None)
-
-            if not client_id or not room_id or not jwt_token:
-                self.write_message({'error': 'client_id, room_id y token son requeridos'})
-                self.close()
-                return
-            if room_id and not re.match(r'^[0-9a-fA-F\-]{36}$', room_id):
-                self.write_message({'error': 'room_id inválido'})
-                self.close()
-                return
-            # Validar el token recibido (debe ser un token de cliente válido para la sala)
-            try:
-                decoded = jwt.decode(jwt_token, PUBLIC_KEY, algorithms=["RS256"])
-                if decoded.get("room_id") == room_id and decoded.get("client_id") == client_id:
-                    valid = True
-                else:
-                    valid = False
-            except jwt.PyJWTError:
-                valid = False
-            # Validar que la sala existe
-            session_exists = redis_client.exists(f"session:{room_id}")
-            clients_list = redis_client.lrange(f"session:{room_id}:clients", 0, -1) if session_exists else []
-            if valid and session_exists:
-                cnt = len(clients_list)
-                if cnt < 2:
-                    # Añadir el cliente a la sala
-                    redis_client.rpush(f"session:{room_id}:clients", client_id)
-                    # Generar token para este cliente
-                    client_token = generate_client_token(room_id, client_id)
-                    # Almacenar token del cliente en Redis
-                    redis_client.hset(f"session:{room_id}:clients_tokens", mapping={client_id: client_token})
-                    redis_client.hset(f"client:{client_id}", mapping={
-                        "status": "connected",
-                        "room_id": room_id,
-                        "token": client_token
-                    })
-                    # Notificar al cliente original
-                    other_id = clients_list[0] if clients_list else None
-                    if other_id:
-                        redis_client.hset(f"client:{other_id}", "status", "connected")
-                        ws_other = client_cache.get(other_id)
-                        if ws_other:
-                            ws_other.write_message({"event": "joined", "client": client_id})
-                    self.client_id = client_id
-                    self.room_id = room_id
-                    # Actualizar última actividad
-                    redis_client.hset(f"session:{room_id}", "last_activity", time.time())
-                    # Enviar credenciales al cliente que se une
-                    self.write_message({
-                        "info": "Te has unido a la sala.",
-                        "room_id": room_id,
-                        "token": client_token
-                    })
-                else:
-                    self.write_message({'error': 'Sala llena. Solo se permiten dos usuarios.'})
-                    self.close()
-                    return
-            else:
-                self.write_message({'error': 'Sala no existe o token incorrecto'})
-                self.close()
-        else:
-            self.write_message({'error': 'Acción no válida'})
+        # Si falta pairing_token o client_id, rechazar
+        if not pairing_token or not client_id:
+            self.write_message({'error': 'client_id y pairing_token requeridos'})
             self.close()
+            return
+        # Validar pairing_token (already decoded above, so just check Redis)
+        stored = redis_client.hget(f"session:{room_id}", "pairing_token")
+        if not stored or stored != pairing_token:
+            self.close(code=4005, reason="Token expirado")
+            return
+        # Consumir pairing_token
+        redis_client.hdel(f"session:{room_id}", "pairing_token")
+        # Obtener primer cliente
+        first_id = redis_client.lindex(f"session:{room_id}:clients", 0)
+        if not first_id:
+            self.write_message({'error': 'Sala no encontrada o primer cliente ausente'})
+            self.close()
+            return
+        # Añadir nuevo cliente
+        redis_client.rpush(f"session:{room_id}:clients", client_id)
+        # Generar long-lived tokens para ambos
+        token1 = generate_client_token(room_id, first_id)
+        token2 = generate_client_token(room_id, client_id)
+        # Almacenar ambos tokens
+        redis_client.hset(f"session:{room_id}:clients_tokens", mapping={first_id: token1, client_id: token2})
+        # Notificar primer cliente
+        ws_other = client_cache.get(first_id)
+        if ws_other:
+            ws_other.write_message({"event": "paired", "room_id": room_id, "token": token1})
+        # Notificar a este cliente
+        self.write_message({"event": "paired", "room_id": room_id, "token": token2})
+# Handler para crear sala y obtener pairing_token
+
+class CreateRoomHandler(BaseHandler):
+    def post(self):
+        # Crear room_id y primer cliente
+        data = json.loads(self.request.body.decode())
+        client_id = data.get("client_id")
+        if not client_id or not re.match(r'^[A-Za-z0-9_\-]{1,64}$', client_id):
+            self.set_status(400)
+            self.write({"error": "client_id inválido"})
+            return
+
+        # Nuevo: Buscar si el cliente ya tiene una sala asociada
+        existing_room = redis_client.hget("client_rooms", client_id)
+        if existing_room:
+            # Verificar si la sesión existe en Redis
+            if redis_client.exists(f"session:{existing_room}"):
+                pairing_token = redis_client.hget(f"session:{existing_room}", "pairing_token")
+                if pairing_token:
+                    # Si pairing_token existe y la sesión es válida, responder con los valores existentes
+                    self.write({"room_id": existing_room, "pairing_token": pairing_token})
+                    return
+            # Si la sesión expiró o pairing_token es falsy, limpiar los datos relacionados
+            redis_client.delete(f"session:{existing_room}")
+            redis_client.delete(f"session:{existing_room}:clients")
+            redis_client.delete(f"session:{existing_room}:clients_tokens")
+            redis_client.hdel("client_rooms", client_id)
+            # Continuar para crear una nueva sala
+
+        room_id = str(uuid.uuid4())
+        # Agregar primer cliente a la lista
+        redis_client.rpush(f"session:{room_id}:clients", client_id)
+        # Generar pairing_token
+        pairing_token = generate_pairing_token(room_id)
+        # Almacenar pairing_token en Redis (hash)
+        redis_client.hset(f"session:{room_id}", mapping={
+            "last_activity": time.time(),
+            "pairing_token": pairing_token
+        })
+        # TTL de 3 minutos para el pairing_token (en el hash)
+        redis_client.expire(f"session:{room_id}", 3 * 60)
+        # Expiración automática de la sesión en Redis en 30 días (para toda la sala)
+        redis_client.expire(f"session:{room_id}:clients", 30 * 24 * 3600)
+        # Registrar el mapeo client_id → room_id
+        redis_client.hset("client_rooms", client_id, room_id)
+        # Responder con room_id y pairing_token
+        self.write({"room_id": room_id, "pairing_token": pairing_token})
     
     def on_message(self, message):
         try:
@@ -358,6 +382,54 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 redis_client.delete(f"session:{room_id}", f"session:{room_id}:clients", f"session:{room_id}:clients_tokens")
                 logging.info(f'Sesión {room_id} expirada y removida o cerrada por desconexión.')
 
+# Handler para validar la sesión a través del JWT en la cookie
+class ValidateSessionHandler(BaseHandler):
+    def get(self):
+        raw = self.get_secure_cookie("minka_session")
+        if not raw:
+            self.set_status(401)
+            return self.write({"valid": False})
+        token = raw.decode() if isinstance(raw, bytes) else raw
+        try:
+            payload = jwt.decode(token, PUBLIC_KEY, algorithms=["RS256"])
+            room_key = f"session:{payload['room_id']}"
+            exists = bool(redis_client.exists(room_key))
+            return self.write({
+                "valid": exists,
+                "client_id": payload["client_id"],
+                "room_id": payload["room_id"]
+            })
+        except jwt.PyJWTError:
+            self.set_status(401)
+            return self.write({"valid": False})
+
+# Nuevo handler para confirmar pairing y setear cookie larga
+class ConfirmPairingHandler(BaseHandler):
+    def post(self):
+        data = json.loads(self.request.body.decode())
+        token = data.get("token")
+        if not token:
+            self.set_status(400)
+            return self.write({"error": "token requerido"})
+        try:
+            payload = jwt.decode(token, PUBLIC_KEY, algorithms=["RS256"])
+            client_id = payload.get("client_id")
+            if not client_id:
+                raise jwt.PyJWTError()
+        except jwt.PyJWTError:
+            self.set_status(400)
+            return self.write({"error": "token inválido"})
+        # Set the long-lived session cookie
+        self.set_secure_cookie(
+            "minka_session",
+            token,
+            expires_days=30,
+            httponly=True,
+            secure=True,
+            samesite="Strict"
+        )
+        self.write({"ok": True})
+
 #
 # Configuración de la aplicación y rutas
 #
@@ -367,7 +439,10 @@ def make_app():
         (r"/ws", WebSocketHandler),
         (r"/monitor", MonitorHandler),
         (r"/health", HealthHandler),
-    ])
+        (r"/create_room", CreateRoomHandler),
+        (r"/api/validate-session", ValidateSessionHandler),
+        (r"/confirm_pairing", ConfirmPairingHandler),
+    ], cookie_secret="YOUR_RANDOM_SECRET")
 
 def cleanup_sessions():
     now = time.time()
