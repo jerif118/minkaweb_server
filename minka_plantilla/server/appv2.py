@@ -114,7 +114,7 @@ class MonitorHandler(BaseHandler):
           <table>
             <tr>
               <th>Room ID</th>
-              <th>Password</th>
+              <th>Pairing Token</th>
               <th>Clientes</th>
             </tr>
         """
@@ -126,7 +126,7 @@ class MonitorHandler(BaseHandler):
             rid = key.split(":",1)[1]
             info = redis_client.hgetall(key)
             clients = redis_client.lrange(f"session:{rid}:clients", 0, -1)
-            sessions_html += f"<tr><td>{rid}</td><td>{info['password']}</td><td>{', '.join(clients)}</td></tr>"
+            sessions_html += f"<tr><td>{rid}</td><td>{info.get('pairing_token','')}</td><td>{', '.join(clients)}</td></tr>"
         html += sessions_html
         html += "</table>"
 
