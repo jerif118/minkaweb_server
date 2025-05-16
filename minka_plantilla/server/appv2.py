@@ -53,11 +53,6 @@ logging.basicConfig(level=logging.INFO)
 # Tiempo máximo de inactividad de una sala en segundos (ej. 5 minutos)
 SESSION_TIMEOUT = 7_200
 
-# Estructura de sessions: cada room_id → dict con keys: password, clients, last_activity
-sessions = {}
-
-# Diccionario para almacenar la información de los clientes conectados
-clients = {}
 
 client_cache = {}
 
@@ -121,12 +116,21 @@ class MonitorHandler(BaseHandler):
         # Iterar sobre las salas y crear una fila por cada una
         sessions_html = ""
         for key in redis_client.scan_iter("session:*"):
+            key = key.decode() if isinstance(key, bytes) else key
             if key.endswith(":clients"):
                 continue
             rid = key.split(":",1)[1]
+            rid = rid.decode() if isinstance(rid, bytes) else rid
             info = redis_client.hgetall(key)
-            clients = redis_client.lrange(f"session:{rid}:clients", 0, -1)
-            sessions_html += f"<tr><td>{rid}</td><td>{info.get('pairing_token','')}</td><td>{', '.join(clients)}</td></tr>"
+            info = {k.decode() if isinstance(k, bytes) else k:
+                    v.decode() if isinstance(v, bytes) else v
+                    for k, v in info.items()}
+            # Leer pairing_token temporal (puede no existir)
+            token = redis_client.get(f"pairing:{rid}")
+            token = token.decode() if token else ""
+            clients_bytes = redis_client.lrange(f"session:{rid}:clients", 0, -1)
+            clients = [(c.decode() if isinstance(c, bytes) else c) for c in clients_bytes]
+            sessions_html += f"<tr><td>{rid}</td><td>{token}</td><td>{', '.join(clients)}</td></tr>"
         html += sessions_html
         html += "</table>"
 
@@ -142,8 +146,13 @@ class MonitorHandler(BaseHandler):
         # Iterar sobre los clientes y mostrar su información
         clients_html = ""
         for key in redis_client.scan_iter("client:*"):
+            key = key.decode() if isinstance(key, bytes) else key
             cid = key.split(":",1)[1]
+            cid = cid.decode() if isinstance(cid, bytes) else cid
             info = redis_client.hgetall(key)
+            info = {k.decode() if isinstance(k, bytes) else k:
+                    v.decode() if isinstance(v, bytes) else v
+                    for k, v in info.items()}
             clients_html += f"<tr><td>{cid}</td><td>{info.get('room_id','')}</td><td>{info.get('status','')}</td></tr>"
 
         html += clients_html
@@ -212,6 +221,11 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             self.client_id = client_id
             self.room_id = room_id
             client_cache[client_id] = self
+            # Garantizar presencia única en la lista de la sala
+            redis_client.lrem(f"session:{room_id}:clients", 0, client_id)
+            redis_client.rpush(f"session:{room_id}:clients", client_id)
+            # Marcar estado online
+            redis_client.hset(f"client:{client_id}", mapping={"room_id": room_id, "status": "online"})
             logging.info(f"[OPEN] (cookie) client_id={client_id} room_id={room_id}")
             # Puede agregar lógica adicional si se requiere para reconexión.
             return
@@ -245,21 +259,44 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             self.write_message({'error': 'client_id y pairing_token requeridos'})
             self.close()
             return
-        # Validar pairing_token (already decoded above, so just check Redis)
-        stored = redis_client.hget(f"session:{room_id}", "pairing_token")
-        if not stored or stored != pairing_token:
-            self.close(code=4005, reason="Token expirado")
+        # Validar token y control de usos
+        data = redis_client.hgetall(f"pairing:{room_id}")
+        # Obtener token y normalizar
+        raw_token = data.get("token") or data.get(b"token")
+        if isinstance(raw_token, bytes):
+            token_value = raw_token.decode()
+        else:
+            token_value = raw_token
+        # Obtener usos y normalizar
+        raw_uses = data.get("uses") or data.get(b"uses") or "0"
+        if isinstance(raw_uses, bytes):
+            raw_uses = raw_uses.decode()
+        uses = int(raw_uses)
+        # Validación de token y contador de usos
+        if token_value is None or token_value != pairing_token or uses <= 0:
+            self.close(code=4005, reason="Token inválido o expirado")
             return
-        # Consumir pairing_token
-        redis_client.hdel(f"session:{room_id}", "pairing_token")
+        # Decrementar contador de usos
+        remaining = redis_client.hincrby(f"pairing:{room_id}", "uses", -1)
+        # Eliminar el hash de pairing cuando usos agoten
+        if remaining <= 0:
+            redis_client.delete(f"pairing:{room_id}")
         # Obtener primer cliente
         first_id = redis_client.lindex(f"session:{room_id}:clients", 0)
         if not first_id:
             self.write_message({'error': 'Sala no encontrada o primer cliente ausente'})
             self.close()
             return
+        # Límite de 2 clientes y evitar duplicados
+        existing = redis_client.lrange(f"session:{room_id}:clients", 0, -1)
+        if client_id not in existing and len(existing) >= 2:
+            self.close(code=4006, reason="Sala llena")
+            return
+        redis_client.lrem(f"session:{room_id}:clients", 0, client_id)
         # Añadir nuevo cliente
         redis_client.rpush(f"session:{room_id}:clients", client_id)
+        # Marcar estado online
+        redis_client.hset(f"client:{client_id}", mapping={"room_id": room_id, "status": "online"})
         # Generar long-lived tokens para ambos
         token1 = generate_client_token(room_id, first_id)
         token2 = generate_client_token(room_id, client_id)
@@ -271,6 +308,58 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             ws_other.write_message({"event": "paired", "room_id": room_id, "token": token1})
         # Notificar a este cliente
         self.write_message({"event": "paired", "room_id": room_id, "token": token2})
+
+    def on_message(self, message):
+        try:
+            data = json.loads(message)
+        except json.JSONDecodeError:
+            self.write_message({'error': 'JSON inválido'})
+            return
+
+        msg = data.get('message')
+        try:
+            msg_serializado = json.dumps(msg)
+        except Exception:
+            self.write_message({'error': 'No pude serializar el mensaje'})
+            return
+        if len(msg_serializado) > 500:
+            self.write_message({'error': 'Mensaje demasiado largo'})
+            return
+
+        # Actualizar actividad
+        redis_client.hset(f"session:{self.room_id}", "last_activity", time.time())
+
+        # Reenviar a todos menos al emisor
+        clients_list = redis_client.lrange(f"session:{self.room_id}:clients", 0, -1)
+        for cid in clients_list:
+            if cid == self.client_id:
+                continue
+            ws_other = client_cache.get(cid)
+            if ws_other:
+                ws_other.write_message({'sender_id': self.client_id, 'message': msg})
+
+        logging.info(f'[BROADCAST] de {self.client_id} → {len(clients_list)-1} clientes: {msg}')
+
+    def on_close(self):
+        client_id = getattr(self, 'client_id', None)
+        room_id = getattr(self, 'room_id', None)
+        if client_id:
+            client_cache.pop(client_id, None)
+            redis_client.hset(f"client:{client_id}", "status", "offline")
+            redis_client.lrem(f"session:{room_id}:clients", 0, client_id)
+            remaining = redis_client.llen(f"session:{room_id}:clients")
+
+            if remaining == 1:
+                other_id = redis_client.lindex(f"session:{room_id}:clients", 0)
+                ws_other = client_cache.get(other_id)
+                if ws_other:
+                    ws_other.write_message({'info': 'El otro usuario se ha desconectado.'})
+
+            if remaining == 0:
+                redis_client.delete(f"session:{room_id}",
+                                    f"session:{room_id}:clients",
+                                    f"session:{room_id}:clients_tokens")
+                logging.info(f'Sesión {room_id} expirada y removida o cerrada por desconexión.')
 # Handler para crear sala y obtener pairing_token
 
 class CreateRoomHandler(BaseHandler):
@@ -303,84 +392,25 @@ class CreateRoomHandler(BaseHandler):
         room_id = str(uuid.uuid4())
         # Agregar primer cliente a la lista
         redis_client.rpush(f"session:{room_id}:clients", client_id)
-        # Generar pairing_token
+        # Registrar primer cliente para monitorización
+        redis_client.hset(f"client:{client_id}", mapping={"room_id": room_id, "status": "waiting"})
+        # Generar pairing_token (3 min)
         pairing_token = generate_pairing_token(room_id)
-        # Almacenar pairing_token en Redis (hash)
+
+        # Crear el hash de la sesión SIN pairing_token (vive 30 d)
         redis_client.hset(f"session:{room_id}", mapping={
-            "last_activity": time.time(),
-            "pairing_token": pairing_token
+            "last_activity": time.time()
         })
-        # TTL de 3 minutos para el pairing_token (en el hash)
-        redis_client.expire(f"session:{room_id}", 3 * 60)
+
+        # Guardar el token y el contador de usos en una clave de hash con TTL y permitir 2 usos
+        redis_client.hset(f"pairing:{room_id}", mapping={"token": pairing_token, "uses": 2})
+        redis_client.expire(f"pairing:{room_id}", 3 * 60)
         # Expiración automática de la sesión en Redis en 30 días (para toda la sala)
         redis_client.expire(f"session:{room_id}:clients", 30 * 24 * 3600)
         # Registrar el mapeo client_id → room_id
         redis_client.hset("client_rooms", client_id, room_id)
         # Responder con room_id y pairing_token
         self.write({"room_id": room_id, "pairing_token": pairing_token})
-    
-    def on_message(self, message):
-        try:
-            data = json.loads(message)
-        except json.JSONDecodeError:
-            self.write_message({'error': 'JSON inválido'})
-            return
-
-        msg = data.get('message')
-
-        # Serializamos a JSON para medir tamaño (y aceptar dicts)
-        try:
-            msg_serializado = json.dumps(msg)
-        except Exception:
-            self.write_message({'error': 'No pude serializar el mensaje'})
-            return
-
-        if len(msg_serializado) > 500:
-            self.write_message({'error': 'Mensaje demasiado largo'})
-            return
-
-        # Nuevo método de redis
-        clients_list = redis_client.lrange(f"session:{self.room_id}:clients", 0, -1)
-        if len(clients_list) == 2:
-            other = clients_list[0] if clients_list[1] == self.client_id else clients_list[1]
-            # Update last_activity on message send
-            redis_client.hset(f"session:{self.room_id}", "last_activity", time.time())
-            ws_other = client_cache.get(other)
-            if ws_other:
-                ws_other.write_message({
-                    'sender_id': self.client_id,
-                    'message': msg
-                })
-            logging.info(f'[BROADCAST] de {self.client_id} → {other}: {msg}')
-        else:
-            self.write_message({'info': 'Aún no emparejado.'})
-
-    def on_close(self):
-        client_id = getattr(self, 'client_id', None)
-        room_id = getattr(self, 'room_id', None)
-        if client_id:
-            # Notificar al otro usuario y limpiar la sesión en Redis
-            # Eliminamos hash de cliente y del cache
-            client_cache.pop(client_id, None)
-            redis_client.delete(f"client:{client_id}")
-            # También eliminar su token de clients_tokens
-            redis_client.hdel(f"session:{room_id}:clients_tokens", client_id)
-
-            # Quitamos el cliente de la lista de la sala
-            redis_client.lrem(f"session:{room_id}:clients", 0, client_id)
-            remaining = redis_client.llen(f"session:{room_id}:clients")
-
-            # Si queda un solo cliente, notificarle
-            if remaining == 1:
-                other_id = redis_client.lindex(f"session:{room_id}:clients", 0)
-                ws_other = client_cache.get(other_id)
-                if ws_other:
-                    ws_other.write_message({'info': 'El otro usuario se ha desconectado.'})
-
-            # Si ya no hay clientes, eliminamos la sala completa
-            if remaining == 0:
-                redis_client.delete(f"session:{room_id}", f"session:{room_id}:clients", f"session:{room_id}:clients_tokens")
-                logging.info(f'Sesión {room_id} expirada y removida o cerrada por desconexión.')
 
 # Handler para validar la sesión a través del JWT en la cookie
 class ValidateSessionHandler(BaseHandler):
