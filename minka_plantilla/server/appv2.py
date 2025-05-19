@@ -135,7 +135,24 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             self.close()
             return
 
-        action = self.get_argument('action', None)
+        # Manejo de reconexión automática
+        if action == "reconnect":
+            if client_id in clients:
+                # Reemplazar el ws antiguo por la nueva conexión
+                clients[client_id]['ws'] = self
+                clients[client_id]['status'] = 'connected'
+                self.client_id = client_id
+                self.room_id = clients[client_id]['room_id']
+                self.write_message({
+                    'info': 'Reconexion exitosa',
+                    'room_id': self.room_id
+                })
+                logging.info(f"[RECONNECT] client_id={client_id} reconnected to room {self.room_id}")
+                return
+            else:
+                self.write_message({'error': 'client_id no encontrado para reconexión'})
+                self.close()
+                return
 
         if action == "create":
             if not client_id:
