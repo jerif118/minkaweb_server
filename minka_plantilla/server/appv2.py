@@ -292,6 +292,35 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 if not sessions[room_id]["clients"]:
                     del sessions[room_id]
 
+class MqttBridgeHandler(tornado.websocket.WebSocketHandler):
+    def check_origin(self, origin):
+        # Permitir conexiones desde el bridge sin validar origen
+        return True
+
+    def open(self):
+        logging.info("[BRIDGE OPEN] conexión entrante desde microservicio puente")
+
+    def on_message(self, raw_message):
+        try:
+            data = json.loads(raw_message)
+            topic = data.get('topic', '')
+            message = data.get('message', '')
+        except Exception as e:
+            logging.warning(f"[BRIDGE] JSON inválido: {e}")
+            return
+        # Extraer room_id del topic: notificaciones/<room_id>
+        room_id = topic.split("/")[-1]
+        if room_id in sessions:
+            for cid in sessions[room_id]["clients"]:
+                ws_client = clients[cid]['ws']
+                try:
+                    ws_client.write_message(message)
+                except Exception as e:
+                    logging.error(f"[BRIDGE] Error al reenviar a {cid}: {e}")
+
+    def on_close(self):
+        logging.info("[BRIDGE CLOSE] microservicio puente desconectado")
+
 #
 # Configuración de la aplicación y rutas
 #
@@ -299,6 +328,7 @@ def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
         (r"/ws", WebSocketHandler),
+        (r"/bridge", MqttBridgeHandler),
         (r"/monitor", MonitorHandler),
         (r"/health", HealthHandler),
     ])

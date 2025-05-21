@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>MQTT Monitor</title>
+  <style>
+      body{font-family:monospace;background:#111;color:#0f0;margin:0}
+      #log{white-space:pre-wrap;padding:8px;overflow-y:scroll;height:100vh}
+  </style>
+</head>
+<body>
+  <div id="log"></div>
+  <script>
+    const log = document.getElementById('log');
+    const ws  = new WebSocket('ws://' + location.host + '/wsmonitor');
+    ws.onmessage = ev=>{
+      const d = JSON.parse(ev.data);
+      log.textContent += `[${d.topic}] ${d.payload}\n`;
+      log.scrollTop = log.scrollHeight;
+    };
+  </script>
+</body>
+</html>
