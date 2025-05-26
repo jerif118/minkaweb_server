@@ -10,7 +10,7 @@ import uuid
 import time
 import logging
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Tiempo máximo de inactividad de una sala en segundos (ej. 5 minutos)
 SESSION_TIMEOUT = 7_200
@@ -128,9 +128,11 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         action      = self.get_argument('action', None)
         room_id     = self.get_argument('room_id', None)
         room_passwd = self.get_argument('password', None)
+        logging.info(f"[OPEN] Connection from origin: {self.request.headers.get('Origin')}")
         logging.info(f"[OPEN] client_id={client_id} action={action} room_id={room_id} password={room_passwd}")
         # Validar formato de client_id
         if client_id and not re.match(r'^[A-Za-z0-9_\-]{1,64}$', client_id):
+            logging.warning(f"[OPEN] Invalid client_id format: {client_id}")
             self.write_message({'error': 'client_id inválido'})
             self.close()
             return
@@ -139,6 +141,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
         if action == "create":
             if not client_id:
+                logging.warning("[OPEN] client_id is required for 'create' action.")
                 self.write_message({'error': 'client_id es requerido'})
                 self.close()
                 return
@@ -177,21 +180,25 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 "password": room_password,
                 "info": "Room created. Waiting for another user to join."
             })
+            logging.info(f"[OPEN] Client {client_id} created room {room_id}")
         
         elif action == "join":
             room_id = self.get_argument('room_id', None)
             room_password = self.get_argument('password', None)
 
             if not client_id or not room_id or not room_password:
+                logging.warning(f"[OPEN] Missing parameters for 'join' action: client_id={client_id}, room_id={room_id}, password={room_password}")
                 self.write_message({'error': 'client_id, room_id y password son requeridos'})
                 self.close()
                 return
             
             if room_id and not re.match(r'^[0-9a-fA-F\-]{36}$', room_id):
+                logging.warning(f"[OPEN] Invalid room_id format: {room_id}")
                 self.write_message({'error': 'room_id inválido'})
                 self.close()
                 return
             if room_password and not re.match(r'^[A-Za-z0-9]{6}$', room_password):
+                logging.warning(f"[OPEN] Invalid password format: {room_password}")
                 self.write_message({'error': 'password inválido'})
                 self.close()
                 return
@@ -207,16 +214,19 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                     self.client_id = client_id
                     self.room_id = room_id
                     self.write_message({'info': 'Te has unido a la sala.'})
+                    logging.info(f"[OPEN] Client {client_id} joined room {room_id}")
                     other_client_id = sessions[room_id]["clients"][0]
                     # Actualizar status del cliente original a 'connected'
                     clients[other_client_id]['status'] = 'connected'
                     if other_client_id != client_id:
                         clients[other_client_id]['ws'].write_message({"event": "joined","client": client_id})
                 else:
+                    logging.warning(f"[OPEN] Client {client_id} tried to join full room {room_id}")
                     self.write_message({'error': 'Sala llena. Solo se permiten dos usuarios.'})
                     self.close()
                     return
             else:
+                logging.warning(f"[OPEN] Client {client_id} failed to join room {room_id}: Non-existent room or wrong password")
                 self.write_message({'error': 'Sala no existe o contraseña incorrecta'})
                 self.close()
         
@@ -226,35 +236,58 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
     
     def on_message(self, message):
         try:
-            data = json.loads(message)
-        except json.JSONDecodeError:
-            self.write_message({'error': 'JSON inválido'})
-            return
+            try:
+                data = json.loads(message)
+            except json.JSONDecodeError:
+                logging.warning(f"[MSG_RECV] Invalid JSON from {getattr(self, 'client_id', 'Unknown')}: {message}")
+                self.write_message({'error': 'JSON inválido'})
+                return
 
-        msg = data.get('message')
+            if not isinstance(data, dict):
+                logging.warning(f"[MSG_RECV] Message is not a JSON object from {getattr(self, 'client_id', 'Unknown')}: {data}")
+                self.write_message({'error': 'El mensaje debe ser un objeto JSON.'})
+                return
 
-        # Serializamos a JSON para medir tamaño (y aceptar dicts)
-        try:
-            msg_serializado = json.dumps(msg)
-        except Exception:
-            self.write_message({'error': 'No pude serializar el mensaje'})
-            return
+            msg = data.get('message')
+            if msg is None:
+                logging.warning(f"[MSG_RECV] JSON object missing 'message' key from {getattr(self, 'client_id', 'Unknown')}: {data}")
+                self.write_message({'error': 'El objeto JSON debe contener una clave "message".'})
+                return
 
-        if len(msg_serializado) > 500:
-            self.write_message({'error': 'Mensaje demasiado largo'})
-            return
+            # Serializamos a JSON para medir tamaño (y aceptar dicts)
+            try:
+                msg_serializado = json.dumps(msg)
+            except Exception:
+                logging.error(f"[MSG_RECV] Could not serialize message from {self.client_id}: {msg}", exc_info=True)
+                self.write_message({'error': 'No pude serializar el mensaje'})
+                return
 
-        # ¡Ya podemos hacer broadcast!
-        if self.room_id in sessions and len(sessions[self.room_id]["clients"]) == 2:
-            other = [cid for cid in sessions[self.room_id]["clients"] if cid != self.client_id][0]
-            # Reenvía el objeto completo, no su str()
-            clients[other]['ws'].write_message({
-                'sender_id': self.client_id,
-                'message'  : msg
-            })
-            logging.info(f'[BROADCAST] de {self.client_id} → {other}: {msg}')
-        else:
-            self.write_message({'info': 'Aún no emparejado.'})
+            if len(msg_serializado) > 500: # Assuming this is a reasonable limit, not 1MB as per max_message_size
+                logging.warning(f"[MSG_RECV] Message too long from {self.client_id}: {len(msg_serializado)} bytes")
+                self.write_message({'error': 'Mensaje demasiado largo'})
+                return
+
+            # ¡Ya podemos hacer broadcast!
+            if hasattr(self, 'room_id') and self.room_id in sessions and len(sessions[self.room_id]["clients"]) == 2:
+                other = [cid for cid in sessions[self.room_id]["clients"] if cid != self.client_id][0]
+                # Reenvía el objeto completo, no su str()
+                clients[other]['ws'].write_message({
+                    'sender_id': self.client_id,
+                    'message'  : msg
+                })
+                logging.info(f'[MSG_SENT] Client: {self.client_id} to Room: {self.room_id} (Other: {other}): {msg_serializado}')
+            elif hasattr(self, 'room_id') and self.room_id in sessions: # Paired but other client disconnected or not yet fully paired
+                logging.info(f'[MSG_WAIT] Client: {self.client_id} in Room: {self.room_id} sent message but not paired: {msg_serializado}')
+                self.write_message({'info': 'Aún no emparejado o el otro usuario se desconectó.'})
+            else: # Should not happen if client is properly associated with a room
+                logging.warning(f"[MSG_ERR] Client {getattr(self, 'client_id', 'Unknown')} in unknown room {getattr(self, 'room_id', 'None')} sent message: {msg_serializado}")
+                self.write_message({'error': 'No estás en una sala válida.'})
+
+        except Exception as e:
+            client_id_for_log = getattr(self, 'client_id', 'Unknown')
+            logging.error(f"Error processing message from {client_id_for_log}: {e}", exc_info=True)
+            self.write_message({'error': 'Ocurrió un error procesando su mensaje.'})
+
 
     def on_close(self):
         client_id = getattr(self, 'client_id', None)
@@ -262,7 +295,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         if client_id:
             if client_id in clients:
                 del clients[client_id]
-            logging.info(f'Cliente {client_id} desconectado.')
+            logging.info(f'Cliente {client_id} (Room: {room_id}) desconectado.')
             # Notificar al otro usuario y limpiar la sesión
             if room_id in sessions:
                 if client_id in sessions[room_id]["clients"]:
@@ -274,6 +307,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 # Eliminar la sala si queda vacía
                 if not sessions[room_id]["clients"]:
                     del sessions[room_id]
+                    logging.info(f'Room {room_id} eliminada por estar vacía.')
 
 #
 # Configuración de la aplicación y rutas
@@ -291,25 +325,48 @@ def cleanup_sessions():
     expired = [rid for rid, info in sessions.items()
                if now - info.get('last_activity', now) > SESSION_TIMEOUT]
     for rid in expired:
-        for cid in sessions[rid]['clients']:
+        for cid in list(sessions[rid]['clients']): # Iterate over a copy for safe removal
             if cid in clients:
                 try:
-                    clients[cid]['ws'].write_message({'info': 'Sesión expirada'})
-                    clients[cid]['ws'].close()
-                except:
-                    pass
-                del clients[cid]
-        del sessions[rid]
-        logging.info(f'Sesión {rid} expirada y removida')
+                    logging.info(f'Cliente {cid} en sala {rid} desconectado por inactividad.')
+                    clients[cid]['ws'].write_message({'info': 'Sesión expirada por inactividad.'})
+                    clients[cid]['ws'].close(code=1000, reason="Session Timeout")
+                except Exception as e:
+                    logging.error(f"Error closing WebSocket for client {cid} during cleanup: {e}")
+                # Removal from clients dict will happen in on_close
+        # If after attempting to disconnect clients, the room is empty, delete it
+        # Note: on_close should handle removing clients from sessions[rid]['clients']
+        # This check is more of a safeguard if on_close failed or was not called for some reason
+        if not sessions[rid]['clients']:
+             del sessions[rid]
+             logging.info(f'Sesión {rid} expirada y removida')
+        elif sessions[rid]['clients'] and all(c not in clients for c in sessions[rid]['clients']):
+            # If clients are no longer in the global clients dict but still listed in session (stale)
+            del sessions[rid]
+            logging.info(f'Sesión {rid} (stale) expirada y removida')
+
 
 import signal, logging
 import tornado.ioloop
 
 def shutdown(sig, frame):
-    logging.info("→ Recibida señal %s, deteniendo IOLoop…", sig)
-    tornado.ioloop.IOLoop.current().add_callback_from_signal(
-        tornado.ioloop.IOLoop.current().stop
-    )
+    logging.info("→ Recibida señal %s, iniciando apagado del servidor...", sig)
+    io_loop = tornado.ioloop.IOLoop.current()
+
+    # Notificar y cerrar conexiones de clientes
+    for client_id, client_info in list(clients.items()): # Iterate over a copy
+        try:
+            if client_info['ws'] and client_info['ws'].ws_connection:
+                client_info['ws'].write_message({'info': 'Servidor reiniciando. Por favor, reconecte.'})
+                client_info['ws'].close(code=1001, reason="Server Restarting")
+                logging.info(f"Notificado y cerrado conexión para cliente {client_id}")
+        except Exception as e:
+            logging.error(f"Error notificando/cerrando cliente {client_id}: {e}")
+
+    # Dar un pequeño tiempo para que los mensajes de cierre se envíen
+    io_loop.add_timeout(time.time() + 1, lambda: io_loop.stop())
+    logging.info("IOLoop se detendrá en breve.")
+
 
 signal.signal(signal.SIGTERM, shutdown)  # usado por Docker / systemd
 signal.signal(signal.SIGINT,  shutdown)  # Ctrl-C local
