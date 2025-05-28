@@ -243,6 +243,32 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 self.write_message({'error': 'JSON inválido'})
                 return
 
+            # ----- Handle client leave action -----
+            if data.get('action') == 'leave':
+                client_id = getattr(self, 'client_id', None)
+                room_id   = getattr(self, 'room_id', None)
+                logging.info(f"[LEAVE] Client {client_id} requested to leave room {room_id}")
+                # Remove from global clients
+                if client_id in clients:
+                    del clients[
+                        client_id]
+                # Remove from session
+                if room_id in sessions and client_id in sessions[room_id]['clients']:
+                    sessions[room_id]['clients'].remove(client_id)
+                    # Notify the other client if present
+                    if sessions[room_id]['clients']:
+                        other = sessions[room_id]['clients'][0]
+                        if other in clients and clients[other]['ws']:
+                            clients[other]['ws'].write_message({'info': 'El otro usuario se ha desconectado.'})
+                    # Clean up session if empty
+                    if not sessions[room_id]['clients']:
+                        del sessions[room_id]
+                        logging.info(f"[LEAVE] Room {room_id} deleted after client {client_id} left")
+                # Acknowledge and close this WebSocket
+                self.write_message({'info': 'Has salido de la sala.'})
+                self.close(code=1000, reason='Client leave')
+                return
+
             if not isinstance(data, dict):
                 logging.warning(f"[MSG_RECV] Message is not a JSON object from {getattr(self, 'client_id', 'Unknown')}: {data}")
                 self.write_message({'error': 'El mensaje debe ser un objeto JSON.'})
@@ -278,7 +304,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 logging.info(f'[MSG_SENT] Client: {self.client_id} to Room: {self.room_id} (Other: {other}): {msg_serializado}')
             elif hasattr(self, 'room_id') and self.room_id in sessions: # Paired but other client disconnected or not yet fully paired
                 logging.info(f'[MSG_WAIT] Client: {self.client_id} in Room: {self.room_id} sent message but not paired: {msg_serializado}')
-                self.write_message({'info': 'Aún no emparejado o el otro usuario se desconectó.'})
+                self.write_message({'info': 'Aún no emparejado o el otro usuario se desconecto.'})
             else: # Should not happen if client is properly associated with a room
                 logging.warning(f"[MSG_ERR] Client {getattr(self, 'client_id', 'Unknown')} in unknown room {getattr(self, 'room_id', 'None')} sent message: {msg_serializado}")
                 self.write_message({'error': 'No estás en una sala válida.'})
@@ -303,7 +329,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                     if len(sessions[room_id]["clients"]) == 1:
                         other_client_id = sessions[room_id]["clients"][0]
                         if other_client_id in clients and clients[other_client_id]['ws']:
-                            clients[other_client_id]['ws'].write_message({'info': 'El otro usuario se ha desconectado.'})
+                            clients[other_client_id]['ws'].write_message({'info': 'El otro usuario salió de la sala.'})
                 # Eliminar la sala si queda vacía
                 if not sessions[room_id]["clients"]:
                     del sessions[room_id]
