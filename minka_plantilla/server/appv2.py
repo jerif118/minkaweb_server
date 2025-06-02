@@ -231,6 +231,24 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             self.write_message({'error': 'JSON inválido'})
             return
 
+        # 1) Si llega {"action":"leave"}, notificamos al otro peer y limpiamos estructuras
+        if data.get('action') == 'leave':
+            # Notificar a la contraparte que el peer se ha desvinculado
+            if hasattr(self, 'room_id') and self.room_id in sessions:
+                peer_list = sessions[self.room_id]["clients"]
+                other_ids = [cid for cid in peer_list if cid != getattr(self, 'client_id', None)]
+                if other_ids:
+                    other = other_ids[0]
+                    if other in clients and clients[other]['ws']:
+                        clients[other]['ws'].write_message({'info': 'El otro usuario se ha desconectado.'})
+                # Eliminar al cliente que envió 'leave'
+                sessions[self.room_id]["clients"].remove(self.client_id)
+                del clients[self.client_id]
+                # Si la sala queda vacía, borrarla
+                if not sessions[self.room_id]["clients"]:
+                    del sessions[self.room_id]
+            return
+
         msg = data.get('message')
 
         # Serializamos a JSON para medir tamaño (y aceptar dicts)
@@ -263,14 +281,10 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             if client_id in clients:
                 del clients[client_id]
             logging.info(f'Cliente {client_id} desconectado.')
-            # Notificar al otro usuario y limpiar la sesión
+            # Limpiar la sesión (sin notificar al otro peer)
             if room_id in sessions:
                 if client_id in sessions[room_id]["clients"]:
                     sessions[room_id]["clients"].remove(client_id)
-                    if len(sessions[room_id]["clients"]) == 1:
-                        other_client_id = sessions[room_id]["clients"][0]
-                        if other_client_id in clients and clients[other_client_id]['ws']:
-                            clients[other_client_id]['ws'].write_message({'info': 'El otro usuario se ha desconectado.'})
                 # Eliminar la sala si queda vacía
                 if not sessions[room_id]["clients"]:
                     del sessions[room_id]
