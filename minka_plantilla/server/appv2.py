@@ -225,6 +225,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             self.close()
     
     def on_message(self, message):
+        logging.info(f"[DEBUG] on_message called with raw message: {message}")
         try:
             data = json.loads(message)
         except json.JSONDecodeError:
@@ -233,6 +234,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
         # 1) Si llega {"action":"leave"}, notificamos al otro peer y limpiamos estructuras
         if data.get('action') == 'leave':
+            logging.info(f"[DEBUG] leave action received from {self.client_id} in room {self.room_id}")
             # Notificar a la contraparte que el peer se ha desvinculado
             if hasattr(self, 'room_id') and self.room_id in sessions:
                 peer_list = sessions[self.room_id]["clients"]
@@ -265,6 +267,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         # ¡Ya podemos hacer broadcast!
         if self.room_id in sessions and len(sessions[self.room_id]["clients"]) == 2:
             other = [cid for cid in sessions[self.room_id]["clients"] if cid != self.client_id][0]
+            logging.info(f"[DEBUG] Broadcasting to {other}: {msg}")
             # Reenvía el objeto completo, no su str()
             clients[other]['ws'].write_message({
                 'sender_id': self.client_id,
@@ -277,6 +280,13 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def on_close(self):
         client_id = getattr(self, 'client_id', None)
         room_id = getattr(self, 'room_id', None)
+        # Notificar al otro peer si aún está conectado
+        if room_id and room_id in sessions:
+            peer_ids = [cid for cid in sessions[room_id]["clients"] if cid != client_id]
+            if peer_ids:
+                peer = peer_ids[0]
+                if peer in clients and clients[peer]['ws']:
+                    clients[peer]['ws'].write_message({'info': 'El otro usuario se ha desconectado.'})
         if client_id:
             if client_id in clients:
                 del clients[client_id]
