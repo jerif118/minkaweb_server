@@ -512,7 +512,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
     #             del sessions[room_id]
     #         return
     def on_close(self):
-        if getattr(self, 'interntional_diconnect',False):
+        # Salir silenciosamente si el cierre fue voluntario (marcado en on_message)
+        if getattr(self, 'intentional_disconnect', False):
             return
         
         client_id = getattr(self, 'client_id', None)
@@ -522,11 +523,11 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         logging.info(f"[CLOSE] Desconexion inexperada del cliente {client_id},room {room_id}"f"Reconectando en {RECONNECT_GRACE_PERIOD} segundos")
         
         if client_id in clients:
-            clients[client_id]['status'] ='peding_reconnect'
+            clients[client_id]['status'] = 'pending_reconnect'
             clients[client_id]['ws'] = None  # Desconectar el WebSocket, pero mantener el client
-            clients[client_id]['pending_since']=time.time()
+            clients[client_id]['pending_since'] = time.time()
         
-        for peer in sessions.get(room_id,{}).get('clients',[]):
+        for peer in sessions.get(room_id, {}).get('clients', []):
             if peer != client_id and peer in clients and clients[peer]['ws']:
                 clients[peer]['ws'].write_message({'warning': 'El otro usuario perdió la conexión. Esperando que se reconecte…'})
 #
