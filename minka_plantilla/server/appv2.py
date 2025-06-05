@@ -1,3 +1,6 @@
+import tornado.websocket
+import re, uuid, json, logging, time
+from session import sessions, clients, RECONNECT_GRACE_PERIOD, SESSION_TIMEOUT
 import tornado.ioloop
 import tornado.web
 import tornado.websocket
@@ -13,18 +16,18 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 # Tiempo máximo de inactividad de una sala en segundos (ej. 5 minutos)
-SESSION_TIMEOUT = 7_200
+# SESSION_TIMEOUT = 7_200
 
-RECONNECT_GRACE_PERIOD = 60  # Tiempo de gracia para reconexión en segundos
+# RECONNECT_GRACE_PERIOD = 60  # Tiempo de gracia para reconexión en segundos
 
-# Estructura de sessions: cada room_id → dict con keys: password, clients, last_activity
-sessions = {}
+# # Estructura de sessions: cada room_id → dict con keys: password, clients, last_activity
+# sessions = {}
 
-# Diccionario para almacenar la información de los clientes conectados
-clients = {}
+# # Diccionario para almacenar la información de los clientes conectados
+# clients = {}
 
-#
-# Handlers Base para manejo de CORS y solicitudes OPTIONS
+# #
+# # Handlers Base para manejo de CORS y solicitudes OPTIONS
 #
 class BaseHandler(tornado.web.RequestHandler):
     def set_default_headers(self):
@@ -448,69 +451,69 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         else:
             self.write_message({'info': 'Aún no emparejado.'})
 
-    # def on_close(self):
-    #     # If this is a voluntary disconnect (handled in on_message with 'leave'), skip all cleanup here.
-    #     if getattr(self, 'intentional_disconnect', False):
-    #         return
-    #     client_id = getattr(self, 'client_id', None)
-    #     room_id = getattr(self, 'room_id', None)
-    #     if not client_id or not room_id:
-    #         return
-    #     logging.info(f"[CLOSE] Desconexión de cliente {client_id} en sala {room_id}")
-    #     # Verificar si hay un cliente móvil en modo doze en esta sala
-    #     mobile_in_doze = False
-    #     if room_id in sessions:
-    #         for cid in sessions[room_id]["clients"]:
-    #             if cid != client_id and cid in clients and not cid.startswith("web-") and clients[cid].get('status') == 'dozing':
-    #                 mobile_in_doze = True
-    #                 break
-    #     # Si el cliente que cierra es un cliente web y hay un móvil en doze
-    #     if client_id and client_id.startswith("web-") and mobile_in_doze:
-    #         logging.info(f"Web client {client_id} desconectado pero hay móvil en doze. Preservando sala.")
-    #         # Marcar el cliente web como desconectado pero mantener en la lista de clientes
-    #         if client_id in clients:
-    #             clients[client_id]['ws'] = None
-    #             clients[client_id]['status'] = 'disconnected'
-    #         # Actualizar timestamp para evitar expiración
-    #         if room_id in sessions:
-    #             sessions[room_id]['last_activity'] = time.time()
-    #         return
-    #     # Si el cliente que cierra es un cliente web y no hay móvil en doze, limpieza completa
-    #     elif client_id and client_id.startswith("web-"):
-    #         if room_id and room_id in sessions:
-    #             peer_ids = [cid for cid in sessions[room_id]["clients"] if cid != client_id]
-    #             # (No notify peers here; voluntary leave handled in on_message)
-    #             for peer in peer_ids:
-    #                 if peer in clients:
-    #                     del clients[peer]
-    #             if client_id in clients:
-    #                 del clients[client_id]
-    #             del sessions[room_id]
-    #         return
-    #     # Si estaba en estado 'dozing', no notificamos ni removemos la sala
-    #     if client_id in clients and clients[client_id].get('status') == 'dozing':
-    #         logging.info(f'Cliente {client_id} en dozing, cerrando socket sin remover sala.')
-    #         clients[client_id]['ws'] = None
-    #         return
-    #     # Normal close: notificar y remover posibles peers en doze
-    #     if room_id and room_id in sessions:
-    #         peer_ids = [cid for cid in sessions[room_id]["clients"] if cid != client_id]
-    #         for peer in peer_ids:
-    #             if peer in clients:
-    #                 # Si está conectado, notificar
-    #                 if clients[peer]['ws']:
-    #                     clients[peer]['ws'].write_message({'info': 'El otro usuario se ha desconectado.'})
-    #         # Remover al cliente que cerró
-    #         del clients[client_id]
-    #         sessions[room_id]["clients"].remove(client_id)
-    #         # Limpiar lista de clientes en la sala
-    #         sessions[room_id]["clients"] = [
-    #             cid for cid in sessions[room_id]["clients"] if cid in clients
-    #         ]
-    #         # Si la sala queda vacía, eliminarla
-    #         if not sessions[room_id]["clients"]:
-    #             del sessions[room_id]
-    #         return
+    def on_close(self):
+        # If this is a voluntary disconnect (handled in on_message with 'leave'), skip all cleanup here.
+        if getattr(self, 'intentional_disconnect', False):
+            return
+        client_id = getattr(self, 'client_id', None)
+        room_id = getattr(self, 'room_id', None)
+        if not client_id or not room_id:
+            return
+        logging.info(f"[CLOSE] Desconexión de cliente {client_id} en sala {room_id}")
+        # Verificar si hay un cliente móvil en modo doze en esta sala
+        mobile_in_doze = False
+        if room_id in sessions:
+            for cid in sessions[room_id]["clients"]:
+                if cid != client_id and cid in clients and not cid.startswith("web-") and clients[cid].get('status') == 'dozing':
+                    mobile_in_doze = True
+                    break
+        # Si el cliente que cierra es un cliente web y hay un móvil en doze
+        if client_id and client_id.startswith("web-") and mobile_in_doze:
+            logging.info(f"Web client {client_id} desconectado pero hay móvil en doze. Preservando sala.")
+            # Marcar el cliente web como desconectado pero mantener en la lista de clientes
+            if client_id in clients:
+                clients[client_id]['ws'] = None
+                clients[client_id]['status'] = 'disconnected'
+            # Actualizar timestamp para evitar expiración
+            if room_id in sessions:
+                sessions[room_id]['last_activity'] = time.time()
+            return
+        # Si el cliente que cierra es un cliente web y no hay móvil en doze, limpieza completa
+        elif client_id and client_id.startswith("web-"):
+            if room_id and room_id in sessions:
+                peer_ids = [cid for cid in sessions[room_id]["clients"] if cid != client_id]
+                # (No notify peers here; voluntary leave handled in on_message)
+                for peer in peer_ids:
+                    if peer in clients:
+                        del clients[peer]
+                if client_id in clients:
+                    del clients[client_id]
+                del sessions[room_id]
+            return
+        # Si estaba en estado 'dozing', no notificamos ni removemos la sala
+        if client_id in clients and clients[client_id].get('status') == 'dozing':
+            logging.info(f'Cliente {client_id} en dozing, cerrando socket sin remover sala.')
+            clients[client_id]['ws'] = None
+            return
+        # Normal close: notificar y remover posibles peers en doze
+        if room_id and room_id in sessions:
+            peer_ids = [cid for cid in sessions[room_id]["clients"] if cid != client_id]
+            for peer in peer_ids:
+                if peer in clients:
+                    # Si está conectado, notificar
+                    if clients[peer]['ws']:
+                        clients[peer]['ws'].write_message({'info': 'El otro usuario se ha desconectado.'})
+            # Remover al cliente que cerró
+            del clients[client_id]
+            sessions[room_id]["clients"].remove(client_id)
+            # Limpiar lista de clientes en la sala
+            sessions[room_id]["clients"] = [
+                cid for cid in sessions[room_id]["clients"] if cid in clients
+            ]
+            # Si la sala queda vacía, eliminarla
+            if not sessions[room_id]["clients"]:
+                del sessions[room_id]
+            return
     def on_close(self):
         # Salir silenciosamente si el cierre fue voluntario (marcado en on_message)
         if getattr(self, 'intentional_disconnect', False):
@@ -531,8 +534,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             if peer != client_id and peer in clients and clients[peer]['ws']:
                 clients[peer]['ws'].write_message({'warning': 'El otro usuario perdió la conexión. Esperando que se reconecte…'})
 #
-# Configuración de la aplicación y rutas
-#
+#Configuración de la aplicación y rutas
+
 def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
@@ -607,12 +610,12 @@ def shutdown(sig, frame):
 signal.signal(signal.SIGTERM, shutdown)  # usado por Docker / systemd
 signal.signal(signal.SIGINT,  shutdown)  # Ctrl-C local
 
-# Programar limpieza de sesiones cada minuto
+
 PeriodicCallback(cleanup_sessions, 60000).start()
 
 #
-# Iniciar el servidor
-#
+#Iniciar el servidor
+
 if __name__ == "__main__":
     app = make_app()
     app.listen(5001)
