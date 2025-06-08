@@ -1,0 +1,37 @@
+INFO:root:Servidor MinkaV2 (Redis) iniciado en el puerto 5001
+INFO:root:[INIT] Inicializando estado del servidor desde Redis...
+INFO:root:[INIT] Cliente mobile-d13de48d está en dozing. Manteniendo estado.
+INFO:root:[INIT] Cliente mobile-2bc86a9a está en dozing. Manteniendo estado.
+INFO:root:[INIT] Inicialización de estado del servidor desde Redis completada.
+INFO:tornado.access:101 GET /ws?client_id=web-debug&action=create (::1) 1.12ms
+INFO:root:[OPEN] Args: client_id=web-debug action=create room_id=None password=None jwt_token=None
+INFO:root:[OPEN-CREATE] JTI c65b3210e56c488b91f85cf90159dc1c almacenado para cliente web web-debug
+INFO:tornado.access:101 GET /ws?client_id=mobile-debug&action=join&room_id=270fea60-f0eb-4d61-ac92-961cf356e208&password=d50e1c (::1) 0.74ms
+INFO:root:[OPEN] Args: client_id=mobile-debug action=join room_id=270fea60-f0eb-4d61-ac92-961cf356e208 password=****** jwt_token=None
+INFO:root:[OPEN-DEBUG] Cliente mobile-debug intentando join. Estado actual: No existe
+INFO:root:[OPEN-DEBUG] Verificando modo doze para mobile-debug. Status: No existe
+INFO:root:[DEBUG] on_message called with raw message: {"message": "Test inicial"}
+INFO:root:[DEBUG] Broadcasting to mobile-debug: Test inicial
+INFO:root:[BROADCAST] de web-debug → mobile-debug: Test inicial
+INFO:root:[DEBUG] on_message called with raw message: {"action": "leave", "reason": "doze"}
+INFO:root:[LEAVE] Acción de salida recibida de mobile-debug en sala 270fea60-f0eb-4d61-ac92-961cf356e208, razón: doze
+INFO:root:[LEAVE] Cliente mobile-debug entrando en modo doze en sala 270fea60-f0eb-4d61-ac92-961cf356e208. Se conservará la cola de mensajes.
+INFO:root:[LEAVE-DOZE] Estado de la cola para mobile-debug: existe=0, mensajes_pendientes=0
+INFO:root:[LEAVE-DOZE] La cola mq:mobile-debug tiene 0 mensajes antes de entrar en doze
+INFO:root:[CLOSE] Cierre voluntario del cliente mobile-debug en sala 270fea60-f0eb-4d61-ac92-961cf356e208. Limpieza gestionada por on_message/'leave'.
+INFO:root:[DEBUG] on_message called with raw message: {"message": "Mensaje durante doze 1"}
+INFO:root:[DEBUG] Broadcasting to mobile-debug: Mensaje durante doze 1
+WARNING:root:[BROADCAST] Peer mobile-debug está en modo doze. Encolando mensaje: {'sender_id': 'web-debug', 'message': 'Mensaje durante doze 1', 'timestamp': 1749333442.313281}
+INFO:root:[BROADCAST] Mensaje encolado exitosamente para mobile-debug. Cola antes: 0, después: 1
+INFO:root:[DEBUG] on_message called with raw message: {"message": "Mensaje durante doze 2"}
+INFO:root:[DEBUG] Broadcasting to mobile-debug: Mensaje durante doze 2
+WARNING:root:[BROADCAST] Peer mobile-debug está en modo doze. Encolando mensaje: {'sender_id': 'web-debug', 'message': 'Mensaje durante doze 2', 'timestamp': 1749333442.5154471}
+INFO:root:[BROADCAST] Mensaje encolado exitosamente para mobile-debug. Cola antes: 1, después: 2
+INFO:tornado.access:101 GET /ws?client_id=mobile-debug&action=join&room_id=270fea60-f0eb-4d61-ac92-961cf356e208&password=d50e1c (::1) 0.71ms
+INFO:root:[OPEN] Args: client_id=mobile-debug action=join room_id=270fea60-f0eb-4d61-ac92-961cf356e208 password=****** jwt_token=None
+INFO:root:[OPEN-DEBUG] Cliente mobile-debug intentando join. Estado actual: dozing
+INFO:root:[OPEN-DEBUG] Datos completos del cliente mobile-debug: {'status': 'dozing', 'room_id': '270fea60-f0eb-4d61-ac92-961cf356e208', 'dozing': True, 'doze_start': 1749333441.3069482, 'ws': None}
+INFO:root:[CLOSE] Desconexión inesperada del cliente web-debug (web: True) en la sala 270fea60-f0eb-4d61-ac92-961cf356e208. Marcando para reconexión (timeout respectivo: web=259200s, mobile=60s).
+INFO:root:[CLOSE] Cola de mensajes para web-debug - existe: 0, longitud: 0
+INFO:root:[CLOSE] Desconexión inesperada del cliente mobile-debug (web: False) en la sala 270fea60-f0eb-4d61-ac92-961cf356e208. Marcando para reconexión (timeout respectivo: web=259200s, mobile=60s).
+INFO:root:[CLOSE] Cola de mensajes para mobile-debug - existe: 1, longitud: 2

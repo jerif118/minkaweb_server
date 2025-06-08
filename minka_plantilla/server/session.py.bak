@@ -1,0 +1,303 @@
+# shared.py
+import time
+import redis
+import json
+import jwt # Importar PyJWT
+import uuid # Para generar JTI
+from datetime import datetime, timedelta # Para la expiración del JWT
+
+# Configuración de Redis (ajusta según tu entorno)
+redis_client = redis.StrictRedis(host='localhost', port=6379, db=0, decode_responses=True)
+
+SESSION_TIMEOUT = 3 * 24 * 60 * 60  # 3 días (era 7_200 segundos / 2 horas)
+RECONNECT_GRACE_PERIOD = 120        # 2 min (para reconexiones rápidas, aumentado de 60s a 120s)
+WEB_RECONNECT_TIMEOUT = 3 * 24 * 60 * 60 # 3 días para que un cliente web se reconecte
+DOZE_TIMEOUT = 24 * 60 * 60             # 24 horas para móviles en doze (ya se usa en appv2)
+
+
+JWT_SECRET_KEY = "minkaweb_secret_key"  
+JWT_ALGORITHM = "HS256"
+JWT_EXPIRATION_DELTA_SECONDS = WEB_RECONNECT_TIMEOUT # Usar el mismo timeout que para la reconexión web
+
+# Ya no usaremos estos diccionarios en memoria
+# sessions = {}  # room_id → {password, clients, last_activity}
+# clients  = {}  # client_id → {ws, status, room_id, ...}
+
+def now():
+    return time.time()
+
+# Funciones para JWT
+def generate_jwt(client_id, room_id):
+    payload = {
+        "client_id": client_id,
+        "room_id": room_id,
+        "exp": datetime.utcnow() + timedelta(seconds=JWT_EXPIRATION_DELTA_SECONDS),
+        "jti": uuid.uuid4().hex  # Añadir JWT ID único
+    }
+    token = jwt.encode(payload, JWT_SECRET_KEY, algorithm=JWT_ALGORITHM)
+    return token
+
+def verify_jwt(token):
+    try:
+        payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_ALGORITHM])
+        jti = payload.get('jti')
+        if not jti:
+            # Considerar inválido si no tiene JTI, o manejar según política
+            return None 
+        if is_jti_blacklisted(jti):
+            return None
+        return payload
+    except jwt.ExpiredSignatureError:
+        # El token ha expirado
+        return None
+    except jwt.InvalidTokenError:
+        # El token es inválido
+        return None
+
+# Funciones para la lista negra de JWT
+JWT_BLACKLIST_KEY_PREFIX = "jwt_blacklist:"
+MESSAGE_QUEUE_KEY_PREFIX = "mq:"  # Prefijo para colas de mensajes
+MAX_QUEUE_LENGTH = 100            # Máximo de mensajes encolados por cliente
+MESSAGE_TTL_SECONDS = 3 * 24 * 60 * 60 # TTL para la clave de la cola
+
+def add_jti_to_blacklist(jti, expiration_seconds):
+    """Añade un JTI a la lista negra con una expiración."""
+    if expiration_seconds > 0:
+        redis_client.setex(f"{JWT_BLACKLIST_KEY_PREFIX}{jti}", int(expiration_seconds), "blacklisted")
+
+def is_jti_blacklisted(jti):
+    """Comprueba si un JTI está en la lista negra."""
+    return redis_client.exists(f"{JWT_BLACKLIST_KEY_PREFIX}{jti}")
+
+# Funciones para colas de mensajes en Redis
+def add_message_to_queue(client_id, message_payload):
+    """Añade un mensaje a la cola de un cliente en Redis.
+    message_payload debe ser un diccionario serializable a JSON.
+    """
+    if not client_id:
+        print(f"ERROR: add_message_to_queue - client_id es None o vacío")
+        return False
+    
+    queue_key = f"{MESSAGE_QUEUE_KEY_PREFIX}{client_id}"
+    # Serializar el mensaje completo (incluyendo sender, timestamp, etc.)
+    message_json = json.dumps(message_payload)
+    
+    # Generar un ID único para el mensaje para control de entrega
+    message_id = f"{time.time()}-{uuid.uuid4().hex[:8]}"
+    message_with_id = {
+        "id": message_id,
+        "data": message_payload,
+        "timestamp": time.time(),
+        "attempts": 0
+    }
+    message_json = json.dumps(message_with_id)
+    
+    # Intentar múltiples veces en caso de problemas con Redis
+    max_retries = 3
+    for retry in range(max_retries):
+        try:
+            # Añadir a la derecha (final de la lista)
+            result = redis_client.rpush(queue_key, message_json)
+            # Mantener la cola con un tamaño máximo
+            redis_client.ltrim(queue_key, -MAX_QUEUE_LENGTH, -1)
+            # Establecer/actualizar el TTL de la clave de la cola para que no persista indefinidamente si el usuario no vuelve
+            redis_client.expire(queue_key, MESSAGE_TTL_SECONDS)
+            
+            # Guardar en una clave separada para verificar entrega
+            ack_key = f"ack:{client_id}:{message_id}"
+            redis_client.setex(ack_key, MESSAGE_TTL_SECONDS, "pending")
+            
+            print(f"DEBUG: Mensaje {message_id} encolado para {client_id}, longitud actual: {result}")
+            return True
+        except redis.exceptions.ConnectionError as e:
+            print(f"ERROR: Conexión Redis fallida al encolar mensaje para {client_id}: {e}, intento {retry+1}/{max_retries}")
+            if retry == max_retries - 1:
+                print(f"ERROR: No se pudo encolar mensaje para {client_id} después de {max_retries} intentos")
+                return False
+            time.sleep(0.5)  # Esperar antes de reintentar
+    
+    return False
+
+def get_pending_messages(client_id, mark_as_delivered=True):
+    """
+    Obtiene los mensajes pendientes de la cola de un cliente.
+    
+    Args:
+        client_id: ID del cliente
+        mark_as_delivered: Si es True, marca los mensajes como entregados y elimina la cola.
+                           Si es False, solo devuelve los mensajes sin eliminarlos.
+    
+    Returns:
+        Lista de mensajes pendientes (solo los datos, sin metadatos)
+    """
+    if not client_id:
+        print(f"ERROR: get_pending_messages - client_id es None o vacío")
+        return []
+    
+    queue_key = f"{MESSAGE_QUEUE_KEY_PREFIX}{client_id}"
+    print(f"DEBUG: Buscando mensajes pendientes para {client_id} con clave {queue_key}")
+    
+    try:
+        # Obtener todos los mensajes de la lista (de izquierda a derecha)
+        raw_lrange_result = redis_client.lrange(queue_key, 0, -1)
+        
+        if not raw_lrange_result:
+            print(f"DEBUG: No hay mensajes pendientes para {client_id}")
+            return []
+        
+        # Deserializar los mensajes con sus metadatos
+        message_objects = []
+        for msg_json in raw_lrange_result:
+            try:
+                msg_obj = json.loads(msg_json)
+                message_objects.append(msg_obj)
+            except json.JSONDecodeError:
+                print(f"ERROR: No se pudo deserializar mensaje para {client_id}: {msg_json}")
+        
+        # Extraer solo los datos de los mensajes para enviar al cliente
+        messages_to_send = []
+        for msg_obj in message_objects:
+            if isinstance(msg_obj, dict) and "data" in msg_obj:
+                messages_to_send.append(msg_obj["data"])
+                # Actualizar estado de entrega si corresponde
+                if mark_as_delivered and "id" in msg_obj:
+                    ack_key = f"ack:{client_id}:{msg_obj['id']}"
+                    redis_client.setex(ack_key, MESSAGE_TTL_SECONDS, "delivered")
+            else:
+                # Formato antiguo o inválido, usar el mensaje tal cual
+                messages_to_send.append(msg_obj)
+        
+        print(f"DEBUG: Encontrados {len(messages_to_send)} mensajes pendientes para {client_id}")
+        
+        # Si corresponde, eliminar la cola después de procesar los mensajes
+        if mark_as_delivered:
+            delete_result = redis_client.delete(queue_key)
+            print(f"DEBUG: Cola {queue_key} eliminada después de recuperar mensajes. Resultado: {delete_result}")
+        
+        return messages_to_send
+        
+    except redis.exceptions.RedisError as e:
+        print(f"ERROR: Error de Redis al obtener mensajes para {client_id}: {e}")
+        return []
+
+# Funciones para interactuar con Redis para las sesiones (rooms)
+def get_session(room_id):
+    session_data = redis_client.get(f"session:{room_id}")
+    return json.loads(session_data) if session_data else None
+
+def set_session(room_id, data):
+    # Asegúrate de que todos los datos sean serializables a JSON
+    # 'clients' es una lista de client_ids, que son strings.
+    redis_client.set(f"session:{room_id}", json.dumps(data))
+    # Establecer un TTL si es necesario, o manejar la expiración en cleanup_sessions
+    # redis_client.expire(f"session:{room_id}", SESSION_TIMEOUT)
+
+
+def delete_session(room_id):
+    redis_client.delete(f"session:{room_id}")
+
+def get_all_session_keys():
+    return [key.split(":")[1] for key in redis_client.keys("session:*")]
+
+# Funciones para interactuar con Redis para los clientes
+def get_client(client_id):
+    client_data = redis_client.get(f"client:{client_id}")
+    if client_data:
+        data = json.loads(client_data)
+        # El objeto 'ws' no se puede serializar, se manejará en la lógica de la aplicación
+        data['ws'] = None # O alguna representación de que no está serializado
+        return data
+    return None
+
+def set_client(client_id, data):
+    # No serializar el objeto WebSocket ('ws')
+    data_to_store = {k: v for k, v in data.items() if k != 'ws'}
+    redis_client.set(f"client:{client_id}", json.dumps(data_to_store))
+    # Considera un TTL para clientes si es apropiado, o manejar en cleanup
+    # redis_client.expire(f"client:{client_id}", SESSION_TIMEOUT)
+
+
+def delete_client(client_id, keep_message_queue=False):
+    """
+    Elimina un cliente de Redis.
+    
+    Args:
+        client_id (str): ID del cliente a eliminar
+        keep_message_queue (bool): Si es True, conserva la cola de mensajes del cliente
+    """
+    print(f"DEBUG: Eliminando cliente {client_id}, conservar cola: {keep_message_queue}")
+    redis_client.delete(f"client:{client_id}")
+    
+    # Eliminar la cola de mensajes solo si keep_message_queue es False
+    if not keep_message_queue:
+        print(f"DEBUG: Eliminando cola de mensajes para {client_id}")
+        redis_client.delete(f"{MESSAGE_QUEUE_KEY_PREFIX}{client_id}")
+    else:
+        print(f"DEBUG: Conservando cola de mensajes para {client_id}")
+        # Asegurar que la cola tenga un tiempo de expiración adecuado
+        message_queue_key = f"{MESSAGE_QUEUE_KEY_PREFIX}{client_id}"
+        if redis_client.exists(message_queue_key):
+            redis_client.expire(message_queue_key, MESSAGE_TTL_SECONDS)
+
+def get_all_client_keys():
+    return [key.split(":")[1] for key in redis_client.keys("client:*")]
+
+# Necesitarás una forma de mantener los objetos WebSocket activos, ya que no se pueden almacenar en Redis.
+# Podrías tener un diccionario local en cada instancia del servidor para esto.
+active_websockets = {} # client_id -> ws_object
+
+# Importaciones necesarias para las nuevas funciones
+import uuid
+
+# Funciones adicionales para el sistema de confirmación de mensajes (ACK)
+def confirm_message_delivery(client_id, message_id):
+    """
+    Confirma que un mensaje fue entregado correctamente.
+    
+    Args:
+        client_id: ID del cliente que recibió el mensaje
+        message_id: ID del mensaje entregado
+    """
+    ack_key = f"ack:{client_id}:{message_id}"
+    if redis_client.exists(ack_key):
+        redis_client.setex(ack_key, MESSAGE_TTL_SECONDS, "confirmed")
+        return True
+    return False
+
+def get_unconfirmed_messages(client_id):
+    """
+    Obtiene mensajes que fueron enviados pero no confirmados.
+    Útil para verificar si hay mensajes que podrían necesitar reenvío.
+    
+    Args:
+        client_id: ID del cliente
+    
+    Returns:
+        Lista de IDs de mensajes pendientes de confirmación
+    """
+    pending_acks = []
+    pattern = f"ack:{client_id}:*"
+    for key in redis_client.scan_iter(match=pattern):
+        status = redis_client.get(key)
+        if status in ["pending", "delivered"]:
+            message_id = key.split(":")[-1]
+            pending_acks.append(message_id)
+    return pending_acks
+
+def schedule_message_redelivery(client_id, max_attempts=3, retry_delay=5):
+    """
+    Programa la reentrega de mensajes que no han sido confirmados.
+    
+    Args:
+        client_id: ID del cliente
+        max_attempts: Número máximo de intentos de reentrega
+        retry_delay: Retraso en segundos entre intentos
+    """
+    # Esta función estaría conectada a un sistema de tareas programadas
+    # Por ahora, simplemente marca los mensajes para reintento
+    pattern = f"ack:{client_id}:*"
+    for key in redis_client.scan_iter(match=pattern):
+        status = redis_client.get(key)
+        if status == "delivered":
+            # Marcar para reintento
+            redis_client.setex(key, MESSAGE_TTL_SECONDS, "pending_retry")

@@ -130,111 +130,47 @@ def add_message_to_queue(client_id, message, max_attempts=3):
     if not client_id or not message:
         return False
 
-    # Verificar si el cliente existe y si está en modo doze
-    client_data = get_client(client_id)
-    if not client_data:
-        logging.warning(f"Intento de encolar mensaje para cliente inexistente: {client_id}")
-        return False
-    
-    # Verificar explícitamente si está en modo doze
-    is_dozing = client_data.get('status') == 'dozing'
-    if not is_dozing:
-        logging.warning(f"Intento de encolar mensaje para cliente que no está en modo doze: {client_id}")
-        # Permitir encolar de todas formas para mayor robustez, pero lo registramos
-    
-    # Generar ID único para el mensaje con timestamp para ordenación
-    message_id = f"{time.time()}-{uuid.uuid4().hex[:8]}"
-    
     # Añadir identificadores al mensaje para rastreo
     message_with_meta = {
-        'id': message_id,
+        'id': f"{time.time()}-{uuid.uuid4().hex[:8]}",
         'data': message,
         'timestamp': time.time(),
-        'attempts': 0,
-        'sender_id': message.get('sender_id', 'unknown'),
-        'is_doze_message': True
+        'attempts': 0
     }
 
     # Serializar como JSON para almacenar en Redis
-    try:
-        message_json = json.dumps(message_with_meta)
-    except Exception as e:
-        logging.error(f"Error al serializar mensaje para {client_id}: {e}")
-        return False
-        
+    message_json = json.dumps(message_with_meta)
     queue_key = f"{MESSAGE_QUEUE_KEY_PREFIX}{client_id}"
     
     try:
         # Encolar el mensaje
         result = redis_client.rpush(queue_key, message_json)
-        
         # Establecer un TTL para la cola si aún no lo tiene
         if redis_client.ttl(queue_key) < 0:  # -1 si no tiene TTL, -2 si no existe
             redis_client.expire(queue_key, MESSAGE_TTL_SECONDS)
-            
-        # Verificar que el mensaje se haya encolado correctamente
-        queue_length = redis_client.llen(queue_key)
-        logging.info(f"Mensaje encolado para {client_id} (dozing: {is_dozing}). Cola actual: {queue_length} mensajes")
-        
         return result > 0
     except Exception as e:
         logging.error(f"Error al encolar mensaje para {client_id}: {e}")
         return False
 
-def get_pending_messages(client_id, delete_queue=True):
-    """
-    Obtiene los mensajes pendientes para un cliente.
-    
-    Args:
-        client_id: ID del cliente
-        delete_queue: Si es True, elimina la cola después de obtener los mensajes
-                     Si es False, conserva la cola (útil para depuración o reintentos)
-    
-    Returns:
-        Lista de mensajes pendientes deserializados o lista vacía si hay error
-    """
+def get_pending_messages(client_id):
     if not client_id:
         return []
 
     queue_key = f"{MESSAGE_QUEUE_KEY_PREFIX}{client_id}"
     try:
-        # Verificar si la cola existe y cuántos mensajes tiene
-        if not redis_client.exists(queue_key):
-            logging.info(f"No hay cola de mensajes pendientes para {client_id}")
-            return []
-            
-        queue_length = redis_client.llen(queue_key)
-        logging.info(f"Recuperando {queue_length} mensajes pendientes para {client_id}")
-        
-        # Obtener todos los mensajes sin eliminar la cola todavía
+        # Obtener todos los mensajes y eliminar la cola
         messages_json = redis_client.lrange(queue_key, 0, -1)
+        redis_client.delete(queue_key)
         
         # Deserializar los mensajes
         messages = []
-        deserialize_errors = 0
-        
         for msg_json in messages_json:
             try:
                 msg = json.loads(msg_json)
-                # Extraer el contenido real del mensaje si está en la estructura de metadatos
-                if 'data' in msg:
-                    messages.append(msg['data'])
-                else:
-                    messages.append(msg)
+                messages.append(msg)
             except json.JSONDecodeError:
-                deserialize_errors += 1
                 logging.error(f"Error al deserializar mensaje para {client_id}")
-        
-        # Solo eliminamos la cola si se indica y si no hubo errores de deserialización
-        if delete_queue and deserialize_errors == 0:
-            redis_client.delete(queue_key)
-            logging.info(f"Cola de mensajes eliminada para {client_id} después de recuperar {len(messages)} mensajes")
-        elif deserialize_errors > 0:
-            logging.warning(f"No se eliminó la cola para {client_id} debido a {deserialize_errors} errores de deserialización")
-        elif not delete_queue:
-            logging.info(f"Conservando cola de mensajes para {client_id} con {len(messages)} mensajes")
-            # Renovar TTL
-            redis_client.expire(queue_key, MESSAGE_TTL_SECONDS)
         
         return messages
     except Exception as e:
