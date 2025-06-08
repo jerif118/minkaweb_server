@@ -1,0 +1,1059 @@
+2025-06-07 17:57:05,513 - minka.test.demo_logs - INFO - [demo_logs.py:14] - === DEMOSTRACIÓN DEL SISTEMA DE LOGS ===
+2025-06-07 17:57:05,513 - minka.test.demo_logs - INFO - [demo_logs.py:18] - Este es un mensaje de nivel INFO - Información general del proceso
+2025-06-07 17:57:05,513 - minka.test.demo_logs - WARNING - [demo_logs.py:19] - Este es un mensaje de nivel WARNING - Advertencia que no detiene el proceso
+2025-06-07 17:57:05,514 - minka.test.demo_logs - ERROR - [demo_logs.py:20] - Este es un mensaje de nivel ERROR - Un error que requiere atención
+2025-06-07 17:57:05,514 - minka.test.demo_logs - CRITICAL - [demo_logs.py:21] - Este es un mensaje de nivel CRITICAL - Error crítico que puede detener el sistema
+2025-06-07 17:57:05,514 - minka.test.demo_logs - INFO - [demo_logs.py:24] - Conexión establecida con el cliente: web-12345
+2025-06-07 17:57:05,514 - minka.test.demo_logs - ERROR - [demo_logs.py:30] - Error en operación matemática: division by zero
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/demo_logs.py", line 28, in demonstrate_logs
+    result = 10 / 0
+             ~~~^~~
+ZeroDivisionError: division by zero
+2025-06-07 17:57:05,516 - minka.test.demo_logs - INFO - [demo_logs.py:37] - Datos del cliente: {'client_id': 'mobile-54321', 'room_id': 'abc-123-def-456', 'status': 'connected'}
+2025-06-07 17:57:05,516 - minka.test.demo_logs - INFO - [demo_logs.py:40] - Mensajes recibidos: 15, Mensajes enviados: 12
+2025-06-07 17:57:05,516 - minka.test.demo_logs - INFO - [demo_logs.py:42] - === FIN DE DEMOSTRACIÓN DE LOGS ===
+2025-06-07 18:31:17,267 - minka.test.test_completo - INFO - [test_completo.py:38] - === INICIANDO PRUEBA COMPLETA DEL SERVIDOR MINKA ===
+2025-06-07 18:31:17,268 - minka.test.test_completo - INFO - [test_completo.py:328] - Iniciando prueba completa del servidor Minka WebSocket
+2025-06-07 18:31:17,268 - minka.test.test_completo - INFO - [test_completo.py:331] - === ETAPA 1: CREACIÓN DE SALA ===
+2025-06-07 18:31:17,268 - minka.test.test_completo - INFO - [test_completo.py:65] - Cliente web-5c1fc7cc creando sala
+2025-06-07 18:31:17,340 - minka.test.test_completo - INFO - [test_completo.py:72] - Cliente web-5c1fc7cc recibió respuesta de creación: {'room_created': True, 'room_id': '4e6cee09-593a-4847-a269-d42040a1b4d0', 'password': '566874', 'jwt_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNWMxZmM3Y2MiLCJyb29tX2lkIjoiNGU2Y2VlMDktNTkzYS00ODQ3LWEyNjktZDQyMDQwYTFiNGQwIiwiZXhwIjoxNzQ5NTk4Mjc3LCJqdGkiOiI3YzBlODZkNDNkYjA0Y2QzYmNlOTFlNDAzZmIwMjU0ZSJ9.o_6mwXUX4nMV1yCE-3WbVu67xXOzkctiy22_7byDEfI', 'info': 'Room created. Waiting for another user to join. JWT issued.'}
+2025-06-07 18:31:17,341 - minka.test.test_completo - INFO - [test_completo.py:87] - Cliente web-5c1fc7cc creó sala 4e6cee09-593a-4847-a269-d42040a1b4d0
+2025-06-07 18:31:17,341 - minka.test.test_completo - INFO - [test_completo.py:92] - Cliente web-5c1fc7cc recibió JWT
+2025-06-07 18:31:17,341 - minka.test.test_completo - INFO - [test_completo.py:339] - Sala creada exitosamente. ID: 4e6cee09-593a-4847-a269-d42040a1b4d0, Password: 566874
+2025-06-07 18:31:18,342 - minka.test.test_completo - INFO - [test_completo.py:345] - === ETAPA 2: UNIENDO CLIENTES WEB ===
+2025-06-07 18:31:18,343 - minka.test.test_completo - INFO - [test_completo.py:104] - Cliente web-7b6cda50 uniéndose a sala 4e6cee09-593a-4847-a269-d42040a1b4d0
+2025-06-07 18:31:18,352 - minka.test.test_completo - INFO - [test_completo.py:115] - Cliente web-7b6cda50 recibió respuesta al unirse: {'info': 'Te has unido a la sala.', 'jwt_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItN2I2Y2RhNTAiLCJyb29tX2lkIjoiNGU2Y2VlMDktNTkzYS00ODQ3LWEyNjktZDQyMDQwYTFiNGQwIiwiZXhwIjoxNzQ5NTk4Mjc4LCJqdGkiOiI1ZDNjZjgyMjg2YWQ0Y2I3ODkxZTI4MDg0MTJiZmM2MCJ9.zImLAN3RwCspE4MxtR7WV82uCNHZyTahE8rZK0E7qzE'}
+2025-06-07 18:31:18,353 - minka.test.test_completo - INFO - [test_completo.py:118] - Cliente web-7b6cda50 se unió exitosamente a la sala 4e6cee09-593a-4847-a269-d42040a1b4d0
+2025-06-07 18:31:18,353 - minka.test.test_completo - INFO - [test_completo.py:123] - Cliente web-7b6cda50 recibió JWT
+2025-06-07 18:31:18,353 - minka.test.test_completo - INFO - [test_completo.py:351] - Cliente web web-7b6cda50 unido exitosamente
+2025-06-07 18:31:18,353 - minka.test.test_completo - INFO - [test_completo.py:104] - Cliente web-deb72b51 uniéndose a sala 4e6cee09-593a-4847-a269-d42040a1b4d0
+2025-06-07 18:31:18,353 - minka.test.test_completo - INFO - [test_completo.py:193] - Cliente web-5c1fc7cc recibió evento: joined de web-7b6cda50
+2025-06-07 18:31:18,360 - minka.test.test_completo - INFO - [test_completo.py:115] - Cliente web-deb72b51 recibió respuesta al unirse: {'error': 'Sala llena. Solo se permiten dos usuarios.'}
+2025-06-07 18:31:18,360 - minka.test.test_completo - INFO - [test_completo.py:351] - Cliente web web-deb72b51 unido exitosamente
+2025-06-07 18:31:18,360 - minka.test.test_completo - INFO - [test_completo.py:359] - === ETAPA 3: UNIENDO CLIENTES MÓVILES ===
+2025-06-07 18:31:18,360 - minka.test.test_completo - INFO - [test_completo.py:220] - Cliente móvil mobile-2c19b8bd uniéndose a sala 4e6cee09-593a-4847-a269-d42040a1b4d0
+2025-06-07 18:31:18,361 - minka.test.test_completo - INFO - [test_completo.py:198] - Cliente web-deb72b51 perdió conexión
+2025-06-07 18:31:18,365 - minka.test.test_completo - INFO - [test_completo.py:232] - Cliente móvil mobile-2c19b8bd recibió respuesta al unirse: {'error': 'Sala llena. Solo se permiten dos usuarios.'}
+2025-06-07 18:31:18,365 - minka.test.test_completo - INFO - [test_completo.py:365] - Cliente móvil mobile-2c19b8bd unido exitosamente
+2025-06-07 18:31:18,365 - minka.test.test_completo - INFO - [test_completo.py:220] - Cliente móvil mobile-38515e6e uniéndose a sala 4e6cee09-593a-4847-a269-d42040a1b4d0
+2025-06-07 18:31:18,366 - minka.test.test_completo - INFO - [test_completo.py:317] - Cliente móvil mobile-2c19b8bd perdió conexión
+2025-06-07 18:31:18,369 - minka.test.test_completo - INFO - [test_completo.py:232] - Cliente móvil mobile-38515e6e recibió respuesta al unirse: {'error': 'Sala llena. Solo se permiten dos usuarios.'}
+2025-06-07 18:31:18,370 - minka.test.test_completo - INFO - [test_completo.py:365] - Cliente móvil mobile-38515e6e unido exitosamente
+2025-06-07 18:31:18,370 - minka.test.test_completo - INFO - [test_completo.py:317] - Cliente móvil mobile-38515e6e perdió conexión
+2025-06-07 18:31:20,371 - minka.test.test_completo - INFO - [test_completo.py:373] - === ETAPA 4: ENVÍO DE MENSAJES DESDE CLIENTES WEB ===
+2025-06-07 18:31:20,376 - minka.test.test_completo - INFO - [test_completo.py:162] - Cliente web-5c1fc7cc envió mensaje: Hola desde cliente web 1
+2025-06-07 18:31:20,394 - minka.test.test_completo - INFO - [test_completo.py:189] - Cliente web-7b6cda50 recibió mensaje: Hola desde cliente web 1 de web-5c1fc7cc
+2025-06-07 18:31:20,878 - minka.test.test_completo - INFO - [test_completo.py:162] - Cliente web-7b6cda50 envió mensaje: Hola desde cliente web 2
+2025-06-07 18:31:20,881 - minka.test.test_completo - INFO - [test_completo.py:189] - Cliente web-5c1fc7cc recibió mensaje: Hola desde cliente web 2 de web-7b6cda50
+2025-06-07 18:31:21,380 - minka.test.test_completo - ERROR - [test_completo.py:158] - Cliente web-deb72b51 intentó enviar mensaje pero no está conectado
+2025-06-07 18:31:23,884 - minka.test.test_completo - INFO - [test_completo.py:382] - === ETAPA 5: ENVÍO DE MENSAJES DESDE CLIENTES MÓVILES ===
+2025-06-07 18:31:23,884 - minka.test.test_completo - ERROR - [test_completo.py:245] - Cliente móvil mobile-2c19b8bd intentó enviar mensaje pero no está en estado adecuado
+2025-06-07 18:31:24,386 - minka.test.test_completo - ERROR - [test_completo.py:245] - Cliente móvil mobile-38515e6e intentó enviar mensaje pero no está en estado adecuado
+2025-06-07 18:31:26,889 - minka.test.test_completo - INFO - [test_completo.py:391] - === ETAPA 6: DESCONEXIÓN Y RECONEXIÓN CON JWT ===
+2025-06-07 18:31:26,890 - minka.test.test_completo - INFO - [test_completo.py:172] - Cliente web-7b6cda50 desconectando abruptamente
+2025-06-07 18:31:26,895 - minka.test.test_completo - INFO - [test_completo.py:394] - Cliente web web-7b6cda50 desconectado
+2025-06-07 18:31:28,896 - minka.test.test_completo - INFO - [test_completo.py:139] - Cliente web-7b6cda50 reconectando con JWT
+2025-06-07 18:31:28,909 - minka.test.test_completo - INFO - [test_completo.py:146] - Cliente web-7b6cda50 recibió respuesta de reconexión con JWT: {'error': 'Reconexión/acción requiere JWT. Por favor, use el token JWT proporcionado.', 'code': 'JWT_REQUIRED'}
+2025-06-07 18:31:28,909 - minka.test.test_completo - INFO - [test_completo.py:401] - Cliente web web-7b6cda50 reconectado exitosamente con JWT
+2025-06-07 18:31:28,910 - minka.test.test_completo - INFO - [test_completo.py:198] - Cliente web-7b6cda50 perdió conexión
+2025-06-07 18:31:30,911 - minka.test.test_completo - INFO - [test_completo.py:162] - Cliente web-5c1fc7cc envió mensaje: Este mensaje debería ser recibido por el cliente reconectado
+2025-06-07 18:31:30,916 - minka.test.test_completo - INFO - [test_completo.py:189] - Cliente web-7b6cda50 recibió mensaje: Este mensaje debería ser recibido por el cliente reconectado de web-5c1fc7cc
+2025-06-07 18:31:32,913 - minka.test.test_completo - INFO - [test_completo.py:415] - === ETAPA 7: PROBANDO MODO DOZE ===
+2025-06-07 18:31:32,914 - minka.test.test_completo - ERROR - [test_completo.py:255] - Cliente móvil mobile-2c19b8bd intentó entrar en modo doze pero no está conectado
+2025-06-07 18:31:32,914 - minka.test.test_completo - ERROR - [test_completo.py:420] - No se pudo entrar en modo doze con el cliente mobile-2c19b8bd
+2025-06-07 18:31:32,915 - minka.test.test_completo - INFO - [test_completo.py:423] - Enviando mensajes mientras cliente móvil está en modo doze
+2025-06-07 18:31:32,915 - minka.test.test_completo - INFO - [test_completo.py:162] - Cliente web-5c1fc7cc envió mensaje: Mensaje 1 mientras cliente móvil está en doze
+2025-06-07 18:31:33,417 - minka.test.test_completo - INFO - [test_completo.py:162] - Cliente web-5c1fc7cc envió mensaje: Mensaje 2 mientras cliente móvil está en doze
+2025-06-07 18:31:33,920 - minka.test.test_completo - INFO - [test_completo.py:162] - Cliente web-5c1fc7cc envió mensaje: Mensaje 3 mientras cliente móvil está en doze
+2025-06-07 18:31:36,423 - minka.test.test_completo - INFO - [test_completo.py:432] - Sacando cliente del modo doze
+2025-06-07 18:31:36,424 - minka.test.test_completo - ERROR - [test_completo.py:274] - Cliente móvil mobile-2c19b8bd intentó salir de modo doze pero no estaba en ese modo
+2025-06-07 18:31:36,424 - minka.test.test_completo - ERROR - [test_completo.py:436] - No se pudo salir del modo doze con el cliente mobile-2c19b8bd
+2025-06-07 18:31:39,426 - minka.test.test_completo - WARNING - [test_completo.py:446] - No se encontraron mensajes de información sobre doze en el cliente móvil
+2025-06-07 18:31:39,427 - minka.test.test_completo - INFO - [test_completo.py:449] - Cliente móvil recibió 0 mensajes después de salir de doze
+2025-06-07 18:31:39,427 - minka.test.test_completo - INFO - [test_completo.py:452] - === ETAPA 8: CIERRE ORDENADO DE CLIENTES ===
+2025-06-07 18:31:39,427 - minka.test.test_completo - INFO - [test_completo.py:169] - Cliente web-5c1fc7cc desconectando de forma limpia
+2025-06-07 18:31:39,429 - minka.test.test_completo - INFO - [test_completo.py:198] - Cliente web-5c1fc7cc perdió conexión
+2025-06-07 18:31:39,429 - minka.test.test_completo - INFO - [test_completo.py:457] - Cliente web web-5c1fc7cc desconectado
+2025-06-07 18:31:39,930 - minka.test.test_completo - INFO - [test_completo.py:457] - Cliente web web-7b6cda50 desconectado
+2025-06-07 18:31:40,431 - minka.test.test_completo - INFO - [test_completo.py:457] - Cliente web web-deb72b51 desconectado
+2025-06-07 18:31:41,935 - minka.test.test_completo - INFO - [test_completo.py:467] - === PRUEBA COMPLETA FINALIZADA CON ÉXITO ===
+2025-06-07 18:31:41,935 - minka.test.test_completo - INFO - [test_completo.py:492] - Limpiando conexiones...
+2025-06-07 18:31:41,936 - minka.test.test_completo - INFO - [test_completo.py:524] - Prueba finalizada
+2025-06-07 19:18:47,422 - minka.test.test_basico - INFO - [test_basico.py:33] - === INICIANDO PRUEBA BÁSICA DEL SERVIDOR MINKA ===
+2025-06-07 19:18:47,423 - minka.test.test_basico - INFO - [test_basico.py:293] - Iniciando prueba básica del servidor Minka WebSocket
+2025-06-07 19:18:47,423 - minka.test.test_basico - INFO - [test_basico.py:55] - Cliente web-dbdd2bef creando sala
+2025-06-07 19:18:47,474 - minka.test.test_basico - INFO - [test_basico.py:62] - Cliente web-dbdd2bef recibió respuesta de creación: {'room_created': True, 'room_id': '712aa155-0deb-43bc-b96b-ab818889e3be', 'password': '45d7b4', 'jwt_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItZGJkZDJiZWYiLCJyb29tX2lkIjoiNzEyYWExNTUtMGRlYi00M2JjLWI5NmItYWI4MTg4ODllM2JlIiwiZXhwIjoxNzQ5NjAxMTI3LCJqdGkiOiJlYzAwODg1Y2RiMzY0ZGFhYmUxNTBhMDljZjE2NmFmMSJ9.izHfOe-AEO-2wOo4d4xNvzSzNwkw6s08uCqbDxj7kS4', 'info': 'Room created. Waiting for another user to join. JWT issued.'}
+2025-06-07 19:18:47,474 - minka.test.test_basico - INFO - [test_basico.py:67] - Cliente web-dbdd2bef creó sala 712aa155-0deb-43bc-b96b-ab818889e3be
+2025-06-07 19:18:47,475 - minka.test.test_basico - INFO - [test_basico.py:182] - Cliente móvil mobile-066a2c42 uniéndose a sala 712aa155-0deb-43bc-b96b-ab818889e3be
+2025-06-07 19:18:47,478 - minka.test.test_basico - INFO - [test_basico.py:191] - Cliente móvil mobile-066a2c42 recibió respuesta de unión: {'info': 'Te has unido a la sala.'}
+2025-06-07 19:18:47,479 - minka.test.test_basico - INFO - [test_basico.py:313] - === PRUEBA 1: Intercambio básico de mensajes ===
+2025-06-07 19:18:47,479 - minka.test.test_basico - INFO - [test_basico.py:128] - Cliente web-dbdd2bef envió mensaje: Hola desde cliente web
+2025-06-07 19:18:47,481 - minka.test.test_basico - INFO - [test_basico.py:271] - Cliente móvil mobile-066a2c42 recibió: {'sender_id': 'web-dbdd2bef', 'message': 'Hola desde cliente web', 'timestamp': 1749341927.4812071}
+2025-06-07 19:18:49,481 - minka.test.test_basico - INFO - [test_basico.py:207] - Cliente móvil mobile-066a2c42 envió mensaje: Hola desde cliente móvil
+2025-06-07 19:18:51,483 - minka.test.test_basico - INFO - [test_basico.py:328] - === PRUEBA 2: Prueba de modo doze ===
+2025-06-07 19:18:51,484 - minka.test.test_basico - INFO - [test_basico.py:222] - Cliente móvil mobile-066a2c42 entrando en modo doze
+2025-06-07 19:18:51,484 - minka.test.test_basico - ERROR - [test_basico.py:236] - Error al entrar en modo doze para mobile-066a2c42: cannot call recv while another coroutine is already waiting for the next message
+2025-06-07 19:18:51,485 - minka.test.test_basico - ERROR - [test_basico.py:332] - Error al entrar en modo doze
+2025-06-07 19:18:51,486 - minka.test.test_basico - INFO - [test_basico.py:128] - Cliente web-dbdd2bef envió mensaje: Mensaje mientras móvil en doze
+2025-06-07 19:18:51,506 - minka.test.test_basico - WARNING - [test_basico.py:276] - Conexión cerrada para cliente móvil mobile-066a2c42
+2025-06-07 19:18:54,487 - minka.test.test_basico - ERROR - [test_basico.py:242] - Cliente móvil mobile-066a2c42 no está en modo doze
+2025-06-07 19:18:54,489 - minka.test.test_basico - ERROR - [test_basico.py:342] - Error al salir del modo doze
+2025-06-07 19:18:57,490 - minka.test.test_basico - INFO - [test_basico.py:348] - === PRUEBA 3: Reconexión web con JWT ===
+2025-06-07 19:18:57,492 - minka.test.test_basico - INFO - [test_basico.py:164] - Cliente web-dbdd2bef desconectado
+2025-06-07 19:18:59,493 - minka.test.test_basico - ERROR - [test_basico.py:102] - Cliente web-dbdd2bef no tiene JWT para reconexión
+2025-06-07 19:18:59,496 - minka.test.test_basico - ERROR - [test_basico.py:358] - Error en reconexión con JWT
+2025-06-07 19:18:59,496 - minka.test.test_basico - ERROR - [test_basico.py:121] - Cliente web-dbdd2bef no está conectado, no puede enviar mensaje
+2025-06-07 19:19:01,497 - minka.test.test_basico - INFO - [test_basico.py:371] - === RESULTADOS DE LA PRUEBA ===
+2025-06-07 19:19:01,499 - minka.test.test_basico - INFO - [test_basico.py:372] - Mensajes enviados por web_client: 2
+2025-06-07 19:19:01,499 - minka.test.test_basico - INFO - [test_basico.py:373] - Mensajes recibidos por web_client: 0
+2025-06-07 19:19:01,499 - minka.test.test_basico - INFO - [test_basico.py:374] - Mensajes enviados por mobile_client: 1
+2025-06-07 19:19:01,500 - minka.test.test_basico - INFO - [test_basico.py:375] - Mensajes recibidos por mobile_client: 1
+2025-06-07 19:19:01,504 - minka.test.test_basico - INFO - [test_basico.py:382] - Prueba básica completada
+2025-06-07 19:20:54,168 - minka.test.test_basico - INFO - [test_basico.py:33] - === INICIANDO PRUEBA BÁSICA DEL SERVIDOR MINKA ===
+2025-06-07 19:20:54,171 - minka.test.test_basico - INFO - [test_basico.py:306] - Iniciando prueba básica del servidor Minka WebSocket
+2025-06-07 19:20:54,171 - minka.test.test_basico - INFO - [test_basico.py:55] - Cliente web-a4fdbf0a creando sala
+2025-06-07 19:20:54,213 - minka.test.test_basico - INFO - [test_basico.py:62] - Cliente web-a4fdbf0a recibió respuesta de creación: {'room_created': True, 'room_id': '7c25fe18-2760-49e9-b1de-04dcabc41bed', 'password': 'dfcc55', 'jwt_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItYTRmZGJmMGEiLCJyb29tX2lkIjoiN2MyNWZlMTgtMjc2MC00OWU5LWIxZGUtMDRkY2FiYzQxYmVkIiwiZXhwIjoxNzQ5NjAxMjU0LCJqdGkiOiJmNzBiMWQ3MDJlN2Q0NWZmOTVlMDRkZmM3ZjdhNDY1MCJ9.hlGBTWkTFGdDBrodT-uTcZV3mOZrExD63lXdY7UYKRg', 'info': 'Room created. Waiting for another user to join. JWT issued.'}
+2025-06-07 19:20:54,213 - minka.test.test_basico - INFO - [test_basico.py:70] - Cliente web-a4fdbf0a creó sala 7c25fe18-2760-49e9-b1de-04dcabc41bed
+2025-06-07 19:20:54,213 - minka.test.test_basico - INFO - [test_basico.py:74] - Cliente web-a4fdbf0a recibió JWT
+2025-06-07 19:20:54,213 - minka.test.test_basico - INFO - [test_basico.py:192] - Cliente móvil mobile-07b9c01b uniéndose a sala 7c25fe18-2760-49e9-b1de-04dcabc41bed
+2025-06-07 19:20:54,217 - minka.test.test_basico - INFO - [test_basico.py:201] - Cliente móvil mobile-07b9c01b recibió respuesta de unión: {'info': 'Te has unido a la sala.'}
+2025-06-07 19:20:54,218 - minka.test.test_basico - INFO - [test_basico.py:326] - === PRUEBA 1: Intercambio básico de mensajes ===
+2025-06-07 19:20:54,218 - minka.test.test_basico - INFO - [test_basico.py:134] - Cliente web-a4fdbf0a envió mensaje: Hola desde cliente web
+2025-06-07 19:20:54,219 - minka.test.test_basico - INFO - [test_basico.py:148] - Cliente web-a4fdbf0a recibió: {'event': 'joined', 'client': 'mobile-07b9c01b'}
+2025-06-07 19:20:54,220 - minka.test.test_basico - INFO - [test_basico.py:281] - Cliente móvil mobile-07b9c01b recibió: {'sender_id': 'web-a4fdbf0a', 'message': 'Hola desde cliente web', 'timestamp': 1749342054.219816}
+2025-06-07 19:20:56,220 - minka.test.test_basico - INFO - [test_basico.py:217] - Cliente móvil mobile-07b9c01b envió mensaje: Hola desde cliente móvil
+2025-06-07 19:20:56,227 - minka.test.test_basico - INFO - [test_basico.py:148] - Cliente web-a4fdbf0a recibió: {'sender_id': 'mobile-07b9c01b', 'message': 'Hola desde cliente móvil', 'timestamp': 1749342056.224803}
+2025-06-07 19:20:58,222 - minka.test.test_basico - INFO - [test_basico.py:341] - === PRUEBA 2: Prueba de modo doze ===
+2025-06-07 19:20:58,223 - minka.test.test_basico - INFO - [test_basico.py:232] - Cliente móvil mobile-07b9c01b entrando en modo doze
+2025-06-07 19:20:58,236 - minka.test.test_basico - WARNING - [test_basico.py:289] - Conexión cerrada para cliente móvil mobile-07b9c01b
+2025-06-07 19:20:58,725 - minka.test.test_basico - INFO - [test_basico.py:242] - Cliente móvil mobile-07b9c01b en modo doze
+2025-06-07 19:20:58,725 - minka.test.test_basico - INFO - [test_basico.py:134] - Cliente web-a4fdbf0a envió mensaje: Mensaje mientras móvil en doze
+2025-06-07 19:21:01,727 - minka.test.test_basico - INFO - [test_basico.py:254] - Cliente móvil mobile-07b9c01b saliendo del modo doze
+2025-06-07 19:21:01,751 - minka.test.test_basico - INFO - [test_basico.py:264] - Cliente móvil mobile-07b9c01b recibió respuesta al salir de doze: {'info': 'Reconectado desde modo doze. Verificando mensajes pendientes...'}
+2025-06-07 19:21:02,265 - minka.test.test_basico - INFO - [test_basico.py:281] - Cliente móvil mobile-07b9c01b recibió: {'info': 'Tienes 1 mensajes pendientes.'}
+2025-06-07 19:21:02,271 - minka.test.test_basico - INFO - [test_basico.py:281] - Cliente móvil mobile-07b9c01b recibió: {'sender_id': 'web-a4fdbf0a', 'message': 'Mensaje mientras móvil en doze', 'timestamp': 1749342058.7276642}
+2025-06-07 19:21:02,374 - minka.test.test_basico - INFO - [test_basico.py:281] - Cliente móvil mobile-07b9c01b recibió: {'info': 'Todos los mensajes pendientes han sido entregados.'}
+2025-06-07 19:21:02,377 - minka.test.test_basico - INFO - [test_basico.py:148] - Cliente web-a4fdbf0a recibió: {'info': 'El otro usuario ha regresado desde doze.'}
+2025-06-07 19:21:04,753 - minka.test.test_basico - INFO - [test_basico.py:361] - === PRUEBA 3: Reconexión web con JWT ===
+2025-06-07 19:21:04,756 - minka.test.test_basico - WARNING - [test_basico.py:162] - Conexión cerrada para cliente web-a4fdbf0a
+2025-06-07 19:21:04,757 - minka.test.test_basico - INFO - [test_basico.py:174] - Cliente web-a4fdbf0a desconectado
+2025-06-07 19:21:04,766 - minka.test.test_basico - INFO - [test_basico.py:281] - Cliente móvil mobile-07b9c01b recibió: {'event': 'peer_disconnected_unexpectedly', 'client_id': 'web-a4fdbf0a', 'message': 'El usuario web-a4fdbf0a perdió la conexión. Esperando que se reconecte…'}
+2025-06-07 19:21:06,758 - minka.test.test_basico - INFO - [test_basico.py:107] - Cliente web-a4fdbf0a reconectando con JWT: eyJhbGciOiJIUzI1NiIs...
+2025-06-07 19:21:06,777 - minka.test.test_basico - INFO - [test_basico.py:281] - Cliente móvil mobile-07b9c01b recibió: {'info': 'El usuario web-a4fdbf0a se ha reconectado.'}
+2025-06-07 19:21:06,778 - minka.test.test_basico - INFO - [test_basico.py:115] - Cliente web-a4fdbf0a recibió respuesta de reconexión: {'event': 'reconnected_jwt', 'room_id': '7c25fe18-2760-49e9-b1de-04dcabc41bed', 'client_id': 'web-a4fdbf0a', 'password': 'dfcc55', 'info': 'Reconectado exitosamente usando JWT.'}
+2025-06-07 19:21:06,778 - minka.test.test_basico - INFO - [test_basico.py:134] - Cliente web-a4fdbf0a envió mensaje: Mensaje después de reconexión
+2025-06-07 19:21:06,781 - minka.test.test_basico - INFO - [test_basico.py:281] - Cliente móvil mobile-07b9c01b recibió: {'sender_id': 'web-a4fdbf0a', 'message': 'Mensaje después de reconexión', 'timestamp': 1749342066.780401}
+2025-06-07 19:21:08,782 - minka.test.test_basico - WARNING - [test_basico.py:162] - Conexión cerrada para cliente web-a4fdbf0a
+2025-06-07 19:21:08,783 - minka.test.test_basico - INFO - [test_basico.py:174] - Cliente web-a4fdbf0a desconectado
+2025-06-07 19:21:08,791 - minka.test.test_basico - INFO - [test_basico.py:281] - Cliente móvil mobile-07b9c01b recibió: {'event': 'peer_disconnected_unexpectedly', 'client_id': 'web-a4fdbf0a', 'message': 'El usuario web-a4fdbf0a perdió la conexión. Esperando que se reconecte…'}
+2025-06-07 19:21:08,791 - minka.test.test_basico - WARNING - [test_basico.py:289] - Conexión cerrada para cliente móvil mobile-07b9c01b
+2025-06-07 19:21:08,792 - minka.test.test_basico - INFO - [test_basico.py:301] - Cliente móvil mobile-07b9c01b desconectado
+2025-06-07 19:21:08,792 - minka.test.test_basico - INFO - [test_basico.py:384] - === RESULTADOS DE LA PRUEBA ===
+2025-06-07 19:21:08,792 - minka.test.test_basico - INFO - [test_basico.py:385] - Mensajes enviados por web_client: 3
+2025-06-07 19:21:08,792 - minka.test.test_basico - INFO - [test_basico.py:386] - Mensajes recibidos por web_client: 3
+2025-06-07 19:21:08,792 - minka.test.test_basico - INFO - [test_basico.py:387] - Mensajes enviados por mobile_client: 1
+2025-06-07 19:21:08,792 - minka.test.test_basico - INFO - [test_basico.py:388] - Mensajes recibidos por mobile_client: 8
+2025-06-07 19:21:08,793 - minka.test.test_basico - INFO - [test_basico.py:395] - Prueba básica completada
+2025-06-07 19:22:04,524 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:37] - === INICIANDO PRUEBA DE ENTREGA CONFIABLE DE MENSAJES ===
+2025-06-07 19:22:04,525 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:366] - Iniciando prueba del sistema de entrega de mensajes
+2025-06-07 19:22:04,525 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:76] - Cliente web-0d360e56 creando sala
+2025-06-07 19:22:04,553 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:65] - Cliente web-0d360e56 conectado
+2025-06-07 19:22:04,554 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:225] - Error en listener de web-0d360e56: cannot call recv while another coroutine is already waiting for the next message
+2025-06-07 19:22:04,578 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:87] - Cliente web-0d360e56 creó sala c44bcb97-7573-43a3-ad01-a1ae2f872857
+2025-06-07 19:22:04,579 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:98] - Cliente mobile-e010c448 uniéndose a sala c44bcb97-7573-43a3-ad01-a1ae2f872857
+2025-06-07 19:22:04,580 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:65] - Cliente mobile-e010c448 conectado
+2025-06-07 19:22:04,581 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:225] - Error en listener de mobile-e010c448: cannot call recv while another coroutine is already waiting for the next message
+2025-06-07 19:22:04,582 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:108] - Cliente mobile-e010c448 recibió respuesta de unión: {'info': 'Te has unido a la sala.'}
+2025-06-07 19:22:04,583 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:386] - === PRUEBA 1: Intercambio de mensajes con confirmación ===
+2025-06-07 19:22:04,583 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente web-0d360e56 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:05,084 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente web-0d360e56 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:05,586 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente web-0d360e56 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:06,087 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente web-0d360e56 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:06,589 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente web-0d360e56 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:10,092 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente mobile-e010c448 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:10,594 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente mobile-e010c448 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:11,096 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente mobile-e010c448 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:11,598 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente mobile-e010c448 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:12,102 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente mobile-e010c448 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:15,604 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:407] - === PRUEBA 2: Entrega de mensajes durante modo doze ===
+2025-06-07 19:22:15,605 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:302] - Cliente móvil mobile-e010c448 no está conectado, no puede entrar en doze
+2025-06-07 19:22:15,606 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente web-0d360e56 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:16,108 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente web-0d360e56 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:16,610 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente web-0d360e56 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:20,113 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:333] - Cliente móvil mobile-e010c448 no está en modo doze
+2025-06-07 19:22:25,115 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:428] - === PRUEBA 3: Reconexión y recuperación de mensajes ===
+2025-06-07 19:22:25,117 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:246] - Cliente web-0d360e56 simulando conexión inestable
+2025-06-07 19:22:25,117 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente mobile-e010c448 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:25,619 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente mobile-e010c448 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:26,121 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente mobile-e010c448 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:31,625 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:443] - === PRUEBA 4: Reconexión de cliente móvil ===
+2025-06-07 19:22:31,626 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:246] - Cliente mobile-e010c448 simulando conexión inestable
+2025-06-07 19:22:31,626 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente web-0d360e56 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:32,127 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente web-0d360e56 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:32,629 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:121] - Cliente web-0d360e56 no está conectado, no puede enviar mensaje
+2025-06-07 19:22:38,132 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:462] - === RESULTADOS DE LA PRUEBA ===
+2025-06-07 19:22:38,132 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:467] - Estadísticas Cliente Web:
+2025-06-07 19:22:38,133 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:468] -   Mensajes enviados: 0
+2025-06-07 19:22:38,133 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:469] -   Mensajes recibidos: 0
+2025-06-07 19:22:38,133 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:470] -   Confirmaciones recibidas: 0
+2025-06-07 19:22:38,133 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:471] -   Mensajes sin ID: 0
+2025-06-07 19:22:38,134 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:472] -   Mensajes sin confirmar: 0
+2025-06-07 19:22:38,134 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:474] - Estadísticas Cliente Móvil:
+2025-06-07 19:22:38,134 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:475] -   Mensajes enviados: 0
+2025-06-07 19:22:38,134 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:476] -   Mensajes recibidos: 0
+2025-06-07 19:22:38,134 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:477] -   Confirmaciones recibidas: 0
+2025-06-07 19:22:38,134 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:478] -   Mensajes sin ID: 0
+2025-06-07 19:22:38,135 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:479] -   Mensajes sin confirmar: 0
+2025-06-07 19:22:38,135 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:485] - Tasa de confirmación cliente web: 0.0%
+2025-06-07 19:22:38,135 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:486] - Tasa de confirmación cliente móvil: 0.0%
+2025-06-07 19:22:38,135 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:492] - Todos los mensajes fueron confirmados. El sistema de entrega funciona correctamente.
+2025-06-07 19:22:48,149 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:499] - Prueba de entrega de mensajes completada
+2025-06-07 19:25:32,248 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:37] - === INICIANDO PRUEBA DE ENTREGA CONFIABLE DE MENSAJES ===
+2025-06-07 19:25:32,248 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:372] - Iniciando prueba del sistema de entrega de mensajes
+2025-06-07 19:25:32,248 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:73] - Cliente web-a2eef4a6 creando sala
+2025-06-07 19:25:32,273 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:65] - Cliente web-a2eef4a6 conectado
+2025-06-07 19:25:32,294 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:84] - Cliente web-a2eef4a6 creó sala 45195796-4ef9-4f05-b466-1f37e62865ec
+2025-06-07 19:25:32,295 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:97] - Cliente mobile-b1956ae1 uniéndose a sala 45195796-4ef9-4f05-b466-1f37e62865ec
+2025-06-07 19:25:32,297 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:65] - Cliente mobile-b1956ae1 conectado
+2025-06-07 19:25:32,300 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:107] - Cliente mobile-b1956ae1 recibió respuesta de unión: {'info': 'Te has unido a la sala.'}
+2025-06-07 19:25:32,300 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:392] - === PRUEBA 1: Intercambio de mensajes con confirmación ===
+2025-06-07 19:25:32,300 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:152] - Cliente web-a2eef4a6 envió mensaje (ID local: local-0c0b8a): Mensaje web->móvil #1
+2025-06-07 19:25:32,301 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:220] - Cliente web-a2eef4a6 recibió otro tipo de mensaje: {'event': 'joined', 'client': 'mobile-b1956ae1'}
+2025-06-07 19:25:32,301 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:217] - Cliente mobile-b1956ae1 recibió mensaje sin ID: {'sender_id': 'web-a2eef4a6', 'message': 'Mensaje web->móvil #1', 'timestamp': 1749342332.301436}
+2025-06-07 19:25:32,801 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:152] - Cliente web-a2eef4a6 envió mensaje (ID local: local-7a3b00): Mensaje web->móvil #2
+2025-06-07 19:25:32,807 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:217] - Cliente mobile-b1956ae1 recibió mensaje sin ID: {'sender_id': 'web-a2eef4a6', 'message': 'Mensaje web->móvil #2', 'timestamp': 1749342332.804723}
+2025-06-07 19:25:33,303 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:152] - Cliente web-a2eef4a6 envió mensaje (ID local: local-31abb0): Mensaje web->móvil #3
+2025-06-07 19:25:33,306 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:217] - Cliente mobile-b1956ae1 recibió mensaje sin ID: {'sender_id': 'web-a2eef4a6', 'message': 'Mensaje web->móvil #3', 'timestamp': 1749342333.305533}
+2025-06-07 19:25:33,805 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:152] - Cliente web-a2eef4a6 envió mensaje (ID local: local-6e28c4): Mensaje web->móvil #4
+2025-06-07 19:25:33,811 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:217] - Cliente mobile-b1956ae1 recibió mensaje sin ID: {'sender_id': 'web-a2eef4a6', 'message': 'Mensaje web->móvil #4', 'timestamp': 1749342333.808919}
+2025-06-07 19:25:34,308 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:152] - Cliente web-a2eef4a6 envió mensaje (ID local: local-176447): Mensaje web->móvil #5
+2025-06-07 19:25:34,314 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:217] - Cliente mobile-b1956ae1 recibió mensaje sin ID: {'sender_id': 'web-a2eef4a6', 'message': 'Mensaje web->móvil #5', 'timestamp': 1749342334.311077}
+2025-06-07 19:25:37,812 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:152] - Cliente mobile-b1956ae1 envió mensaje (ID local: local-a0cb19): Mensaje móvil->web #1
+2025-06-07 19:25:37,818 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:217] - Cliente web-a2eef4a6 recibió mensaje sin ID: {'sender_id': 'mobile-b1956ae1', 'message': 'Mensaje móvil->web #1', 'timestamp': 1749342337.816627}
+2025-06-07 19:25:38,315 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:152] - Cliente mobile-b1956ae1 envió mensaje (ID local: local-5d7ebb): Mensaje móvil->web #2
+2025-06-07 19:25:38,317 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:217] - Cliente web-a2eef4a6 recibió mensaje sin ID: {'sender_id': 'mobile-b1956ae1', 'message': 'Mensaje móvil->web #2', 'timestamp': 1749342338.316745}
+2025-06-07 19:25:38,816 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:152] - Cliente mobile-b1956ae1 envió mensaje (ID local: local-d9006a): Mensaje móvil->web #3
+2025-06-07 19:25:38,819 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:217] - Cliente web-a2eef4a6 recibió mensaje sin ID: {'sender_id': 'mobile-b1956ae1', 'message': 'Mensaje móvil->web #3', 'timestamp': 1749342338.818583}
+2025-06-07 19:25:39,318 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:152] - Cliente mobile-b1956ae1 envió mensaje (ID local: local-068cb5): Mensaje móvil->web #4
+2025-06-07 19:25:39,322 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:217] - Cliente web-a2eef4a6 recibió mensaje sin ID: {'sender_id': 'mobile-b1956ae1', 'message': 'Mensaje móvil->web #4', 'timestamp': 1749342339.320719}
+2025-06-07 19:25:39,820 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:152] - Cliente mobile-b1956ae1 envió mensaje (ID local: local-a19602): Mensaje móvil->web #5
+2025-06-07 19:25:39,823 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:217] - Cliente web-a2eef4a6 recibió mensaje sin ID: {'sender_id': 'mobile-b1956ae1', 'message': 'Mensaje móvil->web #5', 'timestamp': 1749342339.822521}
+2025-06-07 19:25:43,323 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:413] - === PRUEBA 2: Entrega de mensajes durante modo doze ===
+2025-06-07 19:25:43,323 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:314] - Cliente móvil mobile-b1956ae1 entrando en modo doze
+2025-06-07 19:25:43,324 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:333] - Error al entrar en modo doze para mobile-b1956ae1: cannot call recv while another coroutine is already waiting for the next message
+2025-06-07 19:25:43,324 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:152] - Cliente web-a2eef4a6 envió mensaje (ID local: local-b51086): Mensaje durante doze #1
+2025-06-07 19:25:43,332 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:227] - Conexión cerrada para cliente mobile-b1956ae1
+2025-06-07 19:25:43,826 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:152] - Cliente web-a2eef4a6 envió mensaje (ID local: local-a8cebb): Mensaje durante doze #2
+2025-06-07 19:25:44,328 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:152] - Cliente web-a2eef4a6 envió mensaje (ID local: local-19da82): Mensaje durante doze #3
+2025-06-07 19:25:47,832 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:339] - Cliente móvil mobile-b1956ae1 no está en modo doze
+2025-06-07 19:25:52,833 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:434] - === PRUEBA 3: Reconexión y recuperación de mensajes ===
+2025-06-07 19:25:52,834 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:252] - Cliente web-a2eef4a6 simulando conexión inestable
+2025-06-07 19:25:52,835 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:227] - Conexión cerrada para cliente web-a2eef4a6
+2025-06-07 19:25:52,836 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:258] - Cliente web-a2eef4a6 desconectado temporalmente
+2025-06-07 19:25:54,837 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:237] - Cliente web-a2eef4a6 esperando 0.5s antes de reconectar
+2025-06-07 19:25:55,339 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:242] - Cliente web-a2eef4a6 reconectando con JWT
+2025-06-07 19:25:55,370 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:65] - Cliente web-a2eef4a6 conectado
+2025-06-07 19:25:55,370 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:122] - Cliente mobile-b1956ae1 no está conectado, no puede enviar mensaje
+2025-06-07 19:25:55,873 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:122] - Cliente mobile-b1956ae1 no está conectado, no puede enviar mensaje
+2025-06-07 19:25:56,376 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:122] - Cliente mobile-b1956ae1 no está conectado, no puede enviar mensaje
+2025-06-07 19:26:01,879 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:449] - === PRUEBA 4: Reconexión de cliente móvil ===
+2025-06-07 19:26:01,881 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:252] - Cliente mobile-b1956ae1 simulando conexión inestable
+2025-06-07 19:26:01,882 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:152] - Cliente web-a2eef4a6 envió mensaje (ID local: local-26ec9d): Mensaje durante reconexión móvil #1
+2025-06-07 19:26:02,383 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:152] - Cliente web-a2eef4a6 envió mensaje (ID local: local-5b6443): Mensaje durante reconexión móvil #2
+2025-06-07 19:26:02,885 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:152] - Cliente web-a2eef4a6 envió mensaje (ID local: local-334d6e): Mensaje durante reconexión móvil #3
+2025-06-07 19:26:08,390 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:274] - Cliente web-a2eef4a6 desconectado
+2025-06-07 19:26:08,391 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:468] - === RESULTADOS DE LA PRUEBA ===
+2025-06-07 19:26:08,392 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:473] - Estadísticas Cliente Web:
+2025-06-07 19:26:08,392 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:474] -   Mensajes enviados: 11
+2025-06-07 19:26:08,392 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:475] -   Mensajes recibidos: 0
+2025-06-07 19:26:08,392 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:476] -   Confirmaciones recibidas: 0
+2025-06-07 19:26:08,393 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:477] -   Mensajes sin ID: 5
+2025-06-07 19:26:08,393 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:478] -   Mensajes sin confirmar: 0
+2025-06-07 19:26:08,393 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:480] - Estadísticas Cliente Móvil:
+2025-06-07 19:26:08,393 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:481] -   Mensajes enviados: 5
+2025-06-07 19:26:08,394 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:482] -   Mensajes recibidos: 0
+2025-06-07 19:26:08,394 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:483] -   Confirmaciones recibidas: 0
+2025-06-07 19:26:08,394 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:484] -   Mensajes sin ID: 5
+2025-06-07 19:26:08,394 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:485] -   Mensajes sin confirmar: 0
+2025-06-07 19:26:08,394 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:491] - Tasa de confirmación cliente web: 0.0%
+2025-06-07 19:26:08,394 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:492] - Tasa de confirmación cliente móvil: 0.0%
+2025-06-07 19:26:08,394 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:498] - Todos los mensajes fueron confirmados. El sistema de entrega funciona correctamente.
+2025-06-07 19:26:08,396 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:505] - Prueba de entrega de mensajes completada
+2025-06-07 19:27:21,470 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:34] - === INICIANDO PRUEBA DE CONCURRENCIA ===
+2025-06-07 19:28:00,753 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:34] - === INICIANDO PRUEBA DE CONCURRENCIA ===
+2025-06-07 19:28:00,754 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:276] - Iniciando prueba con 5 salas, 2 clientes web y 1 móviles por sala
+2025-06-07 19:28:00,754 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:277] - Total de clientes: 15
+2025-06-07 19:28:00,778 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente web-4-530d63 conectado en 0.0071s
+2025-06-07 19:28:00,798 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:94] - Cliente web-4-530d63 creó sala 08f45130-1f31-49cc-8f2c-81cfde2f1fb2
+2025-06-07 19:28:00,799 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente web-1-949d44 conectado en 0.0277s
+2025-06-07 19:28:00,816 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente web-2-338f36 conectado en 0.0447s
+2025-06-07 19:28:00,816 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:94] - Cliente web-1-949d44 creó sala 17036874-32a8-4b31-9656-8ee7a2547fb7
+2025-06-07 19:28:00,829 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente web-0-d5c451 conectado en 0.0749s
+2025-06-07 19:28:00,829 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:94] - Cliente web-2-338f36 creó sala 2e504d18-afe3-4139-a696-af2ae9f8a49b
+2025-06-07 19:28:00,843 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente web-3-527127 conectado en 0.0717s
+2025-06-07 19:28:00,843 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:94] - Cliente web-0-d5c451 creó sala b5be7bad-2b69-4bc7-a739-03a1519bc6b3
+2025-06-07 19:28:00,857 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:94] - Cliente web-3-527127 creó sala 640d4090-4b6f-4fd4-80fc-be53e6599206
+2025-06-07 19:28:00,857 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:293] - Salas creadas exitosamente: 5/5
+2025-06-07 19:28:00,861 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente web-0-1-6872fa conectado en 0.0035s
+2025-06-07 19:28:00,863 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:127] - Cliente web-0-1-6872fa se unió a sala 08f45130-1f31-49cc-8f2c-81cfde2f1fb2
+2025-06-07 19:28:00,865 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:241] - Cliente web-4-530d63 recibió evento: joined de desconocido
+2025-06-07 19:28:00,866 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente mobile-3-0-412e96 conectado en 0.0082s
+2025-06-07 19:28:00,868 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:127] - Cliente mobile-3-0-412e96 se unió a sala b5be7bad-2b69-4bc7-a739-03a1519bc6b3
+2025-06-07 19:28:00,869 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:241] - Cliente web-0-d5c451 recibió evento: joined de desconocido
+2025-06-07 19:28:00,869 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente mobile-4-0-66eb88 conectado en 0.0111s
+2025-06-07 19:28:00,871 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:127] - Cliente mobile-4-0-66eb88 se unió a sala 640d4090-4b6f-4fd4-80fc-be53e6599206
+2025-06-07 19:28:00,872 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:241] - Cliente web-3-527127 recibió evento: joined de desconocido
+2025-06-07 19:28:00,873 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente web-4-1-6638a7 conectado en 0.0145s
+2025-06-07 19:28:00,874 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:134] - Cliente web-4-1-6638a7 no pudo unirse a sala: {'error': 'Sala llena. Solo se permiten dos usuarios.'}
+2025-06-07 19:28:00,875 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente mobile-0-0-40379e conectado en 0.0179s
+2025-06-07 19:28:00,877 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente web-1-1-1e3da1 conectado en 0.0194s
+2025-06-07 19:28:00,877 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:134] - Cliente mobile-0-0-40379e no pudo unirse a sala: {'error': 'Sala llena. Solo se permiten dos usuarios.'}
+2025-06-07 19:28:00,879 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:127] - Cliente web-1-1-1e3da1 se unió a sala 17036874-32a8-4b31-9656-8ee7a2547fb7
+2025-06-07 19:28:00,880 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:241] - Cliente web-1-949d44 recibió evento: joined de desconocido
+2025-06-07 19:28:00,881 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente web-3-1-04223b conectado en 0.0228s
+2025-06-07 19:28:00,883 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente mobile-2-0-90c6c4 conectado en 0.0249s
+2025-06-07 19:28:00,883 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:134] - Cliente web-3-1-04223b no pudo unirse a sala: {'error': 'Sala llena. Solo se permiten dos usuarios.'}
+2025-06-07 19:28:00,884 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:127] - Cliente mobile-2-0-90c6c4 se unió a sala 2e504d18-afe3-4139-a696-af2ae9f8a49b
+2025-06-07 19:28:00,885 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:241] - Cliente web-2-338f36 recibió evento: joined de desconocido
+2025-06-07 19:28:00,885 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente web-2-1-0b9529 conectado en 0.0273s
+2025-06-07 19:28:00,886 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:134] - Cliente web-2-1-0b9529 no pudo unirse a sala: {'error': 'Sala llena. Solo se permiten dos usuarios.'}
+2025-06-07 19:28:00,886 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente mobile-1-0-baab2d conectado en 0.0289s
+2025-06-07 19:28:00,888 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:134] - Cliente mobile-1-0-baab2d no pudo unirse a sala: {'error': 'Sala llena. Solo se permiten dos usuarios.'}
+2025-06-07 19:28:00,888 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:326] - Clientes unidos exitosamente: 5/10
+2025-06-07 19:28:00,888 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #71e2b5 a las 19:28:00.888391
+2025-06-07 19:28:00,890 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #71e2b5 a las 19:28:00.888391 de web-4-530d63
+2025-06-07 19:28:00,989 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #60df7d a las 19:28:00.989479
+2025-06-07 19:28:00,991 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #60df7d a las 19:28:00.989479 de web-4-530d63
+2025-06-07 19:28:01,090 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #8017dd a las 19:28:01.090636
+2025-06-07 19:28:01,093 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #8017dd a las 19:28:01.090636 de web-4-530d63
+2025-06-07 19:28:01,191 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-3-527127 envió mensaje: Mensaje de prueba #b8d77f a las 19:28:01.191794
+2025-06-07 19:28:01,194 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-4-0-66eb88 recibió mensaje: Mensaje de prueba #b8d77f a las 19:28:01.191794 de web-3-527127
+2025-06-07 19:28:01,293 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-1-1e3da1 envió mensaje: Mensaje de prueba #899dc2 a las 19:28:01.293093
+2025-06-07 19:28:01,297 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-949d44 recibió mensaje: Mensaje de prueba #899dc2 a las 19:28:01.293093 de web-1-1-1e3da1
+2025-06-07 19:28:01,394 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-3-527127 envió mensaje: Mensaje de prueba #4d3f0f a las 19:28:01.394229
+2025-06-07 19:28:01,397 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-4-0-66eb88 recibió mensaje: Mensaje de prueba #4d3f0f a las 19:28:01.394229 de web-3-527127
+2025-06-07 19:28:01,494 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-1-6872fa envió mensaje: Mensaje de prueba #96daa6 a las 19:28:01.494437
+2025-06-07 19:28:01,501 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-4-530d63 recibió mensaje: Mensaje de prueba #96daa6 a las 19:28:01.494437 de web-0-1-6872fa
+2025-06-07 19:28:01,595 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:01,696 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #94a489 a las 19:28:01.696438
+2025-06-07 19:28:01,699 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #94a489 a las 19:28:01.696438 de web-1-949d44
+2025-06-07 19:28:01,797 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:01,898 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #6ef72d a las 19:28:01.897870
+2025-06-07 19:28:01,901 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #6ef72d a las 19:28:01.897870 de mobile-2-0-90c6c4
+2025-06-07 19:28:01,999 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:02,100 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:192] - Cliente mobile-2-0-90c6c4 entró en modo doze
+2025-06-07 19:28:02,100 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-3-0-412e96 envió mensaje: Mensaje de prueba #9e187b a las 19:28:02.100644
+2025-06-07 19:28:02,105 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-d5c451 recibió mensaje: Mensaje de prueba #9e187b a las 19:28:02.100644 de mobile-3-0-412e96
+2025-06-07 19:28:02,106 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:249] - Cliente mobile-2-0-90c6c4 perdió conexión
+2025-06-07 19:28:02,201 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:196] - Error al entrar en doze para mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:02,202 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-1-1e3da1 envió mensaje: Mensaje de prueba #641aac a las 19:28:02.202061
+2025-06-07 19:28:02,204 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-949d44 recibió mensaje: Mensaje de prueba #641aac a las 19:28:02.202061 de web-1-1-1e3da1
+2025-06-07 19:28:02,303 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-3-527127 envió mensaje: Mensaje de prueba #06d619 a las 19:28:02.303178
+2025-06-07 19:28:02,307 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-4-0-66eb88 recibió mensaje: Mensaje de prueba #06d619 a las 19:28:02.303178 de web-3-527127
+2025-06-07 19:28:02,404 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-4-0-66eb88 envió mensaje: Mensaje de prueba #2aba60 a las 19:28:02.404341
+2025-06-07 19:28:02,408 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-3-527127 recibió mensaje: Mensaje de prueba #2aba60 a las 19:28:02.404341 de mobile-4-0-66eb88
+2025-06-07 19:28:02,505 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:02,607 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #7858a9 a las 19:28:02.606773
+2025-06-07 19:28:02,615 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #7858a9 a las 19:28:02.606773 de web-1-949d44
+2025-06-07 19:28:02,708 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-1-6872fa envió mensaje: Mensaje de prueba #c341b9 a las 19:28:02.707850
+2025-06-07 19:28:02,711 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-4-530d63 recibió mensaje: Mensaje de prueba #c341b9 a las 19:28:02.707850 de web-0-1-6872fa
+2025-06-07 19:28:02,809 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #e01e5d a las 19:28:02.809129
+2025-06-07 19:28:02,814 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-3-0-412e96 recibió mensaje: Mensaje de prueba #e01e5d a las 19:28:02.809129 de web-0-d5c451
+2025-06-07 19:28:02,910 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-3-0-412e96 envió mensaje: Mensaje de prueba #7a7eb4 a las 19:28:02.910400
+2025-06-07 19:28:02,917 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-d5c451 recibió mensaje: Mensaje de prueba #7a7eb4 a las 19:28:02.910400 de mobile-3-0-412e96
+2025-06-07 19:28:03,011 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #a3a1d6 a las 19:28:03.010831
+2025-06-07 19:28:03,111 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-4-1-6638a7: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:03,213 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:03,315 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-4-0-66eb88 envió mensaje: Mensaje de prueba #6203f7 a las 19:28:03.314481
+2025-06-07 19:28:03,319 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-3-527127 recibió mensaje: Mensaje de prueba #6203f7 a las 19:28:03.314481 de mobile-4-0-66eb88
+2025-06-07 19:28:03,418 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #e410cc a las 19:28:03.417376
+2025-06-07 19:28:03,422 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #e410cc a las 19:28:03.417376 de web-1-949d44
+2025-06-07 19:28:03,469 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente mobile-2-0-90c6c4 conectado en 0.0028s
+2025-06-07 19:28:03,473 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:134] - Cliente mobile-2-0-90c6c4 no pudo unirse a sala: {'info': 'Reconectado desde modo doze. Verificando mensajes pendientes...'}
+2025-06-07 19:28:03,473 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:223] - Cliente mobile-2-0-90c6c4 falló al salir del modo doze
+2025-06-07 19:28:03,518 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:03,619 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #16e5a1 a las 19:28:03.619577
+2025-06-07 19:28:03,720 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:03,822 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:03,885 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:203] - Cliente mobile-1-0-baab2d ya está conectado, no puede salir de doze
+2025-06-07 19:28:03,923 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #3c973f a las 19:28:03.923179
+2025-06-07 19:28:04,024 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #8f3150 a las 19:28:04.024409
+2025-06-07 19:28:04,095 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:239] - Cliente web-2-338f36 recibió info: El otro usuario ha regresado desde doze.
+2025-06-07 19:28:04,098 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #16e5a1 a las 19:28:03.619577 de web-4-530d63
+2025-06-07 19:28:04,099 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #3c973f a las 19:28:03.923179 de web-1-949d44
+2025-06-07 19:28:04,100 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-3-0-412e96 recibió mensaje: Mensaje de prueba #8f3150 a las 19:28:04.024409 de web-0-d5c451
+2025-06-07 19:28:04,125 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-4-1-6638a7: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:04,227 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #a9bbd4 a las 19:28:04.226860
+2025-06-07 19:28:04,230 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #a9bbd4 a las 19:28:04.226860 de web-1-949d44
+2025-06-07 19:28:04,328 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #ad47ea a las 19:28:04.328143
+2025-06-07 19:28:04,335 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #ad47ea a las 19:28:04.328143 de web-4-530d63
+2025-06-07 19:28:04,429 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #aa16fd a las 19:28:04.429283
+2025-06-07 19:28:04,433 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #aa16fd a las 19:28:04.429283 de mobile-2-0-90c6c4
+2025-06-07 19:28:04,530 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-4-0-66eb88 envió mensaje: Mensaje de prueba #19ad60 a las 19:28:04.530438
+2025-06-07 19:28:04,533 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-3-527127 recibió mensaje: Mensaje de prueba #19ad60 a las 19:28:04.530438 de mobile-4-0-66eb88
+2025-06-07 19:28:04,635 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:192] - Cliente mobile-2-0-90c6c4 entró en modo doze
+2025-06-07 19:28:04,636 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:04,737 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:04,838 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #3eb713 a las 19:28:04.838052
+2025-06-07 19:28:04,939 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:05,040 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:05,141 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:05,243 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-3-0-412e96 envió mensaje: Mensaje de prueba #9ebb92 a las 19:28:05.242967
+2025-06-07 19:28:05,246 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-d5c451 recibió mensaje: Mensaje de prueba #9ebb92 a las 19:28:05.242967 de mobile-3-0-412e96
+2025-06-07 19:28:05,344 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #af80bc a las 19:28:05.344294
+2025-06-07 19:28:05,353 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-3-0-412e96 recibió mensaje: Mensaje de prueba #af80bc a las 19:28:05.344294 de web-0-d5c451
+2025-06-07 19:28:05,445 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #f7081a a las 19:28:05.445508
+2025-06-07 19:28:05,450 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #f7081a a las 19:28:05.445508 de web-4-530d63
+2025-06-07 19:28:05,546 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #473865 a las 19:28:05.546672
+2025-06-07 19:28:05,550 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-3-0-412e96 recibió mensaje: Mensaje de prueba #473865 a las 19:28:05.546672 de web-0-d5c451
+2025-06-07 19:28:05,648 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:05,749 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-4-0-66eb88 envió mensaje: Mensaje de prueba #316c5e a las 19:28:05.749085
+2025-06-07 19:28:05,752 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-3-527127 recibió mensaje: Mensaje de prueba #316c5e a las 19:28:05.749085 de mobile-4-0-66eb88
+2025-06-07 19:28:05,853 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-3-527127 envió mensaje: Mensaje de prueba #6a6c88 a las 19:28:05.852409
+2025-06-07 19:28:05,857 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-4-0-66eb88 recibió mensaje: Mensaje de prueba #6a6c88 a las 19:28:05.852409 de web-3-527127
+2025-06-07 19:28:05,885 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente mobile-2-0-90c6c4 conectado en 0.0020s
+2025-06-07 19:28:05,889 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:134] - Cliente mobile-2-0-90c6c4 no pudo unirse a sala: {'info': 'Reconectado desde modo doze. Verificando mensajes pendientes...'}
+2025-06-07 19:28:05,889 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:223] - Cliente mobile-2-0-90c6c4 falló al salir del modo doze
+2025-06-07 19:28:05,952 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #555f1b a las 19:28:05.952671
+2025-06-07 19:28:06,053 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:06,155 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-4-1-6638a7: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:06,255 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:06,357 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #6ea9c7 a las 19:28:06.356808
+2025-06-07 19:28:06,458 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #fa9528 a las 19:28:06.458235
+2025-06-07 19:28:06,501 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:239] - Cliente web-2-338f36 recibió info: El otro usuario ha regresado desde doze.
+2025-06-07 19:28:06,502 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #555f1b a las 19:28:05.952671 de web-4-530d63
+2025-06-07 19:28:06,503 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #6ea9c7 a las 19:28:06.356808 de web-1-949d44
+2025-06-07 19:28:06,503 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #fa9528 a las 19:28:06.458235 de web-1-949d44
+2025-06-07 19:28:06,559 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #20c086 a las 19:28:06.559068
+2025-06-07 19:28:06,560 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #20c086 a las 19:28:06.559068 de web-4-530d63
+2025-06-07 19:28:06,660 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:06,761 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #e7e4fb a las 19:28:06.761483
+2025-06-07 19:28:06,768 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #e7e4fb a las 19:28:06.761483 de web-4-530d63
+2025-06-07 19:28:06,862 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-1-1e3da1 envió mensaje: Mensaje de prueba #30a934 a las 19:28:06.862210
+2025-06-07 19:28:06,865 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-949d44 recibió mensaje: Mensaje de prueba #30a934 a las 19:28:06.862210 de web-1-1-1e3da1
+2025-06-07 19:28:06,963 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #02ae1b a las 19:28:06.963321
+2025-06-07 19:28:06,966 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-3-0-412e96 recibió mensaje: Mensaje de prueba #02ae1b a las 19:28:06.963321 de web-0-d5c451
+2025-06-07 19:28:07,064 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-3-527127 envió mensaje: Mensaje de prueba #82f753 a las 19:28:07.064707
+2025-06-07 19:28:07,068 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-4-0-66eb88 recibió mensaje: Mensaje de prueba #82f753 a las 19:28:07.064707 de web-3-527127
+2025-06-07 19:28:07,166 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #b1f30e a las 19:28:07.165732
+2025-06-07 19:28:07,267 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #269689 a las 19:28:07.267550
+2025-06-07 19:28:07,271 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #269689 a las 19:28:07.267550 de web-4-530d63
+2025-06-07 19:28:07,368 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:07,470 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:07,571 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #a497ff a las 19:28:07.570888
+2025-06-07 19:28:07,573 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #a497ff a las 19:28:07.570888 de web-4-530d63
+2025-06-07 19:28:07,684 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-1-6872fa envió mensaje: Mensaje de prueba #ad7f8d a las 19:28:07.684176
+2025-06-07 19:28:07,690 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-4-530d63 recibió mensaje: Mensaje de prueba #ad7f8d a las 19:28:07.684176 de web-0-1-6872fa
+2025-06-07 19:28:07,801 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #7351e5 a las 19:28:07.798238
+2025-06-07 19:28:07,841 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #7351e5 a las 19:28:07.798238 de mobile-2-0-90c6c4
+2025-06-07 19:28:07,897 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-3-527127 envió mensaje: Mensaje de prueba #d7a162 a las 19:28:07.897414
+2025-06-07 19:28:07,901 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-4-0-66eb88 recibió mensaje: Mensaje de prueba #d7a162 a las 19:28:07.897414 de web-3-527127
+2025-06-07 19:28:07,998 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #493d51 a las 19:28:07.998264
+2025-06-07 19:28:08,099 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-4-0-66eb88 envió mensaje: Mensaje de prueba #c17816 a las 19:28:08.099325
+2025-06-07 19:28:08,102 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-3-527127 recibió mensaje: Mensaje de prueba #c17816 a las 19:28:08.099325 de mobile-4-0-66eb88
+2025-06-07 19:28:08,200 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #af0843 a las 19:28:08.200374
+2025-06-07 19:28:08,203 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-3-0-412e96 recibió mensaje: Mensaje de prueba #af0843 a las 19:28:08.200374 de web-0-d5c451
+2025-06-07 19:28:08,304 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-4-0-66eb88 envió mensaje: Mensaje de prueba #c7aae5 a las 19:28:08.303314
+2025-06-07 19:28:08,310 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-3-527127 recibió mensaje: Mensaje de prueba #c7aae5 a las 19:28:08.303314 de mobile-4-0-66eb88
+2025-06-07 19:28:08,404 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #6be645 a las 19:28:08.404387
+2025-06-07 19:28:08,505 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:08,607 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #02bd72 a las 19:28:08.606898
+2025-06-07 19:28:08,611 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #02bd72 a las 19:28:08.606898 de mobile-2-0-90c6c4
+2025-06-07 19:28:08,707 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-3-0-412e96 envió mensaje: Mensaje de prueba #61a944 a las 19:28:08.707314
+2025-06-07 19:28:08,711 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-d5c451 recibió mensaje: Mensaje de prueba #61a944 a las 19:28:08.707314 de mobile-3-0-412e96
+2025-06-07 19:28:08,808 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-3-0-412e96 envió mensaje: Mensaje de prueba #b20462 a las 19:28:08.808290
+2025-06-07 19:28:08,813 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-d5c451 recibió mensaje: Mensaje de prueba #b20462 a las 19:28:08.808290 de mobile-3-0-412e96
+2025-06-07 19:28:08,909 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:09,010 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #cd3ada a las 19:28:09.010661
+2025-06-07 19:28:09,020 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-3-0-412e96 recibió mensaje: Mensaje de prueba #cd3ada a las 19:28:09.010661 de web-0-d5c451
+2025-06-07 19:28:09,111 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:196] - Error al entrar en doze para mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:09,112 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:09,213 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #2b39a8 a las 19:28:09.213743
+2025-06-07 19:28:09,219 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-3-0-412e96 recibió mensaje: Mensaje de prueba #2b39a8 a las 19:28:09.213743 de web-0-d5c451
+2025-06-07 19:28:09,315 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #b11264 a las 19:28:09.314629
+2025-06-07 19:28:09,318 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #b11264 a las 19:28:09.314629 de web-4-530d63
+2025-06-07 19:28:09,416 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:09,519 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:09,620 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:09,721 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:09,823 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-4-0-66eb88 envió mensaje: Mensaje de prueba #55cbf8 a las 19:28:09.823090
+2025-06-07 19:28:09,826 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-3-527127 recibió mensaje: Mensaje de prueba #55cbf8 a las 19:28:09.823090 de mobile-4-0-66eb88
+2025-06-07 19:28:09,924 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:10,027 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:196] - Error al entrar en doze para mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:10,029 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:10,129 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:10,230 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-1-6872fa envió mensaje: Mensaje de prueba #5c0b24 a las 19:28:10.230060
+2025-06-07 19:28:10,234 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-4-530d63 recibió mensaje: Mensaje de prueba #5c0b24 a las 19:28:10.230060 de web-0-1-6872fa
+2025-06-07 19:28:10,333 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #d27c4e a las 19:28:10.331153
+2025-06-07 19:28:10,336 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #d27c4e a las 19:28:10.331153 de mobile-2-0-90c6c4
+2025-06-07 19:28:10,432 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:10,533 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-4-1-6638a7: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:10,635 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:10,735 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-4-1-6638a7: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:10,836 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #07e9f4 a las 19:28:10.836103
+2025-06-07 19:28:10,838 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-3-0-412e96 recibió mensaje: Mensaje de prueba #07e9f4 a las 19:28:10.836103 de web-0-d5c451
+2025-06-07 19:28:10,937 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-1-1e3da1 envió mensaje: Mensaje de prueba #043432 a las 19:28:10.937405
+2025-06-07 19:28:10,941 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-949d44 recibió mensaje: Mensaje de prueba #043432 a las 19:28:10.937405 de web-1-1-1e3da1
+2025-06-07 19:28:11,039 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-1-1e3da1 envió mensaje: Mensaje de prueba #84b150 a las 19:28:11.038775
+2025-06-07 19:28:11,047 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-949d44 recibió mensaje: Mensaje de prueba #84b150 a las 19:28:11.038775 de web-1-1-1e3da1
+2025-06-07 19:28:11,139 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:196] - Error al entrar en doze para mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:11,140 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-3-0-412e96 envió mensaje: Mensaje de prueba #000118 a las 19:28:11.140159
+2025-06-07 19:28:11,142 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-d5c451 recibió mensaje: Mensaje de prueba #000118 a las 19:28:11.140159 de mobile-3-0-412e96
+2025-06-07 19:28:11,241 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:11,342 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #5ce85e a las 19:28:11.342209
+2025-06-07 19:28:11,345 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #5ce85e a las 19:28:11.342209 de web-1-949d44
+2025-06-07 19:28:11,443 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #362b07 a las 19:28:11.443519
+2025-06-07 19:28:11,446 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #362b07 a las 19:28:11.443519 de web-1-949d44
+2025-06-07 19:28:11,543 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #ed103f a las 19:28:11.543782
+2025-06-07 19:28:11,545 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #ed103f a las 19:28:11.543782 de web-4-530d63
+2025-06-07 19:28:11,645 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:11,746 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:11,841 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:203] - Cliente mobile-1-0-baab2d ya está conectado, no puede salir de doze
+2025-06-07 19:28:11,847 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #01070f a las 19:28:11.847014
+2025-06-07 19:28:11,850 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #01070f a las 19:28:11.847014 de web-4-530d63
+2025-06-07 19:28:11,947 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #455c80 a las 19:28:11.947405
+2025-06-07 19:28:11,950 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #455c80 a las 19:28:11.947405 de mobile-2-0-90c6c4
+2025-06-07 19:28:12,048 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-4-0-66eb88 envió mensaje: Mensaje de prueba #2c4f43 a las 19:28:12.048176
+2025-06-07 19:28:12,050 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-3-527127 recibió mensaje: Mensaje de prueba #2c4f43 a las 19:28:12.048176 de mobile-4-0-66eb88
+2025-06-07 19:28:12,149 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #281e8f a las 19:28:12.149433
+2025-06-07 19:28:12,152 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-3-0-412e96 recibió mensaje: Mensaje de prueba #281e8f a las 19:28:12.149433 de web-0-d5c451
+2025-06-07 19:28:12,250 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #ed8220 a las 19:28:12.250608
+2025-06-07 19:28:12,254 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #ed8220 a las 19:28:12.250608 de mobile-2-0-90c6c4
+2025-06-07 19:28:12,352 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-4-1-6638a7: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:12,452 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:192] - Cliente mobile-4-0-66eb88 entró en modo doze
+2025-06-07 19:28:12,453 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #9478df a las 19:28:12.453374
+2025-06-07 19:28:12,459 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #9478df a las 19:28:12.453374 de web-1-949d44
+2025-06-07 19:28:12,460 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:249] - Cliente mobile-4-0-66eb88 perdió conexión
+2025-06-07 19:28:12,554 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #dbe02b a las 19:28:12.554546
+2025-06-07 19:28:12,557 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-3-0-412e96 recibió mensaje: Mensaje de prueba #dbe02b a las 19:28:12.554546 de web-0-d5c451
+2025-06-07 19:28:12,655 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #a1b438 a las 19:28:12.655670
+2025-06-07 19:28:12,659 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-3-0-412e96 recibió mensaje: Mensaje de prueba #a1b438 a las 19:28:12.655670 de web-0-d5c451
+2025-06-07 19:28:12,756 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-4-1-6638a7: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:12,858 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #d71ae8 a las 19:28:12.858044
+2025-06-07 19:28:12,861 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #d71ae8 a las 19:28:12.858044 de mobile-2-0-90c6c4
+2025-06-07 19:28:12,886 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:203] - Cliente mobile-0-0-40379e ya está conectado, no puede salir de doze
+2025-06-07 19:28:12,959 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-1-6872fa envió mensaje: Mensaje de prueba #d1310b a las 19:28:12.959189
+2025-06-07 19:28:12,962 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-4-530d63 recibió mensaje: Mensaje de prueba #d1310b a las 19:28:12.959189 de web-0-1-6872fa
+2025-06-07 19:28:13,061 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:13,162 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-4-1-6638a7: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:13,263 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-3-0-412e96 envió mensaje: Mensaje de prueba #c7f4a7 a las 19:28:13.263121
+2025-06-07 19:28:13,267 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-d5c451 recibió mensaje: Mensaje de prueba #c7f4a7 a las 19:28:13.263121 de mobile-3-0-412e96
+2025-06-07 19:28:13,369 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-3-0-412e96 envió mensaje: Mensaje de prueba #733cf1 a las 19:28:13.369508
+2025-06-07 19:28:13,372 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-d5c451 recibió mensaje: Mensaje de prueba #733cf1 a las 19:28:13.369508 de mobile-3-0-412e96
+2025-06-07 19:28:13,468 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-4-1-6638a7: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:13,569 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #31de1f a las 19:28:13.569712
+2025-06-07 19:28:13,572 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #31de1f a las 19:28:13.569712 de mobile-2-0-90c6c4
+2025-06-07 19:28:13,669 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:196] - Error al entrar en doze para mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:13,670 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-1-6872fa envió mensaje: Mensaje de prueba #9b78eb a las 19:28:13.670219
+2025-06-07 19:28:13,670 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente mobile-4-0-66eb88 conectado en 0.0034s
+2025-06-07 19:28:13,673 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:134] - Cliente mobile-4-0-66eb88 no pudo unirse a sala: {'info': 'Reconectado desde modo doze. Verificando mensajes pendientes...'}
+2025-06-07 19:28:13,674 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:223] - Cliente mobile-4-0-66eb88 falló al salir del modo doze
+2025-06-07 19:28:13,745 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:203] - Cliente mobile-1-0-baab2d ya está conectado, no puede salir de doze
+2025-06-07 19:28:13,771 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:13,873 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-4-0-66eb88 envió mensaje: Mensaje de prueba #52866a a las 19:28:13.872743
+2025-06-07 19:28:13,974 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #23c195 a las 19:28:13.973987
+2025-06-07 19:28:14,075 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:192] - Cliente mobile-3-0-412e96 entró en modo doze
+2025-06-07 19:28:14,076 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:14,177 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #68593a a las 19:28:14.177169
+2025-06-07 19:28:14,182 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:239] - Cliente web-3-527127 recibió info: El otro usuario ha regresado desde doze.
+2025-06-07 19:28:14,184 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-3-527127 recibió mensaje: Mensaje de prueba #52866a a las 19:28:13.872743 de mobile-4-0-66eb88
+2025-06-07 19:28:14,185 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-4-530d63 recibió mensaje: Mensaje de prueba #9b78eb a las 19:28:13.670219 de web-0-1-6872fa
+2025-06-07 19:28:14,186 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente mobile-3-0-412e96 recibió mensaje: Mensaje de prueba #23c195 a las 19:28:13.973987 de web-0-d5c451
+2025-06-07 19:28:14,190 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #68593a a las 19:28:14.177169 de mobile-2-0-90c6c4
+2025-06-07 19:28:14,280 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-1-6872fa envió mensaje: Mensaje de prueba #e9d91f a las 19:28:14.280112
+2025-06-07 19:28:14,294 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-4-530d63 recibió mensaje: Mensaje de prueba #e9d91f a las 19:28:14.280112 de web-0-1-6872fa
+2025-06-07 19:28:14,381 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:14,481 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-4-0-66eb88 envió mensaje: Mensaje de prueba #aac9f2 a las 19:28:14.481440
+2025-06-07 19:28:14,485 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-3-527127 recibió mensaje: Mensaje de prueba #aac9f2 a las 19:28:14.481440 de mobile-4-0-66eb88
+2025-06-07 19:28:14,582 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:14,683 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:14,785 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #178593 a las 19:28:14.784994
+2025-06-07 19:28:14,886 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:14,987 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-4-0-66eb88 envió mensaje: Mensaje de prueba #4f552a a las 19:28:14.987451
+2025-06-07 19:28:14,991 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-3-527127 recibió mensaje: Mensaje de prueba #4f552a a las 19:28:14.987451 de mobile-4-0-66eb88
+2025-06-07 19:28:15,088 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-1-6872fa envió mensaje: Mensaje de prueba #cb10d3 a las 19:28:15.088544
+2025-06-07 19:28:15,091 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-4-530d63 recibió mensaje: Mensaje de prueba #cb10d3 a las 19:28:15.088544 de web-0-1-6872fa
+2025-06-07 19:28:15,189 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #33cbd1 a las 19:28:15.189735
+2025-06-07 19:28:15,192 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #33cbd1 a las 19:28:15.189735 de web-4-530d63
+2025-06-07 19:28:15,291 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:15,392 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:15,493 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:15,595 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #c87691 a las 19:28:15.594966
+2025-06-07 19:28:15,696 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #cb1313 a las 19:28:15.696162
+2025-06-07 19:28:15,797 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:15,843 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente mobile-3-0-412e96 conectado en 0.0034s
+2025-06-07 19:28:15,847 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:134] - Cliente mobile-3-0-412e96 no pudo unirse a sala: {'info': 'Reconectado desde modo doze. Verificando mensajes pendientes...'}
+2025-06-07 19:28:15,848 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:223] - Cliente mobile-3-0-412e96 falló al salir del modo doze
+2025-06-07 19:28:15,898 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #cba95f a las 19:28:15.898598
+2025-06-07 19:28:16,001 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:16,014 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:203] - Cliente mobile-1-0-baab2d ya está conectado, no puede salir de doze
+2025-06-07 19:28:16,102 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #f80da1 a las 19:28:16.101906
+2025-06-07 19:28:16,203 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:16,304 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-4-1-6638a7: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:16,405 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:16,506 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #f112c9 a las 19:28:16.506641
+2025-06-07 19:28:16,607 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #060769 a las 19:28:16.607807
+2025-06-07 19:28:16,670 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:239] - Cliente web-0-d5c451 recibió info: El otro usuario ha regresado desde doze.
+2025-06-07 19:28:16,671 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #cba95f a las 19:28:15.898598 de web-1-949d44
+2025-06-07 19:28:16,673 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #060769 a las 19:28:16.607807 de web-1-949d44
+2025-06-07 19:28:16,709 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:16,810 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-4-1-6638a7: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:16,911 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #8bb408 a las 19:28:16.911214
+2025-06-07 19:28:17,012 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:17,114 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #709bd7 a las 19:28:17.113593
+2025-06-07 19:28:17,118 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #709bd7 a las 19:28:17.113593 de web-1-949d44
+2025-06-07 19:28:17,216 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-1-1e3da1 envió mensaje: Mensaje de prueba #a82ccb a las 19:28:17.216281
+2025-06-07 19:28:17,220 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-949d44 recibió mensaje: Mensaje de prueba #a82ccb a las 19:28:17.216281 de web-1-1-1e3da1
+2025-06-07 19:28:17,317 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #b859e2 a las 19:28:17.317154
+2025-06-07 19:28:17,418 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:17,519 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:17,620 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:17,722 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-1-6872fa envió mensaje: Mensaje de prueba #016201 a las 19:28:17.721838
+2025-06-07 19:28:17,725 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-4-530d63 recibió mensaje: Mensaje de prueba #016201 a las 19:28:17.721838 de web-0-1-6872fa
+2025-06-07 19:28:17,822 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-1-6872fa envió mensaje: Mensaje de prueba #8acf9b a las 19:28:17.822634
+2025-06-07 19:28:17,826 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-4-530d63 recibió mensaje: Mensaje de prueba #8acf9b a las 19:28:17.822634 de web-0-1-6872fa
+2025-06-07 19:28:17,923 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:18,025 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #467ec7 a las 19:28:18.024883
+2025-06-07 19:28:18,126 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:18,227 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:18,328 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:18,429 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:18,530 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-4-1-6638a7: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:18,632 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:192] - Cliente mobile-3-0-412e96 entró en modo doze
+2025-06-07 19:28:18,633 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #c2ba45 a las 19:28:18.632945
+2025-06-07 19:28:18,734 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-4-0-66eb88 envió mensaje: Mensaje de prueba #29c7f6 a las 19:28:18.734307
+2025-06-07 19:28:18,736 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-3-527127 recibió mensaje: Mensaje de prueba #29c7f6 a las 19:28:18.734307 de mobile-4-0-66eb88
+2025-06-07 19:28:18,835 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:18,936 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-3-527127 envió mensaje: Mensaje de prueba #718e57 a las 19:28:18.936561
+2025-06-07 19:28:19,038 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #ef4c52 a las 19:28:19.037859
+2025-06-07 19:28:19,041 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #ef4c52 a las 19:28:19.037859 de mobile-2-0-90c6c4
+2025-06-07 19:28:19,139 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-1-6872fa envió mensaje: Mensaje de prueba #c3d8b3 a las 19:28:19.138777
+2025-06-07 19:28:19,144 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-4-530d63 recibió mensaje: Mensaje de prueba #c3d8b3 a las 19:28:19.138777 de web-0-1-6872fa
+2025-06-07 19:28:19,240 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:19,341 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:19,442 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:19,543 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:19,645 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-4-0-66eb88 envió mensaje: Mensaje de prueba #c005d6 a las 19:28:19.644963
+2025-06-07 19:28:19,653 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-3-527127 recibió mensaje: Mensaje de prueba #c005d6 a las 19:28:19.644963 de mobile-4-0-66eb88
+2025-06-07 19:28:19,746 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:196] - Error al entrar en doze para mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:19,746 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #852545 a las 19:28:19.746611
+2025-06-07 19:28:19,751 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #852545 a las 19:28:19.746611 de mobile-2-0-90c6c4
+2025-06-07 19:28:19,849 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-4-0-66eb88 envió mensaje: Mensaje de prueba #22f81d a las 19:28:19.847748
+2025-06-07 19:28:19,852 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-3-527127 recibió mensaje: Mensaje de prueba #22f81d a las 19:28:19.847748 de mobile-4-0-66eb88
+2025-06-07 19:28:19,949 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #7a96b8 a las 19:28:19.948941
+2025-06-07 19:28:20,050 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #ab6169 a las 19:28:20.050551
+2025-06-07 19:28:20,151 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-3-527127 envió mensaje: Mensaje de prueba #484abb a las 19:28:20.151622
+2025-06-07 19:28:20,172 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente mobile-3-0-412e96 conectado en 0.0023s
+2025-06-07 19:28:20,175 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:134] - Cliente mobile-3-0-412e96 no pudo unirse a sala: {'info': 'Reconectado desde modo doze. Verificando mensajes pendientes...'}
+2025-06-07 19:28:20,175 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:223] - Cliente mobile-3-0-412e96 falló al salir del modo doze
+2025-06-07 19:28:20,252 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #e9c36b a las 19:28:20.252767
+2025-06-07 19:28:20,354 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-1-6872fa envió mensaje: Mensaje de prueba #73514a a las 19:28:20.354082
+2025-06-07 19:28:20,455 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #97e665 a las 19:28:20.455308
+2025-06-07 19:28:20,556 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #99c1da a las 19:28:20.556447
+2025-06-07 19:28:20,657 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #fec335 a las 19:28:20.656984
+2025-06-07 19:28:20,681 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:239] - Cliente web-0-d5c451 recibió info: El otro usuario ha regresado desde doze.
+2025-06-07 19:28:20,682 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #e9c36b a las 19:28:20.252767 de web-1-949d44
+2025-06-07 19:28:20,683 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-4-530d63 recibió mensaje: Mensaje de prueba #73514a a las 19:28:20.354082 de web-0-1-6872fa
+2025-06-07 19:28:20,684 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #99c1da a las 19:28:20.556447 de mobile-2-0-90c6c4
+2025-06-07 19:28:20,685 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #fec335 a las 19:28:20.656984 de web-4-530d63
+2025-06-07 19:28:20,758 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-4-0-66eb88 envió mensaje: Mensaje de prueba #b23185 a las 19:28:20.758070
+2025-06-07 19:28:20,761 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-3-527127 recibió mensaje: Mensaje de prueba #b23185 a las 19:28:20.758070 de mobile-4-0-66eb88
+2025-06-07 19:28:20,859 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #add43b a las 19:28:20.859214
+2025-06-07 19:28:20,862 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #add43b a las 19:28:20.859214 de mobile-2-0-90c6c4
+2025-06-07 19:28:20,938 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:203] - Cliente mobile-0-0-40379e ya está conectado, no puede salir de doze
+2025-06-07 19:28:20,960 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:21,062 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #c1d10e a las 19:28:21.061742
+2025-06-07 19:28:21,067 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #c1d10e a las 19:28:21.061742 de web-1-949d44
+2025-06-07 19:28:21,163 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-3-527127 envió mensaje: Mensaje de prueba #73724b a las 19:28:21.162940
+2025-06-07 19:28:21,267 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-1-1e3da1 envió mensaje: Mensaje de prueba #2bf941 a las 19:28:21.266279
+2025-06-07 19:28:21,271 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-949d44 recibió mensaje: Mensaje de prueba #2bf941 a las 19:28:21.266279 de web-1-1-1e3da1
+2025-06-07 19:28:21,369 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:21,470 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:196] - Error al entrar en doze para mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:21,470 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:21,571 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:21,672 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-4-0-66eb88 envió mensaje: Mensaje de prueba #10d12c a las 19:28:21.671958
+2025-06-07 19:28:21,675 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-3-527127 recibió mensaje: Mensaje de prueba #10d12c a las 19:28:21.671958 de mobile-4-0-66eb88
+2025-06-07 19:28:21,773 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #b03f23 a las 19:28:21.773125
+2025-06-07 19:28:21,874 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:196] - Error al entrar en doze para mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:21,874 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #f8146c a las 19:28:21.874647
+2025-06-07 19:28:21,877 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #f8146c a las 19:28:21.874647 de mobile-2-0-90c6c4
+2025-06-07 19:28:21,975 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-1-1e3da1 envió mensaje: Mensaje de prueba #cafff9 a las 19:28:21.975798
+2025-06-07 19:28:21,979 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-949d44 recibió mensaje: Mensaje de prueba #cafff9 a las 19:28:21.975798 de web-1-1-1e3da1
+2025-06-07 19:28:22,077 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #918ad5 a las 19:28:22.076959
+2025-06-07 19:28:22,178 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:22,278 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:22,379 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:22,482 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-3-0-412e96 envió mensaje: Mensaje de prueba #52cfcf a las 19:28:22.481485
+2025-06-07 19:28:22,487 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-d5c451 recibió mensaje: Mensaje de prueba #52cfcf a las 19:28:22.481485 de mobile-3-0-412e96
+2025-06-07 19:28:22,583 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-1-1e3da1 envió mensaje: Mensaje de prueba #ed5179 a las 19:28:22.582806
+2025-06-07 19:28:22,588 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-949d44 recibió mensaje: Mensaje de prueba #ed5179 a las 19:28:22.582806 de web-1-1-1e3da1
+2025-06-07 19:28:22,684 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:22,784 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:22,885 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #059d0d a las 19:28:22.885252
+2025-06-07 19:28:22,890 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #059d0d a las 19:28:22.885252 de web-4-530d63
+2025-06-07 19:28:22,986 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #f4ef1d a las 19:28:22.986420
+2025-06-07 19:28:22,989 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #f4ef1d a las 19:28:22.986420 de web-4-530d63
+2025-06-07 19:28:23,087 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #7f5450 a las 19:28:23.087268
+2025-06-07 19:28:23,089 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #7f5450 a las 19:28:23.087268 de mobile-2-0-90c6c4
+2025-06-07 19:28:23,188 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-1-6872fa envió mensaje: Mensaje de prueba #c6c65c a las 19:28:23.188359
+2025-06-07 19:28:23,190 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-4-530d63 recibió mensaje: Mensaje de prueba #c6c65c a las 19:28:23.188359 de web-0-1-6872fa
+2025-06-07 19:28:23,289 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-3-0-412e96 envió mensaje: Mensaje de prueba #020e2c a las 19:28:23.288924
+2025-06-07 19:28:23,290 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-d5c451 recibió mensaje: Mensaje de prueba #020e2c a las 19:28:23.288924 de mobile-3-0-412e96
+2025-06-07 19:28:23,390 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:23,491 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:23,592 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #248ccb a las 19:28:23.592388
+2025-06-07 19:28:23,595 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #248ccb a las 19:28:23.592388 de mobile-2-0-90c6c4
+2025-06-07 19:28:23,693 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #da946f a las 19:28:23.693508
+2025-06-07 19:28:23,794 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #1c6e76 a las 19:28:23.794692
+2025-06-07 19:28:23,798 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #1c6e76 a las 19:28:23.794692 de web-1-949d44
+2025-06-07 19:28:23,896 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:23,910 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:203] - Cliente mobile-1-0-baab2d ya está conectado, no puede salir de doze
+2025-06-07 19:28:23,928 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:203] - Cliente mobile-1-0-baab2d ya está conectado, no puede salir de doze
+2025-06-07 19:28:23,998 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #220709 a las 19:28:23.997331
+2025-06-07 19:28:24,001 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #220709 a las 19:28:23.997331 de web-4-530d63
+2025-06-07 19:28:24,098 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #5450fd a las 19:28:24.098279
+2025-06-07 19:28:24,199 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #f21ed2 a las 19:28:24.199458
+2025-06-07 19:28:24,300 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:24,401 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-1-6872fa envió mensaje: Mensaje de prueba #8e5605 a las 19:28:24.401787
+2025-06-07 19:28:24,405 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-4-530d63 recibió mensaje: Mensaje de prueba #8e5605 a las 19:28:24.401787 de web-0-1-6872fa
+2025-06-07 19:28:24,502 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #bf3581 a las 19:28:24.502167
+2025-06-07 19:28:24,603 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-3-527127 envió mensaje: Mensaje de prueba #df279a a las 19:28:24.603405
+2025-06-07 19:28:24,704 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-4-0-66eb88 envió mensaje: Mensaje de prueba #4d82f2 a las 19:28:24.704604
+2025-06-07 19:28:24,712 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-3-527127 recibió mensaje: Mensaje de prueba #4d82f2 a las 19:28:24.704604 de mobile-4-0-66eb88
+2025-06-07 19:28:24,804 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:196] - Error al entrar en doze para mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:24,805 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:24,906 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #3a5098 a las 19:28:24.906474
+2025-06-07 19:28:24,909 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #3a5098 a las 19:28:24.906474 de web-1-949d44
+2025-06-07 19:28:25,008 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-3-0-412e96 envió mensaje: Mensaje de prueba #264033 a las 19:28:25.007768
+2025-06-07 19:28:25,011 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-d5c451 recibió mensaje: Mensaje de prueba #264033 a las 19:28:25.007768 de mobile-3-0-412e96
+2025-06-07 19:28:25,109 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-3-527127 envió mensaje: Mensaje de prueba #8dbb78 a las 19:28:25.108958
+2025-06-07 19:28:25,210 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #54733e a las 19:28:25.210278
+2025-06-07 19:28:25,213 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #54733e a las 19:28:25.210278 de mobile-2-0-90c6c4
+2025-06-07 19:28:25,311 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-3-527127 envió mensaje: Mensaje de prueba #aaf6af a las 19:28:25.311370
+2025-06-07 19:28:25,412 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:25,513 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-1-1e3da1 envió mensaje: Mensaje de prueba #b05d00 a las 19:28:25.512972
+2025-06-07 19:28:25,518 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-949d44 recibió mensaje: Mensaje de prueba #b05d00 a las 19:28:25.512972 de web-1-1-1e3da1
+2025-06-07 19:28:25,614 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #84db98 a las 19:28:25.614138
+2025-06-07 19:28:25,618 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #84db98 a las 19:28:25.614138 de web-4-530d63
+2025-06-07 19:28:25,716 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:196] - Error al entrar en doze para mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:25,718 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:25,819 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-3-527127 envió mensaje: Mensaje de prueba #8b49c5 a las 19:28:25.819195
+2025-06-07 19:28:25,920 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-1-6872fa envió mensaje: Mensaje de prueba #22deea a las 19:28:25.920408
+2025-06-07 19:28:25,927 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-4-530d63 recibió mensaje: Mensaje de prueba #22deea a las 19:28:25.920408 de web-0-1-6872fa
+2025-06-07 19:28:26,021 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:26,122 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:26,222 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #53eb39 a las 19:28:26.222730
+2025-06-07 19:28:26,225 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #53eb39 a las 19:28:26.222730 de web-4-530d63
+2025-06-07 19:28:26,228 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:203] - Cliente mobile-0-0-40379e ya está conectado, no puede salir de doze
+2025-06-07 19:28:26,323 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:26,425 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #4f6637 a las 19:28:26.425029
+2025-06-07 19:28:26,427 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #4f6637 a las 19:28:26.425029 de web-1-949d44
+2025-06-07 19:28:26,526 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #d413e4 a las 19:28:26.526223
+2025-06-07 19:28:26,528 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #d413e4 a las 19:28:26.526223 de web-1-949d44
+2025-06-07 19:28:26,627 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-3-0-412e96 envió mensaje: Mensaje de prueba #63bf4e a las 19:28:26.627335
+2025-06-07 19:28:26,630 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-d5c451 recibió mensaje: Mensaje de prueba #63bf4e a las 19:28:26.627335 de mobile-3-0-412e96
+2025-06-07 19:28:26,729 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-3-527127 envió mensaje: Mensaje de prueba #027047 a las 19:28:26.728742
+2025-06-07 19:28:26,829 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #8f9e6c a las 19:28:26.829748
+2025-06-07 19:28:26,931 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #f17bb4 a las 19:28:26.930951
+2025-06-07 19:28:27,034 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #743025 a las 19:28:27.032965
+2025-06-07 19:28:27,037 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #743025 a las 19:28:27.032965 de web-4-530d63
+2025-06-07 19:28:27,136 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #b773f3 a las 19:28:27.135975
+2025-06-07 19:28:27,236 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:27,337 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #1049ec a las 19:28:27.337679
+2025-06-07 19:28:27,438 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-4-1-6638a7: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:27,452 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:203] - Cliente mobile-0-0-40379e ya está conectado, no puede salir de doze
+2025-06-07 19:28:27,539 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-3-0-412e96 envió mensaje: Mensaje de prueba #769318 a las 19:28:27.539568
+2025-06-07 19:28:27,542 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-d5c451 recibió mensaje: Mensaje de prueba #769318 a las 19:28:27.539568 de mobile-3-0-412e96
+2025-06-07 19:28:27,640 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:27,741 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:27,843 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:27,944 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-1-0-baab2d: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:28,045 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-4-1-6638a7: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:28,146 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:28,250 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #1fe231 a las 19:28:28.248777
+2025-06-07 19:28:28,350 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #382490 a las 19:28:28.350394
+2025-06-07 19:28:28,353 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #382490 a las 19:28:28.350394 de web-4-530d63
+2025-06-07 19:28:28,451 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-2-1-0b9529: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:28,552 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:192] - Cliente mobile-3-0-412e96 entró en modo doze
+2025-06-07 19:28:28,553 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-1-1e3da1 envió mensaje: Mensaje de prueba #5f73f1 a las 19:28:28.553196
+2025-06-07 19:28:28,558 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-949d44 recibió mensaje: Mensaje de prueba #5f73f1 a las 19:28:28.553196 de web-1-1-1e3da1
+2025-06-07 19:28:28,654 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #eb3c98 a las 19:28:28.654477
+2025-06-07 19:28:28,659 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #eb3c98 a las 19:28:28.654477 de web-1-949d44
+2025-06-07 19:28:28,755 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-3-527127 envió mensaje: Mensaje de prueba #87eef6 a las 19:28:28.755110
+2025-06-07 19:28:28,856 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #4dfb92 a las 19:28:28.855956
+2025-06-07 19:28:28,957 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-1-6872fa envió mensaje: Mensaje de prueba #bae42e a las 19:28:28.956890
+2025-06-07 19:28:28,960 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-4-530d63 recibió mensaje: Mensaje de prueba #bae42e a las 19:28:28.956890 de web-0-1-6872fa
+2025-06-07 19:28:29,058 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #2ef9bd a las 19:28:29.058030
+2025-06-07 19:28:29,159 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:29,260 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-1-1e3da1 envió mensaje: Mensaje de prueba #64c846 a las 19:28:29.260026
+2025-06-07 19:28:29,263 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-949d44 recibió mensaje: Mensaje de prueba #64c846 a las 19:28:29.260026 de web-1-1-1e3da1
+2025-06-07 19:28:29,361 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #cd3974 a las 19:28:29.361287
+2025-06-07 19:28:29,365 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #cd3974 a las 19:28:29.361287 de web-1-949d44
+2025-06-07 19:28:29,462 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-1-6872fa envió mensaje: Mensaje de prueba #05c9b8 a las 19:28:29.462520
+2025-06-07 19:28:29,469 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-4-530d63 recibió mensaje: Mensaje de prueba #05c9b8 a las 19:28:29.462520 de web-0-1-6872fa
+2025-06-07 19:28:29,563 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde web-3-1-04223b: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:29,667 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:160] - Error al enviar mensaje desde mobile-0-0-40379e: received 1005 (no status received [internal]); then sent 1005 (no status received [internal])
+2025-06-07 19:28:29,767 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-1-1e3da1 envió mensaje: Mensaje de prueba #ed6ce3 a las 19:28:29.767515
+2025-06-07 19:28:29,769 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-949d44 recibió mensaje: Mensaje de prueba #ed6ce3 a las 19:28:29.767515 de web-1-1-1e3da1
+2025-06-07 19:28:29,869 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-2-338f36 envió mensaje: Mensaje de prueba #b366cf a las 19:28:29.869059
+2025-06-07 19:28:29,970 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-3-527127 envió mensaje: Mensaje de prueba #bcda7a a las 19:28:29.970199
+2025-06-07 19:28:30,071 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #57928c a las 19:28:30.071450
+2025-06-07 19:28:30,077 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #57928c a las 19:28:30.071450 de web-1-949d44
+2025-06-07 19:28:30,172 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-2-0-90c6c4 envió mensaje: Mensaje de prueba #ad7ae2 a las 19:28:30.172549
+2025-06-07 19:28:30,179 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-2-338f36 recibió mensaje: Mensaje de prueba #ad7ae2 a las 19:28:30.172549 de mobile-2-0-90c6c4
+2025-06-07 19:28:30,240 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:67] - Cliente mobile-3-0-412e96 conectado en 0.0018s
+2025-06-07 19:28:30,243 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:134] - Cliente mobile-3-0-412e96 no pudo unirse a sala: {'info': 'Reconectado desde modo doze. Verificando mensajes pendientes...'}
+2025-06-07 19:28:30,243 - minka.test.test_concurrencia - ERROR - [test_concurrencia.py:223] - Cliente mobile-3-0-412e96 falló al salir del modo doze
+2025-06-07 19:28:30,273 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-0-d5c451 envió mensaje: Mensaje de prueba #47f16b a las 19:28:30.272926
+2025-06-07 19:28:30,374 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-3-0-412e96 envió mensaje: Mensaje de prueba #9ad5e8 a las 19:28:30.374262
+2025-06-07 19:28:30,475 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente mobile-3-0-412e96 envió mensaje: Mensaje de prueba #11f1e7 a las 19:28:30.475480
+2025-06-07 19:28:30,576 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-1-949d44 envió mensaje: Mensaje de prueba #9eee20 a las 19:28:30.576400
+2025-06-07 19:28:30,677 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:157] - Cliente web-4-530d63 envió mensaje: Mensaje de prueba #dcfde1 a las 19:28:30.677362
+2025-06-07 19:28:30,779 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:170] - Cliente mobile-0-0-40379e desconectado
+2025-06-07 19:28:30,779 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:170] - Cliente mobile-1-0-baab2d desconectado
+2025-06-07 19:28:30,779 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:170] - Cliente web-2-1-0b9529 desconectado
+2025-06-07 19:28:30,780 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:170] - Cliente web-3-1-04223b desconectado
+2025-06-07 19:28:30,780 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:170] - Cliente web-4-1-6638a7 desconectado
+2025-06-07 19:28:30,860 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:239] - Cliente web-0-d5c451 recibió info: El otro usuario ha regresado desde doze.
+2025-06-07 19:28:30,861 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-d5c451 recibió mensaje: Mensaje de prueba #9ad5e8 a las 19:28:30.374262 de mobile-3-0-412e96
+2025-06-07 19:28:30,862 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-d5c451 recibió mensaje: Mensaje de prueba #11f1e7 a las 19:28:30.475480 de mobile-3-0-412e96
+2025-06-07 19:28:30,862 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:170] - Cliente mobile-3-0-412e96 desconectado
+2025-06-07 19:28:30,864 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-d5c451 recibió mensaje: El usuario mobile-3-0-412e96 perdió la conexión. Esperando que se reconecte… de desconocido
+2025-06-07 19:28:30,869 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:249] - Cliente web-0-d5c451 perdió conexión
+2025-06-07 19:28:30,869 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:170] - Cliente web-0-d5c451 desconectado
+2025-06-07 19:28:30,871 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: Mensaje de prueba #9eee20 a las 19:28:30.576400 de web-1-949d44
+2025-06-07 19:28:30,872 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:249] - Cliente web-1-949d44 perdió conexión
+2025-06-07 19:28:30,872 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:170] - Cliente web-1-949d44 desconectado
+2025-06-07 19:28:30,873 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-1-1-1e3da1 recibió mensaje: El usuario web-1-949d44 perdió la conexión. Esperando que se reconecte… de desconocido
+2025-06-07 19:28:30,874 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: Mensaje de prueba #dcfde1 a las 19:28:30.677362 de web-4-530d63
+2025-06-07 19:28:30,874 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:249] - Cliente web-4-530d63 perdió conexión
+2025-06-07 19:28:30,874 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:170] - Cliente web-4-530d63 desconectado
+2025-06-07 19:28:30,875 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:237] - Cliente web-0-1-6872fa recibió mensaje: El usuario web-4-530d63 perdió la conexión. Esperando que se reconecte… de desconocido
+2025-06-07 19:28:30,875 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:249] - Cliente web-2-338f36 perdió conexión
+2025-06-07 19:28:30,876 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:170] - Cliente web-2-338f36 desconectado
+2025-06-07 19:28:30,877 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:249] - Cliente web-3-527127 perdió conexión
+2025-06-07 19:28:30,877 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:170] - Cliente web-3-527127 desconectado
+2025-06-07 19:28:30,878 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:249] - Cliente web-0-1-6872fa perdió conexión
+2025-06-07 19:28:30,878 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:170] - Cliente web-0-1-6872fa desconectado
+2025-06-07 19:28:30,880 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:249] - Cliente web-1-1-1e3da1 perdió conexión
+2025-06-07 19:28:30,880 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:170] - Cliente web-1-1-1e3da1 desconectado
+2025-06-07 19:28:30,881 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:170] - Cliente mobile-2-0-90c6c4 desconectado
+2025-06-07 19:28:30,883 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:170] - Cliente mobile-4-0-66eb88 desconectado
+2025-06-07 19:28:30,883 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:459] - ===== RESULTADOS DE LA PRUEBA =====
+2025-06-07 19:28:30,883 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:461] - duracion: 30.128978967666626
+2025-06-07 19:28:30,883 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:461] - salas_creadas: 5
+2025-06-07 19:28:30,883 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:461] - clientes_unidos: 5
+2025-06-07 19:28:30,883 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:461] - mensajes_enviados: 189
+2025-06-07 19:28:30,883 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:461] - mensajes_recibidos: 161
+2025-06-07 19:28:30,883 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:461] - errores_totales: 137
+2025-06-07 19:28:30,883 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:461] - tiempo_conexion_promedio: 0.024498653411865235
+2025-06-07 19:28:30,884 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:461] - clientes_web: 10
+2025-06-07 19:28:30,884 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:461] - clientes_mobile: 5
+2025-06-07 19:28:30,884 - minka.test.test_concurrencia - INFO - [test_concurrencia.py:492] - ===== FIN DE LA PRUEBA =====
+2025-06-07 19:36:43,918 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:37] - === INICIANDO PRUEBA DE ENTREGA CONFIABLE DE MENSAJES ===
+2025-06-07 19:36:43,918 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:426] - Iniciando prueba del sistema de entrega de mensajes
+2025-06-07 19:36:43,918 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:73] - Cliente web-1c67f73b creando sala
+2025-06-07 19:36:43,946 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:65] - Cliente web-1c67f73b conectado
+2025-06-07 19:36:43,972 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:84] - Cliente web-1c67f73b creó sala 0dddaeb0-4bec-491b-bca7-eee4143ce0bb
+2025-06-07 19:36:43,972 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:97] - Cliente mobile-764d6a82 uniéndose a sala 0dddaeb0-4bec-491b-bca7-eee4143ce0bb
+2025-06-07 19:36:43,974 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:65] - Cliente mobile-764d6a82 conectado
+2025-06-07 19:36:43,977 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:107] - Cliente mobile-764d6a82 recibió respuesta de unión: {'info': 'Te has unido a la sala.'}
+2025-06-07 19:36:43,977 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:446] - === PRUEBA 1: Intercambio de mensajes con confirmación ===
+2025-06-07 19:36:43,977 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343003.977205-5c7ab1): Mensaje web->móvil #1
+2025-06-07 19:36:43,977 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:260] - Cliente web-1c67f73b recibió mensaje de tipo desconocido: {'event': 'joined', 'client': 'mobile-764d6a82'}
+2025-06-07 19:36:43,978 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Mensaje web->móvil #1
+2025-06-07 19:36:44,479 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343004.4787252-5d2531): Mensaje web->móvil #2
+2025-06-07 19:36:44,482 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Mensaje web->móvil #2
+2025-06-07 19:36:44,980 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343004.9805288-bc181f): Mensaje web->móvil #3
+2025-06-07 19:36:44,983 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Mensaje web->móvil #3
+2025-06-07 19:36:45,482 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343005.482322-7bb9d5): Mensaje web->móvil #4
+2025-06-07 19:36:45,495 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Mensaje web->móvil #4
+2025-06-07 19:36:45,984 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343005.984564-407257): Mensaje web->móvil #5
+2025-06-07 19:36:45,990 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Mensaje web->móvil #5
+2025-06-07 19:36:49,489 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343009.488883-408e17): Mensaje móvil->web #1
+2025-06-07 19:36:49,494 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente web-1c67f73b recibió mensaje sin ID de mobile-764d6a82: Mensaje móvil->web #1
+2025-06-07 19:36:49,990 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343009.990106-1c566a): Mensaje móvil->web #2
+2025-06-07 19:36:49,992 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente web-1c67f73b recibió mensaje sin ID de mobile-764d6a82: Mensaje móvil->web #2
+2025-06-07 19:36:50,491 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343010.490803-68aab7): Mensaje móvil->web #3
+2025-06-07 19:36:50,494 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente web-1c67f73b recibió mensaje sin ID de mobile-764d6a82: Mensaje móvil->web #3
+2025-06-07 19:36:50,993 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343010.9927418-13bae6): Mensaje móvil->web #4
+2025-06-07 19:36:51,000 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente web-1c67f73b recibió mensaje sin ID de mobile-764d6a82: Mensaje móvil->web #4
+2025-06-07 19:36:51,495 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343011.495183-0579bd): Mensaje móvil->web #5
+2025-06-07 19:36:51,499 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente web-1c67f73b recibió mensaje sin ID de mobile-764d6a82: Mensaje móvil->web #5
+2025-06-07 19:36:54,998 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:467] - === PRUEBA 2: Entrega de mensajes durante modo doze ===
+2025-06-07 19:36:54,998 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:368] - Cliente móvil mobile-764d6a82 entrando en modo doze
+2025-06-07 19:36:54,998 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:387] - Error al entrar en modo doze para mobile-764d6a82: cannot call recv while another coroutine is already waiting for the next message
+2025-06-07 19:36:54,998 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343014.998857-36d16a): Mensaje durante doze #1
+2025-06-07 19:36:55,006 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:267] - Conexión cerrada para cliente mobile-764d6a82
+2025-06-07 19:36:55,500 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343015.500211-f0d904): Mensaje durante doze #2
+2025-06-07 19:36:56,005 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343016.005229-6f30da): Mensaje durante doze #3
+2025-06-07 19:36:59,508 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:393] - Cliente móvil mobile-764d6a82 no está en modo doze
+2025-06-07 19:37:04,510 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:488] - === PRUEBA 3: Reconexión y recuperación de mensajes ===
+2025-06-07 19:37:04,510 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:292] - Cliente web-1c67f73b simulando conexión inestable
+2025-06-07 19:37:04,512 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:267] - Conexión cerrada para cliente web-1c67f73b
+2025-06-07 19:37:04,512 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:298] - Cliente web-1c67f73b desconectado temporalmente
+2025-06-07 19:37:06,514 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:277] - Cliente web-1c67f73b esperando 0.5s antes de reconectar
+2025-06-07 19:37:07,015 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:282] - Cliente web-1c67f73b reconectando con JWT
+2025-06-07 19:37:07,021 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:65] - Cliente web-1c67f73b conectado
+2025-06-07 19:37:07,021 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:122] - Cliente mobile-764d6a82 no está conectado, no puede enviar mensaje
+2025-06-07 19:37:07,523 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:122] - Cliente mobile-764d6a82 no está conectado, no puede enviar mensaje
+2025-06-07 19:37:08,024 - minka.test.test_entrega_mensajes - ERROR - [test_entrega_mensajes.py:122] - Cliente mobile-764d6a82 no está conectado, no puede enviar mensaje
+2025-06-07 19:37:13,526 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:503] - === PRUEBA 4: Reconexión de cliente móvil ===
+2025-06-07 19:37:13,526 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:292] - Cliente mobile-764d6a82 simulando conexión inestable
+2025-06-07 19:37:13,526 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343033.5266829-ba5cd1): Mensaje durante reconexión móvil #1
+2025-06-07 19:37:14,028 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343034.028165-28e8be): Mensaje durante reconexión móvil #2
+2025-06-07 19:37:14,530 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343034.530569-22e5a2): Mensaje durante reconexión móvil #3
+2025-06-07 19:37:20,032 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:518] - === PRUEBA 5: Rendimiento con mensajes en ráfaga ===
+2025-06-07 19:37:20,033 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:528] - Reconectando cliente móvil antes de la prueba de rendimiento
+2025-06-07 19:37:20,034 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:277] - Cliente mobile-764d6a82 esperando 2s antes de reconectar
+2025-06-07 19:37:22,035 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:286] - Cliente mobile-764d6a82 reconectando con room_id/password
+2025-06-07 19:37:22,038 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:97] - Cliente mobile-764d6a82 uniéndose a sala 0dddaeb0-4bec-491b-bca7-eee4143ce0bb
+2025-06-07 19:37:22,041 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:65] - Cliente mobile-764d6a82 conectado
+2025-06-07 19:37:22,045 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:107] - Cliente mobile-764d6a82 recibió respuesta de unión: {'info': 'Reconectado desde modo doze. Verificando mensajes pendientes...'}
+2025-06-07 19:37:22,045 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:539] - Enviando ráfaga de 20 mensajes desde cliente web
+2025-06-07 19:37:22,045 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343042.045542-a93ccc): Ráfaga-1: Mensaje de prueba de carga
+2025-06-07 19:37:22,146 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343042.1468291-9a8f07): Ráfaga-2: Mensaje de prueba de carga
+2025-06-07 19:37:22,248 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343042.2482922-5f3a54): Ráfaga-3: Mensaje de prueba de carga
+2025-06-07 19:37:22,350 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343042.349947-35793d): Ráfaga-4: Mensaje de prueba de carga
+2025-06-07 19:37:22,451 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343042.451348-12246e): Ráfaga-5: Mensaje de prueba de carga
+2025-06-07 19:37:22,554 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:254] - Cliente mobile-764d6a82 recibió info: Tienes 6 mensajes pendientes.
+2025-06-07 19:37:22,555 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Mensaje durante doze #1
+2025-06-07 19:37:22,557 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343042.5575309-39cc4e): Ráfaga-6: Mensaje de prueba de carga
+2025-06-07 19:37:22,659 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343042.658904-c5a7ff): Ráfaga-7: Mensaje de prueba de carga
+2025-06-07 19:37:22,661 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Mensaje durante doze #2
+2025-06-07 19:37:22,760 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343042.7606049-eb3191): Ráfaga-8: Mensaje de prueba de carga
+2025-06-07 19:37:22,767 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Mensaje durante doze #3
+2025-06-07 19:37:22,863 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343042.862771-873907): Ráfaga-9: Mensaje de prueba de carga
+2025-06-07 19:37:22,872 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Mensaje durante reconexión móvil #1
+2025-06-07 19:37:22,967 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343042.966712-0639b9): Ráfaga-10: Mensaje de prueba de carga
+2025-06-07 19:37:22,978 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Mensaje durante reconexión móvil #2
+2025-06-07 19:37:23,073 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343043.068935-c44297): Ráfaga-11: Mensaje de prueba de carga
+2025-06-07 19:37:23,083 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Mensaje durante reconexión móvil #3
+2025-06-07 19:37:23,176 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343043.175916-002d1f): Ráfaga-12: Mensaje de prueba de carga
+2025-06-07 19:37:23,188 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:254] - Cliente mobile-764d6a82 recibió info: Todos los mensajes pendientes han sido entregados.
+2025-06-07 19:37:23,196 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-1: Mensaje de prueba de carga
+2025-06-07 19:37:23,199 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-2: Mensaje de prueba de carga
+2025-06-07 19:37:23,201 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-3: Mensaje de prueba de carga
+2025-06-07 19:37:23,203 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-4: Mensaje de prueba de carga
+2025-06-07 19:37:23,203 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-5: Mensaje de prueba de carga
+2025-06-07 19:37:23,204 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-6: Mensaje de prueba de carga
+2025-06-07 19:37:23,205 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-7: Mensaje de prueba de carga
+2025-06-07 19:37:23,207 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-8: Mensaje de prueba de carga
+2025-06-07 19:37:23,208 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-9: Mensaje de prueba de carga
+2025-06-07 19:37:23,210 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-10: Mensaje de prueba de carga
+2025-06-07 19:37:23,212 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-11: Mensaje de prueba de carga
+2025-06-07 19:37:23,216 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-12: Mensaje de prueba de carga
+2025-06-07 19:37:23,278 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343043.277944-f8cd78): Ráfaga-13: Mensaje de prueba de carga
+2025-06-07 19:37:23,279 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-13: Mensaje de prueba de carga
+2025-06-07 19:37:23,379 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343043.37951-3d91f9): Ráfaga-14: Mensaje de prueba de carga
+2025-06-07 19:37:23,383 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-14: Mensaje de prueba de carga
+2025-06-07 19:37:23,481 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343043.481631-4a0ff1): Ráfaga-15: Mensaje de prueba de carga
+2025-06-07 19:37:23,485 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-15: Mensaje de prueba de carga
+2025-06-07 19:37:23,583 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343043.583305-0ae91a): Ráfaga-16: Mensaje de prueba de carga
+2025-06-07 19:37:23,586 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-16: Mensaje de prueba de carga
+2025-06-07 19:37:23,685 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343043.684889-79cce4): Ráfaga-17: Mensaje de prueba de carga
+2025-06-07 19:37:23,689 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-17: Mensaje de prueba de carga
+2025-06-07 19:37:23,787 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343043.7871969-3c2121): Ráfaga-18: Mensaje de prueba de carga
+2025-06-07 19:37:23,790 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-18: Mensaje de prueba de carga
+2025-06-07 19:37:23,889 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343043.8892438-af522e): Ráfaga-19: Mensaje de prueba de carga
+2025-06-07 19:37:23,893 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-19: Mensaje de prueba de carga
+2025-06-07 19:37:23,991 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente web-1c67f73b envió mensaje (ID: msg-1749343043.991504-e35ea0): Ráfaga-20: Mensaje de prueba de carga
+2025-06-07 19:37:24,001 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:251] - Cliente mobile-764d6a82 recibió mensaje sin ID de web-1c67f73b: Ráfaga-20: Mensaje de prueba de carga
+2025-06-07 19:37:24,093 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:547] - Esperando a que se procesen los mensajes...
+2025-06-07 19:37:29,094 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:559] - Resultados de la prueba de ráfaga:
+2025-06-07 19:37:29,096 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:560] -   Total mensajes enviados: 20
+2025-06-07 19:37:29,096 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:561] -   Mensajes con confirmación de encolamiento: 0/20 (0.0%)
+2025-06-07 19:37:29,097 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:562] -   Mensajes con confirmación de entrega: 0/20 (0.0%)
+2025-06-07 19:37:29,097 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:567] - Enviando ráfaga de 20 mensajes desde cliente móvil
+2025-06-07 19:37:29,098 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343049.097985-b7e393): Ráfaga-Móvil-1: Mensaje de prueba de carga
+2025-06-07 19:37:29,199 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343049.1997209-cc22d6): Ráfaga-Móvil-2: Mensaje de prueba de carga
+2025-06-07 19:37:29,300 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343049.300725-33897c): Ráfaga-Móvil-3: Mensaje de prueba de carga
+2025-06-07 19:37:29,404 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343049.402456-da4653): Ráfaga-Móvil-4: Mensaje de prueba de carga
+2025-06-07 19:37:29,506 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343049.5065138-0c98f2): Ráfaga-Móvil-5: Mensaje de prueba de carga
+2025-06-07 19:37:29,608 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343049.608609-6d023e): Ráfaga-Móvil-6: Mensaje de prueba de carga
+2025-06-07 19:37:29,710 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343049.710166-6ba2f5): Ráfaga-Móvil-7: Mensaje de prueba de carga
+2025-06-07 19:37:29,812 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343049.8121011-b8fe51): Ráfaga-Móvil-8: Mensaje de prueba de carga
+2025-06-07 19:37:29,913 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343049.9137049-6d495f): Ráfaga-Móvil-9: Mensaje de prueba de carga
+2025-06-07 19:37:30,016 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343050.016208-9b11ec): Ráfaga-Móvil-10: Mensaje de prueba de carga
+2025-06-07 19:37:30,122 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343050.1192808-2ccc55): Ráfaga-Móvil-11: Mensaje de prueba de carga
+2025-06-07 19:37:30,226 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343050.2258182-26d0f7): Ráfaga-Móvil-12: Mensaje de prueba de carga
+2025-06-07 19:37:30,328 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343050.328131-5215a8): Ráfaga-Móvil-13: Mensaje de prueba de carga
+2025-06-07 19:37:30,430 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343050.429952-3c5bcb): Ráfaga-Móvil-14: Mensaje de prueba de carga
+2025-06-07 19:37:30,532 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343050.532193-d27b7a): Ráfaga-Móvil-15: Mensaje de prueba de carga
+2025-06-07 19:37:30,634 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343050.634346-61a995): Ráfaga-Móvil-16: Mensaje de prueba de carga
+2025-06-07 19:37:30,736 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343050.735907-274559): Ráfaga-Móvil-17: Mensaje de prueba de carga
+2025-06-07 19:37:30,837 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343050.837756-b07070): Ráfaga-Móvil-18: Mensaje de prueba de carga
+2025-06-07 19:37:30,939 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343050.9394581-b7144d): Ráfaga-Móvil-19: Mensaje de prueba de carga
+2025-06-07 19:37:31,041 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:147] - Cliente mobile-764d6a82 envió mensaje (ID: msg-1749343051.041582-7a490f): Ráfaga-Móvil-20: Mensaje de prueba de carga
+2025-06-07 19:37:31,143 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:575] - Esperando a que se procesen los mensajes...
+2025-06-07 19:37:36,145 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:587] - Resultados de la prueba de ráfaga desde móvil:
+2025-06-07 19:37:36,145 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:588] -   Total mensajes enviados: 20
+2025-06-07 19:37:36,145 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:589] -   Mensajes con confirmación de encolamiento: 0/20 (0.0%)
+2025-06-07 19:37:36,145 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:590] -   Mensajes con confirmación de entrega: 0/20 (0.0%)
+2025-06-07 19:37:36,147 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:314] - Cliente web-1c67f73b desconectado
+2025-06-07 19:37:36,150 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:260] - Cliente mobile-764d6a82 recibió mensaje de tipo desconocido: {'event': 'peer_disconnected_unexpectedly', 'client_id': 'web-1c67f73b', 'message': 'El usuario web-1c67f73b perdió la conexión. Esperando que se reconecte…'}
+2025-06-07 19:37:36,151 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:314] - Cliente mobile-764d6a82 desconectado
+2025-06-07 19:37:36,152 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:597] - === RESULTADOS DE LA PRUEBA ===
+2025-06-07 19:37:36,152 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:602] - Estadísticas Cliente Web:
+2025-06-07 19:37:36,153 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:603] -   Mensajes enviados: 31
+2025-06-07 19:37:36,153 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:604] -   Mensajes recibidos: 0
+2025-06-07 19:37:36,153 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:605] -   Confirmación de encolamiento recibida: 0/31 (0.0% si aplicable)
+2025-06-07 19:37:36,153 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:607] -   Confirmación de entrega recibida: 0/31 (0.0% si aplicable)
+2025-06-07 19:37:36,153 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:609] -   Mensajes sin ID: 5
+2025-06-07 19:37:36,153 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:611] - Estadísticas Cliente Móvil:
+2025-06-07 19:37:36,153 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:612] -   Mensajes enviados: 25
+2025-06-07 19:37:36,153 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:613] -   Mensajes recibidos: 0
+2025-06-07 19:37:36,153 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:614] -   Confirmación de encolamiento recibida: 0/25 (0.0% si aplicable)
+2025-06-07 19:37:36,154 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:616] -   Confirmación de entrega recibida: 0/25 (0.0% si aplicable)
+2025-06-07 19:37:36,154 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:618] -   Mensajes sin ID: 31
+2025-06-07 19:37:36,154 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:642] - 
+=== EVALUACIÓN DEL SISTEMA DE ENTREGA DE MENSAJES ===
+2025-06-07 19:37:36,154 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:647] - ✓ Sistema de encolamiento: Todos los mensajes confirmados correctamente
+2025-06-07 19:37:36,154 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:652] - ✓ Sistema de entrega: Todos los mensajes entregados correctamente
+2025-06-07 19:37:36,154 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:655] - ✖ Asignación de IDs: 36 mensajes recibidos sin ID
+2025-06-07 19:37:36,154 - minka.test.test_entrega_mensajes - WARNING - [test_entrega_mensajes.py:671] - 
+⚠️ DIAGNÓSTICO GENERAL: El sistema de entrega confiable de mensajes requiere mejoras en: asignación de IDs a mensajes
+2025-06-07 19:37:36,155 - minka.test.test_entrega_mensajes - INFO - [test_entrega_mensajes.py:679] - Prueba de entrega de mensajes completada
+2025-06-07 19:40:53,502 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:37] - === INICIANDO PRUEBA DE CONCURRENCIA CON ENTREGA CONFIABLE DE MENSAJES ===
+2025-06-07 19:40:53,502 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:279] - Iniciando prueba de concurrencia con 5 salas
+2025-06-07 19:40:53,503 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:285] - Configurando sala de prueba 1/5
+2025-06-07 19:40:53,526 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:63] - Cliente web-test-0-7f150b conectado
+2025-06-07 19:40:54,050 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:63] - Cliente mobile-test-0-7341f3 conectado
+2025-06-07 19:40:55,057 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:285] - Configurando sala de prueba 2/5
+2025-06-07 19:40:55,062 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:63] - Cliente web-test-1-bd1e8f conectado
+2025-06-07 19:40:55,592 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:63] - Cliente mobile-test-1-73b916 conectado
+2025-06-07 19:40:56,607 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:285] - Configurando sala de prueba 3/5
+2025-06-07 19:40:56,610 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:63] - Cliente web-test-2-163e62 conectado
+2025-06-07 19:40:57,133 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:63] - Cliente mobile-test-2-b9f9bc conectado
+2025-06-07 19:40:58,139 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:285] - Configurando sala de prueba 4/5
+2025-06-07 19:40:58,148 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:63] - Cliente web-test-3-ee5b7e conectado
+2025-06-07 19:40:58,773 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:63] - Cliente mobile-test-3-369dd9 conectado
+2025-06-07 19:40:59,778 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:285] - Configurando sala de prueba 5/5
+2025-06-07 19:40:59,780 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:63] - Cliente web-test-4-7ac50c conectado
+2025-06-07 19:41:00,306 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:63] - Cliente mobile-test-4-e868db conectado
+2025-06-07 19:41:01,310 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:295] - Se configuraron exitosamente 5/5 salas
+2025-06-07 19:41:01,310 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:298] - Ejecutando pruebas en 5 salas simultáneamente
+2025-06-07 19:41:05,825 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:306] - === RESULTADOS DE LA PRUEBA DE CONCURRENCIA ===
+2025-06-07 19:41:05,825 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:312] - Sala 1 (ID: adc4ac44-1373-468d-83d7-350af252c70c):
+2025-06-07 19:41:05,826 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:313] -   Cliente Web: 5 enviados, 5 recibidos
+2025-06-07 19:41:05,826 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:314] -   Cliente Móvil: 5 enviados, 5 recibidos
+2025-06-07 19:41:05,826 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:312] - Sala 2 (ID: 5d70866a-f47c-4845-8c80-9573ddda83c5):
+2025-06-07 19:41:05,826 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:313] -   Cliente Web: 5 enviados, 5 recibidos
+2025-06-07 19:41:05,826 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:314] -   Cliente Móvil: 5 enviados, 5 recibidos
+2025-06-07 19:41:05,827 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:312] - Sala 3 (ID: 819f85d6-28b6-4d06-999e-081c8e3d600a):
+2025-06-07 19:41:05,827 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:313] -   Cliente Web: 5 enviados, 5 recibidos
+2025-06-07 19:41:05,827 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:314] -   Cliente Móvil: 5 enviados, 5 recibidos
+2025-06-07 19:41:05,827 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:312] - Sala 4 (ID: e8ede1f6-f6f5-4134-950e-96ad048bfe40):
+2025-06-07 19:41:05,827 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:313] -   Cliente Web: 5 enviados, 5 recibidos
+2025-06-07 19:41:05,827 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:314] -   Cliente Móvil: 5 enviados, 5 recibidos
+2025-06-07 19:41:05,827 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:312] - Sala 5 (ID: 27c355fe-0c3b-490b-a5fd-dd54bbfdc04f):
+2025-06-07 19:41:05,827 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:313] -   Cliente Web: 5 enviados, 5 recibidos
+2025-06-07 19:41:05,827 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:314] -   Cliente Móvil: 5 enviados, 5 recibidos
+2025-06-07 19:41:05,827 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:318] - 
+Estadísticas Globales:
+2025-06-07 19:41:05,827 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:319] -   Total mensajes enviados: 50
+2025-06-07 19:41:05,828 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:320] -   Total mensajes recibidos: 50
+2025-06-07 19:41:05,828 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:321] -   Tasa de éxito: 100.0%
+2025-06-07 19:41:05,828 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:325] - ✓ PRUEBA EXITOSA: El servidor maneja concurrencia adecuadamente
+2025-06-07 19:41:05,852 - minka.test.test_concurrencia - INFO - [test_concurrencia_entrega.py:341] - Prueba de concurrencia completada

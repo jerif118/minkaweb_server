@@ -1,0 +1,55 @@
+======================================================================
+INFORME DE PRUEBA DEL SERVIDOR MINKA WEBSOCKET
+======================================================================
+
+--- RESUMEN ---
+Inicio de prueba: 2025-06-07 18:31:17,267
+Fin de prueba: 2025-06-07 18:31:41,935
+Duración: 0:00:24.668000
+
+Estado: PRUEBA COMPLETADA
+
+--- ETAPAS COMPLETADAS ---
+Etapa 1: CREACIÓN DE SALA
+Etapa 2: UNIENDO CLIENTES WEB
+Etapa 3: UNIENDO CLIENTES MÓVILES
+Etapa 4: ENVÍO DE MENSAJES DESDE CLIENTES WEB
+Etapa 5: ENVÍO DE MENSAJES DESDE CLIENTES MÓVILES
+Etapa 6: DESCONEXIÓN Y RECONEXIÓN CON JWT
+Etapa 7: PROBANDO MODO DOZE
+Etapa 8: CIERRE ORDENADO DE CLIENTES
+
+--- CLIENTES Y CONEXIONES ---
+Clientes Web: 7
+Clientes Móviles: 13
+Total de clientes: 20
+Salas creadas: 1
+Conexiones totales: 9
+Desconexiones totales: 6
+Reconexiones con JWT: 2
+
+--- MENSAJES ---
+Mensajes enviados: 6
+Mensajes recibidos: 3
+
+--- MODO DOZE ---
+Entradas en modo doze: 0
+Salidas de modo doze: 0
+
+--- ERRORES (9) ---
+Últimos errores registrados:
+1. 2025-06-07 18:31:24,386 - minka.test.test_completo - ERROR - [test_completo.py:245] - Cliente móvil mobile-38515e6e intentó enviar mensaje pero no está en estado adecuado
+2. 2025-06-07 18:31:32,914 - minka.test.test_completo - ERROR - [test_completo.py:255] - Cliente móvil mobile-2c19b8bd intentó entrar en modo doze pero no está conectado
+3. 2025-06-07 18:31:32,914 - minka.test.test_completo - ERROR - [test_completo.py:420] - No se pudo entrar en modo doze con el cliente mobile-2c19b8bd
+4. 2025-06-07 18:31:36,424 - minka.test.test_completo - ERROR - [test_completo.py:274] - Cliente móvil mobile-2c19b8bd intentó salir de modo doze pero no estaba en ese modo
+5. 2025-06-07 18:31:36,424 - minka.test.test_completo - ERROR - [test_completo.py:436] - No se pudo salir del modo doze con el cliente mobile-2c19b8bd
+... y 10 más. Consulte el archivo de log para más detalles.
+
+--- CONCLUSIÓN ---
+⚠️ PRUEBA COMPLETADA CON ADVERTENCIAS: Se encontraron errores durante la ejecución.
+
+--- RECOMENDACIONES ---
+- Revisar los errores detectados en el archivo de log.
+- Revisar posible pérdida de mensajes durante la transmisión.
+
+======================================================================
