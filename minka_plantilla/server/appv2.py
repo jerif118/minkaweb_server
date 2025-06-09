@@ -267,10 +267,16 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
     
     async def open(self):
         self.intentional_disconnect = False
+        # Inicializar atributos para garantizar que existen en on_message y on_close
+        self.client_id = None
+        self.room_id = None
         # Obtener parámetros de la URL
         client_id_arg = self.get_argument('client_id', None)
-        action_arg = self.get_argument('action', None)
-        room_id_arg = self.get_argument('room_id', None)
+        action_arg    = self.get_argument('action', None)
+        room_id_arg   = self.get_argument('room_id', None)
+        # Asignar los valores iniciales de client_id y room_id
+        self.client_id = client_id_arg
+        self.room_id   = room_id_arg
         room_passwd_arg = self.get_argument('password', None)
         jwt_token_arg = self.get_argument('jwt_token', None) # Nuevo argumento para JWT
 
