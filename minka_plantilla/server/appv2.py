@@ -1225,7 +1225,10 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                         'error': 'Error interno al encolar mensaje.'
                     })
         else:
-            self.write_message({'info': 'Aún no emparejado.'})
+            try:
+                self.write_message({'info': 'Aún no emparejado.'})
+            except tornado.websocket.WebSocketClosedError:
+                logging.warning(f"[on_message] No se puede enviar 'Aún no emparejado.': WebSocket cerrado para client_id={getattr(self, 'client_id', 'N/A')}")
 
     def on_close(self):
         client_id_log = getattr(self, 'client_id', 'N/A')
