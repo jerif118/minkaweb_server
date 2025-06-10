@@ -104,11 +104,23 @@ async def delete_session(room_id):
 
 async def get_all_session_keys():
     rc = await init_redis_client()
-    if not rc: return []
+    if not rc:
+        return []
+
     try:
-        keys = await rc.keys(f"{SESSION_KEY_PREFIX}*")
-        # Extraer la parte del ID de la clave completa
-        return [key.replace(SESSION_KEY_PREFIX, "", 1) for key in keys]
+        cursor = 0
+        keys = []
+        pattern = f"{SESSION_KEY_PREFIX}*"
+
+        while True:
+            cursor, batch = await rc.scan(cursor=cursor, match=pattern, count=300)
+            keys.extend(batch)
+            if cursor == 0:  # 0 indica fin de la iteración SCAN
+                break
+
+        # Devolver solo el ID (sin el prefijo)
+        return [k.replace(SESSION_KEY_PREFIX, "", 1) for k in keys]
+
     except redis.RedisError as e:
         logging.error(f"Error de Redis en get_all_session_keys: {e}")
         return []
@@ -155,10 +167,22 @@ async def delete_client(client_id, keep_message_queue=False):
 
 async def get_all_client_keys():
     rc = await init_redis_client()
-    if not rc: return []
+    if not rc:
+        return []
+
     try:
-        keys = await rc.keys(f"{CLIENT_KEY_PREFIX}*")
-        return [key.replace(CLIENT_KEY_PREFIX, "", 1) for key in keys]
+        cursor = 0
+        keys = []
+        pattern = f"{CLIENT_KEY_PREFIX}*"
+
+        while True:
+            cursor, batch = await rc.scan(cursor=cursor, match=pattern, count=300)
+            keys.extend(batch)
+            if cursor == 0:
+                break
+
+        return [k.replace(CLIENT_KEY_PREFIX, "", 1) for k in keys]
+
     except redis.RedisError as e:
         logging.error(f"Error de Redis en get_all_client_keys: {e}")
         return []

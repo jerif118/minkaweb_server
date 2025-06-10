@@ -12,6 +12,7 @@ import os
 import re
 import jwt
 import logging.handlers
+import collections
 
 from tornado.ioloop import PeriodicCallback
 
@@ -330,6 +331,12 @@ class MonitorHandler(tornado.web.RequestHandler):
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
     
+    HEARTBEAT_INTERVAL = 45  # Intervalo de heartbeat en segundos
+    HEARTBEAT_TIMEOUT = 15  # Timeout para heartbeat en segundos
+    HANDSHAKE_WINDOW = 5  # Ventana de tiempo para handshake en segundos
+    MAX_HANDSHAKES_PER_WINDOW = 200  # Máximo de handshakes permitidos en la ventana
+    handshake_times = collections.deque()
+
     def check_origin(self, origin):
         """Permitir conexiones cross-origin para desarrollo y testing.
         En producción, esto debería ser más restrictivo."""
@@ -342,7 +349,16 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         # - action: create, join (opcional si hay jwt_token)
         # - jwt_token: para reconexiones
         # - room_id, room_password: para join
-        
+        now = time.time()
+        self.__class__.handshake_times.append(now)
+        while (self.__class__.handshake_times
+               and self.__class__.handshake_times[0] < now - self.HANDSHAKE_WINDOW):
+                self.__class__.handshake_times.popleft()
+        if len(self.__class__.handshake_times) > self.MAX_HANDSHAKES_PER_WINDOW:
+            logging.warning("[RL] desmasiado handshakes, rechazando...")
+            self.close(code=1013, reason ="Server overloaded, retry later")
+            return
+
         self.client_id = None
         self.room_id = None
         self.intentional_disconnect = False
@@ -425,6 +441,11 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                             logging.warning(f"[WS-OPEN] WebSocket cerrado para {self.client_id} al enviar mensajes pendientes. Re-encolando...")
                             await add_message_to_queue(self.client_id, msg_payload)
                             break
+                # --- start heartbeat ---
+                self._last_pong = time.time()
+                self._hb = PeriodicCallback(self._send_ping,
+                                            self.HEARTBEAT_INTERVAL * 1000)
+                self._hb.start()
                 return # Conexión establecida
             else:
                 logging.warning(f"[WS-OPEN] Token JWT inválido o expirado presentado. Rechazando.")
@@ -667,6 +688,18 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             self.write_message({'error': 'Acción no válida', 'code': 'INVALID_ACTION'})
             self.close()
             return
+        self._last_pong = time.time()
+        self._hb = PeriodicCallback(self._send_ping, self.HEARTBEAT_INTERVAL *1000)
+        self._hb.start()
+    async def _send_ping(self):
+        try:
+            self.ping(b"hb")
+            if time.time() - self._last_pong > (
+                self.HEARTBEAT_INTERVAL + self.HEARTBEAT_TIMEOUT):
+                logging.warning(f"[HB]{self.client_id} sin pong; cerrando WebSocket.")
+                self.close(code=4000, reason="Heartbeat timeout")
+        except tornado.websocket.WebSocketClosedError:
+            pass
 
     async def on_message(self, message):
         # Todas las operaciones de Redis deben ser awaited
@@ -1007,10 +1040,17 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                           'client_id': self.client_id, 'room_id': self.room_id}
             })
 
+    def on_pong(self, data):
+        self._last_pong = time.time()
+
     async def on_close(self):
         # Todas las operaciones de Redis deben ser awaited
         client_id_log = getattr(self, 'client_id', 'N/A')
         room_id_log = getattr(self, 'room_id', 'N/A')
+
+        if hasattr(self, "_hb"): 
+            self._hb.stop()
+            logging.info(f"[CLOSE] Heartbeat detenido para {client_id_log} en {room_id_log}.")
 
         if getattr(self, 'intentional_disconnect', False):
             logging.info(f"[CLOSE] Cierre voluntario de {client_id_log} en {room_id_log}. Limpieza por on_message/'leave'.")
