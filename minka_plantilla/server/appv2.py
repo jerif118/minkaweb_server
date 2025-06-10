@@ -1158,7 +1158,43 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
         if len(msg_serializado) > 500:
             self.write_message({'error': 'Mensaje demasiado largo'})
-            return            # ¡Ya podemos hacer broadcast!
+            return            
+        
+        # Verificar que los atributos necesarios estén configurados
+        if not hasattr(self, 'client_id') or not hasattr(self, 'room_id'):
+            logging.error(f"[BROADCAST] Error: client_id o room_id no definidos. client_id={getattr(self, 'client_id', 'NO DEFINIDO')}, room_id={getattr(self, 'room_id', 'NO DEFINIDO')}")
+            
+            # Intento de recuperación: buscar si el cliente existe en Redis
+            client_id_from_data = data.get('client_id')
+            if client_id_from_data:
+                client_data = get_client(client_id_from_data)
+                if client_data and 'room_id' in client_data:
+                    # Recuperamos los datos y reconfiguramos el websocket
+                    logging.warning(f"[BROADCAST-RECOVERY] Intentando recuperar sesión para {client_id_from_data}")
+                    self.client_id = client_id_from_data
+                    self.room_id = client_data['room_id']
+                    active_websockets[client_id_from_data] = self
+                    
+                    # Actualizar estado
+                    client_data['status'] = 'connected'
+                    set_client(client_id_from_data, client_data)
+                    
+                    # Continuar después de la recuperación
+                    logging.info(f"[BROADCAST-RECOVERY] Sesión recuperada para {client_id_from_data}, room_id={self.room_id}")
+                else:
+                    self.write_message({
+                        'error': 'No estás conectado a una sala. Por favor, vuelve a conectarte.',
+                        'code': 'NOT_CONNECTED'
+                    })
+                    return
+            else:
+                self.write_message({
+                    'error': 'No estás conectado a una sala. Por favor, vuelve a conectarte.',
+                    'code': 'NOT_CONNECTED'
+                })
+                return
+            
+        # ¡Ya podemos hacer broadcast!
         current_session_broadcast = get_session(self.room_id)
         if current_session_broadcast and len(current_session_broadcast["clients"]) == 2:
             other = [cid for cid in current_session_broadcast["clients"] if cid != self.client_id][0]
