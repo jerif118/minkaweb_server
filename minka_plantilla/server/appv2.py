@@ -1161,8 +1161,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             return            
         
         # Verificar que los atributos necesarios estén configurados
-        if not hasattr(self, 'client_id') or not hasattr(self, 'room_id'):
-            logging.error(f"[BROADCAST] Error: client_id o room_id no definidos. client_id={getattr(self, 'client_id', 'NO DEFINIDO')}, room_id={getattr(self, 'room_id', 'NO DEFINIDO')}")
+        if not getattr(self, 'client_id', None) or not getattr(self, 'room_id', None):
+            logging.error(f"[BROADCAST] Error: client_id o room_id no definidos. client_id={getattr(self, 'client_id', None)}, room_id={getattr(self, 'room_id', None)}")
             
             # Intento de recuperación: buscar si el cliente existe en Redis
             client_id_from_data = data.get('client_id')
