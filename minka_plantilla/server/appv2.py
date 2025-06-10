@@ -267,16 +267,10 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
     
     async def open(self):
         self.intentional_disconnect = False
-        # Inicializar atributos para garantizar que existen en on_message y on_close
-        self.client_id = None
-        self.room_id = None
         # Obtener parámetros de la URL
         client_id_arg = self.get_argument('client_id', None)
-        action_arg    = self.get_argument('action', None)
-        room_id_arg   = self.get_argument('room_id', None)
-        # Asignar los valores iniciales de client_id y room_id
-        self.client_id = client_id_arg
-        self.room_id   = room_id_arg
+        action_arg = self.get_argument('action', None)
+        room_id_arg = self.get_argument('room_id', None)
         room_passwd_arg = self.get_argument('password', None)
         jwt_token_arg = self.get_argument('jwt_token', None) # Nuevo argumento para JWT
 
@@ -816,10 +810,22 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                     # Caso normal: agregar nuevo cliente si hay espacio
                     if len(current_session_join["clients"]) < 2:
                         current_session_join["clients"].append(client_id)
-                        set_client(client_id, {
+                        # Asegurémonos de guardar los datos del cliente correctamente
+                        client_data_new = {
                             'status': 'connected',
-                            'room_id': room_id
-                        })
+                            'room_id': room_id,
+                            'is_web': client_id.startswith("web-")  # Identificar explícitamente si es web o móvil
+                        }
+                        logging.info(f"[JOIN] Guardando datos de cliente {client_id}: {client_data_new}")
+                        set_client(client_id, client_data_new)
+                        
+                        # Verificar que los datos se guardaron correctamente
+                        verification_data = get_client(client_id)
+                        if verification_data:
+                            logging.info(f"[JOIN] Verificación: datos de cliente {client_id} guardados correctamente: {verification_data}")
+                        else:
+                            logging.error(f"[JOIN] ERROR: No se pudieron guardar los datos del cliente {client_id}")
+                            
                         active_websockets[client_id] = self
                         self.client_id = client_id
                         self.room_id = room_id
@@ -841,8 +847,23 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                                 logging.error(f"[OPEN-JOIN] Error al decodificar JWT para obtener JTI para {client_id}: {e}")
                             self.write_message({'info': 'Te has unido a la sala.', 'jwt_token': jwt_token})
                         else:
-                            self.write_message({'info': 'Te has unido a la sala.'})
+                            # Modificación: Enviar mensaje de confirmación más completo para móviles
+                            try:
+                                confirmation_message = {
+                                    'event': 'room_joined',
+                                    'info': 'Te has unido a la sala.',
+                                    'room_id': room_id,
+                                    'client_id': client_id,
+                                    'timestamp': time.time()
+                                }
+                                logging.info(f"[JOIN-MOBILE] Enviando confirmación a cliente móvil {client_id}: {confirmation_message}")
+                                self.write_message(confirmation_message)
+                                # Pequeña pausa para asegurar que el mensaje se envía correctamente
+                                await asyncio.sleep(0.1)
+                            except Exception as e:
+                                logging.error(f"[JOIN-MOBILE] Error al enviar mensaje de confirmación al cliente {client_id}: {e}")
                         
+                        # Notificar al otro cliente sobre la unión
                         other_client_id = [cid for cid in current_session_join["clients"] if cid != client_id][0]
                         other_client_data = get_client(other_client_id)
                         # Actualizar status del cliente original a 'connected' solo si no está en doze
@@ -850,7 +871,11 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                             other_client_data['status'] = 'connected'
                             set_client(other_client_id, other_client_data)
                             if other_client_id in active_websockets:
-                                active_websockets[other_client_id].write_message({"event": "joined","client": client_id})
+                                try:
+                                    logging.info(f"[JOIN] Notificando a {other_client_id} sobre la unión de {client_id}")
+                                    active_websockets[other_client_id].write_message({"event": "joined","client": client_id})
+                                except Exception as e:
+                                    logging.error(f"[JOIN] Error al notificar a {other_client_id}: {e}")
                     else:
                         self.write_message({'error': 'Sala llena. Solo se permiten dos usuarios.'})
                         self.close()
@@ -1225,10 +1250,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                         'error': 'Error interno al encolar mensaje.'
                     })
         else:
-            try:
-                self.write_message({'info': 'Aún no emparejado.'})
-            except tornado.websocket.WebSocketClosedError:
-                logging.warning(f"[on_message] No se puede enviar 'Aún no emparejado.': WebSocket cerrado para client_id={getattr(self, 'client_id', 'N/A')}")
+            self.write_message({'info': 'Aún no emparejado.'})
 
     def on_close(self):
         client_id_log = getattr(self, 'client_id', 'N/A')
