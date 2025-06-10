@@ -22,8 +22,8 @@ El sistema Minka WebSocket proporciona una plataforma de comunicación en tiempo
 
 El sistema está compuesto por los siguientes componentes:
 
-- **Servidor WebSocket**: Implementado con Tornado, maneja las conexiones y enrutamiento de mensajes.
-- **Redis**: Almacena el estado de sesiones, clientes y colas de mensajes.
+- **Servidor WebSocket** (`appv2.py`): Implementado con Tornado, maneja las conexiones y enrutamiento de mensajes usando Redis para persistencia.
+- **Redis**: Almacena el estado de sesiones, clientes y colas de mensajes de forma asíncrona.
 - **Clientes**: Aplicaciones web o móviles que se conectan al servidor.
 
 ### Diagrama de Flujo
@@ -34,9 +34,64 @@ El sistema está compuesto por los siguientes componentes:
 └──────────────┘         │              │         ┌─────────┐
                          │   Servidor   │◄───────►│  Redis  │
 ┌──────────────┐         │  WebSocket   │         └─────────┘
-│ Cliente Móvil│◄───────►│              │
+│ Cliente Móvil│◄───────►│   (appv2.py) │
 └──────────────┘         └──────────────┘
 ```
+
+### Endpoints del Servidor
+
+El servidor principal (`appv2.py`) expone los siguientes endpoints:
+
+#### Endpoints Principales
+
+- **`/`** - Página principal que confirma que el servidor está operativo
+- **`/ws`** - Endpoint WebSocket principal para todas las conexiones de clientes
+- **`/health`** - Endpoint de salud que proporciona información detallada del servidor
+- **`/api/status`** - Alias del endpoint de salud
+- **`/monitor`** - Panel de monitoreo que muestra el estado de sesiones y clientes activos
+
+#### Endpoint de Salud (`/health`)
+
+El endpoint de salud proporciona información completa sobre el estado del servidor:
+
+```json
+{
+  "status": "ok",
+  "timestamp": 1691234567.123,
+  "server_info": {
+    "version": "MinkaV2 (Redis-based)",
+    "port": 5001,
+    "host": "localhost"
+  },
+  "redis": {
+    "connected": true,
+    "version": "7.0.0",
+    "used_memory": "1.2M",
+    "uptime": 3600
+  },
+  "server_stats": {
+    "active_sessions": 5,
+    "active_clients": 12,
+    "dozing_clients": 2,
+    "active_websockets": 8,
+    "websocket_connections": ["web-abc123", "mobile-def456", ...]
+  }
+}
+```
+
+### Archivos Obsoletos
+
+**IMPORTANTE**: El archivo `api.py` contiene endpoints REST heredados que **YA NO ESTÁN EN USO**. Este archivo usa variables globales que no están sincronizadas con Redis y causará errores 403. No debe ser usado en producción.
+
+### Configuración
+
+El servidor se configura a través de variables de entorno definidas en `config.py`:
+
+- `MINKA_PORT`: Puerto del servidor (default: 5001)
+- `MINKA_HOST`: Host del servidor (default: localhost)
+- `REDIS_HOST`: Host de Redis (default: localhost)
+- `REDIS_PORT`: Puerto de Redis (default: 6379)
+- `MINKA_LOG_LEVEL`: Nivel de logging (default: INFO)
 
 ## Conexión de Clientes
 
@@ -1370,3 +1425,117 @@ enum class MessageStatus {
     SENDING, QUEUED, DELIVERED, RECEIVED, FAILED
 }
 ```
+
+## Solución de Problemas
+
+### Errores 403 (Forbidden)
+
+Si encuentras errores 403, verifica lo siguiente:
+
+1. **Archivo api.py obsoleto**: Los errores 403 frecuentemente se deben al uso del archivo `api.py` que está **DEPRECATED**. Este archivo usa variables globales vacías en lugar de Redis.
+
+2. **Endpoints correctos**: Asegúrate de usar los endpoints del servidor principal:
+   - `/ws` para conexiones WebSocket
+   - `/health` para verificar el estado del servidor
+   - `/monitor` para monitoreo
+
+3. **Estado de Redis**: Verifica que Redis esté corriendo y accesible:
+   ```bash
+   redis-cli ping
+   ```
+
+### Verificación del Estado del Servidor
+
+Para verificar que el servidor está funcionando correctamente:
+
+```bash
+# Verificar endpoint de salud
+curl http://localhost:5001/health
+
+# Verificar que el servidor responde
+curl http://localhost:5001/
+```
+
+### Logs del Sistema
+
+Los logs se encuentran en la carpeta `logs/`:
+
+- `minka_server.log` - Log general del servidor
+- `minka_server_error.log` - Solo errores
+- `minka_YYYY-MM-DD.log` - Logs diarios
+- `minka_error_YYYY-MM-DD.log` - Errores diarios
+
+### Problemas Comunes
+
+#### Cliente no puede conectarse
+
+1. Verificar que Redis esté ejecutándose
+2. Verificar que el servidor esté escuchando en el puerto correcto
+3. Revisar los logs del servidor para errores de conexión
+
+#### Mensajes no se entregan
+
+1. Verificar conexión WebSocket del destinatario
+2. Revisar si el cliente está en modo doze correctamente
+3. Verificar las colas de mensajes en Redis:
+   ```bash
+   redis-cli llen mq:client_id
+   ```
+
+#### Reconexiones fallan
+
+1. Para clientes web: verificar que el JWT no haya expirado
+2. Para clientes móviles: verificar que se almacenaron room_id y password
+3. Revisar logs para errores de autenticación
+
+## Estado Actual del Sistema (Junio 2025)
+
+### Funcionalidades Implementadas ✅
+
+- **WebSocket Server** con Tornado y Redis
+- **Autenticación JWT** para clientes web
+- **Modo Doze** para clientes móviles
+- **Sistema de encolamiento** de mensajes confiable
+- **Reconexiones automáticas** con backoff exponencial
+- **Monitoreo** en tiempo real del servidor
+- **Health checks** detallados
+- **Logs rotativos** con múltiples niveles
+- **Configuración** mediante variables de entorno
+
+### Pruebas Pasadas ✅
+
+- **Test comprehensive server**: 15/15 pruebas pasando
+- **Conexiones WebSocket** estables
+- **Entrega de mensajes** confiable
+- **Modo doze** funcionando correctamente
+- **Reconexiones JWT** operativas
+
+### Archivos Obsoletos ⚠️
+
+- `api.py` - **NO USAR** - Contiene endpoints REST obsoletos que causan errores 403
+
+### Configuración de Producción
+
+Para producción, configurar las siguientes variables de entorno:
+
+```bash
+export MINKA_ENV=production
+export MINKA_JWT_SECRET="tu_clave_secreta_muy_segura"
+export REDIS_HOST="tu_servidor_redis"
+export MINKA_LOG_LEVEL=WARNING
+export MINKA_HOST=0.0.0.0
+export MINKA_PORT=5001
+```
+
+### Próximos Pasos Recomendados
+
+1. **Documentar API WebSocket** con esquemas JSON detallados
+2. **Implementar rate limiting** para prevenir spam
+3. **Agregar métricas** de rendimiento (opcional)
+4. **Crear Docker containers** para despliegue fácil
+5. **Implementar HTTPS/WSS** para producción
+
+---
+
+*Documentación actualizada: Junio 2025*
+*Versión del servidor: MinkaV2 (Redis-based)*

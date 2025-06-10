@@ -1,161 +1,249 @@
-import redis, uuid, json, time, jwt
+import asyncio # Importar asyncio
+import redis.asyncio as aioredis # Usar redis-py asyncio
+import redis # Para excepciones
+import uuid, json, time, jwt
 from datetime import datetime, timedelta, timezone
 import logging
 
-# Conexión a Redis con variables de configuración
-redis_client = redis.Redis('localhost', 6379, db=0, decode_responses=True)
-# Considerar uso de redis.ConnectionPool para entornos de producción
+# Importar configuraciones de config.py
+from config import (
+    REDIS_HOST, REDIS_PORT, REDIS_DB, REDIS_PASSWORD,
+    SESSION_KEY_PREFIX as CFG_SESSION_KEY_PREFIX,
+    CLIENT_KEY_PREFIX as CFG_CLIENT_KEY_PREFIX,
+    JWT_BLACKLIST_KEY_PREFIX as CFG_JWT_JTI_BLACKLIST_PREFIX,
+    MESSAGE_QUEUE_KEY_PREFIX as CFG_MESSAGE_QUEUE_KEY_PREFIX,
+    SESSION_TIMEOUT as CFG_SESSION_TIMEOUT,
+    RECONNECT_GRACE_PERIOD as CFG_RECONNECT_GRACE_PERIOD,
+    DOZE_TIMEOUT as CFG_DOZE_TIMEOUT,
+    WEB_RECONNECT_TIMEOUT as CFG_WEB_RECONNECT_TIMEOUT,
+    MESSAGE_TTL_SECONDS as CFG_MESSAGE_TTL_SECONDS,
+    JWT_SECRET_KEY as CFG_JWT_SECRET_KEY,
+    JWT_ALGORITHM as CFG_JWT_ALGORITHM,
+    JWT_EXPIRATION_DELTA_SECONDS as CFG_JWT_EXPIRATION_DELTA_SECONDS,
+    MAX_QUEUE_LENGTH # Añadido para usarlo en add_message_to_queue
+)
 
-# Prefijos para keys de redis
-SESSION_KEY_PREFIX = "minka:session:"
-CLIENT_KEY_PREFIX = "minka:client:"
-# Para JWT
-JWT_JTI_BLACKLIST_PREFIX = "minka:jwt:blacklist:"
-# La cola de mensajes
-MESSAGE_QUEUE_KEY_PREFIX = "minka:message_queue:"
+# Variable global para el cliente Redis asíncrono
+redis_client = None
 
-# Tiempo máximo de inactividad de una sesión (3 horas)
-SESSION_TIMEOUT = 60 * 60 * 3
+async def init_redis_client():
+    """Inicializa la conexión global del cliente Redis asíncrono."""
+    global redis_client
+    if redis_client is None:
+        redis_url = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}"
+        if REDIS_PASSWORD:
+            redis_url = f"redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}"
+        
+        logging.info(f"[REDIS_INIT] Conectando a Redis en {REDIS_HOST}:{REDIS_PORT}, DB: {REDIS_DB}")
+        try:
+            redis_client = await aioredis.from_url(redis_url, decode_responses=True)
+            await redis_client.ping()
+            logging.info("[REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).")
+        except (redis.RedisError, ConnectionRefusedError) as e: # Capturar ConnectionRefusedError también
+            logging.error(f"[REDIS_INIT] No se pudo conectar a Redis: {e}")
+            redis_client = None # Asegurar que redis_client es None si falla la conexión
+            raise # Relanzar para que el llamador maneje la falla de conexión crítica
+    return redis_client
 
-# IMPORTANTE: Periodo de gracia para reconexión de cliente móvil
-RECONNECT_GRACE_PERIOD = 120  # 2 minutos para móviles - aumentado a 120 segundos
+# Prefijos para keys de redis (usando los de config.py)
+SESSION_KEY_PREFIX = CFG_SESSION_KEY_PREFIX
+CLIENT_KEY_PREFIX = CFG_CLIENT_KEY_PREFIX
+JWT_JTI_BLACKLIST_PREFIX = CFG_JWT_JTI_BLACKLIST_PREFIX
+MESSAGE_QUEUE_KEY_PREFIX = CFG_MESSAGE_QUEUE_KEY_PREFIX
 
-# Tiempo límite para el modo doze
-DOZE_TIMEOUT = 60 * 60 * 3  # 3 horas
+# Tiempos y TTLs (usando los de config.py)
+SESSION_TIMEOUT = CFG_SESSION_TIMEOUT
+RECONNECT_GRACE_PERIOD = CFG_RECONNECT_GRACE_PERIOD
+DOZE_TIMEOUT = CFG_DOZE_TIMEOUT
+WEB_RECONNECT_TIMEOUT = CFG_WEB_RECONNECT_TIMEOUT
+MESSAGE_TTL_SECONDS = CFG_MESSAGE_TTL_SECONDS
 
-# Web: período de reconexión mucho más largo
-WEB_RECONNECT_TIMEOUT = 60 * 60 * 72  # 72 horas (3 días)
+# JWT Config (usando los de config.py)
+JWT_SECRET_KEY = CFG_JWT_SECRET_KEY
+JWT_ALGORITHM = CFG_JWT_ALGORITHM
+JWT_EXPIRATION_DELTA_SECONDS = CFG_JWT_EXPIRATION_DELTA_SECONDS
 
-# Tiempo de vida de los mensajes en la cola
-MESSAGE_TTL_SECONDS = 60 * 60 * 24 * 2  # 2 días - eliminar mensajes no entregados después de este tiempo
-
-# JWT Config
-JWT_SECRET_KEY = "your_secret_key_here_replace_in_production"  # Reemplazar en producción con una clave segura
-JWT_ALGORITHM = "HS256"
-JWT_EXPIRATION_DELTA_SECONDS = 60 * 60 * 72  # 72 horas (3 días)
-
-active_websockets = {}
+# active_websockets se maneja en appv2.py, no aquí.
 
 # Funciones para obtener/establecer sesiones
-def get_session(room_id):
+async def get_session(room_id):
+    rc = await init_redis_client() # Asegurar que el cliente esté inicializado
+    if not rc: return None # No se pudo conectar a Redis
     if not room_id:
         return None
-    session_json = redis_client.get(f"{SESSION_KEY_PREFIX}{room_id}")
+    session_json = await rc.get(f"{SESSION_KEY_PREFIX}{room_id}")
     if session_json:
-        return json.loads(session_json)
+        try:
+            return json.loads(session_json)
+        except json.JSONDecodeError:
+            logging.error(f"Error al decodificar JSON para sesión {room_id}")
+            return None
     return None
 
-def set_session(room_id, data):
+async def set_session(room_id, data):
+    rc = await init_redis_client()
+    if not rc: return False
     if not room_id:
         return False
-    return redis_client.set(f"{SESSION_KEY_PREFIX}{room_id}", json.dumps(data))
+    try:
+        return await rc.set(f"{SESSION_KEY_PREFIX}{room_id}", json.dumps(data))
+    except redis.RedisError as e:
+        logging.error(f"Error de Redis en set_session para {room_id}: {e}")
+        return False
 
-def delete_session(room_id):
+async def delete_session(room_id):
+    rc = await init_redis_client()
+    if not rc: return False
     if not room_id:
         return False
-    return redis_client.delete(f"{SESSION_KEY_PREFIX}{room_id}") > 0
+    try:
+        return await rc.delete(f"{SESSION_KEY_PREFIX}{room_id}") > 0
+    except redis.RedisError as e:
+        logging.error(f"Error de Redis en delete_session para {room_id}: {e}")
+        return False
 
-def get_all_session_keys():
-    return [key.split(":", 2)[2] for key in redis_client.keys(f"{SESSION_KEY_PREFIX}*")]
+async def get_all_session_keys():
+    rc = await init_redis_client()
+    if not rc: return []
+    try:
+        keys = await rc.keys(f"{SESSION_KEY_PREFIX}*")
+        # Extraer la parte del ID de la clave completa
+        return [key.replace(SESSION_KEY_PREFIX, "", 1) for key in keys]
+    except redis.RedisError as e:
+        logging.error(f"Error de Redis en get_all_session_keys: {e}")
+        return []
 
 # Funciones para obtener/establecer clientes
-def get_client(client_id):
+async def get_client(client_id):
+    rc = await init_redis_client()
+    if not rc: return None
     if not client_id:
         return None
-    client_json = redis_client.get(f"{CLIENT_KEY_PREFIX}{client_id}")
+    client_json = await rc.get(f"{CLIENT_KEY_PREFIX}{client_id}")
     if client_json:
-        return json.loads(client_json)
+        try:
+            return json.loads(client_json)
+        except json.JSONDecodeError:
+            logging.error(f"Error al decodificar JSON para cliente {client_id}")
+            return None
     return None
 
-def set_client(client_id, data):
+async def set_client(client_id, data):
+    rc = await init_redis_client()
+    if not rc: return False
     if not client_id:
         return False
-    return redis_client.set(f"{CLIENT_KEY_PREFIX}{client_id}", json.dumps(data))
+    try:
+        return await rc.set(f"{CLIENT_KEY_PREFIX}{client_id}", json.dumps(data))
+    except redis.RedisError as e:
+        logging.error(f"Error de Redis en set_client para {client_id}: {e}")
+        return False
 
-def delete_client(client_id, keep_message_queue=False):
+async def delete_client(client_id, keep_message_queue=False):
+    rc = await init_redis_client()
+    if not rc: return False
     if not client_id:
         return False
-    result = redis_client.delete(f"{CLIENT_KEY_PREFIX}{client_id}") > 0
-    # Limpiar la cola de mensajes asociada, a menos que se indique lo contrario
-    if not keep_message_queue:
-        redis_client.delete(f"{MESSAGE_QUEUE_KEY_PREFIX}{client_id}")
-    return result
+    try:
+        result = await rc.delete(f"{CLIENT_KEY_PREFIX}{client_id}") > 0
+        if not keep_message_queue:
+            await rc.delete(f"{MESSAGE_QUEUE_KEY_PREFIX}{client_id}")
+        return result
+    except redis.RedisError as e:
+        logging.error(f"Error de Redis en delete_client para {client_id}: {e}")
+        return False
 
-def get_all_client_keys():
-    return [key.split(":", 2)[2] for key in redis_client.keys(f"{CLIENT_KEY_PREFIX}*")]
+async def get_all_client_keys():
+    rc = await init_redis_client()
+    if not rc: return []
+    try:
+        keys = await rc.keys(f"{CLIENT_KEY_PREFIX}*")
+        return [key.replace(CLIENT_KEY_PREFIX, "", 1) for key in keys]
+    except redis.RedisError as e:
+        logging.error(f"Error de Redis en get_all_client_keys: {e}")
+        return []
 
 # Gestión de JTIs para JWT
-def add_jti_to_blacklist(jti, ttl_seconds):
+async def add_jti_to_blacklist(jti, ttl_seconds):
+    rc = await init_redis_client()
+    if not rc: return False
     if not jti:
         return False
-    return redis_client.setex(f"{JWT_JTI_BLACKLIST_PREFIX}{jti}", ttl_seconds, 1)
+    try:
+        return await rc.setex(f"{JWT_JTI_BLACKLIST_PREFIX}{jti}", ttl_seconds, "1")
+    except redis.RedisError as e:
+        logging.error(f"Error de Redis en add_jti_to_blacklist para JTI {jti}: {e}")
+        return False
 
-def is_jti_blacklisted(jti):
+async def is_jti_blacklisted(jti):
+    rc = await init_redis_client()
+    if not rc: return True # Si Redis no está, considerar inválido por seguridad
     if not jti:
-        return True # Un JTI vacío/None se considera inválido
-    return redis_client.exists(f"{JWT_JTI_BLACKLIST_PREFIX}{jti}") == 1
+        return True 
+    try:
+        return await rc.exists(f"{JWT_JTI_BLACKLIST_PREFIX}{jti}") == 1
+    except redis.RedisError as e:
+        logging.error(f"Error de Redis en is_jti_blacklisted para JTI {jti}: {e}")
+        return True # Fallar seguro
 
-def is_valid_jti(jti):
-    """Verifica si un JTI es válido (no en lista negra)"""
-    return jti and not is_jti_blacklisted(jti)
+async def is_valid_jti(jti):
+    rc = await init_redis_client()
+    if not rc: return False # Si Redis no está, considerar inválido
+    return jti and not await is_jti_blacklisted(jti)
 
-# Funciones para manejar la generación de JWT (para clientes web)
+# Funciones para manejar la generación de JWT (síncronas)
 def generate_jwt(client_id, room_id):
     payload = {
         'client_id': client_id,
         'room_id': room_id,
         'exp': datetime.now(timezone.utc) + timedelta(seconds=JWT_EXPIRATION_DELTA_SECONDS),
-        'jti': str(uuid.uuid4().hex) # JTI único para cada token, útil para revocación
+        'jti': str(uuid.uuid4().hex) 
     }
     return jwt.encode(payload, JWT_SECRET_KEY, algorithm=JWT_ALGORITHM)
 
-def verify_jwt(token):
+async def verify_jwt(token):
+    rc = await init_redis_client()
+    if not rc: return None # Si Redis no está, no se puede verificar JTI
     if not token:
         return None
-        
     try:
         payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_ALGORITHM])
-        # Verificar que el JTI no esté en lista negra
         jti = payload.get('jti')
-        if is_jti_blacklisted(jti):
+        if await is_jti_blacklisted(jti):
             logging.warning(f"JTI {jti} está en lista negra")
             return None
         return payload
     except jwt.PyJWTError as e:
         logging.warning(f"JWT inválido: {e}")
         return None
+    except redis.RedisError as e:
+        logging.error(f"Error de Redis en verify_jwt al verificar JTI: {e}")
+        return None # Fallar seguro
 
 # Funciones para manejar la cola de mensajes
-def add_message_to_queue(client_id, message, max_attempts=3):
+async def add_message_to_queue(client_id, message):
+    rc = await init_redis_client()
+    if not rc: return False
     if not client_id or not message:
         return False
 
-    # Verificar si el cliente existe y si está en modo doze
-    client_data = get_client(client_id)
-    if not client_data:
-        logging.warning(f"Intento de encolar mensaje para cliente inexistente: {client_id}")
+    client_data = await get_client(client_id)
+    if not client_data: # get_client ya maneja el log si Redis falla
+        logging.warning(f"Intento de encolar mensaje para cliente inexistente o error de Redis: {client_id}")
         return False
     
-    # Verificar explícitamente si está en modo doze
     is_dozing = client_data.get('status') == 'dozing'
-    if not is_dozing:
-        logging.warning(f"Intento de encolar mensaje para cliente que no está en modo doze: {client_id}")
-        # Permitir encolar de todas formas para mayor robustez, pero lo registramos
-    
-    # Generar ID único para el mensaje con timestamp para ordenación
+
     message_id = f"{time.time()}-{uuid.uuid4().hex[:8]}"
-    
-    # Añadir identificadores al mensaje para rastreo
     message_with_meta = {
         'id': message_id,
         'data': message,
         'timestamp': time.time(),
         'attempts': 0,
-        'sender_id': message.get('sender_id', 'unknown'),
-        'is_doze_message': True
+        'sender_id': message.get('sender_id', 'unknown') if isinstance(message, dict) else 'unknown',
+        'is_doze_message': is_dozing 
     }
 
-    # Serializar como JSON para almacenar en Redis
     try:
         message_json = json.dumps(message_with_meta)
     except Exception as e:
@@ -165,78 +253,72 @@ def add_message_to_queue(client_id, message, max_attempts=3):
     queue_key = f"{MESSAGE_QUEUE_KEY_PREFIX}{client_id}"
     
     try:
-        # Encolar el mensaje
-        result = redis_client.rpush(queue_key, message_json)
+        current_length = await rc.llen(queue_key)
+        if current_length >= MAX_QUEUE_LENGTH:
+            logging.warning(f"Cola para {client_id} llena ({MAX_QUEUE_LENGTH}). No se añadió {message_id}.")
+            return False
+
+        result = await rc.rpush(queue_key, message_json)
         
-        # Establecer un TTL para la cola si aún no lo tiene
-        if redis_client.ttl(queue_key) < 0:  # -1 si no tiene TTL, -2 si no existe
-            redis_client.expire(queue_key, MESSAGE_TTL_SECONDS)
+        current_ttl = await rc.ttl(queue_key)
+        if current_ttl == -1:
+             await rc.expire(queue_key, MESSAGE_TTL_SECONDS)
             
-        # Verificar que el mensaje se haya encolado correctamente
-        queue_length = redis_client.llen(queue_key)
-        logging.info(f"Mensaje encolado para {client_id} (dozing: {is_dozing}). Cola actual: {queue_length} mensajes")
-        
+        logging.info(f"Mensaje encolado para {client_id} (dozing: {is_dozing}). Cola: {await rc.llen(queue_key)}. TTL: {MESSAGE_TTL_SECONDS}s.")
         return result > 0
-    except Exception as e:
-        logging.error(f"Error al encolar mensaje para {client_id}: {e}")
+    except redis.RedisError as e:
+        logging.error(f"Error de Redis en add_message_to_queue para {client_id}: {e}")
         return False
 
-def get_pending_messages(client_id, delete_queue=True):
-    """
-    Obtiene los mensajes pendientes para un cliente.
-    
-    Args:
-        client_id: ID del cliente
-        delete_queue: Si es True, elimina la cola después de obtener los mensajes
-                     Si es False, conserva la cola (útil para depuración o reintentos)
-    
-    Returns:
-        Lista de mensajes pendientes deserializados o lista vacía si hay error
-    """
+async def get_pending_messages(client_id, delete_queue=True):
+    rc = await init_redis_client()
+    if not rc: return []
     if not client_id:
         return []
 
     queue_key = f"{MESSAGE_QUEUE_KEY_PREFIX}{client_id}"
     try:
-        # Verificar si la cola existe y cuántos mensajes tiene
-        if not redis_client.exists(queue_key):
-            logging.info(f"No hay cola de mensajes pendientes para {client_id}")
+        if not await rc.exists(queue_key):
             return []
             
-        queue_length = redis_client.llen(queue_key)
+        queue_length = await rc.llen(queue_key)
+        if queue_length == 0:
+            return []
         logging.info(f"Recuperando {queue_length} mensajes pendientes para {client_id}")
         
-        # Obtener todos los mensajes sin eliminar la cola todavía
-        messages_json = redis_client.lrange(queue_key, 0, -1)
+        messages_json = await rc.lrange(queue_key, 0, -1)
         
-        # Deserializar los mensajes
         messages = []
         deserialize_errors = 0
         
         for msg_json in messages_json:
             try:
                 msg = json.loads(msg_json)
-                # Extraer el contenido real del mensaje si está en la estructura de metadatos
                 if 'data' in msg:
                     messages.append(msg['data'])
                 else:
                     messages.append(msg)
             except json.JSONDecodeError:
                 deserialize_errors += 1
-                logging.error(f"Error al deserializar mensaje para {client_id}")
+                logging.error(f"Error al deserializar mensaje de la cola para {client_id}")
         
-        # Solo eliminamos la cola si se indica y si no hubo errores de deserialización
         if delete_queue and deserialize_errors == 0:
-            redis_client.delete(queue_key)
+            await rc.delete(queue_key)
             logging.info(f"Cola de mensajes eliminada para {client_id} después de recuperar {len(messages)} mensajes")
         elif deserialize_errors > 0:
             logging.warning(f"No se eliminó la cola para {client_id} debido a {deserialize_errors} errores de deserialización")
         elif not delete_queue:
             logging.info(f"Conservando cola de mensajes para {client_id} con {len(messages)} mensajes")
-            # Renovar TTL
-            redis_client.expire(queue_key, MESSAGE_TTL_SECONDS)
+            await rc.expire(queue_key, MESSAGE_TTL_SECONDS)
         
         return messages
-    except Exception as e:
-        logging.error(f"Error al recuperar mensajes pendientes para {client_id}: {e}")
+    except redis.RedisError as e:
+        logging.error(f"Error de Redis en get_pending_messages para {client_id}: {e}")
         return []
+
+async def close_redis_client():
+    global redis_client
+    if redis_client:
+        await redis_client.close()
+        redis_client = None
+        logging.info("[REDIS_CLOSE] Conexión a Redis cerrada.")

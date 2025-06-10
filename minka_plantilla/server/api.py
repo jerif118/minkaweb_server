@@ -1,3 +1,19 @@
+"""
+DEPRECATED: Este archivo contiene endpoints REST heredados que ya no están en uso.
+
+El servidor principal (appv2.py) utiliza WebSockets y Redis para toda la funcionalidad.
+Los endpoints REST en este archivo usan variables globales que están vacías y 
+causarán errores 403 porque no están sincronizados con el estado en Redis.
+
+Para nueva funcionalidad o depuración, utilice:
+- /ws para conexiones WebSocket
+- /health para verificar el estado del servidor
+- /monitor para ver el estado de sesiones y clientes activos
+
+Este archivo se mantiene para referencia histórica pero NO debe ser usado
+en producción.
+"""
+
 import tornado.web, re, json, uuid, time, logging
 from tornado.escape import xhtml_escape
 from session import sessions, clients, SESSION_TIMEOUT

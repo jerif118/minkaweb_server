@@ -1,0 +1,63 @@
+2025-06-09 19:20:25,618 - minka.websocket_server - INFO - [appv2.py:1531] - Servidor MinkaV2 (Redis) iniciado en el puerto 5001
+2025-06-09 19:20:25,618 - minka.websocket_server - INFO - [appv2.py:1452] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-09 19:21:10,103 - minka.websocket_server - INFO - [appv2.py:1531] - Servidor MinkaV2 (Redis) iniciado en el puerto 5001
+2025-06-09 19:21:10,104 - minka.websocket_server - INFO - [appv2.py:1452] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-09 19:21:10,110 - minka.websocket_server - INFO - [appv2.py:1481] - [INIT] Cliente web-client-1749417003024 sigue en pending_reconnect. Esperando reconexión.
+2025-06-09 19:21:10,110 - minka.websocket_server - INFO - [appv2.py:1523] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-09 19:21:12,665 - minka.websocket_server - INFO - [appv2.py:1440] - → Recibida señal 2, deteniendo IOLoop…
+2025-06-09 19:33:34,424 - minka.websocket_server - INFO - [appv2.py:1567] - Servidor MinkaV2 (Redis) iniciado en el puerto 5001
+2025-06-09 19:33:34,424 - minka.websocket_server - INFO - [appv2.py:1488] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-09 20:21:01,752 - minka.websocket_server - INFO - [appv2.py:1567] - Servidor MinkaV2 (Redis) iniciado en el puerto 5001
+2025-06-09 20:21:01,753 - minka.websocket_server - INFO - [appv2.py:1488] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-09 20:21:01,758 - minka.websocket_server - INFO - [appv2.py:1517] - [INIT] Cliente web-client-1749417003024 sigue en pending_reconnect. Esperando reconexión.
+2025-06-09 20:21:01,759 - minka.websocket_server - INFO - [appv2.py:1559] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-09 20:21:49,351 - minka.websocket_server - INFO - [appv2.py:277] - [OPEN] Args: client_id=web-client-1749518509344 action=create room_id=None password=None jwt_token=None
+2025-06-09 20:21:49,358 - minka.websocket_server - INFO - [appv2.py:489] - [OPEN-CREATE] JTI 5fa37989372b42778b880ec0aed9f192 almacenado para cliente web web-client-1749518509344
+2025-06-09 20:21:50,366 - minka.websocket_server - INFO - [appv2.py:277] - [OPEN] Args: client_id=mobile-448fba41-101f-427b-a112-e481fa0bff2e action=join room_id=829d702a-126e-4f72-8aa0-6274706d8bd9 password=****** jwt_token=None
+2025-06-09 20:21:50,369 - minka.websocket_server - INFO - [appv2.py:516] - [OPEN-DEBUG] Cliente mobile-448fba41-101f-427b-a112-e481fa0bff2e intentando join. Estado actual: No existe
+2025-06-09 20:21:50,370 - minka.websocket_server - INFO - [appv2.py:522] - [OPEN-DEBUG] Verificando modo doze para mobile-448fba41-101f-427b-a112-e481fa0bff2e. Status: No existe
+2025-06-09 20:21:50,370 - minka.websocket_server - INFO - [appv2.py:672] - [OPEN-DEBUG] Verificando modo doze para mobile-448fba41-101f-427b-a112-e481fa0bff2e. Status: No existe
+2025-06-09 20:21:50,372 - minka.websocket_server - WARNING - [appv2.py:1308] - [CLOSE] Desconexión inesperada antes de la asignación completa de client_id/room_id. WebSocket: <__main__.WebSocketHandler object at 0x1040ce7d0>
+2025-06-09 20:21:52,402 - minka.websocket_server - INFO - [appv2.py:1316] - [CLOSE] Desconexión inesperada del cliente web-client-1749518509344 (web: True) en la sala 829d702a-126e-4f72-8aa0-6274706d8bd9. Marcando para reconexión (timeout respectivo: web=259200s, mobile=120s).
+2025-06-09 20:21:52,405 - minka.websocket_server - INFO - [appv2.py:1322] - [CLOSE] Cola de mensajes para web-client-1749518509344 - existe: 0, longitud: 0
+2025-06-09 20:21:52,406 - minka.websocket_server - INFO - [appv2.py:1345] - [CLOSE] Cliente web web-client-1749518509344 registrado como cliente previo de la sala 829d702a-126e-4f72-8aa0-6274706d8bd9
+2025-06-09 20:22:01,760 - minka.websocket_server - INFO - [appv2.py:1473] - Sesión 1039cd7a-d6ec-4e09-b29c-7eca9aa3223b expirada y removida
+2025-06-09 20:22:15,547 - minka.websocket_server - INFO - [appv2.py:277] - [OPEN] Args: client_id=web-client-1749518535542 action=create room_id=None password=None jwt_token=None
+2025-06-09 20:22:15,552 - minka.websocket_server - INFO - [appv2.py:489] - [OPEN-CREATE] JTI 90fcf50bdebf4b518cf041b5b753eb4d almacenado para cliente web web-client-1749518535542
+2025-06-09 20:22:15,554 - minka.websocket_server - INFO - [appv2.py:277] - [OPEN] Args: client_id=mobile-cdd84cc8-4b2f-4b9a-8fe8-23474d9b11ac action=join room_id=284cabcd-6c5d-41d0-aab3-d5d52fcc4456 password=****** jwt_token=None
+2025-06-09 20:22:15,556 - minka.websocket_server - INFO - [appv2.py:516] - [OPEN-DEBUG] Cliente mobile-cdd84cc8-4b2f-4b9a-8fe8-23474d9b11ac intentando join. Estado actual: No existe
+2025-06-09 20:22:15,556 - minka.websocket_server - INFO - [appv2.py:522] - [OPEN-DEBUG] Verificando modo doze para mobile-cdd84cc8-4b2f-4b9a-8fe8-23474d9b11ac. Status: No existe
+2025-06-09 20:22:15,556 - minka.websocket_server - INFO - [appv2.py:672] - [OPEN-DEBUG] Verificando modo doze para mobile-cdd84cc8-4b2f-4b9a-8fe8-23474d9b11ac. Status: No existe
+2025-06-09 20:22:15,557 - minka.websocket_server - WARNING - [appv2.py:1308] - [CLOSE] Desconexión inesperada antes de la asignación completa de client_id/room_id. WebSocket: <__main__.WebSocketHandler object at 0x1040cfcd0>
+2025-06-09 20:22:30,580 - minka.websocket_server - INFO - [appv2.py:1316] - [CLOSE] Desconexión inesperada del cliente web-client-1749518535542 (web: True) en la sala 284cabcd-6c5d-41d0-aab3-d5d52fcc4456. Marcando para reconexión (timeout respectivo: web=259200s, mobile=120s).
+2025-06-09 20:22:30,583 - minka.websocket_server - INFO - [appv2.py:1322] - [CLOSE] Cola de mensajes para web-client-1749518535542 - existe: 0, longitud: 0
+2025-06-09 20:22:30,585 - minka.websocket_server - INFO - [appv2.py:1345] - [CLOSE] Cliente web web-client-1749518535542 registrado como cliente previo de la sala 284cabcd-6c5d-41d0-aab3-d5d52fcc4456
+2025-06-09 20:22:51,554 - minka.websocket_server - INFO - [appv2.py:277] - [OPEN] Args: client_id=web-client-1749518571547 action=create room_id=None password=None jwt_token=None
+2025-06-09 20:22:51,558 - minka.websocket_server - INFO - [appv2.py:489] - [OPEN-CREATE] JTI 29957c59d31349c686196af564c95b07 almacenado para cliente web web-client-1749518571547
+2025-06-09 20:22:51,560 - minka.websocket_server - INFO - [appv2.py:277] - [OPEN] Args: client_id=mobile-43be70e3-d843-4eb4-a322-1fa1436d6a3f action=join room_id=fa4493b3-16fb-450d-9ddc-7b988575551b password=****** jwt_token=None
+2025-06-09 20:22:51,561 - minka.websocket_server - INFO - [appv2.py:516] - [OPEN-DEBUG] Cliente mobile-43be70e3-d843-4eb4-a322-1fa1436d6a3f intentando join. Estado actual: No existe
+2025-06-09 20:22:51,561 - minka.websocket_server - INFO - [appv2.py:522] - [OPEN-DEBUG] Verificando modo doze para mobile-43be70e3-d843-4eb4-a322-1fa1436d6a3f. Status: No existe
+2025-06-09 20:22:51,562 - minka.websocket_server - INFO - [appv2.py:672] - [OPEN-DEBUG] Verificando modo doze para mobile-43be70e3-d843-4eb4-a322-1fa1436d6a3f. Status: No existe
+2025-06-09 20:22:51,562 - minka.websocket_server - WARNING - [appv2.py:1308] - [CLOSE] Desconexión inesperada antes de la asignación completa de client_id/room_id. WebSocket: <__main__.WebSocketHandler object at 0x1040cff50>
+2025-06-09 20:23:06,592 - minka.websocket_server - INFO - [appv2.py:1316] - [CLOSE] Desconexión inesperada del cliente web-client-1749518571547 (web: True) en la sala fa4493b3-16fb-450d-9ddc-7b988575551b. Marcando para reconexión (timeout respectivo: web=259200s, mobile=120s).
+2025-06-09 20:23:06,596 - minka.websocket_server - INFO - [appv2.py:1322] - [CLOSE] Cola de mensajes para web-client-1749518571547 - existe: 0, longitud: 0
+2025-06-09 20:23:06,599 - minka.websocket_server - INFO - [appv2.py:1345] - [CLOSE] Cliente web web-client-1749518571547 registrado como cliente previo de la sala fa4493b3-16fb-450d-9ddc-7b988575551b
+2025-06-09 20:27:41,644 - minka.websocket_server - INFO - [appv2.py:1476] - → Recibida señal 2, deteniendo IOLoop…
+2025-06-09 20:27:52,343 - minka.websocket_server - INFO - [appv2.py:1588] - Servidor MinkaV2 (Redis) iniciado en el puerto 5001
+2025-06-09 20:27:52,343 - minka.websocket_server - INFO - [appv2.py:1509] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-09 20:27:52,348 - minka.websocket_server - INFO - [appv2.py:1580] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-09 20:27:57,902 - minka.websocket_server - INFO - [appv2.py:277] - [OPEN] Args: client_id=web-client-1749518877895 action=create room_id=None password=None jwt_token=None
+2025-06-09 20:27:57,908 - minka.websocket_server - INFO - [appv2.py:489] - [OPEN-CREATE] JTI c8b7d1fed0094a2d808b60bc3999943e almacenado para cliente web web-client-1749518877895
+2025-06-09 20:27:58,914 - minka.websocket_server - INFO - [appv2.py:277] - [OPEN] Args: client_id=mobile-0d3a0125-9c2b-4109-9e7e-2d72fecb93ce action=join room_id=3b0194a4-83e0-4eb6-a155-9ad1bc494ac3 password=****** jwt_token=None
+2025-06-09 20:27:58,916 - minka.websocket_server - INFO - [appv2.py:516] - [OPEN-DEBUG] Cliente mobile-0d3a0125-9c2b-4109-9e7e-2d72fecb93ce intentando join. Estado actual: No existe
+2025-06-09 20:27:58,918 - minka.websocket_server - INFO - [appv2.py:522] - [OPEN-DEBUG] Verificando modo doze para mobile-0d3a0125-9c2b-4109-9e7e-2d72fecb93ce. Status: No existe
+2025-06-09 20:27:58,918 - minka.websocket_server - INFO - [appv2.py:672] - [OPEN-DEBUG] Verificando modo doze para mobile-0d3a0125-9c2b-4109-9e7e-2d72fecb93ce. Status: No existe
+2025-06-09 20:27:58,920 - minka.websocket_server - WARNING - [appv2.py:1329] - [CLOSE] Desconexión inesperada antes de la asignación completa de client_id/room_id. WebSocket: <__main__.WebSocketHandler object at 0x10633a850>
+2025-06-09 20:28:00,946 - minka.websocket_server - INFO - [appv2.py:1337] - [CLOSE] Desconexión inesperada del cliente web-client-1749518877895 (web: True) en la sala 3b0194a4-83e0-4eb6-a155-9ad1bc494ac3. Marcando para reconexión (timeout respectivo: web=259200s, mobile=120s).
+2025-06-09 20:28:00,947 - minka.websocket_server - INFO - [appv2.py:1343] - [CLOSE] Cola de mensajes para web-client-1749518877895 - existe: 0, longitud: 0
+2025-06-09 20:28:00,949 - minka.websocket_server - INFO - [appv2.py:1366] - [CLOSE] Cliente web web-client-1749518877895 registrado como cliente previo de la sala 3b0194a4-83e0-4eb6-a155-9ad1bc494ac3
+2025-06-10 08:05:52,364 - minka.websocket_server - INFO - [appv2.py:1494] - Sesión fa4493b3-16fb-450d-9ddc-7b988575551b expirada y removida
+2025-06-10 08:05:52,370 - minka.websocket_server - INFO - [appv2.py:1494] - Sesión 284cabcd-6c5d-41d0-aab3-d5d52fcc4456 expirada y removida
+2025-06-10 08:05:52,377 - minka.websocket_server - INFO - [appv2.py:1494] - Sesión 829d702a-126e-4f72-8aa0-6274706d8bd9 expirada y removida
+2025-06-10 08:05:52,382 - minka.websocket_server - INFO - [appv2.py:1494] - Sesión 3b0194a4-83e0-4eb6-a155-9ad1bc494ac3 expirada y removida
+2025-06-10 08:07:30,970 - minka.websocket_server - INFO - [appv2.py:1497] - → Recibida señal 2, deteniendo IOLoop…

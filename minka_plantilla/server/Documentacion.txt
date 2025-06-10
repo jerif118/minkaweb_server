@@ -48,7 +48,7 @@ Para crear una nueva sala desde un cliente web usando JavaScript:
 
 ```javascript
 // Ejemplo con JavaScript
-const ws = new WebSocket(`ws://servidor:puerto/ws?client_id=web-${clientId}&action=create`);
+const ws = new WebSocket(`ws://servidor:puerto/ws?action=create`);
 
 ws.onopen = () => {
   console.log("Conexión establecida");
@@ -76,10 +76,10 @@ Es importante guardar el `jwt_token` que devuelve el servidor, ya que facilitar�
 
 ```javascript
 // Unirse con room_id y password
-const ws = new WebSocket(`ws://servidor:puerto/ws?client_id=web-${clientId}&action=join&room_id=${roomId}&password=${password}`);
+const ws = new WebSocket(`ws://servidor:puerto/ws?action=join&room_id=${roomId}&room_password=${password}`);
 
 // Unirse con JWT (después de reconexión)
-const ws = new WebSocket(`ws://servidor:puerto/ws?client_id=web-${clientId}&jwt_token=${jwtToken}`);
+const ws = new WebSocket(`ws://servidor:puerto/ws?jwt_token=${jwtToken}`);
 ```
 
 Al unirse a una sala, el servidor verificará que la sala exista y que la contraseña sea correcta. Si todo es correcto, el cliente recibirá un mensaje de confirmación y un token JWT para facilitar futuras reconexiones.
@@ -90,7 +90,7 @@ Al unirse a una sala, el servidor verificará que la sala exista y que la contra
 
 ```java
 // Ejemplo con Java para Android
-String url = "ws://servidor:puerto/ws?client_id=mobile-" + clientId + "&action=create";
+String url = "ws://servidor:puerto/ws?action=create";
 WebSocketClient client = new WebSocketClient(new URI(url)) {
     @Override
     public void onOpen(ServerHandshake handshake) {
@@ -133,7 +133,7 @@ El método de reconexión recomendado para clientes web es utilizar el JWT:
 function reconnect() {
   const jwtToken = localStorage.getItem('jwt_token');
   if (jwtToken) {
-    const ws = new WebSocket(`ws://servidor:puerto/ws?client_id=web-${clientId}&jwt_token=${jwtToken}`);
+    const ws = new WebSocket(`ws://servidor:puerto/ws?jwt_token=${jwtToken}`);
     // Configurar callbacks
     configurarWebSocket(ws);
     return true;

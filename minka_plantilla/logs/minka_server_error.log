@@ -1,0 +1,893 @@
+2025-06-10 10:58:17 - CRITICAL - [appv2.py:890] - [INIT] FALLO CRÍTICO al conectar con Redis durante la inicialización: 'Redis' object has no attribute 'closed'. El servidor podría no funcionar correctamente.
+2025-06-10 10:59:17 - ERROR - [ioloop.py:941] - Exception in callback <function cleanup_sessions at 0x102511f80>
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 939, in _run
+    await val
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 790, in cleanup_sessions
+    all_s_keys = await get_all_session_keys()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/session.py", line 106, in get_all_session_keys
+    rc = await init_redis_client()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/session.py", line 32, in init_redis_client
+    if redis_client is None:
+                             
+AttributeError: 'Redis' object has no attribute 'closed'
+2025-06-10 11:00:07 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x104bd7740>, <Task finished name='Task-69' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:415> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 419, in on_message
+    data = json.loads(message)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 421, in on_message
+    self.write_message({'error': 'JSON inválido', 'code': 'INVALID_JSON'})
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:00:07 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 419, in on_message
+    data = json.loads(message)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:00:12 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x10490cfe0>, <Task finished name='Task-73' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:415> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 438, in on_message
+    self.write_message({'error': 'No autenticado o identificado', 'code': 'AUTH_REQUIRED'})
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:00:12 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:00:17 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x104bd6a20>, <Task finished name='Task-76' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:415> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 438, in on_message
+    self.write_message({'error': 'No autenticado o identificado', 'code': 'AUTH_REQUIRED'})
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:00:17 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:02:01 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x104bd6d40>, <Task finished name='Task-678' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:415> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 419, in on_message
+    data = json.loads(message)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 421, in on_message
+    self.write_message({'error': 'JSON inválido', 'code': 'INVALID_JSON'})
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:02:01 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 419, in on_message
+    data = json.loads(message)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:02:06 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x104b83560>, <Task finished name='Task-681' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:415> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 438, in on_message
+    self.write_message({'error': 'No autenticado o identificado', 'code': 'AUTH_REQUIRED'})
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:02:06 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:02:11 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x104b83420>, <Task finished name='Task-684' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:415> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 438, in on_message
+    self.write_message({'error': 'No autenticado o identificado', 'code': 'AUTH_REQUIRED'})
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:02:11 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:06:25 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x10490cfe0>, <Task finished name='Task-1287' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:415> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 419, in on_message
+    self.close()
+       ^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 421, in on_message
+    else:
+        ^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:06:25 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 419, in on_message
+    self.close()
+       ^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:06:30 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x104bd6de0>, <Task finished name='Task-1292' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:415> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 438, in on_message
+    # O un error si se esperaba que ya estuviera identificado.
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:06:30 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:06:35 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x104bd6d40>, <Task finished name='Task-1295' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:415> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 438, in on_message
+    # O un error si se esperaba que ya estuviera identificado.
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:06:35 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:08:32 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x104c13c40>, <Task finished name='Task-1896' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:415> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 419, in on_message
+    self.close()
+       ^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 421, in on_message
+    else:
+        ^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:08:32 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 419, in on_message
+    self.close()
+       ^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:08:37 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x104bd7240>, <Task finished name='Task-1900' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:415> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 438, in on_message
+    # O un error si se esperaba que ya estuviera identificado.
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:08:37 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:08:42 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x104bd76a0>, <Task finished name='Task-1903' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:415> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 438, in on_message
+    # O un error si se esperaba que ya estuviera identificado.
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:08:42 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:12:31 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x102ee6a20>, <Task finished name='Task-71' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:426> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 430, in on_message
+    data = json.loads(message)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 432, in on_message
+    self.write_message({'error': 'JSON inválido', 'code': 'INVALID_JSON'})
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:12:31 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 430, in on_message
+    data = json.loads(message)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:12:36 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x102c1cfe0>, <Task finished name='Task-75' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:426> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 450, in on_message
+    self.write_message({'error': 'No autenticado o identificado', 'code': 'AUTH_REQUIRED'})
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:12:36 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:12:41 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x102ee6ac0>, <Task finished name='Task-78' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:426> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 450, in on_message
+    self.write_message({'error': 'No autenticado o identificado', 'code': 'AUTH_REQUIRED'})
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:12:41 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:17:13 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x1020e2840>, <Task finished name='Task-72' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:426> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 430, in on_message
+    data = json.loads(message)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 433, in on_message
+    self.write_message({'error': 'JSON inválido', 'code': 'INVALID_JSON'})
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:17:13 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 430, in on_message
+    data = json.loads(message)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:17:18 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x1020e2660>, <Task finished name='Task-75' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:426> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 451, in on_message
+    self.write_message({'error': 'No autenticado o identificado', 'code': 'AUTH_REQUIRED'})
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:17:18 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:17:23 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x1020e2f20>, <Task finished name='Task-78' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:426> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 451, in on_message
+    self.write_message({'error': 'No autenticado o identificado', 'code': 'AUTH_REQUIRED'})
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:17:23 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:19:37 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x1020e31a0>, <Task finished name='Task-686' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:426> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 430, in on_message
+    data = json.loads(message)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 433, in on_message
+    self.write_message({'error': 'JSON inválido', 'code': 'INVALID_JSON'})
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:19:37 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 430, in on_message
+    data = json.loads(message)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:19:42 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x10208c680>, <Task finished name='Task-689' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:426> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 451, in on_message
+    self.write_message({'error': 'No autenticado o identificado', 'code': 'AUTH_REQUIRED'})
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:19:43 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:19:48 - ERROR - [ioloop.py:770] - Exception in callback functools.partial(<function WebSocketProtocol._run_callback.<locals>.<lambda> at 0x10208eb60>, <Task finished name='Task-693' coro=<WebSocketHandler.on_message() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py:426> exception=WebSocketClosedError()>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 640, in <lambda>
+    self.stream.io_loop.add_future(result, lambda f: f.result())
+                                                     ^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 451, in on_message
+    self.write_message({'error': 'No autenticado o identificado', 'code': 'AUTH_REQUIRED'})
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 11:19:48 - ERROR - [web.py:1875] - Uncaught exception GET /ws (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1790, in _execute
+    result = await result
+             ^^^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 273, in get
+    await self.ws_connection.accept_connection(self)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 863, in accept_connection
+    await self._accept_connection(handler)
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 946, in _accept_connection
+    await self._receive_frame_loop()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1102, in _receive_frame_loop
+    await self._receive_frame()
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 1193, in _receive_frame
+    await handled_future
+tornado.websocket.WebSocketClosedError
+2025-06-10 13:10:46 - ERROR - [web.py:1875] - Uncaught exception GET /test_client_txt.html?id=00f2bff7-d171-48ee-8e66-3749761713c4&vscodeBrowserReqId=1749579046416 (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/test_client_txt.html?id=00f2bff7-d171-48ee-8e66-3749761713c4&vscodeBrowserReqId=1749579046416', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/web.py", line 1788, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: StaticFileHandler.get() missing 1 required positional argument: 'path'
+2025-06-10 13:10:46 - ERROR - [web.py:2348] - 500 GET /test_client_txt.html?id=00f2bff7-d171-48ee-8e66-3749761713c4&vscodeBrowserReqId=1749579046416 (::1) 2.47ms
+2025-06-10 13:19:35 - ERROR - [web.py:1875] - Uncaught exception GET /ws?client_id=mobile-cleanup-test-1749579575&action=join&room_id=cf2e83c73834413ab2f83c67a76f8beb&password=BAFE3E (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?client_id=mobile-cleanup-test-1749579575&action=join&room_id=cf2e83c73834413ab2f83c67a76f8beb&password=BAFE3E', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 602, in open
+    active_websockets[client_id_for_jwt].write_message({
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
