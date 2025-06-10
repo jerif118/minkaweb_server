@@ -1,5 +1,10 @@
 import requests
 import json
+import os
+import unittest
+
+# Archivo donde guardaremos el JWT para futuras ejecuciones
+TOKEN_FILE = os.path.join(os.path.dirname(__file__), ".last_jwt_token")
 
 # --- CONFIGURACIÓN (MODIFICA ESTO SEGÚN TU ENTORNO) ---
 # Si tu servidor Tornado está en tu misma máquina:
@@ -12,24 +17,45 @@ SERVER_SCHEME = "http"
 
 ENDPOINT_URL = f"{SERVER_SCHEME}://{SERVER_HOST}:{SERVER_PORT}/api/rooms/message"
 
-# Datos de ejemplo para el payload.
-# Para que el mensaje se procese completamente y se intente reenviar,
-# 'client_id' y 'room_id' deberían existir en una sesión activa en tu servidor.
-# Si no existen, tu API debería devolver un error 403 o similar, lo cual también es una prueba útil.
+# -------------------------------------------------------------------
+# Utilidades para persistir / cargar el token JWT entre ejecuciones
+# -------------------------------------------------------------------
+def save_token(token: str) -> None:
+    """Guarda el JWT en un archivo local para reutilizarlo."""
+    if token:
+        with open(TOKEN_FILE, "w", encoding="utf-8") as fh:
+            fh.write(token.strip())
+        print(f"[INFO] Token JWT guardado en {TOKEN_FILE}")
+
+def load_token() -> str | None:
+    """Carga el JWT del archivo (si existe)."""
+    if os.path.exists(TOKEN_FILE):
+        with open(TOKEN_FILE, "r", encoding="utf-8") as fh:
+            return fh.read().strip()
+    return None
+
 payload = {
-    "client_id": "mobile-333fd0e2-5451-46b8-a666-7435eb7b109b",  # Un ID de cliente de prueba
-    "room_id": "cf2415b1-2843-416b-aee3-f8cb59cf5ff7",    # Reemplaza con un ID de sala real de tu servidor si quieres probar el reenvío
-    "message": {                             # Esta es la estructura que envías desde Android (NotificationData)
+    "client_id": "mobile-333fd0e2-5451-46b8-a666-7435eb7b109b",
+    "room_id": "cf2415b1-2843-416b-aee3-f8cb59cf5ff7",
+    "message": {
         "appName": "TestAppFromPython",
         "senderName": "Python Script",
         "text": "Hola desde el cliente de prueba Python!",
         "amount": 10.50,
-        "date": 1678886400000, # Ejemplo de timestamp
+        "date": 1678886400000,
         "id": "test-notif-id-python-001",
         "packageName": "com.example.pythontest",
-        "info": "Información adicional opcional" # Si tu NotificationData tiene este campo
+        "info": "Información adicional opcional"
     }
 }
+
+# Si tenemos un JWT previo, añadirlo al payload
+jwt_cached = load_token()
+if jwt_cached:
+    payload["jwt_token"] = jwt_cached
+    print(f"[INFO] Usando JWT almacenado ({jwt_cached[:15]}…)")
+else:
+    print("[INFO] No se encontró JWT almacenado, se enviará sin token.")
 
 headers = {
     "Content-Type": "application/json"
@@ -49,6 +75,11 @@ def probar_envio_mensaje():
             # Intentar parsear la respuesta como JSON
             response_json = response.json()
             print(f"Cuerpo de la Respuesta (JSON):\n{json.dumps(response_json, indent=2)}")
+
+            # -- Guardar token nuevo si viene en la respuesta --
+            if isinstance(response_json, dict) and response_json.get("jwt_token"):
+                save_token(response_json["jwt_token"])
+
         except json.JSONDecodeError:
             # Si no es JSON, mostrar como texto
             print(f"Cuerpo de la Respuesta (Texto):\n{response.text}")
@@ -69,15 +100,27 @@ def probar_envio_mensaje():
         print("\n--- OCURRIÓ UN ERROR INESPERADO ---")
         print(f"Error: {e}")
 
-if __name__ == "__main__":
-    print("NOTA: Para una prueba completa del flujo de mensajes dentro de una sala,")
-    print("asegúrate de que 'client_id' y 'room_id' en el payload correspondan a una")
-    print("sesión activa en el servidor, y que 'client_id' sea un participante de esa sala.")
-    print("De lo contrario, podrías obtener una respuesta exitosa (200 OK) pero con un mensaje")
-    print("del servidor indicando que el otro usuario no fue encontrado o no estás en una sala válida,")
-    print("o un error 403/404 si la sala/cliente no existe.\n")
-    
-    # Para hacer una prueba más completa, podrías primero llamar a /api/rooms (POST) para crear una sala
-    # y luego usar ese room_id aquí. Por ahora, esta prueba se enfoca en el endpoint de mensaje.
+# -------------------------------------------------------------------
+# Tests básicos usando unittest
+# -------------------------------------------------------------------
+class APITestSuite(unittest.TestCase):
+    def test_health(self):
+        url = f"{SERVER_SCHEME}://{SERVER_HOST}:{SERVER_PORT}/health"
+        r = requests.get(url, timeout=5)
+        self.assertEqual(r.status_code, 200, "Health endpoint no devolvió 200")
+        self.assertIn("status", r.json())
 
-    probar_envio_mensaje()
+    def test_send_message(self):
+        """POST al endpoint /api/rooms/message debería devolver 200 o 4xx controlado"""
+        r = requests.post(ENDPOINT_URL, data=json.dumps(payload), headers=headers, timeout=10)
+        self.assertIn(r.status_code, (200, 400, 403, 404))
+        # Guarda token si vino
+        try:
+            data_json = r.json()
+            if "jwt_token" in data_json:
+                save_token(data_json["jwt_token"])
+        except Exception:
+            pass
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)

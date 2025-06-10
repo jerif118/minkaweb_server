@@ -9781,3 +9781,33 @@ tornado.websocket.WebSocketClosedError
 2025-06-10 17:09:48 - INFO - [web.py:2348] - 304 GET /monitor (::1) 19.65ms
 2025-06-10 17:10:18 - INFO - [web.py:2348] - 304 GET /monitor (::1) 12.10ms
 2025-06-10 17:10:48 - INFO - [web.py:2348] - 304 GET /monitor (::1) 13.93ms
+2025-06-10 17:11:18 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.59ms
+2025-06-10 17:11:48 - INFO - [web.py:2348] - 304 GET /monitor (::1) 31.35ms
+2025-06-10 17:12:18 - INFO - [web.py:2348] - 304 GET /monitor (::1) 10.92ms
+2025-06-10 17:12:48 - INFO - [web.py:2348] - 304 GET /monitor (::1) 28.13ms
+2025-06-10 17:13:02 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 17:13:02 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 17:13:02 - INFO - [appv2.py:1374] - Servidor MinkaV2 detenido.
+2025-06-10 17:13:16 - WARNING - [appv2.py:1316] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 17:13:16 - INFO - [appv2.py:1303] - Iniciando cierre elegante...
+2025-06-10 17:13:17 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 17:13:17 - INFO - [appv2.py:1313] - Cierre elegante completado.
+2025-06-10 17:13:17 - INFO - [appv2.py:1334] - Servidor MinkaV2 detenido.
+2025-06-10 17:13:21 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 17:13:21 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 17:13:21 - INFO - [appv2.py:1330] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 17:13:21 - INFO - [appv2.py:1234] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 17:13:21 - INFO - [appv2.py:1274] - [INIT] Cliente python-client-1d4084cb-4d55-4192-8325-ee98bcba4c64 estaba connected. Marcando como pending_reconnect.
+2025-06-10 17:13:21 - INFO - [appv2.py:1274] - [INIT] Cliente python-client-9e2bc6c0-4423-41a4-b9d9-b29d72d32c2c estaba connected. Marcando como pending_reconnect.
+2025-06-10 17:13:21 - INFO - [appv2.py:1274] - [INIT] Cliente web-client-1749581146708 estaba waiting. Marcando como pending_reconnect.
+2025-06-10 17:13:21 - INFO - [appv2.py:1274] - [INIT] Cliente web-client-1749580893015 estaba waiting. Marcando como pending_reconnect.
+2025-06-10 17:13:21 - INFO - [appv2.py:1310] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 17:14:38 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 17:14:38 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 17:14:38 - INFO - [appv2.py:1374] - Servidor MinkaV2 detenido.
+2025-06-10 17:17:21 - INFO - [appv2.py:1186] - [CLEANUP] Cliente python-client-1d4084cb-4d55-4192-8325-ee98bcba4c64 (web: False) no reconectó (200s). Limpiando.
+2025-06-10 17:17:21 - INFO - [appv2.py:1186] - [CLEANUP] Cliente python-client-9e2bc6c0-4423-41a4-b9d9-b29d72d32c2c (web: False) no reconectó (200s). Limpiando.
+2025-06-10 17:47:21 - INFO - [appv2.py:1162] - [CLEANUP] Sala abandonada 11deff7843584ec89470c7a3c1d0d970 expirada (sin conexiones por 1800s, límite: 1800s)
+2025-06-10 17:47:21 - INFO - [appv2.py:1162] - [CLEANUP] Sala abandonada 866a86f08441497a93cbe12e126ab664 expirada (sin conexiones por 1800s, límite: 1800s)
+2025-06-10 17:47:21 - INFO - [appv2.py:1215] - [CLEANUP] Eliminando sesión expirada 866a86f08441497a93cbe12e126ab664 y sus clientes restantes.
+2025-06-10 17:47:21 - INFO - [appv2.py:1215] - [CLEANUP] Eliminando sesión expirada 11deff7843584ec89470c7a3c1d0d970 y sus clientes restantes.

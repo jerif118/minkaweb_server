@@ -76,6 +76,21 @@ if not logging.getLogger().hasHandlers(): # Evitar múltiples handlers si se rec
 # Diccionario para mantener los websockets activos (cliente_id -> WebSocketHandler)
 active_websockets = {}
 
+async def _is_client_slot_active(client_id: str) -> bool:
+    """True si el cliente sigue contando en la sala."""
+    client = await get_client(client_id)
+    if not client:
+        return False  # ya fue limpiado
+
+    status = client.get("status")
+    if status == "pending_reconnect":
+        is_web = client.get("is_web", False)
+        timeout = WEB_RECONNECT_TIMEOUT if is_web else RECONNECT_GRACE_PERIOD
+        return (time.time() - client.get("pending_since", 0)) < timeout
+
+    # dozing, connected, waiting → plaza ocupada
+    return True
+
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.write("Servidor Minka WebSockets V2 está operativo.")
@@ -540,11 +555,20 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                  return
 
             current_session_join = await get_session(room_id_join)
-            if current_session_join and current_session_join.get("password") == room_password_join:
-                if len(current_session_join.get('clients', [])) >= 2 and not current_session_join.get('has_dozing_client'):
-                    self.write_message({'error': 'La sala ya está llena', 'code': 'ROOM_FULL'})
-                    self.close()
-                    return
+            clients_in_room = current_session_join.get('clients', [])
+            already_in_room = client_id_param in clients_in_room
+
+            active_slots = 0
+            for cid in clients_in_room:
+                if cid == client_id_param:
+                    continue  # el que se reconecta no cuenta doble
+                if await _is_client_slot_active(cid):
+                    active_slots += 1
+
+            if (not already_in_room) and active_slots >= 2 and not current_session_join.get('has_dozing_client'):
+                self.write_message({'error': 'La sala ya está llena', 'code': 'ROOM_FULL'})
+                self.close()
+                return
                 
                 # Lógica para re-unión de cliente en doze o unión de nuevo cliente
                 has_dozing_client = current_session_join.get('has_dozing_client', False)
