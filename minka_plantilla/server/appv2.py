@@ -477,8 +477,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             # NO generar JWT hasta que ambos usuarios estén conectados
             # Solo enviar room_id y password para que el usuario pueda compartir
             self.write_message({
-                'event': 'room_created',
-                'room_created': True,
+                #'event': 'room_created',
+                #'room_created': True,
                 'room_id': self.room_id,
                 'password': room_password
                 # NO enviar jwt_token aquí
@@ -580,9 +580,12 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                         logging.error(f"[WS-JOIN] Error al decodificar JWT recién creado para {self.client_id}: {e}")
 
                 self.write_message({
-                    'event': 'joined_room',
+                    # 'event': 'joined_room',
+                    # 'room_id': self.room_id,
+                    # 'client_id': self.client_id,
+                    # 'jwt_token': jwt_token_for_web_joiner
                     'room_id': self.room_id,
-                    'client_id': self.client_id,
+                    'password': room_password_join,     
                     'jwt_token': jwt_token_for_web_joiner
                 })
                 logging.info(f"[WS-JOIN] Cliente {self.client_id} se unió a sala {self.room_id}")
