@@ -569,36 +569,70 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 await set_session(self.room_id, current_session_join)
                 active_websockets[self.client_id] = self
 
-                jwt_token_for_web_joiner = None
-                if self.client_id.startswith("web-"):
-                    jwt_token_for_web_joiner = generate_jwt(self.client_id, self.room_id)
-                    try:
-                        payload = jwt.decode(jwt_token_for_web_joiner, JWT_SECRET_KEY, algorithms=[JWT_ALGORITHM], options={"verify_exp": False})
-                        client_data_join['current_jti'] = payload.get('jti')
-                        await set_client(self.client_id, client_data_join)
-                    except jwt.PyJWTError as e:
-                        logging.error(f"[WS-JOIN] Error al decodificar JWT recién creado para {self.client_id}: {e}")
+                # Generar JWT para el cliente que se une (web o mobile)
+                jwt_token_for_joiner = generate_jwt(self.client_id, self.room_id)
+                try:
+                    payload = jwt.decode(
+                        jwt_token_for_joiner,
+                        JWT_SECRET_KEY,
+                        algorithms=[JWT_ALGORITHM],
+                        options={"verify_exp": False}
+                    )
+                    client_data_join["current_jti"] = payload.get("jti")
+                    await set_client(self.client_id, client_data_join)
+                except jwt.PyJWTError as e:
+                    logging.error(f"[WS-JOIN] Error al decodificar JWT recién creado para {self.client_id}: {e}")
 
                 self.write_message({
-                    # 'event': 'joined_room',
-                    # 'room_id': self.room_id,
-                    # 'client_id': self.client_id,
-                    # 'jwt_token': jwt_token_for_web_joiner
+                    'event': 'joined',
                     'room_id': self.room_id,
-                    'password': room_password_join,     
-                    'jwt_token': jwt_token_for_web_joiner
+                    'jwt_token': jwt_token_for_joiner
                 })
                 logging.info(f"[WS-JOIN] Cliente {self.client_id} se unió a sala {self.room_id}")
 
+                for cid in current_session_join.get('clients', []):
+                    # Generar y registrar token para este peer
+                    peer_data = await get_client(cid) or {}
+                    # ¿Ya tiene JTI asignado?
+                    if peer_data.get("current_jti"):
+                        continue  # ya tiene token válido
+
+                    peer_token = generate_jwt(cid, self.room_id)
+                    try:
+                        pld = jwt.decode(peer_token, JWT_SECRET_KEY,
+                                         algorithms=[JWT_ALGORITHM],
+                                         options={"verify_exp": False})
+                        peer_data["current_jti"] = pld.get("jti")
+                        await set_client(cid, peer_data)
+                    except jwt.PyJWTError as e:
+                        logging.error(f"[WS-JOIN] Error decodificando JWT para {cid}: {e}")
+
+                    # Enviar token al peer si está conectado; si no, encolarlo
+                    if cid in active_websockets:
+                        try:
+                            active_websockets[cid].write_message({
+                                "event": "jwt_issued",
+                                "room_id": self.room_id,
+                                "jwt_token": peer_token,
+                            })
+                        except tornado.websocket.WebSocketClosedError:
+                            logging.warning(f"[WS-JOIN] WS cerrado al enviar JWT a {cid}")
+                    else:
+                        await add_message_to_queue(cid, {
+                            "event": "jwt_issued",
+                            "room_id": self.room_id,
+                            "jwt_token": peer_token,
+                            "peer_id": self.client_id
+                        })
                 # Notificar al otro peer
                 other_peers = [cid for cid in current_session_join.get('clients', []) if cid != self.client_id]
                 for peer_id in other_peers:
                     if peer_id in active_websockets:
                         try:
                             active_websockets[peer_id].write_message({
-                                'event': 'peer_joined',
+                                'event': 'joined',
                                 'peer_id': self.client_id,
-                                'room_id': self.room_id
+                                'room_id': self.room_id,
                             })
                         except tornado.websocket.WebSocketClosedError:
                             logging.warning(f"[WS-JOIN] Error al notificar a {peer_id}: WebSocket cerrado.")
@@ -704,8 +738,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             reason = data.get('reason', '')
             logging.info(f"[LEAVE] Cliente {self.client_id} deja sala {self.room_id}, razón: {reason}")
             
-            # Blacklisting del JTI para clientes web
-            if self.client_id.startswith("web-"):
+            # Blacklisting del JTI para cualquier cliente
+            if True:
                 jti_to_blacklist = None
                 # Prioridad si el cliente envía el token actual en el mensaje de 'leave'
                 if jwt_in_message: 
