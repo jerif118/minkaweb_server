@@ -215,7 +215,6 @@ class MonitorHandler(tornado.web.RequestHandler):
         <head>
           <title>Monitor - Minka WebSocket Server</title>
           <meta charset="UTF-8">
-          <meta http-equiv="refresh" content="30">
           <style>
             body {{ font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }}
             .container {{ max-width: 1200px; margin: 0 auto; }}
@@ -277,6 +276,7 @@ class MonitorHandler(tornado.web.RequestHandler):
             <table>
               <tr>
                 <th>Room ID</th>
+                <th>Contraseña</th>
                 <th>Clientes</th>
                 <th>Última Actividad</th>
                 <th>Detalles</th>
@@ -292,6 +292,7 @@ class MonitorHandler(tornado.web.RequestHandler):
                 html += f"""
               <tr>
                 <td>{tornado.escape.xhtml_escape(room_id)}</td>
+                <td>{tornado.escape.xhtml_escape(session_data.get('password',''))}</td>
                 <td>{tornado.escape.xhtml_escape(clients_list)}</td>
                 <td>{last_activity_str}</td>
                 <td><details><summary>Ver datos</summary><div class="json-data">{tornado.escape.xhtml_escape(str(session_data))}</div></details></td>
@@ -336,7 +337,7 @@ class MonitorHandler(tornado.web.RequestHandler):
         
         html += """
             </table>
-            <p><small>Actualización automática cada 30 segundos</small></p>
+            <p><small>Presiona F5 para refrescar manualmente</small></p>
           </div>
         </body>
         </html>"""
@@ -558,6 +559,13 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             current_session_join = await get_session(room_id_join)
             clients_in_room = current_session_join.get('clients', [])
             already_in_room = client_id_param in clients_in_room
+
+            # Exigir JWT para reconexión de cliente existente
+            if already_in_room and not token:
+                logging.warning(f"[WS-OPEN] Reconexión sin token rechazada para {client_id_param}")
+                self.write_message({'error': 'Token JWT requerido para reconexión', 'code': 'TOKEN_REQUIRED'})
+                self.close()
+                return
 
             active_slots = 0
             for cid in clients_in_room:
