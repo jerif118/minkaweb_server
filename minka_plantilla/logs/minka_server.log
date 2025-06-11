@@ -9811,3 +9811,678 @@ tornado.websocket.WebSocketClosedError
 2025-06-10 17:47:21 - INFO - [appv2.py:1162] - [CLEANUP] Sala abandonada 866a86f08441497a93cbe12e126ab664 expirada (sin conexiones por 1800s, límite: 1800s)
 2025-06-10 17:47:21 - INFO - [appv2.py:1215] - [CLEANUP] Eliminando sesión expirada 866a86f08441497a93cbe12e126ab664 y sus clientes restantes.
 2025-06-10 17:47:21 - INFO - [appv2.py:1215] - [CLEANUP] Eliminando sesión expirada 11deff7843584ec89470c7a3c1d0d970 y sus clientes restantes.
+2025-06-10 22:00:49 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 22:00:49 - ERROR - [session.py:43] - [REDIS_INIT] No se pudo conectar a Redis: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-10 22:00:49 - CRITICAL - [appv2.py:1341] - [MAIN] No se pudo inicializar Redis al arrancar: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.. Saliendo.
+2025-06-10 22:00:49 - INFO - [appv2.py:1398] - Servidor MinkaV2 detenido.
+2025-06-10 22:01:27 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 22:01:27 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 22:01:27 - INFO - [appv2.py:1354] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 22:01:27 - INFO - [appv2.py:1258] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 22:01:27 - INFO - [appv2.py:1334] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 22:01:32 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749610892769 (::1) 2.03ms
+2025-06-10 22:01:32 - INFO - [appv2.py:525] - [WS-OPEN] Sala 58cf4a7f6846452d91f9ac70b28b7098 creada por web-client-1749610892769. Contraseña: 119BCD. Esperando peer para generar JWT.
+2025-06-10 22:02:51 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749610971636 (::1) 24.33ms
+2025-06-10 22:02:51 - INFO - [appv2.py:525] - [WS-OPEN] Sala 832181b6e8354219926b248b3c72139e creada por web-client-1749610971636. Contraseña: 689840. Esperando peer para generar JWT.
+2025-06-10 22:03:00 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749610980866 (::1) 1.83ms
+2025-06-10 22:03:00 - INFO - [appv2.py:525] - [WS-OPEN] Sala cf435fae001f4e6a93b348ce5f4a7f15 creada por web-client-1749610980866. Contraseña: 4C6168. Esperando peer para generar JWT.
+2025-06-10 22:03:36 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-79ebeff3-c459-4f0c-90a0-28210fb55367&room_id=cf435fae001f4e6a93b348ce5f4a7f15&password=4C6168 (::1) 1.20ms
+2025-06-10 22:03:36 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=python-client-79ebeff3-c459-4f0c-90a0-28210fb55367, room_id=cf435fae001f4e6a93b348ce5f4a7f15, password=4C6168
+2025-06-10 22:03:59 - INFO - [web.py:2348] - 200 GET /monitor (::1) 7.21ms
+2025-06-10 22:03:59 - WARNING - [web.py:2348] - 404 GET /favicon.ico (::1) 0.80ms
+2025-06-10 22:04:01 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.74ms
+2025-06-10 22:04:31 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.79ms
+2025-06-10 22:04:48 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-fdf82d4b-48f0-42a3-9b85-9358391d85df&room_id=cf435fae001f4e6a93b348ce5f4a7f15&password=4C6168 (::1) 0.27ms
+2025-06-10 22:04:48 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=python-client-fdf82d4b-48f0-42a3-9b85-9358391d85df, room_id=cf435fae001f4e6a93b348ce5f4a7f15, password=4C6168
+2025-06-10 22:05:01 - INFO - [web.py:2348] - 304 GET /monitor (::1) 15.02ms
+2025-06-10 22:05:18 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-e3b6f479-fb69-4998-9dda-55ef8d84b2a4&room_id=cf435fae001f4e6a93b348ce5f4a7f15&password=4C6168 (::1) 0.28ms
+2025-06-10 22:05:18 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=python-client-e3b6f479-fb69-4998-9dda-55ef8d84b2a4, room_id=cf435fae001f4e6a93b348ce5f4a7f15, password=4C6168
+2025-06-10 22:05:22 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-0a90b4ce-5aa7-43b0-a270-21d62e94f85d&room_id=cf435fae001f4e6a93b348ce5f4a7f15&password=4C6168 (::1) 0.27ms
+2025-06-10 22:05:22 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=python-client-0a90b4ce-5aa7-43b0-a270-21d62e94f85d, room_id=cf435fae001f4e6a93b348ce5f4a7f15, password=4C6168
+2025-06-10 22:05:31 - INFO - [web.py:2348] - 304 GET /monitor (::1) 14.96ms
+2025-06-10 22:05:41 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-d39ccb0f-e233-4d7c-8353-acfa6d712d76&room_id=cf435fae001f4e6a93b348ce5f4a7f15&password=4C6168 (::1) 0.35ms
+2025-06-10 22:05:41 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=python-client-d39ccb0f-e233-4d7c-8353-acfa6d712d76, room_id=cf435fae001f4e6a93b348ce5f4a7f15, password=4C6168
+2025-06-10 22:05:43 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-d838b729-dc7d-412a-95b7-2d39e2be2737&room_id=cf435fae001f4e6a93b348ce5f4a7f15&password=4C6168 (::1) 0.33ms
+2025-06-10 22:05:43 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=python-client-d838b729-dc7d-412a-95b7-2d39e2be2737, room_id=cf435fae001f4e6a93b348ce5f4a7f15, password=4C6168
+2025-06-10 22:06:02 - INFO - [web.py:2348] - 304 GET /monitor (::1) 10.91ms
+2025-06-10 22:06:11 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-ec691a3d-b9b4-48ea-b8a8-699cf0e75d87&room_id=cf435fae001f4e6a93b348ce5f4a7f15&password=4C6168 (::1) 0.30ms
+2025-06-10 22:06:11 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=python-client-ec691a3d-b9b4-48ea-b8a8-699cf0e75d87, room_id=cf435fae001f4e6a93b348ce5f4a7f15, password=4C6168
+2025-06-10 22:06:12 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-a960099f-462b-4bf7-a4da-0f84c4144a08&room_id=cf435fae001f4e6a93b348ce5f4a7f15&password=4C6168 (::1) 0.25ms
+2025-06-10 22:06:12 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=python-client-a960099f-462b-4bf7-a4da-0f84c4144a08, room_id=cf435fae001f4e6a93b348ce5f4a7f15, password=4C6168
+2025-06-10 22:06:32 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.60ms
+2025-06-10 22:07:02 - INFO - [web.py:2348] - 304 GET /monitor (::1) 6.51ms
+2025-06-10 22:07:32 - INFO - [web.py:2348] - 304 GET /monitor (::1) 12.46ms
+2025-06-10 22:08:02 - INFO - [web.py:2348] - 304 GET /monitor (::1) 27.67ms
+2025-06-10 22:08:33 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.17ms
+2025-06-10 22:09:03 - INFO - [web.py:2348] - 304 GET /monitor (::1) 10.95ms
+2025-06-10 22:09:33 - INFO - [web.py:2348] - 304 GET /monitor (::1) 12.88ms
+2025-06-10 22:10:03 - INFO - [web.py:2348] - 200 GET /monitor (::1) 9.21ms
+2025-06-10 22:10:20 - INFO - [web.py:2348] - 304 GET /monitor (::1) 3.18ms
+2025-06-10 22:10:21 - INFO - [web.py:2348] - 304 GET /monitor (::1) 2.93ms
+2025-06-10 22:10:21 - INFO - [web.py:2348] - 304 GET /monitor (::1) 3.35ms
+2025-06-10 22:10:21 - INFO - [web.py:2348] - 304 GET /monitor (::1) 1.94ms
+2025-06-10 22:10:22 - INFO - [web.py:2348] - 304 GET /monitor (::1) 2.14ms
+2025-06-10 22:10:25 - INFO - [web.py:2348] - 304 GET /monitor (::1) 2.38ms
+2025-06-10 22:10:25 - INFO - [web.py:2348] - 304 GET /monitor (::1) 2.30ms
+2025-06-10 22:10:26 - INFO - [web.py:2348] - 304 GET /monitor (::1) 2.49ms
+2025-06-10 22:10:26 - INFO - [web.py:2348] - 304 GET /monitor (::1) 2.88ms
+2025-06-10 22:10:26 - INFO - [web.py:2348] - 304 GET /monitor (::1) 3.00ms
+2025-06-10 22:10:35 - INFO - [web.py:2348] - 304 GET /monitor (::1) 2.59ms
+2025-06-10 22:10:36 - INFO - [web.py:2348] - 304 GET /monitor (::1) 3.84ms
+2025-06-10 22:10:36 - INFO - [web.py:2348] - 304 GET /monitor (::1) 2.11ms
+2025-06-10 22:10:36 - INFO - [web.py:2348] - 304 GET /monitor (::1) 2.49ms
+2025-06-10 22:10:41 - WARNING - [appv2.py:1380] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 22:10:41 - INFO - [appv2.py:1367] - Iniciando cierre elegante...
+2025-06-10 22:10:42 - INFO - [session.py:348] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 22:10:42 - INFO - [appv2.py:1377] - Cierre elegante completado.
+2025-06-10 22:10:42 - INFO - [appv2.py:1398] - Servidor MinkaV2 detenido.
+2025-06-10 22:10:44 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 22:10:44 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 22:10:44 - INFO - [appv2.py:1354] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 22:10:44 - INFO - [appv2.py:1258] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 22:10:44 - INFO - [appv2.py:1334] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 22:10:47 - INFO - [web.py:2348] - 200 GET /monitor (::1) 28.67ms
+2025-06-10 22:10:56 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749611456649 (::1) 1.49ms
+2025-06-10 22:10:56 - INFO - [appv2.py:525] - [WS-OPEN] Sala 9678f9e2921c4a648ddc96d19f703c9a creada por web-client-1749611456649. Contraseña: 6B72BE. Esperando peer para generar JWT.
+2025-06-10 22:11:17 - INFO - [web.py:2348] - 200 GET /monitor (::1) 5.20ms
+2025-06-10 22:11:23 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-8d25b1dd-4f9c-44ae-b8df-be9e12badd57&room_id=9678f9e2921c4a648ddc96d19f703c9a&password=6B72BE (::1) 0.31ms
+2025-06-10 22:11:23 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=python-client-8d25b1dd-4f9c-44ae-b8df-be9e12badd57, room_id=9678f9e2921c4a648ddc96d19f703c9a, password=6B72BE
+2025-06-10 22:11:48 - INFO - [web.py:2348] - 304 GET /monitor (::1) 6.43ms
+2025-06-10 22:12:09 - WARNING - [appv2.py:1380] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 22:12:09 - INFO - [appv2.py:1367] - Iniciando cierre elegante...
+2025-06-10 22:12:10 - INFO - [session.py:348] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 22:12:10 - INFO - [appv2.py:1377] - Cierre elegante completado.
+2025-06-10 22:12:10 - INFO - [appv2.py:1398] - Servidor MinkaV2 detenido.
+2025-06-10 22:12:25 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 22:12:25 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 22:12:25 - INFO - [appv2.py:1354] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 22:12:25 - INFO - [appv2.py:1258] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 22:12:25 - INFO - [appv2.py:1298] - [INIT] Cliente web-client-1749611456649 estaba waiting. Marcando como pending_reconnect.
+2025-06-10 22:12:25 - INFO - [appv2.py:1334] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 22:12:28 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749611548584 (::1) 11.41ms
+2025-06-10 22:12:28 - INFO - [appv2.py:525] - [WS-OPEN] Sala caa2c03dd08f4204a5acea38bda1ea7c creada por web-client-1749611548584. Contraseña: E9A740. Esperando peer para generar JWT.
+2025-06-10 22:13:07 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-78270e9d-70ff-4584-be20-1c64b77b91f5&room_id=caa2c03dd08f4204a5acea38bda1ea7c&password=E9A740 (::1) 0.31ms
+2025-06-10 22:13:07 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=python-client-78270e9d-70ff-4584-be20-1c64b77b91f5, room_id=caa2c03dd08f4204a5acea38bda1ea7c, password=E9A740
+2025-06-10 22:21:25 - INFO - [appv2.py:1178] - [CLEANUP] Sala incompleta 9678f9e2921c4a648ddc96d19f703c9a expirada (solo 1 cliente por 629s, límite: 600s)
+2025-06-10 22:21:25 - INFO - [appv2.py:1239] - [CLEANUP] Eliminando sesión expirada 9678f9e2921c4a648ddc96d19f703c9a y sus clientes restantes.
+2025-06-10 22:23:25 - INFO - [appv2.py:1178] - [CLEANUP] Sala incompleta caa2c03dd08f4204a5acea38bda1ea7c expirada (solo 1 cliente por 657s, límite: 600s)
+2025-06-10 22:23:25 - INFO - [appv2.py:1239] - [CLEANUP] Eliminando sesión expirada caa2c03dd08f4204a5acea38bda1ea7c y sus clientes restantes.
+2025-06-10 22:25:16 - WARNING - [appv2.py:1380] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 22:25:16 - INFO - [appv2.py:1367] - Iniciando cierre elegante...
+2025-06-10 22:25:17 - INFO - [session.py:348] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 22:25:17 - INFO - [appv2.py:1377] - Cierre elegante completado.
+2025-06-10 22:25:17 - INFO - [appv2.py:1398] - Servidor MinkaV2 detenido.
+2025-06-10 22:25:19 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 22:25:19 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 22:25:19 - INFO - [appv2.py:1354] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 22:25:19 - INFO - [appv2.py:1258] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 22:25:19 - INFO - [appv2.py:1334] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 22:25:23 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749612323005 (::1) 194.85ms
+2025-06-10 22:25:23 - INFO - [appv2.py:525] - [WS-OPEN] Sala 779b6549ef27489ab4a5d0bb24ecc363 creada por web-client-1749612323005. Contraseña: 582FE3. Esperando peer para generar JWT.
+2025-06-10 22:25:59 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-814d57c0-5df8-44a4-bc57-7b886faa0bbd&room_id=779b6549ef27489ab4a5d0bb24ecc363&password=582FE3 (::1) 0.34ms
+2025-06-10 22:25:59 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=python-client-814d57c0-5df8-44a4-bc57-7b886faa0bbd, room_id=779b6549ef27489ab4a5d0bb24ecc363, password=582FE3
+2025-06-10 22:25:59 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 779b6549ef27489ab4a5d0bb24ecc363. Generando JWT para todos los clientes.
+2025-06-10 22:25:59 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente web-client-1749612323005
+2025-06-10 22:25:59 - INFO - [appv2.py:670] - [WS-JOIN] Cliente python-client-814d57c0-5df8-44a4-bc57-7b886faa0bbd se unió a sala 779b6549ef27489ab4a5d0bb24ecc363 - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:25:59 - INFO - [appv2.py:677] - [WS-JOIN] Cliente python-client-814d57c0-5df8-44a4-bc57-7b886faa0bbd se unió a sala 779b6549ef27489ab4a5d0bb24ecc363
+2025-06-10 22:27:15 - INFO - [web.py:2348] - 200 GET /monitor (::1) 5.64ms
+2025-06-10 22:27:18 - INFO - [web.py:2348] - 304 GET /monitor (::1) 5.08ms
+2025-06-10 22:27:42 - INFO - [web.py:2348] - 304 GET /monitor (::1) 6.80ms
+2025-06-10 22:27:43 - INFO - [web.py:2348] - 304 GET /monitor (::1) 3.72ms
+2025-06-10 22:27:44 - INFO - [web.py:2348] - 304 GET /monitor (::1) 4.77ms
+2025-06-10 22:27:44 - INFO - [web.py:2348] - 304 GET /monitor (::1) 3.80ms
+2025-06-10 22:27:44 - INFO - [web.py:2348] - 304 GET /monitor (::1) 2.88ms
+2025-06-10 22:27:44 - INFO - [web.py:2348] - 304 GET /monitor (::1) 4.60ms
+2025-06-10 22:27:44 - INFO - [web.py:2348] - 304 GET /monitor (::1) 3.27ms
+2025-06-10 22:27:44 - INFO - [web.py:2348] - 304 GET /monitor (::1) 4.94ms
+2025-06-10 22:27:46 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749612323005&room_id=779b6549ef27489ab4a5d0bb24ecc363&password=582FE3 (::1) 7.78ms
+2025-06-10 22:27:46 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749612323005, room_id=779b6549ef27489ab4a5d0bb24ecc363, password=582FE3
+2025-06-10 22:27:46 - WARNING - [appv2.py:601] - [WS-JOIN] Cliente web-client-1749612323005 ya está en la sala 779b6549ef27489ab4a5d0bb24ecc363. Permitir reconexión.
+2025-06-10 22:27:46 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 779b6549ef27489ab4a5d0bb24ecc363. Generando JWT para todos los clientes.
+2025-06-10 22:27:46 - ERROR - [web.py:1875] - Uncaught exception GET /ws?action=join&client_id=web-client-1749612323005&room_id=779b6549ef27489ab4a5d0bb24ecc363&password=582FE3 (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?action=join&client_id=web-client-1749612323005&room_id=779b6549ef27489ab4a5d0bb24ecc363&password=582FE3', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 647, in open
+    active_websockets[client_id_for_jwt].write_message({
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-10 22:27:46 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749612466858 (::1) 0.57ms
+2025-06-10 22:27:46 - INFO - [appv2.py:525] - [WS-OPEN] Sala 6543896c4d954389a27b17221aae6f1d creada por web-client-1749612466858. Contraseña: BFE4E1. Esperando peer para generar JWT.
+2025-06-10 22:27:49 - INFO - [web.py:2348] - 200 GET /monitor (::1) 13.13ms
+2025-06-10 22:27:50 - INFO - [web.py:2348] - 304 GET /monitor (::1) 5.18ms
+2025-06-10 22:27:50 - INFO - [web.py:2348] - 304 GET /monitor (::1) 4.88ms
+2025-06-10 22:27:50 - INFO - [web.py:2348] - 304 GET /monitor (::1) 6.32ms
+2025-06-10 22:27:50 - INFO - [web.py:2348] - 304 GET /monitor (::1) 4.81ms
+2025-06-10 22:27:51 - INFO - [web.py:2348] - 304 GET /monitor (::1) 6.20ms
+2025-06-10 22:27:51 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.33ms
+2025-06-10 22:27:51 - INFO - [web.py:2348] - 304 GET /monitor (::1) 4.77ms
+2025-06-10 22:27:51 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.59ms
+2025-06-10 22:27:51 - INFO - [web.py:2348] - 304 GET /monitor (::1) 4.38ms
+2025-06-10 22:27:52 - INFO - [web.py:2348] - 304 GET /monitor (::1) 4.52ms
+2025-06-10 22:27:53 - INFO - [web.py:2348] - 304 GET /monitor (::1) 4.01ms
+2025-06-10 22:27:53 - INFO - [web.py:2348] - 304 GET /monitor (::1) 6.23ms
+2025-06-10 22:27:53 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.09ms
+2025-06-10 22:28:01 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749612481480 (::1) 0.48ms
+2025-06-10 22:28:01 - INFO - [appv2.py:525] - [WS-OPEN] Sala 2b1b135706d042e3a1101579714b6a9d creada por web-client-1749612481480. Contraseña: 0A2BE1. Esperando peer para generar JWT.
+2025-06-10 22:28:24 - INFO - [web.py:2348] - 200 GET /monitor (::1) 27.02ms
+2025-06-10 22:28:54 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.82ms
+2025-06-10 22:29:14 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.01ms
+2025-06-10 22:29:15 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.16ms
+2025-06-10 22:29:15 - INFO - [web.py:2348] - 304 GET /monitor (::1) 6.09ms
+2025-06-10 22:29:15 - INFO - [web.py:2348] - 304 GET /monitor (::1) 5.38ms
+2025-06-10 22:29:17 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749612557137 (::1) 13.14ms
+2025-06-10 22:29:17 - INFO - [appv2.py:525] - [WS-OPEN] Sala a7872482464e4cc78cb4ed8abfa93b2a creada por web-client-1749612557137. Contraseña: B59936. Esperando peer para generar JWT.
+2025-06-10 22:29:19 - INFO - [web.py:2348] - 200 GET /monitor (::1) 13.02ms
+2025-06-10 22:29:49 - INFO - [web.py:2348] - 304 GET /monitor (::1) 12.70ms
+2025-06-10 22:30:19 - INFO - [web.py:2348] - 304 GET /monitor (::1) 17.62ms
+2025-06-10 22:30:49 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.16ms
+2025-06-10 22:30:53 - INFO - [web.py:2348] - 304 GET /monitor (::1) 20.81ms
+2025-06-10 22:30:54 - INFO - [web.py:2348] - 304 GET /monitor (::1) 5.56ms
+2025-06-10 22:30:54 - INFO - [web.py:2348] - 304 GET /monitor (::1) 10.56ms
+2025-06-10 22:30:54 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.62ms
+2025-06-10 22:30:54 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.52ms
+2025-06-10 22:30:55 - INFO - [web.py:2348] - 304 GET /monitor (::1) 13.08ms
+2025-06-10 22:30:55 - INFO - [web.py:2348] - 304 GET /monitor (::1) 4.61ms
+2025-06-10 22:30:56 - INFO - [web.py:2348] - 304 GET /monitor (::1) 6.76ms
+2025-06-10 22:30:56 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.60ms
+2025-06-10 22:30:57 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749612657831 (::1) 0.98ms
+2025-06-10 22:30:57 - INFO - [appv2.py:525] - [WS-OPEN] Sala 332070c6b3aa4700bd7444d62969b5a3 creada por web-client-1749612657831. Contraseña: 265202. Esperando peer para generar JWT.
+2025-06-10 22:30:58 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749612658326 (::1) 1.96ms
+2025-06-10 22:30:58 - INFO - [appv2.py:525] - [WS-OPEN] Sala 8bb4854b23f14881aa3c880e3a58da96 creada por web-client-1749612658326. Contraseña: 14B965. Esperando peer para generar JWT.
+2025-06-10 22:31:00 - INFO - [web.py:2348] - 200 GET /monitor (::1) 8.80ms
+2025-06-10 22:31:00 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.67ms
+2025-06-10 22:31:00 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.14ms
+2025-06-10 22:31:30 - INFO - [web.py:2348] - 304 GET /monitor (::1) 20.15ms
+2025-06-10 22:32:00 - INFO - [web.py:2348] - 304 GET /monitor (::1) 22.69ms
+2025-06-10 22:32:31 - INFO - [web.py:2348] - 304 GET /monitor (::1) 24.18ms
+2025-06-10 22:33:01 - INFO - [web.py:2348] - 304 GET /monitor (::1) 42.73ms
+2025-06-10 22:33:14 - WARNING - [appv2.py:1380] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 22:33:14 - INFO - [appv2.py:1367] - Iniciando cierre elegante...
+2025-06-10 22:33:15 - INFO - [session.py:348] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 22:33:15 - INFO - [appv2.py:1377] - Cierre elegante completado.
+2025-06-10 22:33:15 - INFO - [appv2.py:1398] - Servidor MinkaV2 detenido.
+2025-06-10 22:33:25 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 22:33:25 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 22:33:25 - INFO - [appv2.py:1360] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 22:33:25 - INFO - [appv2.py:1264] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 22:33:25 - INFO - [appv2.py:1304] - [INIT] Cliente web-client-1749612658326 estaba waiting. Marcando como pending_reconnect.
+2025-06-10 22:33:25 - INFO - [appv2.py:1304] - [INIT] Cliente web-client-1749612557137 estaba waiting. Marcando como pending_reconnect.
+2025-06-10 22:33:25 - INFO - [appv2.py:1304] - [INIT] Cliente web-client-1749612657831 estaba waiting. Marcando como pending_reconnect.
+2025-06-10 22:33:25 - INFO - [appv2.py:1304] - [INIT] Cliente web-client-1749612466858 estaba waiting. Marcando como pending_reconnect.
+2025-06-10 22:33:25 - INFO - [appv2.py:1304] - [INIT] Cliente python-client-814d57c0-5df8-44a4-bc57-7b886faa0bbd estaba connected. Marcando como pending_reconnect.
+2025-06-10 22:33:25 - INFO - [appv2.py:1304] - [INIT] Cliente web-client-1749612323005 estaba connected. Marcando como pending_reconnect.
+2025-06-10 22:33:25 - INFO - [appv2.py:1304] - [INIT] Cliente web-client-1749612481480 estaba waiting. Marcando como pending_reconnect.
+2025-06-10 22:33:25 - INFO - [appv2.py:1340] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 22:33:31 - INFO - [web.py:2348] - 200 GET /monitor (::1) 16.10ms
+2025-06-10 22:33:33 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749612812887 (::1) 4.01ms
+2025-06-10 22:33:33 - INFO - [appv2.py:525] - [WS-OPEN] Sala 696b7d1fe8d94965b9f4d24079c467fe creada por web-client-1749612812887. Contraseña: 11A8B6. Esperando peer para generar JWT.
+2025-06-10 22:33:55 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155&room_id=696b7d1fe8d94965b9f4d24079c467fe&password=11A8B6 (::1) 0.32ms
+2025-06-10 22:33:55 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155, room_id=696b7d1fe8d94965b9f4d24079c467fe, password=11A8B6
+2025-06-10 22:33:55 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 696b7d1fe8d94965b9f4d24079c467fe. Generando JWT para todos los clientes.
+2025-06-10 22:33:55 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente web-client-1749612812887
+2025-06-10 22:33:55 - INFO - [appv2.py:670] - [WS-JOIN] Cliente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:33:55 - INFO - [appv2.py:677] - [WS-JOIN] Cliente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe
+2025-06-10 22:34:01 - INFO - [web.py:2348] - 200 GET /monitor (::1) 14.42ms
+2025-06-10 22:34:09 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para web-client-1749612812887 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:34:09 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de web-client-1749612812887 (web: True) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:34:10 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749612812887&room_id=696b7d1fe8d94965b9f4d24079c467fe&password=11A8B6 (::1) 224.88ms
+2025-06-10 22:34:10 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749612812887, room_id=696b7d1fe8d94965b9f4d24079c467fe, password=11A8B6
+2025-06-10 22:34:10 - WARNING - [appv2.py:601] - [WS-JOIN] Cliente web-client-1749612812887 ya está en la sala 696b7d1fe8d94965b9f4d24079c467fe. Permitir reconexión.
+2025-06-10 22:34:10 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 696b7d1fe8d94965b9f4d24079c467fe. Generando JWT para todos los clientes.
+2025-06-10 22:34:10 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155
+2025-06-10 22:34:10 - INFO - [appv2.py:670] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:34:10 - INFO - [appv2.py:677] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe
+2025-06-10 22:34:17 - INFO - [web.py:2348] - 200 GET /monitor (::1) 18.04ms
+2025-06-10 22:34:18 - INFO - [web.py:2348] - 304 GET /monitor (::1) 14.41ms
+2025-06-10 22:34:34 - INFO - [web.py:2348] - 304 GET /monitor (::1) 15.90ms
+2025-06-10 22:34:44 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para web-client-1749612812887 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:34:44 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de web-client-1749612812887 (web: True) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:34:44 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749612812887&room_id=696b7d1fe8d94965b9f4d24079c467fe&password=11A8B6 (::1) 2.80ms
+2025-06-10 22:34:44 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749612812887, room_id=696b7d1fe8d94965b9f4d24079c467fe, password=11A8B6
+2025-06-10 22:34:44 - WARNING - [appv2.py:601] - [WS-JOIN] Cliente web-client-1749612812887 ya está en la sala 696b7d1fe8d94965b9f4d24079c467fe. Permitir reconexión.
+2025-06-10 22:34:44 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 696b7d1fe8d94965b9f4d24079c467fe. Generando JWT para todos los clientes.
+2025-06-10 22:34:44 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155
+2025-06-10 22:34:44 - INFO - [appv2.py:670] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:34:44 - INFO - [appv2.py:677] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe
+2025-06-10 22:34:46 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para web-client-1749612812887 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:34:46 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de web-client-1749612812887 (web: True) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:34:46 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749612812887&room_id=696b7d1fe8d94965b9f4d24079c467fe&password=11A8B6 (::1) 0.54ms
+2025-06-10 22:34:46 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749612812887, room_id=696b7d1fe8d94965b9f4d24079c467fe, password=11A8B6
+2025-06-10 22:34:46 - WARNING - [appv2.py:601] - [WS-JOIN] Cliente web-client-1749612812887 ya está en la sala 696b7d1fe8d94965b9f4d24079c467fe. Permitir reconexión.
+2025-06-10 22:34:46 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 696b7d1fe8d94965b9f4d24079c467fe. Generando JWT para todos los clientes.
+2025-06-10 22:34:46 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155
+2025-06-10 22:34:46 - INFO - [appv2.py:670] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:34:46 - INFO - [appv2.py:677] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe
+2025-06-10 22:34:47 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para web-client-1749612812887 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:34:47 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de web-client-1749612812887 (web: True) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:34:47 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749612812887&room_id=696b7d1fe8d94965b9f4d24079c467fe&password=11A8B6 (::1) 0.53ms
+2025-06-10 22:34:47 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749612812887, room_id=696b7d1fe8d94965b9f4d24079c467fe, password=11A8B6
+2025-06-10 22:34:47 - WARNING - [appv2.py:601] - [WS-JOIN] Cliente web-client-1749612812887 ya está en la sala 696b7d1fe8d94965b9f4d24079c467fe. Permitir reconexión.
+2025-06-10 22:34:47 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 696b7d1fe8d94965b9f4d24079c467fe. Generando JWT para todos los clientes.
+2025-06-10 22:34:47 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155
+2025-06-10 22:34:47 - INFO - [appv2.py:670] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:34:47 - INFO - [appv2.py:677] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe
+2025-06-10 22:35:04 - INFO - [web.py:2348] - 200 GET /monitor (::1) 15.95ms
+2025-06-10 22:35:19 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para web-client-1749612812887 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:35:19 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de web-client-1749612812887 (web: True) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:35:20 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749612812887&room_id=696b7d1fe8d94965b9f4d24079c467fe&password=11A8B6 (::1) 26.61ms
+2025-06-10 22:35:20 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749612812887, room_id=696b7d1fe8d94965b9f4d24079c467fe, password=11A8B6
+2025-06-10 22:35:20 - WARNING - [appv2.py:601] - [WS-JOIN] Cliente web-client-1749612812887 ya está en la sala 696b7d1fe8d94965b9f4d24079c467fe. Permitir reconexión.
+2025-06-10 22:35:20 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 696b7d1fe8d94965b9f4d24079c467fe. Generando JWT para todos los clientes.
+2025-06-10 22:35:20 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155
+2025-06-10 22:35:20 - INFO - [appv2.py:670] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:35:20 - INFO - [appv2.py:677] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe
+2025-06-10 22:35:35 - INFO - [web.py:2348] - 200 GET /monitor (::1) 14.03ms
+2025-06-10 22:35:39 - INFO - [appv2.py:726] - [DEBUG] on_message de python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155 raw: {"message": "hola"}
+2025-06-10 22:35:39 - INFO - [appv2.py:790] - [MESSAGE-DEBUG] Sala 696b7d1fe8d94965b9f4d24079c467fe: active, Clientes: ['web-client-1749612812887', 'python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155']
+2025-06-10 22:35:39 - INFO - [appv2.py:1033] - [BROADCAST] Mensaje 1749612939.368372-98de477e de python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155 entregado a web-client-1749612812887
+2025-06-10 22:35:44 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para web-client-1749612812887 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:35:44 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de web-client-1749612812887 (web: True) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:35:45 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749612812887&room_id=696b7d1fe8d94965b9f4d24079c467fe&password=11A8B6 (::1) 1.87ms
+2025-06-10 22:35:45 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749612812887, room_id=696b7d1fe8d94965b9f4d24079c467fe, password=11A8B6
+2025-06-10 22:35:45 - WARNING - [appv2.py:601] - [WS-JOIN] Cliente web-client-1749612812887 ya está en la sala 696b7d1fe8d94965b9f4d24079c467fe. Permitir reconexión.
+2025-06-10 22:35:45 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 696b7d1fe8d94965b9f4d24079c467fe. Generando JWT para todos los clientes.
+2025-06-10 22:35:45 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155
+2025-06-10 22:35:45 - INFO - [appv2.py:670] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:35:45 - INFO - [appv2.py:677] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe
+2025-06-10 22:35:48 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para web-client-1749612812887 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:35:48 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de web-client-1749612812887 (web: True) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:35:48 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749612812887&room_id=696b7d1fe8d94965b9f4d24079c467fe&password=11A8B6 (::1) 3.81ms
+2025-06-10 22:35:48 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749612812887, room_id=696b7d1fe8d94965b9f4d24079c467fe, password=11A8B6
+2025-06-10 22:35:48 - WARNING - [appv2.py:601] - [WS-JOIN] Cliente web-client-1749612812887 ya está en la sala 696b7d1fe8d94965b9f4d24079c467fe. Permitir reconexión.
+2025-06-10 22:35:48 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 696b7d1fe8d94965b9f4d24079c467fe. Generando JWT para todos los clientes.
+2025-06-10 22:35:48 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155
+2025-06-10 22:35:48 - INFO - [appv2.py:670] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:35:48 - INFO - [appv2.py:677] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe
+2025-06-10 22:35:49 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para web-client-1749612812887 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:35:49 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de web-client-1749612812887 (web: True) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:35:49 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749612812887&room_id=696b7d1fe8d94965b9f4d24079c467fe&password=11A8B6 (::1) 0.40ms
+2025-06-10 22:35:49 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749612812887, room_id=696b7d1fe8d94965b9f4d24079c467fe, password=11A8B6
+2025-06-10 22:35:49 - WARNING - [appv2.py:601] - [WS-JOIN] Cliente web-client-1749612812887 ya está en la sala 696b7d1fe8d94965b9f4d24079c467fe. Permitir reconexión.
+2025-06-10 22:35:49 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 696b7d1fe8d94965b9f4d24079c467fe. Generando JWT para todos los clientes.
+2025-06-10 22:35:50 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155
+2025-06-10 22:35:50 - INFO - [appv2.py:670] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:35:50 - INFO - [appv2.py:677] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe
+2025-06-10 22:35:51 - INFO - [web.py:2348] - 200 GET /monitor (::1) 11.58ms
+2025-06-10 22:35:52 - INFO - [web.py:2348] - 304 GET /monitor (::1) 18.58ms
+2025-06-10 22:35:55 - INFO - [web.py:2348] - 304 GET /monitor (::1) 17.42ms
+2025-06-10 22:35:56 - INFO - [web.py:2348] - 304 GET /monitor (::1) 16.79ms
+2025-06-10 22:35:56 - INFO - [web.py:2348] - 304 GET /monitor (::1) 13.63ms
+2025-06-10 22:35:57 - INFO - [web.py:2348] - 304 GET /monitor (::1) 16.90ms
+2025-06-10 22:35:58 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para web-client-1749612812887 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:35:58 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de web-client-1749612812887 (web: True) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:35:58 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749612812887&room_id=696b7d1fe8d94965b9f4d24079c467fe&password=11A8B6 (::1) 0.44ms
+2025-06-10 22:35:58 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749612812887, room_id=696b7d1fe8d94965b9f4d24079c467fe, password=11A8B6
+2025-06-10 22:35:58 - WARNING - [appv2.py:601] - [WS-JOIN] Cliente web-client-1749612812887 ya está en la sala 696b7d1fe8d94965b9f4d24079c467fe. Permitir reconexión.
+2025-06-10 22:35:58 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 696b7d1fe8d94965b9f4d24079c467fe. Generando JWT para todos los clientes.
+2025-06-10 22:35:58 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155
+2025-06-10 22:35:58 - INFO - [appv2.py:670] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:35:58 - INFO - [appv2.py:677] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe
+2025-06-10 22:35:59 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para web-client-1749612812887 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:35:59 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de web-client-1749612812887 (web: True) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:35:59 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749612812887&room_id=696b7d1fe8d94965b9f4d24079c467fe&password=11A8B6 (::1) 0.90ms
+2025-06-10 22:35:59 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749612812887, room_id=696b7d1fe8d94965b9f4d24079c467fe, password=11A8B6
+2025-06-10 22:35:59 - WARNING - [appv2.py:601] - [WS-JOIN] Cliente web-client-1749612812887 ya está en la sala 696b7d1fe8d94965b9f4d24079c467fe. Permitir reconexión.
+2025-06-10 22:35:59 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 696b7d1fe8d94965b9f4d24079c467fe. Generando JWT para todos los clientes.
+2025-06-10 22:35:59 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155
+2025-06-10 22:35:59 - INFO - [appv2.py:670] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:35:59 - INFO - [appv2.py:677] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe
+2025-06-10 22:35:59 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para web-client-1749612812887 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:35:59 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de web-client-1749612812887 (web: True) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:36:00 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749612812887&room_id=696b7d1fe8d94965b9f4d24079c467fe&password=11A8B6 (::1) 1.06ms
+2025-06-10 22:36:00 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749612812887, room_id=696b7d1fe8d94965b9f4d24079c467fe, password=11A8B6
+2025-06-10 22:36:00 - WARNING - [appv2.py:601] - [WS-JOIN] Cliente web-client-1749612812887 ya está en la sala 696b7d1fe8d94965b9f4d24079c467fe. Permitir reconexión.
+2025-06-10 22:36:00 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 696b7d1fe8d94965b9f4d24079c467fe. Generando JWT para todos los clientes.
+2025-06-10 22:36:00 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155
+2025-06-10 22:36:00 - INFO - [appv2.py:670] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:36:00 - INFO - [appv2.py:677] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe
+2025-06-10 22:36:19 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para web-client-1749612812887 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:36:19 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de web-client-1749612812887 (web: True) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:36:20 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749612812887&room_id=696b7d1fe8d94965b9f4d24079c467fe&password=11A8B6 (::1) 0.73ms
+2025-06-10 22:36:20 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749612812887, room_id=696b7d1fe8d94965b9f4d24079c467fe, password=11A8B6
+2025-06-10 22:36:20 - WARNING - [appv2.py:601] - [WS-JOIN] Cliente web-client-1749612812887 ya está en la sala 696b7d1fe8d94965b9f4d24079c467fe. Permitir reconexión.
+2025-06-10 22:36:20 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 696b7d1fe8d94965b9f4d24079c467fe. Generando JWT para todos los clientes.
+2025-06-10 22:36:20 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155
+2025-06-10 22:36:20 - INFO - [appv2.py:670] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:36:20 - INFO - [appv2.py:677] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe
+2025-06-10 22:36:23 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para web-client-1749612812887 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:36:23 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de web-client-1749612812887 (web: True) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:36:24 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749612812887&room_id=696b7d1fe8d94965b9f4d24079c467fe&password=11A8B6 (::1) 0.96ms
+2025-06-10 22:36:24 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749612812887, room_id=696b7d1fe8d94965b9f4d24079c467fe, password=11A8B6
+2025-06-10 22:36:24 - WARNING - [appv2.py:601] - [WS-JOIN] Cliente web-client-1749612812887 ya está en la sala 696b7d1fe8d94965b9f4d24079c467fe. Permitir reconexión.
+2025-06-10 22:36:24 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 696b7d1fe8d94965b9f4d24079c467fe. Generando JWT para todos los clientes.
+2025-06-10 22:36:24 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155
+2025-06-10 22:36:24 - INFO - [appv2.py:670] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:36:24 - INFO - [appv2.py:677] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe
+2025-06-10 22:36:27 - INFO - [web.py:2348] - 200 GET /monitor (::1) 20.48ms
+2025-06-10 22:36:32 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para web-client-1749612812887 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:36:32 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de web-client-1749612812887 (web: True) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:36:32 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749612812887&room_id=696b7d1fe8d94965b9f4d24079c467fe&password=11A8B6 (::1) 0.35ms
+2025-06-10 22:36:32 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749612812887, room_id=696b7d1fe8d94965b9f4d24079c467fe, password=11A8B6
+2025-06-10 22:36:32 - WARNING - [appv2.py:601] - [WS-JOIN] Cliente web-client-1749612812887 ya está en la sala 696b7d1fe8d94965b9f4d24079c467fe. Permitir reconexión.
+2025-06-10 22:36:32 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 696b7d1fe8d94965b9f4d24079c467fe. Generando JWT para todos los clientes.
+2025-06-10 22:36:32 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155
+2025-06-10 22:36:32 - INFO - [appv2.py:670] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:36:32 - INFO - [appv2.py:677] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe
+2025-06-10 22:36:57 - INFO - [web.py:2348] - 200 GET /monitor (::1) 18.58ms
+2025-06-10 22:37:22 - INFO - [appv2.py:726] - [DEBUG] on_message de python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155 raw: {"message": "hola "}
+2025-06-10 22:37:22 - INFO - [appv2.py:790] - [MESSAGE-DEBUG] Sala 696b7d1fe8d94965b9f4d24079c467fe: active, Clientes: ['web-client-1749612812887', 'python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155']
+2025-06-10 22:37:22 - INFO - [appv2.py:1033] - [BROADCAST] Mensaje 1749613042.510404-219fb9d7 de python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155 entregado a web-client-1749612812887
+2025-06-10 22:37:25 - INFO - [appv2.py:726] - [DEBUG] on_message de python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155 raw: {"message": "como estas "}
+2025-06-10 22:37:25 - INFO - [appv2.py:790] - [MESSAGE-DEBUG] Sala 696b7d1fe8d94965b9f4d24079c467fe: active, Clientes: ['web-client-1749612812887', 'python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155']
+2025-06-10 22:37:25 - INFO - [appv2.py:1033] - [BROADCAST] Mensaje 1749613045.8073869-5312d8ab de python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155 entregado a web-client-1749612812887
+2025-06-10 22:37:25 - INFO - [appv2.py:1216] - [CLEANUP] Cliente python-client-814d57c0-5df8-44a4-bc57-7b886faa0bbd (web: False) no reconectó (200s). Limpiando.
+2025-06-10 22:37:27 - INFO - [web.py:2348] - 200 GET /monitor (::1) 19.47ms
+2025-06-10 22:37:28 - INFO - [appv2.py:726] - [DEBUG] on_message de python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155 raw: {"message": "gaaa"}
+2025-06-10 22:37:28 - INFO - [appv2.py:790] - [MESSAGE-DEBUG] Sala 696b7d1fe8d94965b9f4d24079c467fe: active, Clientes: ['web-client-1749612812887', 'python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155']
+2025-06-10 22:37:28 - INFO - [appv2.py:1033] - [BROADCAST] Mensaje 1749613048.163483-bfd9dfe4 de python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155 entregado a web-client-1749612812887
+2025-06-10 22:37:33 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para web-client-1749612812887 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:37:33 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de web-client-1749612812887 (web: True) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:37:33 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749612812887&room_id=696b7d1fe8d94965b9f4d24079c467fe&password=11A8B6 (::1) 0.83ms
+2025-06-10 22:37:33 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749612812887, room_id=696b7d1fe8d94965b9f4d24079c467fe, password=11A8B6
+2025-06-10 22:37:33 - WARNING - [appv2.py:601] - [WS-JOIN] Cliente web-client-1749612812887 ya está en la sala 696b7d1fe8d94965b9f4d24079c467fe. Permitir reconexión.
+2025-06-10 22:37:33 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 696b7d1fe8d94965b9f4d24079c467fe. Generando JWT para todos los clientes.
+2025-06-10 22:37:33 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155
+2025-06-10 22:37:33 - INFO - [appv2.py:670] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:37:33 - INFO - [appv2.py:677] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe
+2025-06-10 22:37:57 - INFO - [web.py:2348] - 200 GET /monitor (::1) 15.54ms
+2025-06-10 22:38:25 - INFO - [appv2.py:1184] - [CLEANUP] Sala incompleta 2b1b135706d042e3a1101579714b6a9d expirada (solo 1 cliente por 624s, límite: 600s)
+2025-06-10 22:38:25 - INFO - [appv2.py:1184] - [CLEANUP] Sala incompleta 6543896c4d954389a27b17221aae6f1d expirada (solo 1 cliente por 639s, límite: 600s)
+2025-06-10 22:38:25 - INFO - [appv2.py:1245] - [CLEANUP] Eliminando sesión expirada 6543896c4d954389a27b17221aae6f1d y sus clientes restantes.
+2025-06-10 22:38:25 - INFO - [appv2.py:1245] - [CLEANUP] Eliminando sesión expirada 2b1b135706d042e3a1101579714b6a9d y sus clientes restantes.
+2025-06-10 22:38:27 - INFO - [web.py:2348] - 200 GET /monitor (::1) 8.56ms
+2025-06-10 22:38:58 - INFO - [web.py:2348] - 304 GET /monitor (::1) 15.08ms
+2025-06-10 22:39:25 - INFO - [appv2.py:1184] - [CLEANUP] Sala incompleta a7872482464e4cc78cb4ed8abfa93b2a expirada (solo 1 cliente por 609s, límite: 600s)
+2025-06-10 22:39:26 - INFO - [appv2.py:1245] - [CLEANUP] Eliminando sesión expirada a7872482464e4cc78cb4ed8abfa93b2a y sus clientes restantes.
+2025-06-10 22:39:28 - INFO - [web.py:2348] - 200 GET /monitor (::1) 10.42ms
+2025-06-10 22:39:58 - INFO - [web.py:2348] - 304 GET /monitor (::1) 14.87ms
+2025-06-10 22:40:28 - INFO - [web.py:2348] - 304 GET /monitor (::1) 24.65ms
+2025-06-10 22:40:59 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.08ms
+2025-06-10 22:41:25 - INFO - [appv2.py:1184] - [CLEANUP] Sala incompleta 8bb4854b23f14881aa3c880e3a58da96 expirada (solo 1 cliente por 628s, límite: 600s)
+2025-06-10 22:41:25 - INFO - [appv2.py:1184] - [CLEANUP] Sala incompleta 332070c6b3aa4700bd7444d62969b5a3 expirada (solo 1 cliente por 628s, límite: 600s)
+2025-06-10 22:41:25 - INFO - [appv2.py:1245] - [CLEANUP] Eliminando sesión expirada 332070c6b3aa4700bd7444d62969b5a3 y sus clientes restantes.
+2025-06-10 22:41:25 - INFO - [appv2.py:1245] - [CLEANUP] Eliminando sesión expirada 8bb4854b23f14881aa3c880e3a58da96 y sus clientes restantes.
+2025-06-10 22:41:29 - INFO - [web.py:2348] - 200 GET /monitor (::1) 7.24ms
+2025-06-10 22:41:59 - INFO - [web.py:2348] - 304 GET /monitor (::1) 14.72ms
+2025-06-10 22:42:29 - INFO - [web.py:2348] - 304 GET /monitor (::1) 11.49ms
+2025-06-10 22:42:59 - INFO - [web.py:2348] - 304 GET /monitor (::1) 10.78ms
+2025-06-10 22:43:29 - INFO - [web.py:2348] - 304 GET /monitor (::1) 12.06ms
+2025-06-10 22:44:00 - INFO - [web.py:2348] - 304 GET /monitor (::1) 10.30ms
+2025-06-10 22:44:30 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.15ms
+2025-06-10 22:45:00 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.67ms
+2025-06-10 22:45:30 - INFO - [web.py:2348] - 304 GET /monitor (::1) 10.80ms
+2025-06-10 22:46:00 - INFO - [web.py:2348] - 304 GET /monitor (::1) 24.43ms
+2025-06-10 22:46:30 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.10ms
+2025-06-10 22:47:01 - INFO - [web.py:2348] - 304 GET /monitor (::1) 6.72ms
+2025-06-10 22:47:31 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.56ms
+2025-06-10 22:47:35 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para web-client-1749612812887 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:47:35 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de web-client-1749612812887 (web: True) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:47:35 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749612812887&room_id=696b7d1fe8d94965b9f4d24079c467fe&password=11A8B6 (::1) 46.51ms
+2025-06-10 22:47:35 - INFO - [appv2.py:532] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749612812887, room_id=696b7d1fe8d94965b9f4d24079c467fe, password=11A8B6
+2025-06-10 22:47:36 - WARNING - [appv2.py:601] - [WS-JOIN] Cliente web-client-1749612812887 ya está en la sala 696b7d1fe8d94965b9f4d24079c467fe. Permitir reconexión.
+2025-06-10 22:47:36 - INFO - [appv2.py:631] - [WS-JOIN] Ambos usuarios conectados en sala 696b7d1fe8d94965b9f4d24079c467fe. Generando JWT para todos los clientes.
+2025-06-10 22:47:36 - INFO - [appv2.py:654] - [WS-JOIN] JWT enviado a cliente existente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155
+2025-06-10 22:47:36 - INFO - [appv2.py:670] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:47:36 - INFO - [appv2.py:677] - [WS-JOIN] Cliente web-client-1749612812887 se unió a sala 696b7d1fe8d94965b9f4d24079c467fe
+2025-06-10 22:48:01 - INFO - [web.py:2348] - 200 GET /monitor (::1) 10.33ms
+2025-06-10 22:48:31 - INFO - [web.py:2348] - 304 GET /monitor (::1) 14.46ms
+2025-06-10 22:49:01 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.14ms
+2025-06-10 22:49:32 - INFO - [web.py:2348] - 304 GET /monitor (::1) 13.57ms
+2025-06-10 22:49:49 - WARNING - [appv2.py:1386] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 22:49:49 - INFO - [appv2.py:1373] - Iniciando cierre elegante...
+2025-06-10 22:49:49 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para web-client-1749612812887 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:49:49 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de web-client-1749612812887 (web: True) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:49:49 - INFO - [appv2.py:1075] - [CLOSE] Heartbeat detenido para python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155 en 696b7d1fe8d94965b9f4d24079c467fe.
+2025-06-10 22:49:49 - INFO - [appv2.py:1098] - [CLOSE] Desconexión inesperada de python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155 (web: False) en 696b7d1fe8d94965b9f4d24079c467fe. Marcando para reconexión.
+2025-06-10 22:49:49 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749613789282 (::1) 2.26ms
+2025-06-10 22:49:49 - INFO - [appv2.py:525] - [WS-OPEN] Sala 38019ef9876a445488741dc0de58986d creada por web-client-1749613789282. Contraseña: D62154. Esperando peer para generar JWT.
+2025-06-10 22:49:50 - INFO - [session.py:348] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 22:49:50 - INFO - [appv2.py:1383] - Cierre elegante completado.
+2025-06-10 22:49:50 - INFO - [appv2.py:1404] - Servidor MinkaV2 detenido.
+2025-06-10 22:51:56 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 22:51:56 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 22:51:56 - INFO - [appv2.py:1361] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 22:51:56 - INFO - [appv2.py:1265] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 22:51:56 - INFO - [appv2.py:1305] - [INIT] Cliente web-client-1749613789282 estaba waiting. Marcando como pending_reconnect.
+2025-06-10 22:51:56 - INFO - [appv2.py:1341] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 22:51:59 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749613919844 (::1) 3.74ms
+2025-06-10 22:51:59 - INFO - [appv2.py:526] - [WS-OPEN] Sala 15463bc8191848b786f2c1d34b738054 creada por web-client-1749613919844. Contraseña: 93816C. Esperando peer para generar JWT.
+2025-06-10 22:52:40 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-72c99155-0d6e-4723-af56-4fc803b0340b&room_id=15463bc8191848b786f2c1d34b738054&password=93816C (::1) 0.51ms
+2025-06-10 22:52:40 - INFO - [appv2.py:533] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=python-client-72c99155-0d6e-4723-af56-4fc803b0340b, room_id=15463bc8191848b786f2c1d34b738054, password=93816C
+2025-06-10 22:52:40 - INFO - [appv2.py:632] - [WS-JOIN] Ambos usuarios conectados en sala 15463bc8191848b786f2c1d34b738054. Generando JWT para todos los clientes.
+2025-06-10 22:52:40 - INFO - [appv2.py:655] - [WS-JOIN] JWT enviado a cliente existente web-client-1749613919844
+2025-06-10 22:52:40 - INFO - [appv2.py:671] - [WS-JOIN] Cliente python-client-72c99155-0d6e-4723-af56-4fc803b0340b se unió a sala 15463bc8191848b786f2c1d34b738054 - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:52:40 - INFO - [appv2.py:678] - [WS-JOIN] Cliente python-client-72c99155-0d6e-4723-af56-4fc803b0340b se unió a sala 15463bc8191848b786f2c1d34b738054
+2025-06-10 22:52:45 - INFO - [appv2.py:1076] - [CLOSE] Heartbeat detenido para web-client-1749613919844 en 15463bc8191848b786f2c1d34b738054.
+2025-06-10 22:52:45 - INFO - [appv2.py:1099] - [CLOSE] Desconexión inesperada de web-client-1749613919844 (web: True) en 15463bc8191848b786f2c1d34b738054. Marcando para reconexión.
+2025-06-10 22:52:46 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749613919844&room_id=15463bc8191848b786f2c1d34b738054&password=93816C (::1) 4.84ms
+2025-06-10 22:52:46 - INFO - [appv2.py:533] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749613919844, room_id=15463bc8191848b786f2c1d34b738054, password=93816C
+2025-06-10 22:52:46 - WARNING - [appv2.py:602] - [WS-JOIN] Cliente web-client-1749613919844 ya está en la sala 15463bc8191848b786f2c1d34b738054. Permitir reconexión.
+2025-06-10 22:52:46 - INFO - [appv2.py:632] - [WS-JOIN] Ambos usuarios conectados en sala 15463bc8191848b786f2c1d34b738054. Generando JWT para todos los clientes.
+2025-06-10 22:52:46 - INFO - [appv2.py:655] - [WS-JOIN] JWT enviado a cliente existente python-client-72c99155-0d6e-4723-af56-4fc803b0340b
+2025-06-10 22:52:46 - INFO - [appv2.py:671] - [WS-JOIN] Cliente web-client-1749613919844 se unió a sala 15463bc8191848b786f2c1d34b738054 - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:52:46 - INFO - [appv2.py:678] - [WS-JOIN] Cliente web-client-1749613919844 se unió a sala 15463bc8191848b786f2c1d34b738054
+2025-06-10 22:53:06 - WARNING - [appv2.py:1387] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 22:53:06 - INFO - [appv2.py:1374] - Iniciando cierre elegante...
+2025-06-10 22:53:06 - INFO - [appv2.py:1076] - [CLOSE] Heartbeat detenido para web-client-1749613919844 en 15463bc8191848b786f2c1d34b738054.
+2025-06-10 22:53:06 - INFO - [appv2.py:1099] - [CLOSE] Desconexión inesperada de web-client-1749613919844 (web: True) en 15463bc8191848b786f2c1d34b738054. Marcando para reconexión.
+2025-06-10 22:53:06 - INFO - [appv2.py:1076] - [CLOSE] Heartbeat detenido para python-client-72c99155-0d6e-4723-af56-4fc803b0340b en 15463bc8191848b786f2c1d34b738054.
+2025-06-10 22:53:06 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749613986261 (::1) 0.72ms
+2025-06-10 22:53:06 - INFO - [appv2.py:1099] - [CLOSE] Desconexión inesperada de python-client-72c99155-0d6e-4723-af56-4fc803b0340b (web: False) en 15463bc8191848b786f2c1d34b738054. Marcando para reconexión.
+2025-06-10 22:53:06 - INFO - [appv2.py:526] - [WS-OPEN] Sala cfa4beff91d7487e8a22835adec9eeca creada por web-client-1749613986261. Contraseña: 603AB1. Esperando peer para generar JWT.
+2025-06-10 22:53:07 - INFO - [session.py:348] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 22:53:07 - INFO - [appv2.py:1384] - Cierre elegante completado.
+2025-06-10 22:53:07 - INFO - [appv2.py:1405] - Servidor MinkaV2 detenido.
+2025-06-10 22:55:04 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 22:55:04 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 22:55:04 - INFO - [appv2.py:1362] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 22:55:04 - INFO - [appv2.py:1266] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 22:55:04 - INFO - [appv2.py:1306] - [INIT] Cliente web-client-1749613986261 estaba waiting. Marcando como pending_reconnect.
+2025-06-10 22:55:04 - INFO - [appv2.py:1296] - [INIT] Cliente python-client-f68e7a07-7b5f-42ac-a9a0-c52d19649155 (web: False) en pending_reconnect expiró (200s). Limpiando.
+2025-06-10 22:55:04 - INFO - [appv2.py:1342] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 22:55:07 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749614107325 (::1) 11.08ms
+2025-06-10 22:55:07 - INFO - [appv2.py:527] - [WS-OPEN] Sala cfd0ab2e662140efb8fc0e1e42ab1c68 creada por web-client-1749614107325. Contraseña: 3AF733. Esperando peer para generar JWT.
+2025-06-10 22:55:41 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-756bab54-cf09-4e91-8f7e-eb79f6eb1a8a&room_id=cfd0ab2e662140efb8fc0e1e42ab1c68&password=3AF733 (::1) 0.41ms
+2025-06-10 22:55:41 - INFO - [appv2.py:534] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=python-client-756bab54-cf09-4e91-8f7e-eb79f6eb1a8a, room_id=cfd0ab2e662140efb8fc0e1e42ab1c68, password=3AF733
+2025-06-10 22:55:41 - INFO - [appv2.py:633] - [WS-JOIN] Ambos usuarios conectados en sala cfd0ab2e662140efb8fc0e1e42ab1c68. Generando JWT para todos los clientes.
+2025-06-10 22:55:41 - INFO - [appv2.py:656] - [WS-JOIN] JWT enviado a cliente existente web-client-1749614107325
+2025-06-10 22:55:41 - INFO - [appv2.py:672] - [WS-JOIN] Cliente python-client-756bab54-cf09-4e91-8f7e-eb79f6eb1a8a se unió a sala cfd0ab2e662140efb8fc0e1e42ab1c68 - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:55:41 - INFO - [appv2.py:679] - [WS-JOIN] Cliente python-client-756bab54-cf09-4e91-8f7e-eb79f6eb1a8a se unió a sala cfd0ab2e662140efb8fc0e1e42ab1c68
+2025-06-10 22:55:53 - INFO - [appv2.py:1077] - [CLOSE] Heartbeat detenido para web-client-1749614107325 en cfd0ab2e662140efb8fc0e1e42ab1c68.
+2025-06-10 22:55:54 - INFO - [appv2.py:1100] - [CLOSE] Desconexión inesperada de web-client-1749614107325 (web: True) en cfd0ab2e662140efb8fc0e1e42ab1c68. Marcando para reconexión.
+2025-06-10 22:55:54 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749614107325&room_id=cfd0ab2e662140efb8fc0e1e42ab1c68&password=3AF733 (::1) 8.90ms
+2025-06-10 22:55:54 - INFO - [appv2.py:534] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749614107325, room_id=cfd0ab2e662140efb8fc0e1e42ab1c68, password=3AF733
+2025-06-10 22:55:54 - WARNING - [appv2.py:603] - [WS-JOIN] Cliente web-client-1749614107325 ya está en la sala cfd0ab2e662140efb8fc0e1e42ab1c68. Permitir reconexión.
+2025-06-10 22:55:54 - INFO - [appv2.py:633] - [WS-JOIN] Ambos usuarios conectados en sala cfd0ab2e662140efb8fc0e1e42ab1c68. Generando JWT para todos los clientes.
+2025-06-10 22:55:54 - INFO - [appv2.py:656] - [WS-JOIN] JWT enviado a cliente existente python-client-756bab54-cf09-4e91-8f7e-eb79f6eb1a8a
+2025-06-10 22:55:54 - INFO - [appv2.py:672] - [WS-JOIN] Cliente web-client-1749614107325 se unió a sala cfd0ab2e662140efb8fc0e1e42ab1c68 - Ambos usuarios conectados, JWT enviado
+2025-06-10 22:55:54 - INFO - [appv2.py:679] - [WS-JOIN] Cliente web-client-1749614107325 se unió a sala cfd0ab2e662140efb8fc0e1e42ab1c68
+2025-06-10 22:57:04 - INFO - [appv2.py:1218] - [CLEANUP] Cliente python-client-72c99155-0d6e-4723-af56-4fc803b0340b (web: False) no reconectó (200s). Limpiando.
+2025-06-10 23:00:04 - INFO - [appv2.py:1186] - [CLEANUP] Sala incompleta 38019ef9876a445488741dc0de58986d expirada (solo 1 cliente por 615s, límite: 600s)
+2025-06-10 23:00:04 - INFO - [appv2.py:1247] - [CLEANUP] Eliminando sesión expirada 38019ef9876a445488741dc0de58986d y sus clientes restantes.
+2025-06-10 23:00:57 - INFO - [web.py:2348] - 200 GET /monitor (::1) 12.64ms
+2025-06-10 23:00:59 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.90ms
+2025-06-10 23:01:02 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.92ms
+2025-06-10 23:01:04 - INFO - [appv2.py:1077] - [CLOSE] Heartbeat detenido para web-client-1749614107325 en cfd0ab2e662140efb8fc0e1e42ab1c68.
+2025-06-10 23:01:04 - INFO - [appv2.py:1100] - [CLOSE] Desconexión inesperada de web-client-1749614107325 (web: True) en cfd0ab2e662140efb8fc0e1e42ab1c68. Marcando para reconexión.
+2025-06-10 23:01:04 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749614107325&room_id=cfd0ab2e662140efb8fc0e1e42ab1c68&password=3AF733 (::1) 2.35ms
+2025-06-10 23:01:04 - INFO - [appv2.py:534] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749614107325, room_id=cfd0ab2e662140efb8fc0e1e42ab1c68, password=3AF733
+2025-06-10 23:01:04 - WARNING - [appv2.py:603] - [WS-JOIN] Cliente web-client-1749614107325 ya está en la sala cfd0ab2e662140efb8fc0e1e42ab1c68. Permitir reconexión.
+2025-06-10 23:01:04 - INFO - [appv2.py:633] - [WS-JOIN] Ambos usuarios conectados en sala cfd0ab2e662140efb8fc0e1e42ab1c68. Generando JWT para todos los clientes.
+2025-06-10 23:01:04 - INFO - [appv2.py:656] - [WS-JOIN] JWT enviado a cliente existente python-client-756bab54-cf09-4e91-8f7e-eb79f6eb1a8a
+2025-06-10 23:01:04 - INFO - [appv2.py:672] - [WS-JOIN] Cliente web-client-1749614107325 se unió a sala cfd0ab2e662140efb8fc0e1e42ab1c68 - Ambos usuarios conectados, JWT enviado
+2025-06-10 23:01:04 - INFO - [appv2.py:679] - [WS-JOIN] Cliente web-client-1749614107325 se unió a sala cfd0ab2e662140efb8fc0e1e42ab1c68
+2025-06-10 23:01:05 - INFO - [appv2.py:728] - [DEBUG] on_message de web-client-1749614107325 raw: {"action":"leave"}
+2025-06-10 23:01:05 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749614465634 (::1) 1.77ms
+2025-06-10 23:01:05 - INFO - [appv2.py:792] - [MESSAGE-DEBUG] Sala cfd0ab2e662140efb8fc0e1e42ab1c68: active, Clientes: ['web-client-1749614107325', 'python-client-756bab54-cf09-4e91-8f7e-eb79f6eb1a8a']
+2025-06-10 23:01:05 - INFO - [appv2.py:801] - [LEAVE] Cliente web-client-1749614107325 deja sala cfd0ab2e662140efb8fc0e1e42ab1c68, razón: 
+2025-06-10 23:01:05 - INFO - [appv2.py:823] - [LEAVE-BLACKLIST] JTI 9fbdc84404b1494a9348f652c4a6837b de almacenamiento para web-client-1749614107325
+2025-06-10 23:01:05 - INFO - [appv2.py:527] - [WS-OPEN] Sala 338715b0ddf24b4d94332027c7f721a5 creada por web-client-1749614465634. Contraseña: 4E2C8D. Esperando peer para generar JWT.
+2025-06-10 23:01:05 - INFO - [appv2.py:827] - [LEAVE-BLACKLIST] JTI 9fbdc84404b1494a9348f652c4a6837b para web-client-1749614107325 en lista negra (TTL 604800s).
+2025-06-10 23:01:05 - INFO - [appv2.py:833] - [LEAVE-BLACKLIST] current_jti eliminado de Redis para web-client-1749614107325
+2025-06-10 23:01:05 - INFO - [appv2.py:873] - [LEAVE] Web web-client-1749614107325 sale. Sala cfd0ab2e662140efb8fc0e1e42ab1c68 y peers serán eliminados.
+2025-06-10 23:01:05 - INFO - [appv2.py:1077] - [CLOSE] Heartbeat detenido para web-client-1749614107325 en cfd0ab2e662140efb8fc0e1e42ab1c68.
+2025-06-10 23:01:05 - INFO - [appv2.py:1086] - [CLOSE] Cierre voluntario de web-client-1749614107325 en cfd0ab2e662140efb8fc0e1e42ab1c68. Limpieza por on_message/'leave'.
+2025-06-10 23:01:07 - INFO - [web.py:2348] - 200 GET /monitor (::1) 9.33ms
+2025-06-10 23:01:08 - INFO - [web.py:2348] - 304 GET /monitor (::1) 11.73ms
+2025-06-10 23:01:08 - INFO - [web.py:2348] - 304 GET /monitor (::1) 6.93ms
+2025-06-10 23:01:09 - INFO - [web.py:2348] - 304 GET /monitor (::1) 12.59ms
+2025-06-10 23:01:16 - WARNING - [appv2.py:1388] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 23:01:16 - INFO - [appv2.py:1375] - Iniciando cierre elegante...
+2025-06-10 23:01:16 - INFO - [appv2.py:1077] - [CLOSE] Heartbeat detenido para web-client-1749614465634 en 338715b0ddf24b4d94332027c7f721a5.
+2025-06-10 23:01:16 - INFO - [appv2.py:1100] - [CLOSE] Desconexión inesperada de web-client-1749614465634 (web: True) en 338715b0ddf24b4d94332027c7f721a5. Marcando para reconexión.
+2025-06-10 23:01:17 - INFO - [session.py:348] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 23:01:17 - INFO - [appv2.py:1385] - Cierre elegante completado.
+2025-06-10 23:01:17 - INFO - [appv2.py:1406] - Servidor MinkaV2 detenido.
+2025-06-10 23:01:19 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 23:01:19 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 23:01:19 - INFO - [appv2.py:1368] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 23:01:19 - INFO - [appv2.py:1272] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 23:01:19 - INFO - [appv2.py:1348] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 23:01:25 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749614485380 (::1) 1.82ms
+2025-06-10 23:01:25 - INFO - [appv2.py:526] - [WS-OPEN] Sala d75fe67d8c6540e0b8e274d93383aae0 creada por web-client-1749614485380. Contraseña: EEFE4F. Esperando peer para generar JWT.
+2025-06-10 23:01:39 - INFO - [web.py:2348] - 200 GET /monitor (::1) 8.60ms
+2025-06-10 23:01:50 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-f8a1b24e-59d6-468a-aaa5-327b41e2d4ef&room_id=d75fe67d8c6540e0b8e274d93383aae0&password=EEFE4F (::1) 0.42ms
+2025-06-10 23:01:50 - INFO - [appv2.py:533] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=python-client-f8a1b24e-59d6-468a-aaa5-327b41e2d4ef, room_id=d75fe67d8c6540e0b8e274d93383aae0, password=EEFE4F
+2025-06-10 23:01:50 - INFO - [appv2.py:639] - [WS-JOIN] Ambos usuarios conectados en sala d75fe67d8c6540e0b8e274d93383aae0. Generando JWT para todos los clientes.
+2025-06-10 23:01:50 - INFO - [appv2.py:662] - [WS-JOIN] JWT enviado a cliente existente web-client-1749614485380
+2025-06-10 23:01:50 - INFO - [appv2.py:678] - [WS-JOIN] Cliente python-client-f8a1b24e-59d6-468a-aaa5-327b41e2d4ef se unió a sala d75fe67d8c6540e0b8e274d93383aae0 - Ambos usuarios conectados, JWT enviado
+2025-06-10 23:01:50 - INFO - [appv2.py:685] - [WS-JOIN] Cliente python-client-f8a1b24e-59d6-468a-aaa5-327b41e2d4ef se unió a sala d75fe67d8c6540e0b8e274d93383aae0
+2025-06-10 23:01:54 - INFO - [web.py:2348] - 200 GET /monitor (::1) 6.97ms
+2025-06-10 23:01:57 - INFO - [web.py:2348] - 304 GET /monitor (::1) 12.00ms
+2025-06-10 23:01:58 - INFO - [web.py:2348] - 304 GET /monitor (::1) 13.58ms
+2025-06-10 23:01:58 - INFO - [web.py:2348] - 304 GET /monitor (::1) 10.87ms
+2025-06-10 23:01:58 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.98ms
+2025-06-10 23:01:58 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.23ms
+2025-06-10 23:02:01 - INFO - [appv2.py:1083] - [CLOSE] Heartbeat detenido para web-client-1749614485380 en d75fe67d8c6540e0b8e274d93383aae0.
+2025-06-10 23:02:01 - INFO - [appv2.py:1106] - [CLOSE] Desconexión inesperada de web-client-1749614485380 (web: True) en d75fe67d8c6540e0b8e274d93383aae0. Marcando para reconexión.
+2025-06-10 23:02:01 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=web-client-1749614485380&room_id=d75fe67d8c6540e0b8e274d93383aae0&password=EEFE4F (::1) 0.96ms
+2025-06-10 23:02:01 - INFO - [appv2.py:533] - [WS-JOIN-DEBUG] Parámetros recibidos: client_id=web-client-1749614485380, room_id=d75fe67d8c6540e0b8e274d93383aae0, password=EEFE4F
+2025-06-10 23:02:01 - WARNING - [appv2.py:564] - [WS-OPEN] Reconexión sin token rechazada para web-client-1749614485380
+2025-06-10 23:02:01 - WARNING - [appv2.py:1102] - [CLOSE] Desconexión inesperada ANTES de asignación client/room. WebSocket: <__main__.WebSocketHandler object at 0x104eee050>
+2025-06-10 23:02:01 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749614521604 (::1) 2.07ms
+2025-06-10 23:02:01 - INFO - [appv2.py:526] - [WS-OPEN] Sala ff098c9c35e4430bb75b1f53e3885811 creada por web-client-1749614521604. Contraseña: 43A5B9. Esperando peer para generar JWT.
+2025-06-10 23:02:04 - INFO - [web.py:2348] - 200 GET /monitor (::1) 12.14ms
+2025-06-10 23:02:04 - INFO - [web.py:2348] - 304 GET /monitor (::1) 15.33ms
+2025-06-10 23:02:04 - INFO - [web.py:2348] - 304 GET /monitor (::1) 10.24ms
+2025-06-10 23:02:05 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.53ms
+2025-06-10 23:02:35 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.84ms
+2025-06-10 23:03:00 - INFO - [web.py:2348] - 304 GET /monitor (::1) 12.86ms
+2025-06-10 23:03:01 - INFO - [web.py:2348] - 304 GET /monitor (::1) 10.45ms
+2025-06-10 23:03:01 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.26ms
+2025-06-10 23:03:01 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.97ms
+2025-06-10 23:03:02 - INFO - [web.py:2348] - 304 GET /monitor (::1) 15.66ms
+2025-06-10 23:03:02 - INFO - [web.py:2348] - 304 GET /monitor (::1) 16.21ms
+2025-06-10 23:03:02 - INFO - [web.py:2348] - 304 GET /monitor (::1) 11.08ms
+2025-06-10 23:03:02 - INFO - [web.py:2348] - 304 GET /monitor (::1) 13.75ms
+2025-06-10 23:03:03 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.34ms
+2025-06-10 23:03:03 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.07ms
+2025-06-10 23:03:03 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.14ms
+2025-06-10 23:03:03 - INFO - [web.py:2348] - 304 GET /monitor (::1) 10.85ms
+2025-06-10 23:03:03 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.97ms
+2025-06-10 23:03:06 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.57ms
+2025-06-10 23:03:07 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.89ms
+2025-06-10 23:03:07 - INFO - [web.py:2348] - 304 GET /monitor (::1) 10.34ms
+2025-06-10 23:03:07 - INFO - [web.py:2348] - 304 GET /monitor (::1) 10.70ms
+2025-06-10 23:03:07 - INFO - [web.py:2348] - 304 GET /monitor (::1) 13.00ms
+2025-06-10 23:03:19 - INFO - [appv2.py:1192] - [CLEANUP] Sala incompleta cfa4beff91d7487e8a22835adec9eeca expirada (solo 1 cliente por 613s, límite: 600s)
+2025-06-10 23:03:19 - INFO - [appv2.py:1253] - [CLEANUP] Eliminando sesión expirada cfa4beff91d7487e8a22835adec9eeca y sus clientes restantes.
+2025-06-10 23:03:37 - INFO - [web.py:2348] - 200 GET /monitor (::1) 25.23ms
+2025-06-10 23:04:08 - INFO - [web.py:2348] - 304 GET /monitor (::1) 28.04ms
+2025-06-10 23:04:38 - INFO - [web.py:2348] - 304 GET /monitor (::1) 28.30ms
+2025-06-10 23:04:45 - INFO - [appv2.py:1083] - [CLOSE] Heartbeat detenido para python-client-f8a1b24e-59d6-468a-aaa5-327b41e2d4ef en d75fe67d8c6540e0b8e274d93383aae0.
+2025-06-10 23:04:45 - INFO - [appv2.py:1106] - [CLOSE] Desconexión inesperada de python-client-f8a1b24e-59d6-468a-aaa5-327b41e2d4ef (web: False) en d75fe67d8c6540e0b8e274d93383aae0. Marcando para reconexión.
+2025-06-10 23:04:47 - INFO - [web.py:2348] - 200 GET /monitor (::1) 26.54ms
+2025-06-10 23:04:48 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.57ms
+2025-06-10 23:04:48 - INFO - [web.py:2348] - 304 GET /monitor (::1) 6.73ms
+2025-06-10 23:04:48 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.55ms
+2025-06-10 23:04:48 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.47ms
+2025-06-10 23:04:48 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.50ms
+2025-06-10 23:04:48 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.07ms
+2025-06-10 23:04:49 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.95ms
+2025-06-10 23:04:49 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.45ms
+2025-06-10 23:04:49 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.05ms
+2025-06-10 23:04:49 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.60ms
+2025-06-10 23:04:49 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.62ms
+2025-06-10 23:04:50 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.30ms
+2025-06-10 23:04:50 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.34ms
+2025-06-10 23:04:50 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.38ms
+2025-06-10 23:04:50 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.99ms
+2025-06-10 23:04:50 - INFO - [web.py:2348] - 304 GET /monitor (::1) 12.97ms
+2025-06-10 23:04:51 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.91ms
+2025-06-10 23:04:51 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.85ms
+2025-06-10 23:04:52 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.92ms
+2025-06-10 23:04:52 - INFO - [web.py:2348] - 304 GET /monitor (::1) 13.92ms
+2025-06-10 23:04:52 - INFO - [web.py:2348] - 304 GET /monitor (::1) 10.07ms
+2025-06-10 23:05:06 - INFO - [web.py:2348] - 304 GET /monitor (::1) 20.73ms
+2025-06-10 23:05:06 - INFO - [web.py:2348] - 304 GET /monitor (::1) 122.67ms
+2025-06-10 23:05:07 - INFO - [web.py:2348] - 304 GET /monitor (::1) 11.57ms
+2025-06-10 23:05:08 - INFO - [web.py:2348] - 304 GET /monitor (::1) 14.91ms
+2025-06-10 23:05:08 - INFO - [web.py:2348] - 304 GET /monitor (::1) 11.68ms
+2025-06-10 23:05:08 - INFO - [web.py:2348] - 304 GET /monitor (::1) 11.70ms
+2025-06-10 23:05:08 - INFO - [web.py:2348] - 304 GET /monitor (::1) 5.67ms
+2025-06-10 23:05:38 - INFO - [web.py:2348] - 304 GET /monitor (::1) 54.58ms
+2025-06-10 23:06:09 - INFO - [web.py:2348] - 304 GET /monitor (::1) 15.36ms
+2025-06-10 23:06:22 - INFO - [web.py:2348] - 304 GET /monitor (::1) 10.06ms
+2025-06-10 23:06:22 - INFO - [web.py:2348] - 304 GET /monitor (::1) 10.06ms
+2025-06-10 23:06:22 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.23ms
+2025-06-10 23:06:22 - INFO - [web.py:2348] - 304 GET /monitor (::1) 9.28ms
+2025-06-10 23:06:23 - INFO - [web.py:2348] - 304 GET /monitor (::1) 7.87ms
+2025-06-10 23:06:23 - INFO - [web.py:2348] - 304 GET /monitor (::1) 8.02ms
+2025-06-10 23:06:23 - INFO - [web.py:2348] - 304 GET /monitor (::1) 10.49ms
+2025-06-10 23:06:23 - INFO - [web.py:2348] - 304 GET /monitor (::1) 14.70ms
+2025-06-10 23:06:54 - INFO - [web.py:2348] - 304 GET /monitor (::1) 11.09ms
+2025-06-10 23:07:24 - INFO - [web.py:2348] - 304 GET /monitor (::1) 16.42ms
+2025-06-10 23:07:54 - INFO - [web.py:2348] - 304 GET /monitor (::1) 28.10ms
+2025-06-10 23:08:19 - INFO - [appv2.py:1200] - [CLEANUP] Sala abandonada 779b6549ef27489ab4a5d0bb24ecc363 expirada (sin conexiones por 1853s, límite: 1800s)
+2025-06-10 23:08:19 - INFO - [appv2.py:1224] - [CLEANUP] Cliente python-client-f8a1b24e-59d6-468a-aaa5-327b41e2d4ef (web: False) no reconectó (200s). Limpiando.
+2025-06-10 23:08:19 - INFO - [appv2.py:1253] - [CLEANUP] Eliminando sesión expirada 779b6549ef27489ab4a5d0bb24ecc363 y sus clientes restantes.
+2025-06-10 23:08:24 - INFO - [web.py:2348] - 200 GET /monitor (::1) 11.72ms
+2025-06-10 23:08:54 - WARNING - [appv2.py:1394] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 23:08:54 - INFO - [appv2.py:1381] - Iniciando cierre elegante...
+2025-06-10 23:08:54 - INFO - [appv2.py:1083] - [CLOSE] Heartbeat detenido para web-client-1749614521604 en ff098c9c35e4430bb75b1f53e3885811.
+2025-06-10 23:08:54 - INFO - [appv2.py:1106] - [CLOSE] Desconexión inesperada de web-client-1749614521604 (web: True) en ff098c9c35e4430bb75b1f53e3885811. Marcando para reconexión.
+2025-06-10 23:08:54 - INFO - [web.py:2348] - 200 GET /monitor (::1) 10.86ms
+2025-06-10 23:08:55 - INFO - [session.py:348] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 23:08:55 - INFO - [appv2.py:1391] - Cierre elegante completado.
+2025-06-10 23:08:55 - INFO - [appv2.py:1412] - Servidor MinkaV2 detenido.
+2025-06-10 23:08:57 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 23:08:57 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 23:08:57 - INFO - [appv2.py:1266] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 23:08:57 - INFO - [appv2.py:1170] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 23:08:57 - INFO - [appv2.py:1246] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 23:09:01 - INFO - [web.py:2348] - 200 GET /monitor (::1) 19.14ms
+2025-06-10 23:09:31 - INFO - [web.py:2348] - 304 GET /monitor (::1) 19.75ms
+2025-06-10 23:09:45 - WARNING - [appv2.py:1292] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 23:09:45 - INFO - [appv2.py:1279] - Iniciando cierre elegante...
+2025-06-10 23:09:46 - INFO - [session.py:348] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 23:09:46 - INFO - [appv2.py:1289] - Cierre elegante completado.
+2025-06-10 23:09:46 - INFO - [appv2.py:1310] - Servidor MinkaV2 detenido.
+2025-06-10 23:09:47 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 23:09:47 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 23:09:47 - INFO - [appv2.py:1370] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 23:09:47 - INFO - [appv2.py:1274] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 23:09:47 - INFO - [appv2.py:1350] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 23:09:51 - INFO - [web.py:2348] - 200 GET /monitor (::1) 20.43ms
+2025-06-10 23:09:52 - INFO - [web.py:2348] - 304 GET /monitor (::1) 11.57ms
+2025-06-10 23:10:23 - INFO - [web.py:2348] - 304 GET /monitor (::1) 22.07ms
+2025-06-10 23:10:23 - WARNING - [appv2.py:1396] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 23:10:23 - INFO - [appv2.py:1383] - Iniciando cierre elegante...
+2025-06-10 23:10:24 - INFO - [session.py:348] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 23:10:24 - INFO - [appv2.py:1393] - Cierre elegante completado.
+2025-06-10 23:10:24 - INFO - [appv2.py:1414] - Servidor MinkaV2 detenido.
+2025-06-10 23:10:26 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 23:10:26 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 23:10:26 - INFO - [appv2.py:1369] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 23:10:26 - INFO - [appv2.py:1273] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 23:10:26 - INFO - [appv2.py:1349] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 23:10:29 - INFO - [web.py:2348] - 200 GET /monitor (::1) 33.41ms
+2025-06-10 23:10:35 - INFO - [web.py:2348] - 304 GET /monitor (::1) 41.72ms
+2025-06-10 23:10:37 - WARNING - [appv2.py:1395] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 23:10:37 - INFO - [appv2.py:1382] - Iniciando cierre elegante...
+2025-06-10 23:10:38 - INFO - [session.py:348] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 23:10:38 - INFO - [appv2.py:1392] - Cierre elegante completado.
+2025-06-10 23:10:38 - INFO - [appv2.py:1413] - Servidor MinkaV2 detenido.

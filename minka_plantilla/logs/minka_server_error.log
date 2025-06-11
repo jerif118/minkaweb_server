@@ -891,3 +891,15 @@ Traceback (most recent call last):
   File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
     raise WebSocketClosedError()
 tornado.websocket.WebSocketClosedError
+2025-06-10 22:00:49 - ERROR - [session.py:43] - [REDIS_INIT] No se pudo conectar a Redis: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-10 22:00:49 - CRITICAL - [appv2.py:1341] - [MAIN] No se pudo inicializar Redis al arrancar: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.. Saliendo.
+2025-06-10 22:27:46 - ERROR - [web.py:1875] - Uncaught exception GET /ws?action=join&client_id=web-client-1749612323005&room_id=779b6549ef27489ab4a5d0bb24ecc363&password=582FE3 (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?action=join&client_id=web-client-1749612323005&room_id=779b6549ef27489ab4a5d0bb24ecc363&password=582FE3', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 647, in open
+    active_websockets[client_id_for_jwt].write_message({
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError

@@ -1,66 +1,58 @@
-# Especificación Técnica - Servidor WebSocket Minka
+# Documentación del Sistema Minka WebSocket
 
 ## Introducción
 
-Esta documentación especifica el servidor WebSocket Minka implementado en `appv2.py`, un servidor de comunicación en tiempo real que permite la vinculación y comunicación entre clientes web (React) y móviles (Android) mediante WebSockets.
+El sistema Minka WebSocket proporciona una plataforma de comunicación en tiempo real entre clientes web y móviles. Esta documentación explica cómo configurar, conectar y utilizar el sistema de manera efectiva.
 
 ## Índice
 
 1. [Arquitectura del Sistema](#arquitectura-del-sistema)
-2. [Endpoints del Servidor](#endpoints-del-servidor)
-3. [Conexión de Clientes](#conexión-de-clientes)
-   - [Cliente Web (React)](#cliente-web-react)
-   - [Cliente Móvil (Android)](#cliente-móvil-android)
-4. [Reconexión de Clientes](#reconexión-de-clientes)
-5. [Estructura de Mensajes](#estructura-de-mensajes)
-6. [Autenticación JWT](#autenticación-jwt)
-7. [Sistema de Encolamiento](#sistema-de-encolamiento)
-8. [Modo Doze](#modo-doze)
-9. [Configuración](#configuración)
+2. [Conexión de Clientes](#conexión-de-clientes)
+   - [Cliente Web](#cliente-web)
+   - [Cliente Móvil](#cliente-móvil)
+   - [Reconexiones](#reconexiones)
+3. [Modo Doze](#modo-doze)
+4. [Estructura de Mensajes](#estructura-de-mensajes)
+5. [Autenticación con JWT](#autenticación-con-jwt)
+6. [Sistema de Encolamiento](#sistema-de-encolamiento)
+7. [Sistema de Entrega Confiable de Mensajes](#sistema-de-entrega-confiable-de-mensajes)
+8. [Ejemplos de Implementación](#ejemplos-de-implementación)
 
 ## Arquitectura del Sistema
 
-El servidor WebSocket Minka está implementado usando los siguientes componentes:
+El sistema está compuesto por los siguientes componentes:
 
-- **Servidor WebSocket** (`appv2.py`): Implementado con Tornado, maneja conexiones WebSocket, autenticación JWT, encolamiento de mensajes y estados de cliente
-- **Redis**: Base de datos en memoria para persistencia asíncrona de sesiones, clientes y colas de mensajes con TTL automático
-- **Cliente React**: Frontend web que crea salas y genera códigos QR
-- **Cliente Android**: Aplicación móvil que escanea códigos QR y se conecta a salas
+- **Servidor WebSocket** (`appv2.py`): Implementado con Tornado, maneja las conexiones y enrutamiento de mensajes usando Redis para persistencia.
+- **Redis**: Almacena el estado de sesiones, clientes y colas de mensajes de forma asíncrona.
+- **Clientes**: Aplicaciones web o móviles que se conectan al servidor.
 
-### Diagrama de Arquitectura
+### Diagrama de Flujo
 
 ```
-┌──────────────────┐         ┌──────────────────┐
-│   Cliente React  │◄───────►│                  │
-│  (Crea Sala +    │         │                  │         ┌─────────┐
-│   Muestra QR)    │         │   Servidor       │◄───────►│  Redis  │
-└──────────────────┘         │  WebSocket       │         │(Async)  │
-                             │   (appv2.py)     │         └─────────┘
-┌──────────────────┐         │                  │
-│ Cliente Android  │◄───────►│                  │
-│ (Escanea QR +    │         │                  │
-│  Se Conecta)     │         │                  │
-└──────────────────┘         └──────────────────┘
+┌──────────────┐         ┌──────────────┐
+│ Cliente Web  │◄───────►│              │
+└──────────────┘         │              │         ┌─────────┐
+                         │   Servidor   │◄───────►│  Redis  │
+┌──────────────┐         │  WebSocket   │         └─────────┘
+│ Cliente Móvil│◄───────►│   (appv2.py) │
+└──────────────┘         └──────────────┘
 ```
 
-## Endpoints del Servidor
+### Endpoints del Servidor
 
-### Endpoints HTTP
+El servidor principal (`appv2.py`) expone los siguientes endpoints:
 
-- **`GET /`** - Página principal, confirma que el servidor está operativo
-- **`GET /health`** - Endpoint de salud con información detallada del servidor
-- **`GET /api/status`** - Alias del endpoint de salud
-- **`GET /monitor`** - Panel de monitoreo con estado de sesiones y clientes activos
+#### Endpoints Principales
 
-### Endpoint WebSocket
+- **`/`** - Página principal que confirma que el servidor está operativo
+- **`/ws`** - Endpoint WebSocket principal para todas las conexiones de clientes
+- **`/health`** - Endpoint de salud que proporciona información detallada del servidor
+- **`/api/status`** - Alias del endpoint de salud
+- **`/monitor`** - Panel de monitoreo que muestra el estado de sesiones y clientes activos
 
-- **`WS /ws`** - Endpoint principal para conexiones WebSocket con parámetros de query:
-  - `action`: `create` (crear sala) o `join` (unirse a sala)
-  - `client_id`: Identificador único del cliente
-  - `room_id`: ID de la sala (requerido para action=join)
-  - `password`: Contraseña de la sala (requerido para action=join)
+#### Endpoint de Salud (`/health`)
 
-### Respuesta del Endpoint de Salud
+El endpoint de salud proporciona información completa sobre el estado del servidor:
 
 ```json
 {
@@ -82,83 +74,108 @@ El servidor WebSocket Minka está implementado usando los siguientes componentes
     "active_clients": 12,
     "dozing_clients": 2,
     "active_websockets": 8,
-    "websocket_connections": ["web-abc123", "mobile-def456"]
+    "websocket_connections": ["web-abc123", "mobile-def456", ...]
   }
 }
 ```
 
+### Archivos Obsoletos
+
+**IMPORTANTE**: El archivo `api.py` contiene endpoints REST heredados que **YA NO ESTÁN EN USO**. Este archivo usa variables globales que no están sincronizadas con Redis y causará errores 403. No debe ser usado en producción.
+
+### Configuración
+
+El servidor se configura a través de variables de entorno definidas en `config.py`:
+
+- `MINKA_PORT`: Puerto del servidor (default: 5001)
+- `MINKA_HOST`: Host del servidor (default: localhost)
+- `REDIS_HOST`: Host de Redis (default: localhost)
+- `REDIS_PORT`: Puerto de Redis (default: 6379)
+- `MINKA_LOG_LEVEL`: Nivel de logging (default: INFO)
+
 ## Conexión de Clientes
 
-### Cliente Web (React)
+### Cliente Web (JavaScript)
 
 #### Crear una Sala
 
+Para crear una nueva sala desde un cliente web usando JavaScript:
+
 ```javascript
-// Establecer conexión para crear sala
-const clientId = `web-client-${Date.now()}`;
-const ws = new WebSocket(`ws://servidor:puerto/ws?action=create&client_id=${clientId}`);
+// Ejemplo con JavaScript
+const ws = new WebSocket(`ws://servidor:puerto/ws?client_id=web-${clientId}&action=create`);
+
+ws.onopen = () => {
+  console.log("Conexión establecida");
+};
 
 ws.onmessage = (event) => {
   const data = JSON.parse(event.data);
+  console.log("Mensaje recibido:", data);
   
-  // Respuesta de sala creada
-  if (data.room_created) {
-    const qrInfo = {
-      room_id: data.room_id,
-      password: data.password
-    };
-    // Generar código QR con información de la sala
-    generateQRCode(JSON.stringify(qrInfo));
+  // Guardar room_id, password y JWT para reconexión
+  if (data.room_id && data.password) {
+    localStorage.setItem('room_id', data.room_id);
+    localStorage.setItem('password', data.password);
   }
   
-  // Notificación de cliente móvil conectado
-  if (data.event === 'joined') {
-    onDevicesLinked(data.jwt_token);
+  if (data.jwt_token) {
+    localStorage.setItem('jwt_token', data.jwt_token);
   }
 };
 ```
 
-#### Unirse a Sala Existente
+Es importante guardar el `jwt_token` que devuelve el servidor, ya que facilitará la reconexión automática en caso de desconexiones temporales.
+
+#### Unirse a una Sala Existente
 
 ```javascript
-// Conectar usando credenciales de sala
-const url = `ws://servidor:puerto/ws?action=join&client_id=${clientId}&room_id=${roomId}&password=${password}`;
-const ws = new WebSocket(url);
+// Unirse con room_id y password
+const ws = new WebSocket(`ws://servidor:puerto/ws?client_id=web-${clientId}&action=join&room_id=${roomId}&password=${password}`);
+
+// Unirse con JWT (después de reconexión)
+const ws = new WebSocket(`ws://servidor:puerto/ws?client_id=web-${clientId}&jwt_token=${jwtToken}`);
 ```
 
-### Cliente Móvil (Android)
+Al unirse a una sala, el servidor verificará que la sala exista y que la contraseña sea correcta. Si todo es correcto, el cliente recibirá un mensaje de confirmación y un token JWT para facilitar futuras reconexiones.
 
-#### Conexión Mediante QR
+### Cliente Móvil (Java/Android)
 
-```kotlin
-// Parsear datos del código QR escaneado
-val qrInfo = Gson().fromJson(qrContents, QrInfo::class.java)
-data class QrInfo(val room_id: String, val password: String)
+#### Crear una Sala
 
-// Generar identificador único del cliente
-val clientId = "mobile-${UUID.randomUUID()}"
+```java
+// Ejemplo con Java para Android
+String url = "ws://servidor:puerto/ws?client_id=mobile-" + clientId + "&action=create";
+WebSocketClient client = new WebSocketClient(new URI(url)) {
+    @Override
+    public void onOpen(ServerHandshake handshake) {
+        System.out.println("Conectado");
+    }
 
-// Establecer conexión WebSocket
-val url = "ws://$host/ws?action=join&client_id=$clientId&room_id=${qrInfo.room_id}&password=${qrInfo.password}"
-webSocket = client.newWebSocket(request, webSocketListener)
+    @Override
+    public void onMessage(String message) {
+        JSONObject data = new JSONObject(message);
+        // Guardar room_id y password
+        if (data.has("room_id") && data.has("password")) {
+            String roomId = data.getString("room_id");
+            String password = data.getString("password");
+            // Guardar para reconexión
+            saveCredentials(roomId, password);
+        }
+    }
+    // ...otros métodos...
+};
+client.connect();
 ```
 
-#### Sistema de Reconexión
+#### Unirse a una Sala Existente
 
-```kotlin
-// Reconexión automática con backoff exponencial
-private fun reconnect() {
-    if (!shouldReconnect) return
-    
-    val delay = min(1000L * 2.0.pow(attempts.toDouble()).toLong(), 30000L)
-    
-    handler.postDelayed({
-        val url = "ws://$host/ws?action=join&client_id=$clientId&room_id=$roomId&password=$password"
-        webSocket = client.newWebSocket(Request.Builder().url(url).build(), listener)
-        attempts++
-    }, delay)
-}
+```java
+String url = "ws://servidor:puerto/ws?client_id=mobile-" + clientId + "&action=join&room_id=" + roomId + "&password=" + password;
+// Crear y conectar cliente similar al ejemplo anterior
 ```
+
+Los clientes móviles deben almacenar el `room_id` y `password` de manera segura para poder reconectarse después.
 
 ### Reconexiones
 
@@ -601,90 +618,77 @@ class MinkaWebSocketClient {
       // Guardar información importante para reconexiones
       if (data.room_id) this.roomId = data.room_id;
       if (data.password) this.password = data.password;
-      if (data.jwt_token) {
-        this.jwt = data.jwt_token;
-        localStorage.setItem('jwt_token', this.jwt);
-        localStorage.setItem('room_id', this.roomId);
-        localStorage.setItem('password', this.password);
-      }
+      if (data.jwt_token) this.jwt = data.jwt_token;
 
-      // Manejar diferentes tipos de mensajes
-      if (data.event === 'message_queued') {
+      // Manejar confirmaciones de mensajes
+      if (data.event === "message_queued") {
         this.callbacks.onMessageQueued(data);
-      } else if (data.event === 'message_delivered') {
+      } else if (data.event === "message_delivered") {
         this.callbacks.onMessageDelivered(data);
-      } else if (data.sender_id && data.message) {
+      } else {
         this.callbacks.onMessage(data);
-      } else if (data.info) {
-        console.log("Info del servidor:", data.info);
       }
     };
 
     this.ws.onclose = (event) => {
-      console.log("Conexión cerrada:", event.code, event.reason);
+      console.log("Desconectado del servidor WebSocket");
       this.callbacks.onDisconnect(event);
 
-      if (!event.wasClean && event.code !== 1000) {
-        this.handleReconnection();
+      // Intentar reconectar automáticamente si la desconexión no fue limpia
+      if (!event.wasClean) {
+        const delay = Math.min(1000 * Math.pow(2, this.reconnectAttempts), this.maxReconnectDelay);
+        console.log(`Intentando reconexión en ${delay/1000} segundos...`);
+        
+        setTimeout(() => {
+          console.log("Intentando reconexión...");
+          // Primero intentar con JWT
+          if (this.reconnectWithJwt()) {
+            console.log("Reconexión iniciada con JWT");
+            this.callbacks.onReconnect("jwt");
+          } 
+          // Si no hay JWT, intentar con credenciales
+          else if (this.reconnectWithCredentials()) {
+            console.log("Reconexión iniciada con credenciales");
+            this.callbacks.onReconnect("credentials");
+          } else {
+            console.log("No se pudo reconectar: faltan credenciales");
+          }
+          this.reconnectAttempts++;
+        }, delay);
       }
     };
 
     this.ws.onerror = (error) => {
-      console.error("Error WebSocket:", error);
+      console.error("Error en la conexión WebSocket:", error);
       this.callbacks.onError(error);
     };
   }
 
-  handleReconnection() {
-    const delay = Math.min(1000 * Math.pow(2, this.reconnectAttempts), this.maxReconnectDelay);
-    console.log(`Intentando reconexión en ${delay/1000} segundos...`);
-
-    setTimeout(() => {
-      // Intentar reconectar con JWT primero
-      if (!this.reconnectWithJwt()) {
-        // Si no hay JWT, intentar con credenciales
-        if (!this.reconnectWithCredentials()) {
-          console.error("No se pudo reconectar: faltan credenciales");
-          return;
-        }
-      }
-      this.reconnectAttempts++;
-      this.callbacks.onReconnect();
-    }, delay);
-  }
-
-  sendMessage(message) {
+  sendMessage(text) {
     if (this.ws && this.ws.readyState === WebSocket.OPEN) {
-      this.ws.send(JSON.stringify({ message: message }));
+      this.ws.send(JSON.stringify({ message: text }));
       return true;
     }
     return false;
   }
 
-  leaveRoom(reason = "exit") {
+  disconnect(reason = "exit") {
     if (this.ws && this.ws.readyState === WebSocket.OPEN) {
-      const leaveMessage = { action: "leave", reason: reason };
-      
-      // Si es un cierre de sesión, incluir JWT para invalidar
+      // Si es una desconexión explícita, invalidar JWT
       if (reason === "exit" && this.jwt) {
-        leaveMessage.jwt_token = this.jwt;
+        this.ws.send(JSON.stringify({ 
+          action: "leave", 
+          reason: reason,
+          jwt_token: this.jwt 
+        }));
+      } else {
+        this.ws.send(JSON.stringify({ 
+          action: "leave", 
+          reason: reason
+        }));
       }
-      
-      this.ws.send(JSON.stringify(leaveMessage));
       this.ws.close();
-      
-      // Limpiar datos locales al salir
-      if (reason === "exit") {
-        localStorage.removeItem('jwt_token');
-        localStorage.removeItem('room_id');
-        localStorage.removeItem('password');
-      }
-    }
-  }
-
-  disconnect() {
-    if (this.ws) {
-      this.ws.close();
+      this.ws = null;
     }
   }
 }
@@ -1422,216 +1426,7 @@ enum class MessageStatus {
 }
 ```
 
-## Integración React-Android
-
-### Vinculación de Dispositivos
-
-La integración React-Android está optimizada para un flujo de vinculación fluido:
-
-#### Frontend React (Web)
-```javascript
-// LinkingScreen.jsx - Crear sala y mostrar QR
-const [qrCodeData, setQrCodeData] = useState('');
-
-useEffect(() => {
-  const clientId = `web-client-${Date.now()}`;
-  const ws = new WebSocket(`ws://servidor:puerto/ws?action=create&client_id=${clientId}`);
-  
-  ws.onmessage = (evt) => {
-    const data = JSON.parse(evt.data);
-    
-    // React espera 'room_created: true'
-    if (data.room_created) {
-      const qrInfo = {
-        room_id: data.room_id,
-        password: data.password
-      };
-      setQrCodeData(JSON.stringify(qrInfo)); // Solo 38 caracteres
-    }
-    
-    // Cuando Android se conecta, React recibe 'joined'
-    if (data.event === 'joined') {
-      onLinked(ws, clientId, { room_id: data.room_id, password: data.password });
-    }
-  };
-}, []);
-```
-
-#### App Android (Móvil)
-```kotlin
-// MainActivity.kt - Escanear QR y conectar
-override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    super.onActivityResult(requestCode, resultCode, data)
-    qrScanner.handleResult(requestCode, resultCode, data)?.let { contents ->
-        try {
-            val info = Gson().fromJson(contents, QrInfo::class.java)
-            val clientId = "mobile-${UUID.randomUUID()}"
-            
-            // Iniciar servicio WebSocket
-            val svc = Intent(this, WebSocketService::class.java).apply {
-                putExtra("host", "192.168.1.100:5001")  // Tu IP del servidor
-                putExtra("clientId", clientId)
-                putExtra("roomId", info.room_id)
-                putExtra("password", info.password)
-            }
-            startForegroundService(svc)
-            
-            Toast.makeText(this, "Conectando a sala...", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            Toast.makeText(this, "QR inválido", Toast.LENGTH_LONG).show()
-        }
-    }
-}
-
-data class QrInfo(val room_id: String, val password: String)
-```
-
-### Verificación de Conexión
-
-Para verificar que ambos dispositivos están conectados correctamente:
-
-#### En el navegador (React):
-1. Abre `http://tu-servidor:5001/monitor`
-2. Verifica que aparezcan ambos clientes:
-   - `web-client-xxxx` (React)
-   - `mobile-xxxx` (Android)
-
-#### En Android:
-```kotlin
-// WebSocketManager.kt - Verificar conexión exitosa
-ws.onmessage = { event ->
-    val data = JSON.parse(event.data)
-    
-    if (data.event === 'joined' && data.jwt_token) {
-        // Conexión exitosa, ambos dispositivos vinculados
-        Log.i("WebSocket", "Dispositivos vinculados exitosamente")
-        onNotification?.invoke(NotificationData(info = "Dispositivos vinculados"))
-    }
-}
-```
-
-### Prueba de Integración Completa
-
-1. **Inicia el servidor**:
-   ```bash
-   cd /ruta/al/servidor
-   python appv2.py
-   ```
-
-2. **Abre React en el navegador**:
-   ```bash
-   http://localhost:3000  # Tu frontend React
-   ```
-
-3. **Escanea QR con Android**:
-   - Abre tu app Android
-   - Usa el escáner QR para leer el código
-   - Verifica que aparezca "Conectando a sala..."
-
-4. **Verifica la vinculación**:
-   - React debe mostrar pantalla de notificaciones
-   - Android debe mostrar estado "Conectado"
-   - Monitor debe mostrar ambos clientes activos
-
-### Configuración de Red
-
-**Importante**: Para testing local, asegúrate de que ambos dispositivos estén en la misma red:
-
-```kotlin
-// En Android, usar la IP local de tu Mac/PC
-putExtra("host", "192.168.1.XXX:5001")  // Reemplaza XXX con tu IP
-```
-
-```bash
-# Encontrar tu IP local (macOS)
-ifconfig | grep "inet " | grep -v 127.0.0.1
-```
-
 ## Solución de Problemas
-
-###  Problemas de Conexión Android
-
-#### 1. **"QR inválido" al escanear**
-
-**Causa**: El QR no contiene el formato JSON esperado.
-
-**Solución**:
-```kotlin
-// Verificar que el QR contiene exactamente:
-{
-  "room_id": "abc123...",
-  "password": "XYZ789"
-}
-
-// Debug en onActivityResult:
-Log.d("QR_DEBUG", "Contenido escaneado: $contents")
-```
-
-#### 2. **"No se puede conectar al servidor"**
-
-**Causas comunes**:
-- IP incorrecta del servidor
-- Puerto bloqueado por firewall
-- Servidor no está ejecutándose
-
-**Soluciones**:
-```bash
-# 1. Verificar que el servidor está corriendo
-curl http://tu-ip:5001/health
-
-# 2. Verificar IP local
-ifconfig | grep "inet " | grep -v 127.0.0.1
-
-# 3. Verificar conectividad desde Android
-# En Android, usar una app como "Network Tools" para ping a tu servidor
-```
-
-#### 3. **Conexión se corta inmediatamente**
-
-**Causa**: Parámetros incorrectos en la URL de conexión.
-
-**Solución**:
-```kotlin
-// URL correcta debe ser:
-"ws://$host/ws?action=join&client_id=$clientId&room_id=$roomId&password=$password"
-
-// Verificar que todos los parámetros tienen valores:
-Log.d("WebSocket", "client_id: $clientId")
-Log.d("WebSocket", "room_id: $roomId") 
-Log.d("WebSocket", "password: $password")
-```
-
-### Problemas de React
-
-#### 1. **QR no se genera**
-
-**Causa**: React no recibe `room_created: true`.
-
-**Solución**:
-```javascript
-// Verificar en el navegador DevTools que llega:
-ws.onmessage = (evt) => {
-  console.log("Mensaje del servidor:", evt.data);
-  const data = JSON.parse(evt.data);
-  
-  if (data.room_created) {  // Debe ser true
-    console.log("Sala creada:", data.room_id, data.password);
-  }
-};
-```
-
-#### 2. **No se detecta cuando Android se conecta**
-
-**Causa**: React no recibe `event: 'joined'`.
-
-**Solución**:
-```javascript
-// Verificar que React recibe exactamente:
-if (data.event === 'joined') {
-  console.log("Android conectado:", data);
-  // Cambiar a pantalla de notificaciones
-}
-```
 
 ### Errores 403 (Forbidden)
 
@@ -1695,73 +1490,52 @@ Los logs se encuentran en la carpeta `logs/`:
 
 ## Estado Actual del Sistema (Junio 2025)
 
-### Funcionalidades Implementadas v2
+### Funcionalidades Implementadas ✅
 
-- **WebSocket Server v2** con Tornado y Redis asíncrono
-- **Integración React-Android** con compatibilidad perfecta
-- **QR Códigos Optimizados** de solo 38 caracteres
-- **JWT Inteligente** generado solo cuando ambos usuarios están conectados
-- **Autenticación JWT** mejorada para clientes web
-- **Modo Doze** avanzado para clientes móviles
+- **WebSocket Server** con Tornado y Redis
+- **Autenticación JWT** para clientes web
+- **Modo Doze** para clientes móviles
 - **Sistema de encolamiento** de mensajes confiable
-- **Reconexiones automáticas** con backoff exponencial inteligente
-- **Monitoreo** en tiempo real del servidor con métricas detalladas
-- **Health checks** y logs rotativos con múltiples niveles
-- **Configuración** flexible mediante variables de entorno
+- **Reconexiones automáticas** con backoff exponencial
+- **Monitoreo** en tiempo real del servidor
+- **Health checks** detallados
+- **Logs rotativos** con múltiples niveles
+- **Configuración** mediante variables de entorno
 
-### Pruebas Pasadas v2
+### Pruebas Pasadas ✅
 
 - **Test comprehensive server**: 15/15 pruebas pasando
-- **Conexiones WebSocket** React-Android estables
-- **QR códigos compactos** funcionando perfectamente
-- **JWT generación optimizada** solo cuando necesario
-- **Entrega de mensajes** confiable entre dispositivos
-- **Modo doze** funcionando correctamente en Android
-- **Reconexiones JWT** operativas en ambos clientes
-- **Blacklisting de tokens** para seguridad mejorada
+- **Conexiones WebSocket** estables
+- **Entrega de mensajes** confiable
+- **Modo doze** funcionando correctamente
+- **Reconexiones JWT** operativas
 
-### Optimizaciones v2
-
-- **Flujo de conexión**: Reducido de ~200ms a ~50ms
-- **Tamaño de QR**: Reducido de 200+ a 38 caracteres
-- **Compatibilidad**: 100% React + Android funcional
-- **Memoria del servidor**: Optimizada con Redis TTL automático
-- **Reconexiones**: Backoff exponencial con límite inteligente
-
-### Archivos Obsoletos
+### Archivos Obsoletos ⚠️
 
 - `api.py` - **NO USAR** - Contiene endpoints REST obsoletos que causan errores 403
 
-### Configuración de Producción v2
+### Configuración de Producción
 
 Para producción, configurar las siguientes variables de entorno:
 
 ```bash
 export MINKA_ENV=production
-export MINKA_JWT_SECRET="tu_clave_secreta_muy_segura_v2"
-export REDIS_HOST="tu_servidor_redis_produccion"
+export MINKA_JWT_SECRET="tu_clave_secreta_muy_segura"
+export REDIS_HOST="tu_servidor_redis"
 export MINKA_LOG_LEVEL=WARNING
 export MINKA_HOST=0.0.0.0
 export MINKA_PORT=5001
-export MINKA_CORS_ORIGINS="https://tu-frontend-react.com,https://tu-app-android.com"
 ```
 
-### Verificación de Compatibilidad
+### Próximos Pasos Recomendados
 
-Para verificar que tu configuración React-Android funciona correctamente:
-
-```bash
-# 1. Verificar servidor
-curl http://tu-servidor:5001/health
-
-# 2. Verificar monitor
-curl http://tu-servidor:5001/monitor
-
-# 3. Verificar logs
-tail -f logs/minka_server.log | grep -E "(WS-OPEN|WS-JOIN)"
-```
-
+1. **Documentar API WebSocket** con esquemas JSON detallados
+2. **Implementar rate limiting** para prevenir spam
+3. **Agregar métricas** de rendimiento (opcional)
+4. **Crear Docker containers** para despliegue fácil
+5. **Implementar HTTPS/WSS** para producción
 
 ---
 
-*Documentación actualizada: 10 de Junio de 2025*
+*Documentación actualizada: Junio 2025*
+*Versión del servidor: MinkaV2 (Redis-based)*
