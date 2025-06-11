@@ -478,9 +478,9 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             # Solo enviar room_id y password para que el usuario pueda compartir
             self.write_message({
                 'event': 'room_created',
+                'room_created': True,
                 'room_id': self.room_id,
-                'client_id': self.client_id,
-                'room_password': room_password
+                'password': room_password
                 # NO enviar jwt_token aquí
             })
             logging.info(f"[WS-OPEN] Sala {self.room_id} creada por {self.client_id}. Contraseña: {room_password}. Esperando peer para generar JWT.")
