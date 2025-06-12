@@ -25,7 +25,7 @@ from session import (
     close_redis_client
 )
 
-# Importar configuración
+# Importar configuracion
 from config import (
     SESSION_TIMEOUT, RECONNECT_GRACE_PERIOD, MESSAGE_TTL_SECONDS, 
     JWT_SECRET_KEY, JWT_ALGORITHM, JWT_EXPIRATION_DELTA_SECONDS,
@@ -35,8 +35,8 @@ from config import (
     LOG_TO_FILE, LOG_TO_CONSOLE, LOG_MAX_BYTES, LOG_BACKUP_COUNT
 )
 
-# Configuración del logger (movida de logger.py si es que existía y se quiere integrar aquí)
-# Si tienes un logger.py separado, asegúrate que su configuración no colisione o úsalo directamente.
+# Configuracion del logger (movida de logger.py si es que existía y se quiere integrar aquí)
+# Si tienes un logger.py separado, asegúrate que su configuracion no colisione o úsalo directamente.
 if not logging.getLogger().hasHandlers(): # Evitar múltiples handlers si se recarga
     log_formatter = logging.Formatter(
         '%(asctime)s - %(levelname)s - [%(filename)s:%(lineno)d] - %(message)s',
@@ -91,7 +91,7 @@ class HealthHandler(tornado.web.RequestHandler):
             }
         }
         
-        # Verificar conexión a Redis
+        # Verificar conexion a Redis
         redis_ok = False
         redis_info = {}
         try:
@@ -99,7 +99,7 @@ class HealthHandler(tornado.web.RequestHandler):
             if rc:
                 await rc.ping()
                 redis_ok = True
-                # Obtener información adicional de Redis
+                # Obtener informacion adicional de Redis
                 info = await rc.info()
                 redis_info = {
                     "connected": True,
@@ -161,7 +161,7 @@ class HealthHandler(tornado.web.RequestHandler):
 
 class MonitorHandler(tornado.web.RequestHandler):
     async def get(self):
-        # Esta función ahora debe ser asíncrona debido a las llamadas a Redis
+        # Esta funcion ahora debe ser asíncrona debido a las llamadas a Redis
         sessions = []
         clients = []
         try:
@@ -290,7 +290,7 @@ class MonitorHandler(tornado.web.RequestHandler):
                 <th>Client ID</th>
                 <th>Room ID</th>
                 <th>Estado</th>
-                <th>Última Conexión</th>
+                <th>Última Conexion</th>
                 <th>Detalles</th>
               </tr>"""
         
@@ -320,7 +320,7 @@ class MonitorHandler(tornado.web.RequestHandler):
         
         html += """
             </table>
-            <p><small>Actualización automática cada 30 segundos</small></p>
+            <p><small>Actualizacion automática cada 30 segundos</small></p>
           </div>
         </body>
         </html>"""
@@ -332,12 +332,12 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
     
     def check_origin(self, origin):
         """Permitir conexiones cross-origin para desarrollo y testing.
-        En producción, esto debería ser más restrictivo."""
+        En produccion, esto debería ser más restrictivo."""
         return True
     
     async def open(self, *args, **kwargs):
         # Todas las operaciones de Redis deben ser awaited
-        # Parámetros esperados según documentación:
+        # Parámetros esperados según documentacion:
         # - client_id: obligatorio para todas las conexiones
         # - action: create, join (opcional si hay jwt_token)
         # - jwt_token: para reconexiones
@@ -360,13 +360,26 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                     token = p
                     break
         
-        # REQUISITO ESTRICTO: client_id siempre obligatorio según documentación TXT
+        # REQUISITO ESTRICTO: client_id siempre obligatorio según documentacion TXT
         if not client_id_param:
-            logging.warning(f"[WS-OPEN] Conexión rechazada: client_id es obligatorio según documentación")
+            logging.warning(f"[WS-OPEN] Conexion rechazada: client_id es obligatorio según documentacion")
             self.write_message({
-                'error': 'client_id es obligatorio en todos los tipos de conexión', 
+                'error': 'client_id es obligatorio en todos los tipos de conexion', 
                 'code': 'CLIENT_ID_REQUIRED',
                 'documentation': 'Usar: ws://servidor/ws?client_id=YOUR_CLIENT_ID&action=create'
+            })
+            self.close()
+            return
+
+        # Verificar si es un cliente existente intentando reconectar
+        existing_client = await get_client(client_id_param) if client_id_param else None
+        
+        # Si el cliente ya existe, exigir token JWT para reconexion
+        if existing_client and not token:
+            logging.warning(f"[WS-OPEN] Cliente existente {client_id_param} intento reconectar sin JWT. Rechazando.")
+            self.write_message({
+                'error': 'Reconexion requiere token JWT valido', 
+                'code': 'JWT_REQUIRED_FOR_RECONNECTION'
             })
             self.close()
             return
@@ -377,7 +390,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 self.client_id = payload.get('client_id')
                 self.room_id = payload.get('room_id')
                 
-                # Si se proporciona client_id en parámetros, debe coincidir con el JWT
+                # Verificacion estricta: client_id en JWT debe coincidir con el parámetro
                 if client_id_param and client_id_param != self.client_id:
                     logging.warning(f"[WS-OPEN] client_id en parámetros ({client_id_param}) no coincide con JWT ({self.client_id})")
                     self.write_message({'error': 'client_id no coincide con JWT', 'code': 'CLIENT_ID_MISMATCH'})
@@ -387,9 +400,23 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 logging.info(f"[WS-OPEN] Cliente {self.client_id} autenticado con JWT para sala {self.room_id}")
                 
                 client_data = await get_client(self.client_id)
-                if not client_data or client_data.get('room_id') != self.room_id:
-                    logging.warning(f"[WS-OPEN] JWT válido para {self.client_id} pero datos de cliente no coinciden o no existen. Rechazando.")
-                    self.write_message({'error': 'Token inválido o sesión caducada', 'code': 'INVALID_TOKEN_SESSION'})
+                if not client_data:
+                    logging.warning(f"[WS-OPEN] JWT válido para {self.client_id} pero cliente no existe en Redis. Rechazando.")
+                    self.write_message({'error': 'Token válido pero cliente no registrado', 'code': 'CLIENT_NOT_FOUND'})
+                    self.close()
+                    return
+                
+                # Verificar que el cliente esté asociado con la sala correcta
+                if client_data.get('room_id') != self.room_id:
+                    logging.warning(f"[WS-OPEN] JWT válido para {self.client_id} pero sala no coincide. JWT:{self.room_id}, Redis:{client_data.get('room_id')}")
+                    self.write_message({'error': 'Token no corresponde a la sala del cliente', 'code': 'ROOM_MISMATCH'})
+                    self.close()
+                    return
+                
+                # Verificar JTI para evitar uso de múltiples tokens por cliente
+                if 'jti' in payload and client_data.get('current_jti') and payload['jti'] != client_data.get('current_jti'):
+                    logging.warning(f"[WS-OPEN] Cliente {self.client_id} intento usar un token diferente al registrado.")
+                    self.write_message({'error': 'Token JWT no es el último emitido para este cliente', 'code': 'INVALID_TOKEN_JTI'})
                     self.close()
                     return
                 
@@ -400,7 +427,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 
                 session_data = await get_session(self.room_id)
                 if not session_data:
-                    logging.warning(f"[WS-OPEN] Cliente {self.client_id} intentó unirse a sala {self.room_id} inexistente con JWT. Rechazando.")
+                    logging.warning(f"[WS-OPEN] Cliente {self.client_id} intento unirse a sala {self.room_id} inexistente con JWT. Rechazando.")
                     self.write_message({'error': 'Sala no existe', 'code': 'ROOM_NOT_FOUND'})
                     self.close()
                     return
@@ -425,7 +452,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                             logging.warning(f"[WS-OPEN] WebSocket cerrado para {self.client_id} al enviar mensajes pendientes. Re-encolando...")
                             await add_message_to_queue(self.client_id, msg_payload)
                             break
-                return # Conexión establecida
+                return # Conexion establecida
             else:
                 logging.warning(f"[WS-OPEN] Token JWT inválido o expirado presentado. Rechazando.")
                 self.write_message({'error': 'Token inválido o expirado', 'code': 'INVALID_TOKEN'})
@@ -434,8 +461,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         
         # Usar client_id proporcionado en parámetros para todas las acciones
         if not action:
-            logging.warning(f"[WS-OPEN] Conexión sin acción especificada. Se requiere action=create o action=join")
-            self.write_message({'error': 'Acción requerida (create o join)', 'code': 'ACTION_REQUIRED'})
+            logging.warning(f"[WS-OPEN] Conexion sin accion especificada. Se requiere action=create o action=join")
+            self.write_message({'error': 'Accion requerida (create o join)', 'code': 'ACTION_REQUIRED'})
             self.close()
             return
 
@@ -489,7 +516,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             room_id_join = self.get_argument("room_id", None)
             room_password_join = self.get_argument("room_password", None) or self.get_argument("password", None)
             
-            # Usar client_id de parámetros (obligatorio según documentación)
+            # Usar client_id de parámetros (obligatorio según documentacion)
             if not client_id_param:
                 logging.warning(f"[WS-OPEN] action=join requiere client_id en parámetros")
                 self.write_message({'error': 'client_id requerido para unirse a sala', 'code': 'CLIENT_ID_REQUIRED'})
@@ -501,13 +528,13 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 self.close()
                 return
             
-            # Validación de formato (opcional pero recomendado)
+            # Validacion de formato (opcional pero recomendado)
             # Ajustar regex para UUID v4 (36 chars con guiones, o 32 sin guiones)
             if not re.match(r'^[0-9a-fA-F]{32}$', room_id_join) and not re.match(r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$', room_id_join):
                  self.write_message({'error': 'Formato de room_id inválido', 'code': 'INVALID_ROOM_ID_FORMAT'})
                  self.close()
                  return
-            if not re.match(r'^[A-Z0-9]{6}$', room_password_join): # Ajustado para coincidir con generación (MAYÚSCULAS)
+            if not re.match(r'^[A-Z0-9]{6}$', room_password_join): # Ajustado para coincidir con generacion (MAYÚSCULAS)
                  self.write_message({'error': 'Formato de contraseña inválido', 'code': 'INVALID_PASSWORD_FORMAT'})
                  self.close()
                  return
@@ -519,7 +546,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                     self.close()
                     return
                 
-                # Lógica para re-unión de cliente en doze o unión de nuevo cliente
+                # Logica para re-union de cliente en doze o union de nuevo cliente
                 has_dozing_client = current_session_join.get('has_dozing_client', False)
                 dozing_client_id = current_session_join.get('doze_client_id')
 
@@ -547,8 +574,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                     self.room_id = room_id_join
 
                     if self.client_id in current_session_join.get('clients',[]):
-                        logging.warning(f"[WS-JOIN] Cliente {self.client_id} ya está en la sala {self.room_id}. Permitir reconexión.")
-                        # Podría ser una reconexión web o un reintento móvil
+                        logging.warning(f"[WS-JOIN] Cliente {self.client_id} ya esta en la sala {self.room_id}. Permitir reconexion.")
+                        # Podría ser una reconexion web o un reintento movil
                     else:
                         current_session_join.get('clients', []).append(self.client_id)
 
@@ -588,7 +615,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                     'room_id': self.room_id,
                     'jwt_token': jwt_token_for_joiner
                 })
-                logging.info(f"[WS-JOIN] Cliente {self.client_id} se unió a sala {self.room_id}")
+                logging.info(f"[WS-JOIN] Cliente {self.client_id} se unio a sala {self.room_id}")
 
                 for cid in current_session_join.get('clients', []):
                     # Generar y registrar token para este peer
@@ -637,9 +664,9 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                         except tornado.websocket.WebSocketClosedError:
                             logging.warning(f"[WS-JOIN] Error al notificar a {peer_id}: WebSocket cerrado.")
                     else:
-                        # Si el peer no está activo (ej. móvil en doze que se acaba de despertar o web desconectado)
-                        # Se podría encolar una notificación, pero 'peer_joined' es más para conexión en tiempo real.
-                        logging.info(f"[WS-JOIN] Peer {peer_id} no tiene websocket activo. No se envió notificación de unión.")
+                        # Si el peer no está activo (ej. movil en doze que se acaba de despertar o web desconectado)
+                        # Se podría encolar una notificacion, pero 'peer_joined' es más para conexion en tiempo real.
+                        logging.info(f"[WS-JOIN] Peer {peer_id} no tiene websocket activo. No se envio notificacion de union.")
                 
                 # Enviar mensajes pendientes al cliente que se une/reconecta
                 pending_messages_join = await get_pending_messages(self.client_id, delete_queue=True)
@@ -657,7 +684,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 self.close()
                 return
         else:
-            self.write_message({'error': 'Acción no válida', 'code': 'INVALID_ACTION'})
+            self.write_message({'error': 'Accion no válida', 'code': 'INVALID_ACTION'})
             self.close()
             return
 
@@ -672,16 +699,16 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             self.close()
             return
             
-        if not self.client_id or not self.room_id: # Si no se identificó en open()
-            # Podría ser un cliente móvil enviando su primer mensaje de identificación
+        if not self.client_id or not self.room_id: # Si no se identifico en open()
+            # Podría ser un cliente movil enviando su primer mensaje de identificacion
             # O un error si se esperaba que ya estuviera identificado.
-            # Esta lógica dependerá de tu protocolo exacto para móviles.
+            # Esta logica dependerá de tu protocolo exacto para moviles.
             action = data.get('action')
-            if action == 'identify_mobile': # Ejemplo de acción de identificación
-                # ... lógica para identificar y registrar cliente móvil ...
+            if action == 'identify_mobile': # Ejemplo de accion de identificacion
+                # ... logica para identificar y registrar cliente movil ...
                 # self.client_id = ... ; self.room_id = ...
                 # active_websockets[self.client_id] = self
-                logging.info(f"[IDENTIFY] Cliente móvil identificado (lógica pendiente)")
+                logging.info(f"[IDENTIFY] Cliente movil identificado (logica pendiente)")
                 # await self.process_message_data(data) # Luego procesar el mensaje original
                 return 
             else:
@@ -694,49 +721,49 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         await self.process_message_data(data)
 
     async def process_message_data(self, data):
-        # Este método contiene la lógica que estaba en on_message después de la carga del JSON
-        # y la verificación inicial de client_id/room_id.
+        # Este método contiene la logica que estaba en on_message después de la carga del JSON
+        # y la verificacion inicial de client_id/room_id.
 
         # Validar que el mensaje tenga una estructura válida
         action = data.get('action')
         message_content = data.get('message')
         
-        # Si no hay acción ni mensaje, es inválido
+        # Si no hay accion ni mensaje, es inválido
         if not action and message_content is None:
-            logging.warning(f"[PROCESS-MSG] Cliente {self.client_id} envió datos sin acción ni mensaje. Cerrando.")
-            self.write_message({'error': 'Falta acción o mensaje', 'code': 'MISSING_ACTION_OR_MESSAGE'})
+            logging.warning(f"[PROCESS-MSG] Cliente {self.client_id} envio datos sin accion ni mensaje. Cerrando.")
+            self.write_message({'error': 'Falta accion o mensaje', 'code': 'MISSING_ACTION_OR_MESSAGE'})
             self.close()
             return
             
-        # Si hay acción, validar que sea una acción conocida
+        # Si hay accion, validar que sea una accion conocida
         valid_actions = ['leave']  # Lista de acciones válidas
         if action and action not in valid_actions:
-            logging.warning(f"[PROCESS-MSG] Cliente {self.client_id} envió acción inválida: {action}. Cerrando.")
-            self.write_message({'error': 'Acción no válida', 'code': 'INVALID_ACTION'})
+            logging.warning(f"[PROCESS-MSG] Cliente {self.client_id} envio accion inválida: {action}. Cerrando.")
+            self.write_message({'error': 'Accion no válida', 'code': 'INVALID_ACTION'})
             self.close()
             return
             
-        # Si es solo un mensaje (sin acción), debe tener contenido
+        # Si es solo un mensaje (sin accion), debe tener contenido
         if not action and message_content is not None:
-            # Esto es un mensaje normal, continuar con la lógica de broadcast
+            # Esto es un mensaje normal, continuar con la logica de broadcast
             pass
         elif action:
-            # Es una acción válida, continuar con la lógica de acción
+            # Es una accion válida, continuar con la logica de accion
             pass
 
-        # Mejora de diagnóstico: Registrar el estado de la sala para depuración
+        # Mejora de diagnostico: Registrar el estado de la sala para depuracion
         room_info = await get_session(self.room_id)
         if room_info:
             logging.info(f"[MESSAGE-DEBUG] Sala {self.room_id}: {room_info.get('status')}, Clientes: {room_info.get('clients', [])}")
         else:
-            logging.warning(f"[MESSAGE-DEBUG] No se encontró info para sala {self.room_id} (cliente {self.client_id})")
+            logging.warning(f"[MESSAGE-DEBUG] No se encontro info para sala {self.room_id} (cliente {self.client_id})")
 
         jwt_in_message = data.get('jwt_token') # Cliente podría enviar su JWT para ser invalidado en 'leave'
 
         if data.get('action') == 'leave':
             self.intentional_disconnect = True
             reason = data.get('reason', '')
-            logging.info(f"[LEAVE] Cliente {self.client_id} deja sala {self.room_id}, razón: {reason}")
+            logging.info(f"[LEAVE] Cliente {self.client_id} deja sala {self.room_id}, razon: {reason}")
             
             # Blacklisting del JTI para cualquier cliente
             if True:
@@ -744,7 +771,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 # Prioridad si el cliente envía el token actual en el mensaje de 'leave'
                 if jwt_in_message: 
                     try:
-                        # No verificar expiración aquí, solo queremos el JTI de un token que el cliente *tenía*
+                        # No verificar expiracion aquí, solo queremos el JTI de un token que el cliente *tenía*
                         payload = jwt.decode(jwt_in_message, JWT_SECRET_KEY, algorithms=[JWT_ALGORITHM], options={"verify_exp": False}) 
                         jti_to_blacklist = payload.get('jti')
                         if jti_to_blacklist:
@@ -770,9 +797,9 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                             await set_client(self.client_id, client_data_to_clear_jti)
                             logging.info(f"[LEAVE-BLACKLIST] current_jti eliminado de Redis para {self.client_id}")
                 else:
-                    logging.warning(f"[LEAVE-BLACKLIST] No se encontró JTI para blacklisting para {self.client_id}.")
+                    logging.warning(f"[LEAVE-BLACKLIST] No se encontro JTI para blacklisting para {self.client_id}.")
 
-            # Lógica de 'leave' para cliente web cuando hay un móvil en doze
+            # Logica de 'leave' para cliente web cuando hay un movil en doze
             if self.client_id.startswith("web-"):
                 current_session_leave = await get_session(self.room_id)
                 if current_session_leave:
@@ -789,7 +816,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                             break
                     
                     if mobile_in_doze:
-                        logging.info(f"[LEAVE] Web {self.client_id} sale, móvil {dozing_mobile_id} en doze. Manteniendo sala {self.room_id}.")
+                        logging.info(f"[LEAVE] Web {self.client_id} sale, movil {dozing_mobile_id} en doze. Manteniendo sala {self.room_id}.")
                         if self.client_id in current_session_leave.get("clients", []):
                             current_session_leave["clients"].remove(self.client_id)
                         if "previous_clients" not in current_session_leave: current_session_leave["previous_clients"] = []
@@ -797,7 +824,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                         current_session_leave['last_activity'] = time.time()
                         await set_session(self.room_id, current_session_leave)
                         
-                        # Notificar al móvil (si estuviera conectado, aunque está en doze)
+                        # Notificar al movil (si estuviera conectado, aunque está en doze)
                         if dozing_mobile_id and dozing_mobile_id in active_websockets:
                             try:
                                 active_websockets[dozing_mobile_id].write_message({'event': 'peer_left', 'client_id': self.client_id, 'message': 'Cliente web desconectado. Permaneces en doze.'}) 
@@ -807,11 +834,11 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                         await delete_client(self.client_id, keep_message_queue=False) # Web no necesita cola al salir
                         if self.client_id in active_websockets: del active_websockets[self.client_id]
                     else:
-                        # Comportamiento normal: eliminar sala completa si el web se va y no hay móvil en doze
+                        # Comportamiento normal: eliminar sala completa si el web se va y no hay movil en doze
                         logging.info(f"[LEAVE] Web {self.client_id} sale. Sala {self.room_id} y peers serán eliminados.")
                         for peer_id in other_ids:
                             if peer_id in active_websockets:
-                                try: active_websockets[peer_id].write_message({'event': 'peer_left', 'client_id': self.client_id, 'message': 'El otro usuario se desconectó.'}) 
+                                try: active_websockets[peer_id].write_message({'event': 'peer_left', 'client_id': self.client_id, 'message': 'El otro usuario se desconecto.'}) 
                                 except tornado.websocket.WebSocketClosedError: pass
                             await delete_client(peer_id) 
                             if peer_id in active_websockets: del active_websockets[peer_id]
@@ -821,12 +848,12 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 self.close()
                 return
 
-            # Móvil entrando en modo doze
+            # Movil entrando en modo doze
             if reason == "doze":
                 if self.client_id.startswith("web-"):
                     logging.warning(f"[LEAVE-DOZE] Cliente web {self.client_id} no puede entrar en doze.")
                     self.write_message({'error': 'Clientes web no pueden usar doze', 'code': 'WEB_CANT_DOZE'})
-                    # No cerrar conexión necesariamente, solo rechazar acción
+                    # No cerrar conexion necesariamente, solo rechazar accion
                     return 
 
                 client_data_doze = await get_client(self.client_id)
@@ -843,7 +870,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 
                 current_session_doze = await get_session(self.room_id)
                 if not current_session_doze:
-                    logging.error(f"[LEAVE-DOZE] No se encontró sala {self.room_id} para {self.client_id}")
+                    logging.error(f"[LEAVE-DOZE] No se encontro sala {self.room_id} para {self.client_id}")
                     self.close(); return
                 
                 if "previous_clients" not in current_session_doze: current_session_doze["previous_clients"] = []
@@ -878,25 +905,25 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 self.close()
                 return
 
-            # Leave normal (no web con móvil en doze, no móvil entrando en doze)
+            # Leave normal (no web con movil en doze, no movil entrando en doze)
             current_session_normal_leave = await get_session(self.room_id)
             if current_session_normal_leave:
                 other_ids = [cid for cid in current_session_normal_leave.get("clients", []) if cid != self.client_id]
                 for peer_id in other_ids:
                     if peer_id in active_websockets:
-                        try: active_websockets[peer_id].write_message({'event': 'peer_left', 'client_id': self.client_id, 'message': 'El otro usuario se desconectó.'}) 
+                        try: active_websockets[peer_id].write_message({'event': 'peer_left', 'client_id': self.client_id, 'message': 'El otro usuario se desconecto.'}) 
                         except tornado.websocket.WebSocketClosedError: pass
                 
                 if self.client_id in current_session_normal_leave.get("clients", []):
                     current_session_normal_leave["clients"].remove(self.client_id)
                 
-                # Determinar si se debe conservar la cola (ej. si el cliente es móvil y podría reconectar)
+                # Determinar si se debe conservar la cola (ej. si el cliente es movil y podría reconectar)
                 # Por defecto, para un leave normal, no se conserva la cola.
-                keep_queue_on_leave = False # Cambiar si hay lógica específica para móviles en leave normal
+                keep_queue_on_leave = False # Cambiar si hay logica específica para moviles en leave normal
                 await delete_client(self.client_id, keep_message_queue=keep_queue_on_leave)
                 if self.client_id in active_websockets: del active_websockets[self.client_id]
                 
-                # Actualizar clientes en sesión (filtrar los que ya no existen)
+                # Actualizar clientes en sesion (filtrar los que ya no existen)
                 valid_clients_in_session = []
                 for cid_in_s in current_session_normal_leave.get("clients", []):
                     if await get_client(cid_in_s): # Verificar si el cliente aún existe en Redis
@@ -905,23 +932,23 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 
                 if not current_session_normal_leave["clients"]:
                     await delete_session(self.room_id)
-                    logging.info(f"[LEAVE] Cliente {self.client_id} salió. Sala {self.room_id} eliminada (vacía).")
+                    logging.info(f"[LEAVE] Cliente {self.client_id} salio. Sala {self.room_id} eliminada (vacía).")
                 else:
                     current_session_normal_leave['last_activity'] = time.time()
                     await set_session(self.room_id, current_session_normal_leave)
-                    logging.info(f"[LEAVE] Cliente {self.client_id} salió de {self.room_id}. Restantes: {len(current_session_normal_leave['clients'])}.")
+                    logging.info(f"[LEAVE] Cliente {self.client_id} salio de {self.room_id}. Restantes: {len(current_session_normal_leave['clients'])}.")
             else:
-                await delete_client(self.client_id) # No conservar cola si la sesión no existe
+                await delete_client(self.client_id) # No conservar cola si la sesion no existe
                 if self.client_id in active_websockets: del active_websockets[self.client_id]
-                logging.warning(f"[LEAVE] Cliente {self.client_id} intentó salir de sala ({self.room_id}) inexistente. Cliente eliminado.")
+                logging.warning(f"[LEAVE] Cliente {self.client_id} intento salir de sala ({self.room_id}) inexistente. Cliente eliminado.")
 
             self.close()
             return
 
-        # Lógica de broadcast de mensajes (no acciones)
+        # Logica de broadcast de mensajes (no acciones)
         msg_content = data.get('message')
         if msg_content is None: # Asegurar que haya algo que enviar
-            logging.warning(f"[BROADCAST] Cliente {self.client_id} envió mensaje sin contenido 'message'. Ignorando.")
+            logging.warning(f"[BROADCAST] Cliente {self.client_id} envio mensaje sin contenido 'message'. Ignorando.")
             # self.write_message({'error': 'Mensaje sin contenido 'message'', 'code': 'EMPTY_MESSAGE'})
             return
 
@@ -942,7 +969,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             
             if not other_clients_bcast:
                 logging.info(f"[BROADCAST] No hay otros clientes en {self.room_id} para {self.client_id} para enviar mensaje.")
-                # Podría ser una condición de carrera si el otro cliente acaba de irse
+                # Podría ser una condicion de carrera si el otro cliente acaba de irse
                 self.write_message({'info': 'No hay destinatario en la sala.', 'code': 'NO_RECIPIENT'})
                 return
 
@@ -954,7 +981,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 'message_id': message_id
             }
 
-            # Lógica actual 1-a-1, tomar el primero. Para múltiples, iterar.
+            # Logica actual 1-a-1, tomar el primero. Para múltiples, iterar.
             # for recipient_id in other_clients_bcast:
             recipient_id = other_clients_bcast[0]
             
@@ -992,7 +1019,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                         'error': 'No se pudo encolar el mensaje.'
                     })
         else:
-            # No hay otros clientes o la sesión no existe como se esperaba
+            # No hay otros clientes o la sesion no existe como se esperaba
             self.write_message({
                 'info': 'Aún no emparejado o no hay otros participantes.',
                 'code': 'NOT_PAIRED_OR_ALONE',
@@ -1007,22 +1034,22 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
         if getattr(self, 'intentional_disconnect', False):
             logging.info(f"[CLOSE] Cierre voluntario de {client_id_log} en {room_id_log}. Limpieza por on_message/'leave'.")
-            # active_websockets ya debería estar limpio por la lógica de 'leave'
+            # active_websockets ya debería estar limpio por la logica de 'leave'
             if hasattr(self, 'client_id') and self.client_id and self.client_id in active_websockets and active_websockets[self.client_id] == self:
                 del active_websockets[self.client_id]
             return
         
-        # --- Desconexión Involuntaria / Inesperada ---
+        # --- Desconexion Involuntaria / Inesperada ---
         # Usar los atributos de instancia si existen, ya que podrían no estar en el log todavía
         client_id_on_close = getattr(self, 'client_id', None)
         room_id_on_close = getattr(self, 'room_id', None)
 
         if not client_id_on_close or not room_id_on_close:
-            logging.warning(f"[CLOSE] Desconexión inesperada ANTES de asignación client/room. WebSocket: {self}")
+            logging.warning(f"[CLOSE] Desconexion inesperada ANTES de asignacion client/room. WebSocket: {self}")
             return
 
         is_web_client_on_close = client_id_on_close.startswith("web-")
-        logging.info(f"[CLOSE] Desconexión inesperada de {client_id_on_close} (web: {is_web_client_on_close}) en {room_id_on_close}. Marcando para reconexión.")
+        logging.info(f"[CLOSE] Desconexion inesperada de {client_id_on_close} (web: {is_web_client_on_close}) en {room_id_on_close}. Marcando para reconexion.")
         
         client_data_on_close = await get_client(client_id_on_close)
         if client_data_on_close:
@@ -1044,7 +1071,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                         session_data_on_close["previous_clients"].append(client_id_on_close)
                     await set_session(room_id_on_close, session_data_on_close)
         else:
-            logging.warning(f"[CLOSE] No se encontraron datos para {client_id_on_close} (sala {room_id_on_close}) tras desconexión.")
+            logging.warning(f"[CLOSE] No se encontraron datos para {client_id_on_close} (sala {room_id_on_close}) tras desconexion.")
         
         if client_id_on_close in active_websockets and active_websockets[client_id_on_close] == self:
             del active_websockets[client_id_on_close]
@@ -1056,10 +1083,10 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                     try:
                         active_websockets[peer_id].write_message({
                             'event': 'peer_disconnected_unexpectedly', 'client_id': client_id_on_close,
-                            'message': f'Usuario {client_id_on_close} perdió conexión. Esperando reconexión…'
+                            'message': f'Usuario {client_id_on_close} perdio conexion. Esperando reconexion…'
                         })
                     except tornado.websocket.WebSocketClosedError: pass
-                    except Exception as e: logging.error(f"[CLOSE] Excepción notificando a {peer_id}: {e}")
+                    except Exception as e: logging.error(f"[CLOSE] Excepcion notificando a {peer_id}: {e}")
 
 async def cleanup_sessions(): # Ahora es una corutina
     now = time.time()
@@ -1081,22 +1108,22 @@ async def cleanup_sessions(): # Ahora es una corutina
                     has_dozing_mobile_in_session = True
                     break
         
-        # Actualizar la lista de clientes en la sesión solo con los activos
+        # Actualizar la lista de clientes en la sesion solo con los activos
         if len(active_clients_in_session) != len(session_info.get('clients', [])):
             session_info['clients'] = active_clients_in_session
-            # Si después de esto la sesión queda vacía, se marcará para eliminar
+            # Si después de esto la sesion queda vacía, se marcará para eliminar
         
-        if not session_info['clients']: # Si la sesión está vacía después de filtrar
+        if not session_info['clients']: # Si la sesion está vacía después de filtrar
             expired_session_ids.append(room_id_key)
-            logging.info(f"[CLEANUP] Sesión {room_id_key} marcada para expirar (sin clientes válidos)." )
-            continue # Pasar a la siguiente sesión
+            logging.info(f"[CLEANUP] Sesion {room_id_key} marcada para expirar (sin clientes validos)." )
+            continue # Pasar a la siguiente sesion
 
         timeout_for_this_session = DOZE_TIMEOUT if has_dozing_mobile_in_session else SESSION_TIMEOUT
         if now - session_info.get('last_activity', now) > timeout_for_this_session:
-            logging.info(f"[CLEANUP] Sesión {room_id_key} marcada para expirar (timeout: {timeout_for_this_session}s). Dozing mobile: {has_dozing_mobile_in_session}")
+            logging.info(f"[CLEANUP] Sesion {room_id_key} marcada para expirar (timeout: {timeout_for_this_session}s). Dozing mobile: {has_dozing_mobile_in_session}")
             expired_session_ids.append(room_id_key)
         else:
-            # Si la sesión no expira, pero se modificó la lista de clientes, guardarla
+            # Si la sesion no expira, pero se modifico la lista de clientes, guardarla
             if len(active_clients_in_session) != len(session_info.get('clients', [])):
                  await set_session(room_id_key, session_info)
 
@@ -1111,7 +1138,7 @@ async def cleanup_sessions(): # Ahora es una corutina
             timeout_for_client_cleanup = WEB_RECONNECT_TIMEOUT if is_web_cleanup else RECONNECT_GRACE_PERIOD
             
             if now - client_info_cleanup.get('pending_since', now) > timeout_for_client_cleanup:
-                logging.info(f'[CLEANUP] Cliente {client_id_key} (web: {is_web_cleanup}) no reconectó ({timeout_for_client_cleanup}s). Limpiando.')
+                logging.info(f'[CLEANUP] Cliente {client_id_key} (web: {is_web_cleanup}) no reconecto ({timeout_for_client_cleanup}s). Limpiando.')
                 room_id_of_client = client_info_cleanup.get('room_id')
                 
                 if room_id_of_client:
@@ -1129,7 +1156,7 @@ async def cleanup_sessions(): # Ahora es una corutina
                             if not session_info_of_client['clients']:
                                 if room_id_of_client not in expired_session_ids: # Evitar duplicados
                                     expired_session_ids.append(room_id_of_client)
-                                logging.info(f"[CLEANUP] Sesión {room_id_of_client} marcada para expirar (último cliente {client_id_key} no reconectó).")
+                                logging.info(f"[CLEANUP] Sesion {room_id_of_client} marcada para expirar (último cliente {client_id_key} no reconecto).")
                             else:
                                 await set_session(room_id_of_client, session_info_of_client)
                 
@@ -1140,21 +1167,21 @@ async def cleanup_sessions(): # Ahora es una corutina
     
     # Limpiar las sesiones marcadas como expiradas
     for rid_to_delete in set(expired_session_ids): # Usar set para evitar procesar duplicados
-        logging.info(f'[CLEANUP] Eliminando sesión expirada {rid_to_delete} y sus clientes restantes.')
+        logging.info(f'[CLEANUP] Eliminando sesion expirada {rid_to_delete} y sus clientes restantes.')
         session_being_deleted = await get_session(rid_to_delete)
         if session_being_deleted:
             for cid_in_del_session in session_being_deleted.get('clients', []):
                 if cid_in_del_session in active_websockets:
                     try: 
-                        active_websockets[cid_in_del_session].write_message({'info': 'Sesión expirada por inactividad o limpieza.', 'code': 'SESSION_EXPIRED'})
-                        active_websockets[cid_in_del_session].close(code=1000, reason="Sesión expirada")
+                        active_websockets[cid_in_del_session].write_message({'info': 'Sesion expirada por inactividad o limpieza.', 'code': 'SESSION_EXPIRED'})
+                        active_websockets[cid_in_del_session].close(code=1000, reason="Sesion expirada")
                     except: pass # Ignorar errores al cerrar
                     # No es necesario borrar de active_websockets aquí, on_close lo hará
                 
                 # Determinar si se debe mantener la cola para este cliente
-                # Por lo general, si la sesión expira, las colas de los clientes también se limpian,
-                # a menos que haya una razón específica para conservarlas (ej. cliente en doze persistente).
-                # Aquí, como la sesión completa expira, borramos las colas.
+                # Por lo general, si la sesion expira, las colas de los clientes también se limpian,
+                # a menos que haya una razon específica para conservarlas (ej. cliente en doze persistente).
+                # Aquí, como la sesion completa expira, borramos las colas.
                 await delete_client(cid_in_del_session, keep_message_queue=False) 
         await delete_session(rid_to_delete)
 
@@ -1165,8 +1192,8 @@ async def initialize_server_state_from_redis(): # Ahora es una corutina
     try:
         await init_redis_client() # Asegurar que el cliente Redis esté listo
     except Exception as e:
-        logging.critical(f"[INIT] FALLO CRÍTICO al conectar con Redis durante la inicialización: {e}. El servidor podría no funcionar correctamente.")
-        # Dependiendo de la criticidad, podrías querer salir de la aplicación aquí.
+        logging.critical(f"[INIT] FALLO CRÍTICO al conectar con Redis durante la inicializacion: {e}. El servidor podría no funcionar correctamente.")
+        # Dependiendo de la criticidad, podrías querer salir de la aplicacion aquí.
         # exit(1)
         return # No continuar si Redis no está
 
@@ -1189,7 +1216,7 @@ async def initialize_server_state_from_redis(): # Ahora es una corutina
             timeout_init = WEB_RECONNECT_TIMEOUT if is_web_init_flag else RECONNECT_GRACE_PERIOD
 
             if now - pending_since_init > timeout_init:
-                logging.info(f"[INIT] Cliente {cid_key_init} (web: {is_web_init_flag}) en pending_reconnect expiró ({timeout_init}s). Limpiando.")
+                logging.info(f"[INIT] Cliente {cid_key_init} (web: {is_web_init_flag}) en pending_reconnect expiro ({timeout_init}s). Limpiando.")
                 clients_to_delete_init.append(cid_key_init)
                 if room_id_init:
                     if room_id_init not in sessions_to_update_init:
@@ -1211,7 +1238,7 @@ async def initialize_server_state_from_redis(): # Ahora es una corutina
                      sessions_to_update_init[room_id_init]['last_activity'] = now 
         
         elif current_status_init == 'dozing':
-            logging.info(f"[INIT] Cliente {cid_key_init} está en dozing. Manteniendo estado. Actualizando last_activity de sesión.")
+            logging.info(f"[INIT] Cliente {cid_key_init} está en dozing. Manteniendo estado. Actualizando last_activity de sesion.")
             if room_id_init:
                 if room_id_init not in sessions_to_update_init:
                     sessions_to_update_init[room_id_init] = await get_session(room_id_init)
@@ -1222,23 +1249,23 @@ async def initialize_server_state_from_redis(): # Ahora es una corutina
     for room_id_upd, session_data_upd in sessions_to_update_init.items():
         if session_data_upd:
             if not session_data_upd.get('clients'):
-                logging.info(f"[INIT] Sesión {room_id_upd} quedó vacía durante init. Eliminando.")
+                logging.info(f"[INIT] Sesion {room_id_upd} quedo vacía durante init. Eliminando.")
                 await delete_session(room_id_upd)
             else:
                 session_data_upd['last_activity'] = now 
                 await set_session(room_id_upd, session_data_upd)
         else:
-             logging.warning(f"[INIT] Sesión {room_id_upd} no encontrada al intentar actualizarla (pudo ser eliminada).")
+             logging.warning(f"[INIT] Sesion {room_id_upd} no encontrada al intentar actualizarla (pudo ser eliminada).")
 
     for cid_del_init in clients_to_delete_init:
-        # Para clientes eliminados en init, usualmente no se conserva la cola a menos que haya una lógica muy específica
+        # Para clientes eliminados en init, usualmente no se conserva la cola a menos que haya una logica muy específica
         await delete_client(cid_del_init, keep_message_queue=False) 
 
     active_websockets.clear()
-    logging.info("[INIT] Inicialización de estado del servidor desde Redis completada.")
+    logging.info("[INIT] Inicializacion de estado del servidor desde Redis completada.")
 
 
-async def main(): # Nueva función async main para gestionar el ciclo de vida
+async def main(): # Nueva funcion async main para gestionar el ciclo de vida
     try:
         await init_redis_client() # Inicializar Redis al arrancar
     except Exception as e:
@@ -1259,7 +1286,7 @@ async def main(): # Nueva función async main para gestionar el ciclo de vida
     # Inicializar estado desde Redis ANTES de que el cleanup_sessions empiece a correr con datos viejos
     await initialize_server_state_from_redis()
     
-    # Iniciar tareas periódicas
+    # Iniciar tareas periodicas
     cleanup_task = PeriodicCallback(cleanup_sessions, 60000) # 60 segundos
     cleanup_task.start()
     
@@ -1274,7 +1301,7 @@ async def main(): # Nueva función async main para gestionar el ciclo de vida
             ws.close(code=1001, reason="Servidor apagándose")
             del active_websockets[client_id]
         await asyncio.sleep(1) # Dar tiempo para que los cierres se procesen
-        await close_redis_client() # Cerrar conexión a Redis
+        await close_redis_client() # Cerrar conexion a Redis
         tornado.ioloop.IOLoop.current().stop()
         shutdown_event.set()
         logging.info("Cierre elegante completado.")

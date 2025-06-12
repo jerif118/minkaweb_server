@@ -10486,3 +10486,1036 @@ tornado.websocket.WebSocketClosedError
 2025-06-10 23:10:38 - INFO - [session.py:348] - [REDIS_CLOSE] Conexión a Redis cerrada.
 2025-06-10 23:10:38 - INFO - [appv2.py:1392] - Cierre elegante completado.
 2025-06-10 23:10:38 - INFO - [appv2.py:1413] - Servidor MinkaV2 detenido.
+2025-06-10 23:39:07 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 23:39:07 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 23:39:07 - INFO - [appv2.py:1220] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 23:39:07 - INFO - [appv2.py:1125] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 23:39:07 - INFO - [appv2.py:1201] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 23:39:25 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749616765752 (::1) 12.13ms
+2025-06-10 23:39:26 - INFO - [appv2.py:486] - [WS-OPEN] Sala bd4b5032daec4e67a3c0705e36d05456 creada por web-client-1749616765752. Contraseña: 7C0EBB. Esperando peer para generar JWT.
+2025-06-10 23:44:47 - WARNING - [appv2.py:1246] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 23:44:47 - INFO - [appv2.py:1233] - Iniciando cierre elegante...
+2025-06-10 23:44:48 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 23:44:48 - INFO - [appv2.py:1243] - Cierre elegante completado.
+2025-06-10 23:44:48 - INFO - [appv2.py:1264] - Servidor MinkaV2 detenido.
+2025-06-10 23:44:49 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 23:44:49 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 23:44:49 - INFO - [appv2.py:1220] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 23:44:49 - INFO - [appv2.py:1125] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 23:44:49 - INFO - [appv2.py:1165] - [INIT] Cliente web-client-1749616765752 estaba waiting. Marcando como pending_reconnect.
+2025-06-10 23:44:49 - INFO - [appv2.py:1201] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 23:44:53 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749617093333 (::1) 50.10ms
+2025-06-10 23:44:53 - INFO - [appv2.py:486] - [WS-OPEN] Sala 033a31210eea4853bb352fa20f126dc9 creada por web-client-1749617093333. Contraseña: 91DE27. Esperando peer para generar JWT.
+2025-06-10 23:45:48 - WARNING - [appv2.py:1246] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 23:45:48 - INFO - [appv2.py:1233] - Iniciando cierre elegante...
+2025-06-10 23:45:49 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 23:45:49 - INFO - [appv2.py:1243] - Cierre elegante completado.
+2025-06-10 23:45:49 - INFO - [appv2.py:1264] - Servidor MinkaV2 detenido.
+2025-06-10 23:45:50 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 23:45:50 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 23:45:50 - INFO - [appv2.py:1220] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 23:45:50 - INFO - [appv2.py:1125] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 23:45:50 - INFO - [appv2.py:1165] - [INIT] Cliente web-client-1749617093333 estaba waiting. Marcando como pending_reconnect.
+2025-06-10 23:45:50 - INFO - [appv2.py:1201] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 23:45:56 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749617156428 (::1) 4.39ms
+2025-06-10 23:45:56 - INFO - [appv2.py:486] - [WS-OPEN] Sala fa780aaaa0e04db6bfbae0226326963f creada por web-client-1749617156428. Contraseña: D0BA4A. Esperando peer para generar JWT.
+2025-06-10 23:46:24 - WARNING - [appv2.py:1246] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 23:46:24 - INFO - [appv2.py:1233] - Iniciando cierre elegante...
+2025-06-10 23:46:25 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 23:46:25 - INFO - [appv2.py:1243] - Cierre elegante completado.
+2025-06-10 23:46:25 - INFO - [appv2.py:1264] - Servidor MinkaV2 detenido.
+2025-06-10 23:46:27 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 23:46:27 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 23:46:27 - INFO - [appv2.py:1219] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 23:46:27 - INFO - [appv2.py:1124] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 23:46:27 - INFO - [appv2.py:1164] - [INIT] Cliente web-client-1749617156428 estaba waiting. Marcando como pending_reconnect.
+2025-06-10 23:46:27 - INFO - [appv2.py:1200] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 23:47:55 - WARNING - [appv2.py:1245] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 23:47:55 - INFO - [appv2.py:1232] - Iniciando cierre elegante...
+2025-06-10 23:47:56 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 23:47:56 - INFO - [appv2.py:1242] - Cierre elegante completado.
+2025-06-10 23:47:56 - INFO - [appv2.py:1263] - Servidor MinkaV2 detenido.
+2025-06-10 23:47:57 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 23:47:57 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 23:47:57 - INFO - [appv2.py:1219] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 23:47:57 - INFO - [appv2.py:1124] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 23:47:57 - INFO - [appv2.py:1200] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 23:48:00 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749617280978 (::1) 1.26ms
+2025-06-10 23:48:00 - INFO - [appv2.py:485] - [WS-OPEN] Sala 5d97d28fb23e4aaf83cf0e64129d5f06 creada por web-client-1749617280978. Contraseña: 7EE4F0. Esperando peer para generar JWT.
+2025-06-10 23:48:34 - WARNING - [appv2.py:1245] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 23:48:34 - INFO - [appv2.py:1232] - Iniciando cierre elegante...
+2025-06-10 23:48:35 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 23:48:35 - INFO - [appv2.py:1242] - Cierre elegante completado.
+2025-06-10 23:48:35 - INFO - [appv2.py:1263] - Servidor MinkaV2 detenido.
+2025-06-10 23:48:37 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 23:48:37 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 23:48:37 - INFO - [appv2.py:1219] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 23:48:37 - INFO - [appv2.py:1124] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 23:48:37 - INFO - [appv2.py:1164] - [INIT] Cliente web-client-1749617280978 estaba waiting. Marcando como pending_reconnect.
+2025-06-10 23:48:37 - INFO - [appv2.py:1200] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 23:48:42 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749617322554 (::1) 1.05ms
+2025-06-10 23:48:42 - INFO - [appv2.py:485] - [WS-OPEN] Sala 07539d698eaf476e968e4681dde90797 creada por web-client-1749617322554. Contraseña: 43020D. Esperando peer para generar JWT.
+2025-06-10 23:51:38 - WARNING - [appv2.py:1245] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 23:51:38 - INFO - [appv2.py:1232] - Iniciando cierre elegante...
+2025-06-10 23:51:39 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 23:51:39 - INFO - [appv2.py:1242] - Cierre elegante completado.
+2025-06-10 23:51:39 - INFO - [appv2.py:1263] - Servidor MinkaV2 detenido.
+2025-06-10 23:51:41 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-10 23:51:41 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-10 23:51:41 - INFO - [appv2.py:1220] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-10 23:51:41 - INFO - [appv2.py:1125] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-10 23:51:41 - INFO - [appv2.py:1165] - [INIT] Cliente web-client-1749617322554 estaba waiting. Marcando como pending_reconnect.
+2025-06-10 23:51:41 - INFO - [appv2.py:1201] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-10 23:51:43 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749617503727 (::1) 1.33ms
+2025-06-10 23:51:43 - INFO - [appv2.py:486] - [WS-OPEN] Sala b3a4e1685e244d38b3552945907043bf creada por web-client-1749617503727. Contraseña: EBAF20. Esperando peer para generar JWT.
+2025-06-10 23:51:46 - WARNING - [appv2.py:1246] - Recibida señal 2. Planificando cierre elegante.
+2025-06-10 23:51:46 - INFO - [appv2.py:1233] - Iniciando cierre elegante...
+2025-06-10 23:51:47 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-10 23:51:47 - INFO - [appv2.py:1243] - Cierre elegante completado.
+2025-06-10 23:51:47 - INFO - [appv2.py:1264] - Servidor MinkaV2 detenido.
+2025-06-11 15:46:05 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-11 15:46:05 - ERROR - [session.py:43] - [REDIS_INIT] No se pudo conectar a Redis: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-11 15:46:05 - CRITICAL - [appv2.py:1211] - [MAIN] No se pudo inicializar Redis al arrancar: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.. Saliendo.
+2025-06-11 15:46:05 - INFO - [appv2.py:1267] - Servidor MinkaV2 detenido.
+2025-06-11 15:46:40 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-11 15:46:40 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-11 15:46:40 - INFO - [appv2.py:1223] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-11 15:46:40 - INFO - [appv2.py:1128] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-11 15:46:40 - INFO - [appv2.py:1168] - [INIT] Cliente web-client-1749617503727 estaba waiting. Marcando como pending_reconnect.
+2025-06-11 15:46:40 - INFO - [appv2.py:1204] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-11 15:47:19 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749674839700 (::1) 3.29ms
+2025-06-11 15:47:19 - INFO - [appv2.py:486] - [WS-OPEN] Sala e7a36968312742bba369d14fadab4c7b creada por web-client-1749674839700. Contraseña: 8CCBEC. Esperando peer para generar JWT.
+2025-06-11 15:47:46 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749674866255 (::1) 0.51ms
+2025-06-11 15:47:46 - INFO - [appv2.py:486] - [WS-OPEN] Sala 8fd251b6a8f04f439617874b9b3a078c creada por web-client-1749674866255. Contraseña: BECA62. Esperando peer para generar JWT.
+2025-06-11 15:48:08 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-f11b6132-b870-443b-bd46-bb587b103bdd&room_id=8fd251b6a8f04f439617874b9b3a078c&password=BECA62 (::1) 0.73ms
+2025-06-11 15:48:08 - INFO - [appv2.py:591] - [WS-JOIN] Cliente python-client-f11b6132-b870-443b-bd46-bb587b103bdd se unió a sala 8fd251b6a8f04f439617874b9b3a078c
+2025-06-11 15:53:28 - WARNING - [appv2.py:1249] - Recibida señal 2. Planificando cierre elegante.
+2025-06-11 15:53:28 - INFO - [appv2.py:1236] - Iniciando cierre elegante...
+2025-06-11 15:53:29 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-11 15:53:29 - INFO - [appv2.py:1246] - Cierre elegante completado.
+2025-06-11 15:53:29 - INFO - [appv2.py:1267] - Servidor MinkaV2 detenido.
+2025-06-11 15:53:30 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-11 15:53:30 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-11 15:53:30 - INFO - [appv2.py:1224] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-11 15:53:30 - INFO - [appv2.py:1129] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-11 15:53:30 - INFO - [appv2.py:1169] - [INIT] Cliente python-client-f11b6132-b870-443b-bd46-bb587b103bdd estaba connected. Marcando como pending_reconnect.
+2025-06-11 15:53:30 - INFO - [appv2.py:1169] - [INIT] Cliente web-client-1749674866255 estaba waiting. Marcando como pending_reconnect.
+2025-06-11 15:53:30 - INFO - [appv2.py:1169] - [INIT] Cliente web-client-1749674839700 estaba waiting. Marcando como pending_reconnect.
+2025-06-11 15:53:30 - INFO - [appv2.py:1205] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-11 15:53:35 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749675215203 (::1) 0.97ms
+2025-06-11 15:53:35 - INFO - [appv2.py:486] - [WS-OPEN] Sala 8d33f3c2ea9448d0b680e38b4aa731b4 creada por web-client-1749675215203. Contraseña: E5A85C. Esperando peer para generar JWT.
+2025-06-11 15:54:04 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-078af7c1-35c5-4a2c-8101-bf0a850fdfe1&room_id=8d33f3c2ea9448d0b680e38b4aa731b4&password=E5A85C (::1) 0.32ms
+2025-06-11 15:54:04 - INFO - [appv2.py:592] - [WS-JOIN] Cliente python-client-078af7c1-35c5-4a2c-8101-bf0a850fdfe1 se unió a sala 8d33f3c2ea9448d0b680e38b4aa731b4
+2025-06-11 15:57:30 - INFO - [appv2.py:1081] - [CLEANUP] Cliente python-client-f11b6132-b870-443b-bd46-bb587b103bdd (web: False) no reconectó (200s). Limpiando.
+2025-06-11 16:11:54 - WARNING - [appv2.py:1250] - Recibida señal 2. Planificando cierre elegante.
+2025-06-11 16:11:54 - INFO - [appv2.py:1237] - Iniciando cierre elegante...
+2025-06-11 16:11:55 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-11 16:11:55 - INFO - [appv2.py:1247] - Cierre elegante completado.
+2025-06-11 16:11:55 - INFO - [appv2.py:1268] - Servidor MinkaV2 detenido.
+2025-06-11 16:11:57 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-11 16:11:57 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-11 16:11:57 - INFO - [appv2.py:1225] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-11 16:11:57 - INFO - [appv2.py:1130] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-11 16:11:57 - INFO - [appv2.py:1170] - [INIT] Cliente web-client-1749675215203 estaba waiting. Marcando como pending_reconnect.
+2025-06-11 16:11:57 - INFO - [appv2.py:1170] - [INIT] Cliente python-client-078af7c1-35c5-4a2c-8101-bf0a850fdfe1 estaba connected. Marcando como pending_reconnect.
+2025-06-11 16:11:57 - INFO - [appv2.py:1206] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-11 16:12:01 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749676321891 (::1) 1.60ms
+2025-06-11 16:12:01 - INFO - [appv2.py:486] - [WS-OPEN] Sala 34f214a33fd143009749b66500351ef5 creada por web-client-1749676321891. Contraseña: 955EDB. Esperando peer para generar JWT.
+2025-06-11 16:12:30 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-ded76f9d-6158-4b6d-9605-e01b23075d28&room_id=34f214a33fd143009749b66500351ef5&password=955EDB (::1) 0.36ms
+2025-06-11 16:12:30 - ERROR - [web.py:1875] - Uncaught exception GET /ws?action=join&client_id=python-client-ded76f9d-6158-4b6d-9605-e01b23075d28&room_id=34f214a33fd143009749b66500351ef5&password=955EDB (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?action=join&client_id=python-client-ded76f9d-6158-4b6d-9605-e01b23075d28&room_id=34f214a33fd143009749b66500351ef5&password=955EDB', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 589, in open
+    'password': room_password_join,
+           ^^^^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'jwt_token_for_web_joiner' where it is not associated with a value
+2025-06-11 16:14:06 - WARNING - [appv2.py:1251] - Recibida señal 2. Planificando cierre elegante.
+2025-06-11 16:14:06 - INFO - [appv2.py:1238] - Iniciando cierre elegante...
+2025-06-11 16:14:07 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-11 16:14:07 - INFO - [appv2.py:1248] - Cierre elegante completado.
+2025-06-11 16:14:07 - INFO - [appv2.py:1269] - Servidor MinkaV2 detenido.
+2025-06-11 16:14:09 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-11 16:14:09 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-11 16:14:09 - INFO - [appv2.py:1225] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-11 16:14:09 - INFO - [appv2.py:1130] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-11 16:14:09 - INFO - [appv2.py:1170] - [INIT] Cliente python-client-ded76f9d-6158-4b6d-9605-e01b23075d28 estaba connected. Marcando como pending_reconnect.
+2025-06-11 16:14:09 - INFO - [appv2.py:1170] - [INIT] Cliente web-client-1749676321891 estaba waiting. Marcando como pending_reconnect.
+2025-06-11 16:14:09 - INFO - [appv2.py:1206] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-11 16:14:12 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749676451999 (::1) 1.47ms
+2025-06-11 16:14:12 - INFO - [appv2.py:486] - [WS-OPEN] Sala 99c154be5bfe4c7abdaf6bc9e8a899bc creada por web-client-1749676451999. Contraseña: FCD7EC. Esperando peer para generar JWT.
+2025-06-11 16:15:56 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-0b0017ab-f02e-4316-aa94-af03ed820866&room_id=99c154be5bfe4c7abdaf6bc9e8a899bc&password=FCD7EC (::1) 0.50ms
+2025-06-11 16:15:56 - INFO - [appv2.py:592] - [WS-JOIN] Cliente python-client-0b0017ab-f02e-4316-aa94-af03ed820866 se unió a sala 99c154be5bfe4c7abdaf6bc9e8a899bc
+2025-06-11 16:16:09 - INFO - [appv2.py:1082] - [CLEANUP] Cliente python-client-078af7c1-35c5-4a2c-8101-bf0a850fdfe1 (web: False) no reconectó (200s). Limpiando.
+2025-06-11 16:16:38 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-a00155fe-0c1f-4a24-8117-a6e85053fca0&room_id=99c154be5bfe4c7abdaf6bc9e8a899bc&password=FCD7EC (::1) 0.28ms
+2025-06-11 16:16:45 - WARNING - [appv2.py:1251] - Recibida señal 2. Planificando cierre elegante.
+2025-06-11 16:16:45 - INFO - [appv2.py:1238] - Iniciando cierre elegante...
+2025-06-11 16:16:46 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-11 16:16:46 - INFO - [appv2.py:1248] - Cierre elegante completado.
+2025-06-11 16:16:46 - INFO - [appv2.py:1269] - Servidor MinkaV2 detenido.
+2025-06-11 16:16:47 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-11 16:16:47 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-11 16:16:47 - INFO - [appv2.py:1225] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-11 16:16:47 - INFO - [appv2.py:1130] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-11 16:16:47 - INFO - [appv2.py:1170] - [INIT] Cliente web-client-1749676451999 estaba waiting. Marcando como pending_reconnect.
+2025-06-11 16:16:47 - INFO - [appv2.py:1170] - [INIT] Cliente python-client-0b0017ab-f02e-4316-aa94-af03ed820866 estaba connected. Marcando como pending_reconnect.
+2025-06-11 16:16:47 - INFO - [appv2.py:1206] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-11 16:16:51 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749676611236 (::1) 2.64ms
+2025-06-11 16:16:51 - INFO - [appv2.py:486] - [WS-OPEN] Sala 87eafe0be0e8496488da7a590788a44b creada por web-client-1749676611236. Contraseña: 3E2536. Esperando peer para generar JWT.
+2025-06-11 16:17:12 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-debd82d5-18aa-47e9-bae5-2ad7daa41d2f&room_id=87eafe0be0e8496488da7a590788a44b&password=3E2536 (::1) 0.44ms
+2025-06-11 16:17:12 - ERROR - [web.py:1875] - Uncaught exception GET /ws?action=join&client_id=python-client-debd82d5-18aa-47e9-bae5-2ad7daa41d2f&room_id=87eafe0be0e8496488da7a590788a44b&password=3E2536 (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?action=join&client_id=python-client-debd82d5-18aa-47e9-bae5-2ad7daa41d2f&room_id=87eafe0be0e8496488da7a590788a44b&password=3E2536', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 589, in open
+    'password': room_password_join,
+           ^^^^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'jwt_token_for_web_joiner' where it is not associated with a value
+2025-06-11 16:17:31 - WARNING - [appv2.py:1251] - Recibida señal 2. Planificando cierre elegante.
+2025-06-11 16:17:31 - INFO - [appv2.py:1238] - Iniciando cierre elegante...
+2025-06-11 16:17:32 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-11 16:17:32 - INFO - [appv2.py:1248] - Cierre elegante completado.
+2025-06-11 16:17:32 - INFO - [appv2.py:1269] - Servidor MinkaV2 detenido.
+2025-06-11 16:17:33 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-11 16:17:33 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-11 16:17:33 - INFO - [appv2.py:1225] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-11 16:17:33 - INFO - [appv2.py:1130] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-11 16:17:33 - INFO - [appv2.py:1170] - [INIT] Cliente web-client-1749676611236 estaba waiting. Marcando como pending_reconnect.
+2025-06-11 16:17:33 - INFO - [appv2.py:1170] - [INIT] Cliente python-client-debd82d5-18aa-47e9-bae5-2ad7daa41d2f estaba connected. Marcando como pending_reconnect.
+2025-06-11 16:17:33 - INFO - [appv2.py:1160] - [INIT] Cliente python-client-ded76f9d-6158-4b6d-9605-e01b23075d28 (web: False) en pending_reconnect expiró (200s). Limpiando.
+2025-06-11 16:17:33 - INFO - [appv2.py:1206] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-11 16:17:55 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-1534f185-af11-4643-a41c-8e785aae104e&room_id=87eafe0be0e8496488da7a590788a44b&password=3E2536 (::1) 1.08ms
+2025-06-11 16:18:03 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749676683350 (::1) 0.59ms
+2025-06-11 16:18:03 - INFO - [appv2.py:486] - [WS-OPEN] Sala 2e054b6fee8345b4b1a82b4a7454dc8c creada por web-client-1749676683350. Contraseña: 0CC317. Esperando peer para generar JWT.
+2025-06-11 16:18:22 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-af1a2bef-7924-4a3c-a22d-3dc5431d27c8&room_id=2e054b6fee8345b4b1a82b4a7454dc8c&password=0CC317 (::1) 0.42ms
+2025-06-11 16:18:22 - INFO - [appv2.py:592] - [WS-JOIN] Cliente python-client-af1a2bef-7924-4a3c-a22d-3dc5431d27c8 se unió a sala 2e054b6fee8345b4b1a82b4a7454dc8c
+2025-06-11 16:19:27 - WARNING - [appv2.py:1251] - Recibida señal 2. Planificando cierre elegante.
+2025-06-11 16:19:27 - INFO - [appv2.py:1238] - Iniciando cierre elegante...
+2025-06-11 16:19:28 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-11 16:19:28 - INFO - [appv2.py:1248] - Cierre elegante completado.
+2025-06-11 16:19:28 - INFO - [appv2.py:1269] - Servidor MinkaV2 detenido.
+2025-06-11 16:19:30 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-11 16:19:30 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-11 16:19:30 - INFO - [appv2.py:1225] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-11 16:19:30 - INFO - [appv2.py:1130] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-11 16:19:30 - INFO - [appv2.py:1170] - [INIT] Cliente python-client-af1a2bef-7924-4a3c-a22d-3dc5431d27c8 estaba connected. Marcando como pending_reconnect.
+2025-06-11 16:19:30 - INFO - [appv2.py:1170] - [INIT] Cliente web-client-1749676683350 estaba waiting. Marcando como pending_reconnect.
+2025-06-11 16:19:30 - INFO - [appv2.py:1206] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-11 16:19:34 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749676774806 (::1) 1.18ms
+2025-06-11 16:19:34 - INFO - [appv2.py:486] - [WS-OPEN] Sala 63b6a1c0f9634357aaa372337524f104 creada por web-client-1749676774806. Contraseña: ECB9DC. Esperando peer para generar JWT.
+2025-06-11 16:19:53 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-97d765d8-2ee3-4b99-b52d-9a6ec77ae217&room_id=63b6a1c0f9634357aaa372337524f104&password=ECB9DC (::1) 0.29ms
+2025-06-11 16:19:53 - INFO - [appv2.py:592] - [WS-JOIN] Cliente python-client-97d765d8-2ee3-4b99-b52d-9a6ec77ae217 se unió a sala 63b6a1c0f9634357aaa372337524f104
+2025-06-11 16:20:17 - INFO - [appv2.py:634] - [DEBUG] on_message de web-client-1749676774806 raw: {"action":"leave"}
+2025-06-11 16:20:17 - INFO - [appv2.py:698] - [MESSAGE-DEBUG] Sala 63b6a1c0f9634357aaa372337524f104: active, Clientes: ['web-client-1749676774806', 'python-client-97d765d8-2ee3-4b99-b52d-9a6ec77ae217']
+2025-06-11 16:20:17 - INFO - [appv2.py:707] - [LEAVE] Cliente web-client-1749676774806 deja sala 63b6a1c0f9634357aaa372337524f104, razón: 
+2025-06-11 16:20:17 - WARNING - [appv2.py:741] - [LEAVE-BLACKLIST] No se encontró JTI para blacklisting para web-client-1749676774806.
+2025-06-11 16:20:17 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749676817163 (::1) 0.58ms
+2025-06-11 16:20:17 - INFO - [appv2.py:779] - [LEAVE] Web web-client-1749676774806 sale. Sala 63b6a1c0f9634357aaa372337524f104 y peers serán eliminados.
+2025-06-11 16:20:17 - INFO - [appv2.py:486] - [WS-OPEN] Sala e8f4014ec27243f5ba2e6155ff7d01d1 creada por web-client-1749676817163. Contraseña: 31BAB7. Esperando peer para generar JWT.
+2025-06-11 16:20:30 - INFO - [appv2.py:1082] - [CLEANUP] Cliente python-client-0b0017ab-f02e-4316-aa94-af03ed820866 (web: False) no reconectó (200s). Limpiando.
+2025-06-11 16:20:41 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-ad6f4d74-39aa-4eb9-a332-9b3d89c0f913&room_id=63b6a1c0f9634357aaa372337524f104&password=ECB9DC (::1) 0.26ms
+2025-06-11 16:21:06 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-d300fad9-fba6-43ec-a2be-ba8397bb020b&room_id=63b6a1c0f9634357aaa372337524f104&password=ECB9DC (::1) 0.26ms
+2025-06-11 16:21:30 - INFO - [appv2.py:1082] - [CLEANUP] Cliente python-client-debd82d5-18aa-47e9-bae5-2ad7daa41d2f (web: False) no reconectó (200s). Limpiando.
+2025-06-11 16:23:30 - INFO - [appv2.py:1082] - [CLEANUP] Cliente python-client-af1a2bef-7924-4a3c-a22d-3dc5431d27c8 (web: False) no reconectó (200s). Limpiando.
+2025-06-11 17:23:09 - WARNING - [appv2.py:1251] - Recibida señal 2. Planificando cierre elegante.
+2025-06-11 17:23:09 - INFO - [appv2.py:1238] - Iniciando cierre elegante...
+2025-06-11 17:23:10 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-11 17:23:10 - INFO - [appv2.py:1248] - Cierre elegante completado.
+2025-06-11 17:23:10 - INFO - [appv2.py:1269] - Servidor MinkaV2 detenido.
+2025-06-11 17:23:11 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-11 17:23:11 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-11 17:23:11 - INFO - [appv2.py:1258] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-11 17:23:11 - INFO - [appv2.py:1163] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-11 17:23:11 - INFO - [appv2.py:1203] - [INIT] Cliente web-client-1749676817163 estaba waiting. Marcando como pending_reconnect.
+2025-06-11 17:23:11 - INFO - [appv2.py:1239] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-11 17:23:15 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749680595345 (::1) 7.09ms
+2025-06-11 17:23:15 - INFO - [appv2.py:486] - [WS-OPEN] Sala 014eda08c8a943aab554933883ca81fa creada por web-client-1749680595345. Contraseña: 41712D. Esperando peer para generar JWT.
+2025-06-11 17:23:37 - INFO - [web.py:2348] - 101 GET /ws?action=join&client_id=python-client-16e5b94f-befc-4f0f-b9e4-edd98644d979&room_id=014eda08c8a943aab554933883ca81fa&password=41712D (::1) 0.37ms
+2025-06-11 17:23:37 - INFO - [appv2.py:591] - [WS-JOIN] Cliente python-client-16e5b94f-befc-4f0f-b9e4-edd98644d979 se unió a sala 014eda08c8a943aab554933883ca81fa
+2025-06-11 17:24:39 - INFO - [appv2.py:667] - [DEBUG] on_message de web-client-1749680595345 raw: {"action":"leave"}
+2025-06-11 17:24:39 - INFO - [appv2.py:731] - [MESSAGE-DEBUG] Sala 014eda08c8a943aab554933883ca81fa: active, Clientes: ['web-client-1749680595345', 'python-client-16e5b94f-befc-4f0f-b9e4-edd98644d979']
+2025-06-11 17:24:39 - INFO - [appv2.py:740] - [LEAVE] Cliente web-client-1749680595345 deja sala 014eda08c8a943aab554933883ca81fa, razón: 
+2025-06-11 17:24:39 - INFO - [appv2.py:762] - [LEAVE-BLACKLIST] JTI 8543b4f3fde4471392d26ccc46dbc063 de almacenamiento para web-client-1749680595345
+2025-06-11 17:24:39 - INFO - [appv2.py:766] - [LEAVE-BLACKLIST] JTI 8543b4f3fde4471392d26ccc46dbc063 para web-client-1749680595345 en lista negra (TTL 604800s).
+2025-06-11 17:24:39 - INFO - [appv2.py:772] - [LEAVE-BLACKLIST] current_jti eliminado de Redis para web-client-1749680595345
+2025-06-11 17:24:39 - INFO - [web.py:2348] - 101 GET /ws?action=create&client_id=web-client-1749680679903 (::1) 0.78ms
+2025-06-11 17:24:39 - INFO - [appv2.py:812] - [LEAVE] Web web-client-1749680595345 sale. Sala 014eda08c8a943aab554933883ca81fa y peers serán eliminados.
+2025-06-11 17:24:39 - INFO - [appv2.py:486] - [WS-OPEN] Sala e5d629c383b34ca8a4471e271b9a118a creada por web-client-1749680679903. Contraseña: 948ECD. Esperando peer para generar JWT.
+2025-06-11 17:24:45 - WARNING - [appv2.py:1284] - Recibida señal 2. Planificando cierre elegante.
+2025-06-11 17:24:45 - INFO - [appv2.py:1271] - Iniciando cierre elegante...
+2025-06-11 17:24:46 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-11 17:24:46 - INFO - [appv2.py:1281] - Cierre elegante completado.
+2025-06-11 17:24:46 - INFO - [appv2.py:1302] - Servidor MinkaV2 detenido.
+2025-06-11 19:46:34 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-11 19:46:34 - ERROR - [session.py:43] - [REDIS_INIT] No se pudo conectar a Redis: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-11 19:46:34 - CRITICAL - [appv2.py:1272] - [MAIN] No se pudo inicializar Redis al arrancar: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.. Saliendo.
+2025-06-11 19:46:34 - INFO - [appv2.py:1328] - Servidor MinkaV2 detenido.
+2025-06-11 19:46:57 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-11 19:46:57 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-11 19:46:57 - INFO - [appv2.py:1284] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-11 19:46:57 - INFO - [appv2.py:1189] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-11 19:46:57 - INFO - [appv2.py:1229] - [INIT] Cliente web-client-1749680679903 estaba waiting. Marcando como pending_reconnect.
+2025-06-11 19:46:57 - INFO - [appv2.py:1265] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-11 19:47:31 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-01aeef68&action=create (::1) 0.58ms
+2025-06-11 19:47:31 - INFO - [appv2.py:513] - [WS-OPEN] Sala e0a0d6b96af047e1b8ed224f1551e92e creada por web-01aeef68. Contraseña: 35ADA4. Esperando peer para generar JWT.
+2025-06-11 19:47:32 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-14e5f8fa&action=join&room_id=e0a0d6b96af047e1b8ed224f1551e92e&room_password=35ADA4 (::1) 0.72ms
+2025-06-11 19:47:32 - INFO - [appv2.py:618] - [WS-JOIN] Cliente mobile-14e5f8fa se unió a sala e0a0d6b96af047e1b8ed224f1551e92e
+2025-06-11 19:47:32 - INFO - [appv2.py:693] - [DEBUG] on_message de web-01aeef68 raw: {"message": "Hola desde web"}
+2025-06-11 19:47:32 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala e0a0d6b96af047e1b8ed224f1551e92e: active, Clientes: ['web-01aeef68', 'mobile-14e5f8fa']
+2025-06-11 19:47:32 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749689252.58187-9ed82659 de web-01aeef68 entregado a mobile-14e5f8fa
+2025-06-11 19:47:32 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-14e5f8fa raw: {"message": "Hola desde m\u00f3vil"}
+2025-06-11 19:47:32 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala e0a0d6b96af047e1b8ed224f1551e92e: active, Clientes: ['web-01aeef68', 'mobile-14e5f8fa']
+2025-06-11 19:47:32 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-01aeef68&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItMDFhZWVmNjgiLCJyb29tX2lkIjoiZTBhMGQ2Yjk2YWYwNDdlMWI4ZWQyMjRmMTU1MWU5MmUiLCJleHAiOjE3NTAyOTQwNTIsImp0aSI6ImY3NDk1MzQzODY2YjQ1OGJiZDdlMzFjMzQyNzRiZGZkIn0.vth6GsZSWgbl7Czu3hF-PK924glcVnXTlKu_hrAgPC8 (::1) 0.44ms
+2025-06-11 19:47:32 - WARNING - [appv2.py:1002] - [BROADCAST] WS cerrado para web-01aeef68 al enviar. Se encolará.
+2025-06-11 19:47:32 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-01aeef68 autenticado con JWT para sala e0a0d6b96af047e1b8ed224f1551e92e
+2025-06-11 19:47:32 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-01aeef68 reconectado/validado en sala e0a0d6b96af047e1b8ed224f1551e92e
+2025-06-11 19:47:32 - INFO - [session.py:267] - Mensaje encolado para web-01aeef68 (dozing: False). Cola: 1. TTL: 604800s.
+2025-06-11 19:47:32 - INFO - [appv2.py:1009] - [BROADCAST] Mensaje 1749689252.5864441-2fc2fa24 de mobile-14e5f8fa encolado para web-01aeef68.
+2025-06-11 19:47:32 - INFO - [session.py:287] - Recuperando 1 mensajes pendientes para web-01aeef68
+2025-06-11 19:47:32 - INFO - [session.py:307] - Cola de mensajes eliminada para web-01aeef68 después de recuperar 1 mensajes
+2025-06-11 19:47:32 - INFO - [appv2.py:447] - [WS-OPEN] Enviando 1 mensajes pendientes a web-01aeef68
+2025-06-11 19:47:32 - INFO - [appv2.py:693] - [DEBUG] on_message de web-01aeef68 raw: {"message": "Mensaje despu\u00e9s de reconexi\u00f3n web"}
+2025-06-11 19:47:32 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala e0a0d6b96af047e1b8ed224f1551e92e: active, Clientes: ['web-01aeef68', 'mobile-14e5f8fa']
+2025-06-11 19:47:32 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-14e5f8fa&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtMTRlNWY4ZmEiLCJyb29tX2lkIjoiZTBhMGQ2Yjk2YWYwNDdlMWI4ZWQyMjRmMTU1MWU5MmUiLCJleHAiOjE3NTAyOTQwNTIsImp0aSI6IjQ3YTA3Yzc4YTdmYzQzMWFiZmI3OTc5M2E2NDExNmNlIn0.5i4v7ZrtTb7UmdZrxq5qZL5F-tZk18LTamMugi7pzH0 (::1) 0.21ms
+2025-06-11 19:47:32 - WARNING - [appv2.py:1002] - [BROADCAST] WS cerrado para mobile-14e5f8fa al enviar. Se encolará.
+2025-06-11 19:47:32 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-14e5f8fa autenticado con JWT para sala e0a0d6b96af047e1b8ed224f1551e92e
+2025-06-11 19:47:32 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-14e5f8fa reconectado/validado en sala e0a0d6b96af047e1b8ed224f1551e92e
+2025-06-11 19:47:32 - INFO - [session.py:267] - Mensaje encolado para mobile-14e5f8fa (dozing: False). Cola: 1. TTL: 604800s.
+2025-06-11 19:47:32 - INFO - [appv2.py:1009] - [BROADCAST] Mensaje 1749689252.593177-04632696 de web-01aeef68 encolado para mobile-14e5f8fa.
+2025-06-11 19:47:32 - INFO - [session.py:287] - Recuperando 1 mensajes pendientes para mobile-14e5f8fa
+2025-06-11 19:47:32 - INFO - [session.py:307] - Cola de mensajes eliminada para mobile-14e5f8fa después de recuperar 1 mensajes
+2025-06-11 19:47:32 - INFO - [appv2.py:447] - [WS-OPEN] Enviando 1 mensajes pendientes a mobile-14e5f8fa
+2025-06-11 19:47:32 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-14e5f8fa raw: {"message": "Mensaje despu\u00e9s de reconexi\u00f3n m\u00f3vil"}
+2025-06-11 19:47:32 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-01aeef68&jwt_token=invalid_token_123 (::1) 0.29ms
+2025-06-11 19:47:32 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala e0a0d6b96af047e1b8ed224f1551e92e: active, Clientes: ['web-01aeef68', 'mobile-14e5f8fa']
+2025-06-11 19:47:32 - WARNING - [session.py:217] - JWT inválido: Not enough segments
+2025-06-11 19:47:32 - WARNING - [appv2.py:457] - [WS-OPEN] Token JWT inválido o expirado presentado. Rechazando.
+2025-06-11 19:47:32 - WARNING - [appv2.py:1002] - [BROADCAST] WS cerrado para web-01aeef68 al enviar. Se encolará.
+2025-06-11 19:47:32 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-01aeef68&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItMDFhZWVmNjgiLCJyb29tX2lkIjoiZTBhMGQ2Yjk2YWYwNDdlMWI4ZWQyMjRmMTU1MWU5MmUiLCJleHAiOjE3NTAyOTQwNTIsImp0aSI6ImY3NDk1MzQzODY2YjQ1OGJiZDdlMzFjMzQyNzRiZGZkIn0.vth6GsZSWgbl7Czu3hF-PK924glcVnXTlKu_hrAgPC8 (::1) 0.18ms
+2025-06-11 19:47:32 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-01aeef68 autenticado con JWT para sala e0a0d6b96af047e1b8ed224f1551e92e
+2025-06-11 19:47:32 - INFO - [session.py:267] - Mensaje encolado para web-01aeef68 (dozing: False). Cola: 1. TTL: 604800s.
+2025-06-11 19:47:32 - INFO - [appv2.py:1009] - [BROADCAST] Mensaje 1749689252.5989802-d9e5284b de mobile-14e5f8fa encolado para web-01aeef68.
+2025-06-11 19:47:32 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-01aeef68 reconectado/validado en sala e0a0d6b96af047e1b8ed224f1551e92e
+2025-06-11 19:47:32 - INFO - [session.py:287] - Recuperando 1 mensajes pendientes para web-01aeef68
+2025-06-11 19:47:32 - INFO - [session.py:307] - Cola de mensajes eliminada para web-01aeef68 después de recuperar 1 mensajes
+2025-06-11 19:47:32 - INFO - [appv2.py:447] - [WS-OPEN] Enviando 1 mensajes pendientes a web-01aeef68
+2025-06-11 19:47:32 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-14e5f8fa (::1) 0.20ms
+2025-06-11 19:47:32 - WARNING - [appv2.py:379] - [WS-OPEN] Cliente existente mobile-14e5f8fa intentó reconectar sin JWT. Rechazando.
+2025-06-11 19:47:32 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-14e5f8fa&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtMTRlNWY4ZmEiLCJyb29tX2lkIjoiZTBhMGQ2Yjk2YWYwNDdlMWI4ZWQyMjRmMTU1MWU5MmUiLCJleHAiOjE3NTAyOTQwNTIsImp0aSI6IjQ3YTA3Yzc4YTdmYzQzMWFiZmI3OTc5M2E2NDExNmNlIn0.5i4v7ZrtTb7UmdZrxq5qZL5F-tZk18LTamMugi7pzH0 (::1) 0.62ms
+2025-06-11 19:47:32 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-14e5f8fa autenticado con JWT para sala e0a0d6b96af047e1b8ed224f1551e92e
+2025-06-11 19:47:32 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-14e5f8fa reconectado/validado en sala e0a0d6b96af047e1b8ed224f1551e92e
+2025-06-11 19:53:28 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-23ee3579&action=create (::1) 0.41ms
+2025-06-11 19:53:28 - INFO - [appv2.py:513] - [WS-OPEN] Sala 630cc461dbad4f0ca507ee456d643cbc creada por web-23ee3579. Contraseña: 9BBB06. Esperando peer para generar JWT.
+2025-06-11 19:53:29 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-f04cafbc&action=join&room_id=630cc461dbad4f0ca507ee456d643cbc&room_password=9BBB06 (::1) 0.39ms
+2025-06-11 19:53:29 - INFO - [appv2.py:618] - [WS-JOIN] Cliente mobile-f04cafbc se unió a sala 630cc461dbad4f0ca507ee456d643cbc
+2025-06-11 19:53:29 - INFO - [appv2.py:693] - [DEBUG] on_message de web-23ee3579 raw: {"message": "Mensaje 1 desde web"}
+2025-06-11 19:53:29 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 630cc461dbad4f0ca507ee456d643cbc: active, Clientes: ['web-23ee3579', 'mobile-f04cafbc']
+2025-06-11 19:53:29 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749689609.480521-23a618a7 de web-23ee3579 entregado a mobile-f04cafbc
+2025-06-11 19:53:29 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-f04cafbc raw: {"message": "Mensaje 1 desde m\u00f3vil"}
+2025-06-11 19:53:29 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 630cc461dbad4f0ca507ee456d643cbc: active, Clientes: ['web-23ee3579', 'mobile-f04cafbc']
+2025-06-11 19:53:29 - WARNING - [appv2.py:1002] - [BROADCAST] WS cerrado para web-23ee3579 al enviar. Se encolará.
+2025-06-11 19:53:29 - INFO - [session.py:267] - Mensaje encolado para web-23ee3579 (dozing: False). Cola: 1. TTL: 604800s.
+2025-06-11 19:53:29 - INFO - [appv2.py:1009] - [BROADCAST] Mensaje 1749689609.483388-3963fd93 de mobile-f04cafbc encolado para web-23ee3579.
+2025-06-11 19:54:33 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-bf1e55bd&action=create (::1) 0.22ms
+2025-06-11 19:54:33 - INFO - [appv2.py:513] - [WS-OPEN] Sala 41aff262536d4f2e8672046aefdaab8e creada por web-bf1e55bd. Contraseña: 26DEE1. Esperando peer para generar JWT.
+2025-06-11 19:54:34 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-dabd5491&action=join&room_id=41aff262536d4f2e8672046aefdaab8e&room_password=26DEE1 (::1) 0.53ms
+2025-06-11 19:54:34 - INFO - [appv2.py:618] - [WS-JOIN] Cliente mobile-dabd5491 se unió a sala 41aff262536d4f2e8672046aefdaab8e
+2025-06-11 19:54:34 - INFO - [appv2.py:693] - [DEBUG] on_message de web-bf1e55bd raw: {"message": "Mensaje 1 desde web"}
+2025-06-11 19:54:34 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 41aff262536d4f2e8672046aefdaab8e: active, Clientes: ['web-bf1e55bd', 'mobile-dabd5491']
+2025-06-11 19:54:34 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749689674.615343-94cf9d8f de web-bf1e55bd entregado a mobile-dabd5491
+2025-06-11 19:54:34 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-dabd5491 raw: {"message": "Mensaje 1 desde m\u00f3vil"}
+2025-06-11 19:54:34 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 41aff262536d4f2e8672046aefdaab8e: active, Clientes: ['web-bf1e55bd', 'mobile-dabd5491']
+2025-06-11 19:54:34 - WARNING - [appv2.py:1002] - [BROADCAST] WS cerrado para web-bf1e55bd al enviar. Se encolará.
+2025-06-11 19:54:34 - INFO - [session.py:267] - Mensaje encolado para web-bf1e55bd (dozing: False). Cola: 1. TTL: 604800s.
+2025-06-11 19:54:34 - INFO - [appv2.py:1009] - [BROADCAST] Mensaje 1749689674.6184902-693c4f63 de mobile-dabd5491 encolado para web-bf1e55bd.
+2025-06-11 19:58:20 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-866a3553&action=create (::1) 0.22ms
+2025-06-11 19:58:20 - INFO - [appv2.py:513] - [WS-OPEN] Sala 4170a62150974b9aa613eecbc2821b21 creada por web-866a3553. Contraseña: 97EE66. Esperando peer para generar JWT.
+2025-06-11 19:58:21 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-8ecc85a2&action=join&room_id=4170a62150974b9aa613eecbc2821b21&room_password=97EE66 (::1) 1.88ms
+2025-06-11 19:58:21 - INFO - [appv2.py:618] - [WS-JOIN] Cliente mobile-8ecc85a2 se unió a sala 4170a62150974b9aa613eecbc2821b21
+2025-06-11 19:58:24 - INFO - [appv2.py:693] - [DEBUG] on_message de web-866a3553 raw: {"message": "Mensaje 1 desde web"}
+2025-06-11 19:58:24 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 4170a62150974b9aa613eecbc2821b21: active, Clientes: ['web-866a3553', 'mobile-8ecc85a2']
+2025-06-11 19:58:24 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749689904.373937-8748a728 de web-866a3553 entregado a mobile-8ecc85a2
+2025-06-11 19:58:24 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-8ecc85a2 raw: {"message": "Mensaje 1 desde m\u00f3vil"}
+2025-06-11 19:58:24 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 4170a62150974b9aa613eecbc2821b21: active, Clientes: ['web-866a3553', 'mobile-8ecc85a2']
+2025-06-11 19:58:24 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749689904.381485-9de06bf5 de mobile-8ecc85a2 entregado a web-866a3553
+2025-06-11 19:58:24 - INFO - [appv2.py:693] - [DEBUG] on_message de web-866a3553 raw: {"message": "Mensaje 2 desde web"}
+2025-06-11 19:58:24 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 4170a62150974b9aa613eecbc2821b21: active, Clientes: ['web-866a3553', 'mobile-8ecc85a2']
+2025-06-11 19:58:24 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749689904.882622-8bfc51a2 de web-866a3553 entregado a mobile-8ecc85a2
+2025-06-11 20:03:54 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-7092e662&action=create (::1) 0.90ms
+2025-06-11 20:03:54 - INFO - [appv2.py:513] - [WS-OPEN] Sala 2abf17b0a5cb47b6a0bb16b255507ec4 creada por web-7092e662. Contraseña: 622C4D. Esperando peer para generar JWT.
+2025-06-11 20:03:55 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-27539674&action=join&room_id=2abf17b0a5cb47b6a0bb16b255507ec4&room_password=622C4D (::1) 0.41ms
+2025-06-11 20:03:55 - INFO - [appv2.py:618] - [WS-JOIN] Cliente mobile-27539674 se unió a sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:03:57 - INFO - [appv2.py:693] - [DEBUG] on_message de web-7092e662 raw: {"message": "Mensaje 1 desde web"}
+2025-06-11 20:03:57 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 2abf17b0a5cb47b6a0bb16b255507ec4: active, Clientes: ['web-7092e662', 'mobile-27539674']
+2025-06-11 20:03:57 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690237.827779-3468715a de web-7092e662 entregado a mobile-27539674
+2025-06-11 20:03:57 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-27539674 raw: {"message": "Mensaje 1 desde m\u00f3vil"}
+2025-06-11 20:03:57 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 2abf17b0a5cb47b6a0bb16b255507ec4: active, Clientes: ['web-7092e662', 'mobile-27539674']
+2025-06-11 20:03:57 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690237.8397021-d292e966 de mobile-27539674 entregado a web-7092e662
+2025-06-11 20:03:57 - INFO - [appv2.py:693] - [DEBUG] on_message de web-7092e662 raw: {"message": "Mensaje 2 desde web"}
+2025-06-11 20:03:57 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 2abf17b0a5cb47b6a0bb16b255507ec4: active, Clientes: ['web-7092e662', 'mobile-27539674']
+2025-06-11 20:03:57 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690237.848184-0cb5dda1 de web-7092e662 entregado a mobile-27539674
+2025-06-11 20:03:57 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-27539674 raw: {"message": "Mensaje 2 desde m\u00f3vil"}
+2025-06-11 20:03:57 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 2abf17b0a5cb47b6a0bb16b255507ec4: active, Clientes: ['web-7092e662', 'mobile-27539674']
+2025-06-11 20:03:57 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690237.8503768-a06f8735 de mobile-27539674 entregado a web-7092e662
+2025-06-11 20:03:57 - INFO - [appv2.py:693] - [DEBUG] on_message de web-7092e662 raw: {"message": "Mensaje 3 desde web"}
+2025-06-11 20:03:57 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 2abf17b0a5cb47b6a0bb16b255507ec4: active, Clientes: ['web-7092e662', 'mobile-27539674']
+2025-06-11 20:03:57 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690237.852323-8d823c50 de web-7092e662 entregado a mobile-27539674
+2025-06-11 20:03:57 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-7092e662&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNzA5MmU2NjIiLCJyb29tX2lkIjoiMmFiZjE3YjBhNWNiNDdiNmEwYmIxNmIyNTU1MDdlYzQiLCJleHAiOjE3NTAyOTUwMzUsImp0aSI6ImFiMDgzNjEzMmIxNjQyNGVhNWQ1MDA0NzIxNzhkNjMyIn0.1kGd-vUtx7T2T9dCh-z8gft6-ZXOlWCM3GrhlhwxV60 (::1) 0.29ms
+2025-06-11 20:03:57 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-7092e662 autenticado con JWT para sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:03:57 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-7092e662 reconectado/validado en sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:03:59 - INFO - [appv2.py:693] - [DEBUG] on_message de web-7092e662 raw: {"message": "Mensaje despu\u00e9s de reconexi\u00f3n web"}
+2025-06-11 20:03:59 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 2abf17b0a5cb47b6a0bb16b255507ec4: active, Clientes: ['web-7092e662', 'mobile-27539674']
+2025-06-11 20:03:59 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690239.8685591-a2923a42 de web-7092e662 entregado a mobile-27539674
+2025-06-11 20:03:59 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-27539674 raw: {"message": "Respuesta a web reconectado"}
+2025-06-11 20:03:59 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 2abf17b0a5cb47b6a0bb16b255507ec4: active, Clientes: ['web-7092e662', 'mobile-27539674']
+2025-06-11 20:03:59 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690239.880894-655c5a18 de mobile-27539674 entregado a web-7092e662
+2025-06-11 20:03:59 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-27539674&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtMjc1Mzk2NzQiLCJyb29tX2lkIjoiMmFiZjE3YjBhNWNiNDdiNmEwYmIxNmIyNTU1MDdlYzQiLCJleHAiOjE3NTAyOTUwMzUsImp0aSI6IjRhMGE4NGMwYmJjYTQ1ODA5MGY3MmU1ZWYwMDI5ZmZlIn0.Q7IO9OuLVF0RjVxHP_fcKlNTSwI9UNlZ8YmHhmunguA (::1) 0.37ms
+2025-06-11 20:03:59 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-27539674 autenticado con JWT para sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:03:59 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-27539674 reconectado/validado en sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:04:01 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-27539674 raw: {"message": "Mensaje despu\u00e9s de reconexi\u00f3n m\u00f3vil"}
+2025-06-11 20:04:01 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 2abf17b0a5cb47b6a0bb16b255507ec4: active, Clientes: ['web-7092e662', 'mobile-27539674']
+2025-06-11 20:04:01 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690241.906552-1ae4ff6e de mobile-27539674 entregado a web-7092e662
+2025-06-11 20:04:01 - INFO - [appv2.py:693] - [DEBUG] on_message de web-7092e662 raw: {"message": "Respuesta a m\u00f3vil reconectado"}
+2025-06-11 20:04:01 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 2abf17b0a5cb47b6a0bb16b255507ec4: active, Clientes: ['web-7092e662', 'mobile-27539674']
+2025-06-11 20:04:01 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690241.9168031-ad258ec4 de web-7092e662 entregado a mobile-27539674
+2025-06-11 20:04:01 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-7092e662&jwt_token=invalid_token_123 (::1) 0.32ms
+2025-06-11 20:04:01 - WARNING - [session.py:217] - JWT inválido: Not enough segments
+2025-06-11 20:04:01 - WARNING - [appv2.py:457] - [WS-OPEN] Token JWT inválido o expirado presentado. Rechazando.
+2025-06-11 20:04:01 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-7092e662&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNzA5MmU2NjIiLCJyb29tX2lkIjoiMmFiZjE3YjBhNWNiNDdiNmEwYmIxNmIyNTU1MDdlYzQiLCJleHAiOjE3NTAyOTUwMzUsImp0aSI6ImFiMDgzNjEzMmIxNjQyNGVhNWQ1MDA0NzIxNzhkNjMyIn0.1kGd-vUtx7T2T9dCh-z8gft6-ZXOlWCM3GrhlhwxV60 (::1) 0.32ms
+2025-06-11 20:04:01 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-7092e662 autenticado con JWT para sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:04:01 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-7092e662 reconectado/validado en sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:04:01 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-27539674 (::1) 0.22ms
+2025-06-11 20:04:01 - WARNING - [appv2.py:379] - [WS-OPEN] Cliente existente mobile-27539674 intentó reconectar sin JWT. Rechazando.
+2025-06-11 20:04:01 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-27539674&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtMjc1Mzk2NzQiLCJyb29tX2lkIjoiMmFiZjE3YjBhNWNiNDdiNmEwYmIxNmIyNTU1MDdlYzQiLCJleHAiOjE3NTAyOTUwMzUsImp0aSI6IjRhMGE4NGMwYmJjYTQ1ODA5MGY3MmU1ZWYwMDI5ZmZlIn0.Q7IO9OuLVF0RjVxHP_fcKlNTSwI9UNlZ8YmHhmunguA (::1) 0.20ms
+2025-06-11 20:04:01 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-27539674 autenticado con JWT para sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:04:01 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-27539674 reconectado/validado en sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:04:01 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-7092e662&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNzA5MmU2NjIiLCJyb29tX2lkIjoiMmFiZjE3YjBhNWNiNDdiNmEwYmIxNmIyNTU1MDdlYzQiLCJleHAiOjE3NTAyOTUwMzUsImp0aSI6ImFiMDgzNjEzMmIxNjQyNGVhNWQ1MDA0NzIxNzhkNjMyIn0.1kGd-vUtx7T2T9dCh-z8gft6-ZXOlWCM3GrhlhwxV60 (::1) 0.29ms
+2025-06-11 20:04:01 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-7092e662 autenticado con JWT para sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:04:01 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-7092e662 reconectado/validado en sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:04:01 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-27539674&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtMjc1Mzk2NzQiLCJyb29tX2lkIjoiMmFiZjE3YjBhNWNiNDdiNmEwYmIxNmIyNTU1MDdlYzQiLCJleHAiOjE3NTAyOTUwMzUsImp0aSI6IjRhMGE4NGMwYmJjYTQ1ODA5MGY3MmU1ZWYwMDI5ZmZlIn0.Q7IO9OuLVF0RjVxHP_fcKlNTSwI9UNlZ8YmHhmunguA (::1) 0.18ms
+2025-06-11 20:04:01 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-27539674 autenticado con JWT para sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:04:01 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-27539674 reconectado/validado en sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:04:01 - INFO - [appv2.py:693] - [DEBUG] on_message de web-7092e662 raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 1"}
+2025-06-11 20:04:01 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 2abf17b0a5cb47b6a0bb16b255507ec4: active, Clientes: ['web-7092e662', 'mobile-27539674']
+2025-06-11 20:04:01 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690241.956409-44e47390 de web-7092e662 entregado a mobile-27539674
+2025-06-11 20:04:01 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-7092e662&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNzA5MmU2NjIiLCJyb29tX2lkIjoiMmFiZjE3YjBhNWNiNDdiNmEwYmIxNmIyNTU1MDdlYzQiLCJleHAiOjE3NTAyOTUwMzUsImp0aSI6ImFiMDgzNjEzMmIxNjQyNGVhNWQ1MDA0NzIxNzhkNjMyIn0.1kGd-vUtx7T2T9dCh-z8gft6-ZXOlWCM3GrhlhwxV60 (::1) 0.15ms
+2025-06-11 20:04:01 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-7092e662 autenticado con JWT para sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:04:01 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-7092e662 reconectado/validado en sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:04:01 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-27539674&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtMjc1Mzk2NzQiLCJyb29tX2lkIjoiMmFiZjE3YjBhNWNiNDdiNmEwYmIxNmIyNTU1MDdlYzQiLCJleHAiOjE3NTAyOTUwMzUsImp0aSI6IjRhMGE4NGMwYmJjYTQ1ODA5MGY3MmU1ZWYwMDI5ZmZlIn0.Q7IO9OuLVF0RjVxHP_fcKlNTSwI9UNlZ8YmHhmunguA (::1) 0.20ms
+2025-06-11 20:04:01 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-27539674 autenticado con JWT para sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:04:01 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-27539674 reconectado/validado en sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:04:01 - INFO - [appv2.py:693] - [DEBUG] on_message de web-7092e662 raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 2"}
+2025-06-11 20:04:01 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 2abf17b0a5cb47b6a0bb16b255507ec4: active, Clientes: ['web-7092e662', 'mobile-27539674']
+2025-06-11 20:04:01 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690241.967606-c44fd16d de web-7092e662 entregado a mobile-27539674
+2025-06-11 20:04:01 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-7092e662&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNzA5MmU2NjIiLCJyb29tX2lkIjoiMmFiZjE3YjBhNWNiNDdiNmEwYmIxNmIyNTU1MDdlYzQiLCJleHAiOjE3NTAyOTUwMzUsImp0aSI6ImFiMDgzNjEzMmIxNjQyNGVhNWQ1MDA0NzIxNzhkNjMyIn0.1kGd-vUtx7T2T9dCh-z8gft6-ZXOlWCM3GrhlhwxV60 (::1) 0.17ms
+2025-06-11 20:04:01 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-7092e662 autenticado con JWT para sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:04:01 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-7092e662 reconectado/validado en sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:04:01 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-27539674&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtMjc1Mzk2NzQiLCJyb29tX2lkIjoiMmFiZjE3YjBhNWNiNDdiNmEwYmIxNmIyNTU1MDdlYzQiLCJleHAiOjE3NTAyOTUwMzUsImp0aSI6IjRhMGE4NGMwYmJjYTQ1ODA5MGY3MmU1ZWYwMDI5ZmZlIn0.Q7IO9OuLVF0RjVxHP_fcKlNTSwI9UNlZ8YmHhmunguA (::1) 0.17ms
+2025-06-11 20:04:01 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-27539674 autenticado con JWT para sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:04:01 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-27539674 reconectado/validado en sala 2abf17b0a5cb47b6a0bb16b255507ec4
+2025-06-11 20:04:01 - INFO - [appv2.py:693] - [DEBUG] on_message de web-7092e662 raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 3"}
+2025-06-11 20:04:01 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 2abf17b0a5cb47b6a0bb16b255507ec4: active, Clientes: ['web-7092e662', 'mobile-27539674']
+2025-06-11 20:04:01 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690241.9763148-02743e8f de web-7092e662 entregado a mobile-27539674
+2025-06-11 20:08:30 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-9d2bda79&action=create (::1) 0.84ms
+2025-06-11 20:08:30 - INFO - [appv2.py:513] - [WS-OPEN] Sala a365a68366194cbcadcb72671dc65807 creada por web-9d2bda79. Contraseña: 367F48. Esperando peer para generar JWT.
+2025-06-11 20:08:31 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-8dbb9995&action=join&room_id=a365a68366194cbcadcb72671dc65807&room_password=367F48 (::1) 0.61ms
+2025-06-11 20:08:31 - INFO - [appv2.py:618] - [WS-JOIN] Cliente mobile-8dbb9995 se unió a sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:33 - INFO - [appv2.py:693] - [DEBUG] on_message de web-9d2bda79 raw: {"message": "Mensaje 1 desde web"}
+2025-06-11 20:08:33 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala a365a68366194cbcadcb72671dc65807: active, Clientes: ['web-9d2bda79', 'mobile-8dbb9995']
+2025-06-11 20:08:33 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690513.778545-c2501f8a de web-9d2bda79 entregado a mobile-8dbb9995
+2025-06-11 20:08:33 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-8dbb9995 raw: {"message": "Mensaje 1 desde m\u00f3vil"}
+2025-06-11 20:08:33 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala a365a68366194cbcadcb72671dc65807: active, Clientes: ['web-9d2bda79', 'mobile-8dbb9995']
+2025-06-11 20:08:33 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690513.7911181-e6fe307d de mobile-8dbb9995 entregado a web-9d2bda79
+2025-06-11 20:08:33 - INFO - [appv2.py:693] - [DEBUG] on_message de web-9d2bda79 raw: {"message": "Mensaje 2 desde web"}
+2025-06-11 20:08:33 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala a365a68366194cbcadcb72671dc65807: active, Clientes: ['web-9d2bda79', 'mobile-8dbb9995']
+2025-06-11 20:08:33 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690513.796269-74575078 de web-9d2bda79 entregado a mobile-8dbb9995
+2025-06-11 20:08:33 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-8dbb9995 raw: {"message": "Mensaje 2 desde m\u00f3vil"}
+2025-06-11 20:08:33 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala a365a68366194cbcadcb72671dc65807: active, Clientes: ['web-9d2bda79', 'mobile-8dbb9995']
+2025-06-11 20:08:33 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690513.799583-f5e51fd4 de mobile-8dbb9995 entregado a web-9d2bda79
+2025-06-11 20:08:33 - INFO - [appv2.py:693] - [DEBUG] on_message de web-9d2bda79 raw: {"message": "Mensaje 3 desde web"}
+2025-06-11 20:08:33 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala a365a68366194cbcadcb72671dc65807: active, Clientes: ['web-9d2bda79', 'mobile-8dbb9995']
+2025-06-11 20:08:33 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690513.803394-a59ae003 de web-9d2bda79 entregado a mobile-8dbb9995
+2025-06-11 20:08:33 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-9d2bda79&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItOWQyYmRhNzkiLCJyb29tX2lkIjoiYTM2NWE2ODM2NjE5NGNiY2FkY2I3MjY3MWRjNjU4MDciLCJleHAiOjE3NTAyOTUzMTEsImp0aSI6ImFkN2ExN2U5ZjM2ZTRkOGFiMmJjMmZmODVmYjI5MDkwIn0.7mvIHqqIIEITJ4RG6dhW93Is8fiKMzf-LS5tXY0qGWM (::1) 0.30ms
+2025-06-11 20:08:33 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-9d2bda79 autenticado con JWT para sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:33 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-9d2bda79 reconectado/validado en sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:35 - INFO - [appv2.py:693] - [DEBUG] on_message de web-9d2bda79 raw: {"message": "Mensaje despu\u00e9s de reconexi\u00f3n web"}
+2025-06-11 20:08:35 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala a365a68366194cbcadcb72671dc65807: active, Clientes: ['web-9d2bda79', 'mobile-8dbb9995']
+2025-06-11 20:08:35 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690515.822431-76826126 de web-9d2bda79 entregado a mobile-8dbb9995
+2025-06-11 20:08:35 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-8dbb9995 raw: {"message": "Respuesta a web reconectado"}
+2025-06-11 20:08:35 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala a365a68366194cbcadcb72671dc65807: active, Clientes: ['web-9d2bda79', 'mobile-8dbb9995']
+2025-06-11 20:08:35 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690515.831188-593d2117 de mobile-8dbb9995 entregado a web-9d2bda79
+2025-06-11 20:08:35 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-8dbb9995&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtOGRiYjk5OTUiLCJyb29tX2lkIjoiYTM2NWE2ODM2NjE5NGNiY2FkY2I3MjY3MWRjNjU4MDciLCJleHAiOjE3NTAyOTUzMTEsImp0aSI6IjcyZjY5NjhkNThkYjRkNmI5YzdkM2M4ZWJhMGQ0YjFkIn0.HEM8BZ7aDfe3ttpUjwvE6eBf2e4DMULr8srQAhaHl7Y (::1) 0.33ms
+2025-06-11 20:08:35 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-8dbb9995 autenticado con JWT para sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:35 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-8dbb9995 reconectado/validado en sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:37 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-8dbb9995 raw: {"message": "Mensaje despu\u00e9s de reconexi\u00f3n m\u00f3vil"}
+2025-06-11 20:08:37 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala a365a68366194cbcadcb72671dc65807: active, Clientes: ['web-9d2bda79', 'mobile-8dbb9995']
+2025-06-11 20:08:37 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690517.859364-7a3c35a8 de mobile-8dbb9995 entregado a web-9d2bda79
+2025-06-11 20:08:37 - INFO - [appv2.py:693] - [DEBUG] on_message de web-9d2bda79 raw: {"message": "Respuesta a m\u00f3vil reconectado"}
+2025-06-11 20:08:37 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala a365a68366194cbcadcb72671dc65807: active, Clientes: ['web-9d2bda79', 'mobile-8dbb9995']
+2025-06-11 20:08:37 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690517.866378-6d861ee2 de web-9d2bda79 entregado a mobile-8dbb9995
+2025-06-11 20:08:37 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-9d2bda79&jwt_token=invalid_token_123 (::1) 0.34ms
+2025-06-11 20:08:37 - WARNING - [session.py:217] - JWT inválido: Not enough segments
+2025-06-11 20:08:37 - WARNING - [appv2.py:457] - [WS-OPEN] Token JWT inválido o expirado presentado. Rechazando.
+2025-06-11 20:08:37 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-9d2bda79&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItOWQyYmRhNzkiLCJyb29tX2lkIjoiYTM2NWE2ODM2NjE5NGNiY2FkY2I3MjY3MWRjNjU4MDciLCJleHAiOjE3NTAyOTUzMTEsImp0aSI6ImFkN2ExN2U5ZjM2ZTRkOGFiMmJjMmZmODVmYjI5MDkwIn0.7mvIHqqIIEITJ4RG6dhW93Is8fiKMzf-LS5tXY0qGWM (::1) 0.25ms
+2025-06-11 20:08:37 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-9d2bda79 autenticado con JWT para sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:37 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-9d2bda79 reconectado/validado en sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:37 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-8dbb9995 (::1) 0.18ms
+2025-06-11 20:08:37 - WARNING - [appv2.py:379] - [WS-OPEN] Cliente existente mobile-8dbb9995 intentó reconectar sin JWT. Rechazando.
+2025-06-11 20:08:37 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-8dbb9995&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtOGRiYjk5OTUiLCJyb29tX2lkIjoiYTM2NWE2ODM2NjE5NGNiY2FkY2I3MjY3MWRjNjU4MDciLCJleHAiOjE3NTAyOTUzMTEsImp0aSI6IjcyZjY5NjhkNThkYjRkNmI5YzdkM2M4ZWJhMGQ0YjFkIn0.HEM8BZ7aDfe3ttpUjwvE6eBf2e4DMULr8srQAhaHl7Y (::1) 0.19ms
+2025-06-11 20:08:37 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-8dbb9995 autenticado con JWT para sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:37 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-8dbb9995 reconectado/validado en sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:37 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-9d2bda79&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItOWQyYmRhNzkiLCJyb29tX2lkIjoiYTM2NWE2ODM2NjE5NGNiY2FkY2I3MjY3MWRjNjU4MDciLCJleHAiOjE3NTAyOTUzMTEsImp0aSI6ImFkN2ExN2U5ZjM2ZTRkOGFiMmJjMmZmODVmYjI5MDkwIn0.7mvIHqqIIEITJ4RG6dhW93Is8fiKMzf-LS5tXY0qGWM (::1) 0.17ms
+2025-06-11 20:08:37 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-9d2bda79 autenticado con JWT para sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:37 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-9d2bda79 reconectado/validado en sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:37 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-8dbb9995&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtOGRiYjk5OTUiLCJyb29tX2lkIjoiYTM2NWE2ODM2NjE5NGNiY2FkY2I3MjY3MWRjNjU4MDciLCJleHAiOjE3NTAyOTUzMTEsImp0aSI6IjcyZjY5NjhkNThkYjRkNmI5YzdkM2M4ZWJhMGQ0YjFkIn0.HEM8BZ7aDfe3ttpUjwvE6eBf2e4DMULr8srQAhaHl7Y (::1) 0.17ms
+2025-06-11 20:08:37 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-8dbb9995 autenticado con JWT para sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:37 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-8dbb9995 reconectado/validado en sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:37 - INFO - [appv2.py:693] - [DEBUG] on_message de web-9d2bda79 raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 1"}
+2025-06-11 20:08:37 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala a365a68366194cbcadcb72671dc65807: active, Clientes: ['web-9d2bda79', 'mobile-8dbb9995']
+2025-06-11 20:08:37 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690517.9070778-1a171948 de web-9d2bda79 entregado a mobile-8dbb9995
+2025-06-11 20:08:38 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-9d2bda79&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItOWQyYmRhNzkiLCJyb29tX2lkIjoiYTM2NWE2ODM2NjE5NGNiY2FkY2I3MjY3MWRjNjU4MDciLCJleHAiOjE3NTAyOTUzMTEsImp0aSI6ImFkN2ExN2U5ZjM2ZTRkOGFiMmJjMmZmODVmYjI5MDkwIn0.7mvIHqqIIEITJ4RG6dhW93Is8fiKMzf-LS5tXY0qGWM (::1) 0.49ms
+2025-06-11 20:08:38 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-9d2bda79 autenticado con JWT para sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:38 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-9d2bda79 reconectado/validado en sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:38 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-8dbb9995&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtOGRiYjk5OTUiLCJyb29tX2lkIjoiYTM2NWE2ODM2NjE5NGNiY2FkY2I3MjY3MWRjNjU4MDciLCJleHAiOjE3NTAyOTUzMTEsImp0aSI6IjcyZjY5NjhkNThkYjRkNmI5YzdkM2M4ZWJhMGQ0YjFkIn0.HEM8BZ7aDfe3ttpUjwvE6eBf2e4DMULr8srQAhaHl7Y (::1) 0.32ms
+2025-06-11 20:08:38 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-8dbb9995 autenticado con JWT para sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:38 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-8dbb9995 reconectado/validado en sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:38 - INFO - [appv2.py:693] - [DEBUG] on_message de web-9d2bda79 raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 2"}
+2025-06-11 20:08:38 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala a365a68366194cbcadcb72671dc65807: active, Clientes: ['web-9d2bda79', 'mobile-8dbb9995']
+2025-06-11 20:08:38 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690518.441639-e8db3bf6 de web-9d2bda79 entregado a mobile-8dbb9995
+2025-06-11 20:08:38 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-9d2bda79&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItOWQyYmRhNzkiLCJyb29tX2lkIjoiYTM2NWE2ODM2NjE5NGNiY2FkY2I3MjY3MWRjNjU4MDciLCJleHAiOjE3NTAyOTUzMTEsImp0aSI6ImFkN2ExN2U5ZjM2ZTRkOGFiMmJjMmZmODVmYjI5MDkwIn0.7mvIHqqIIEITJ4RG6dhW93Is8fiKMzf-LS5tXY0qGWM (::1) 1.00ms
+2025-06-11 20:08:38 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-9d2bda79 autenticado con JWT para sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:38 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-9d2bda79 reconectado/validado en sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:38 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-8dbb9995&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtOGRiYjk5OTUiLCJyb29tX2lkIjoiYTM2NWE2ODM2NjE5NGNiY2FkY2I3MjY3MWRjNjU4MDciLCJleHAiOjE3NTAyOTUzMTEsImp0aSI6IjcyZjY5NjhkNThkYjRkNmI5YzdkM2M4ZWJhMGQ0YjFkIn0.HEM8BZ7aDfe3ttpUjwvE6eBf2e4DMULr8srQAhaHl7Y (::1) 0.29ms
+2025-06-11 20:08:38 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-8dbb9995 autenticado con JWT para sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:38 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-8dbb9995 reconectado/validado en sala a365a68366194cbcadcb72671dc65807
+2025-06-11 20:08:38 - INFO - [appv2.py:693] - [DEBUG] on_message de web-9d2bda79 raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 3"}
+2025-06-11 20:08:38 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala a365a68366194cbcadcb72671dc65807: active, Clientes: ['web-9d2bda79', 'mobile-8dbb9995']
+2025-06-11 20:08:38 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690518.976238-c639bc93 de web-9d2bda79 entregado a mobile-8dbb9995
+2025-06-11 20:11:20 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-5a8bd96c&action=create (::1) 1.39ms
+2025-06-11 20:11:20 - INFO - [appv2.py:513] - [WS-OPEN] Sala f2696482397a4118b0365340dfb04d7a creada por web-5a8bd96c. Contraseña: 9A5288. Esperando peer para generar JWT.
+2025-06-11 20:11:21 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-5655d2a2&action=join&room_id=f2696482397a4118b0365340dfb04d7a&room_password=9A5288 (::1) 0.61ms
+2025-06-11 20:11:21 - INFO - [appv2.py:618] - [WS-JOIN] Cliente mobile-5655d2a2 se unió a sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:24 - INFO - [appv2.py:693] - [DEBUG] on_message de web-5a8bd96c raw: {"message": "Mensaje 1 desde web"}
+2025-06-11 20:11:24 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala f2696482397a4118b0365340dfb04d7a: active, Clientes: ['web-5a8bd96c', 'mobile-5655d2a2']
+2025-06-11 20:11:24 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690684.2440588-f11e1d70 de web-5a8bd96c entregado a mobile-5655d2a2
+2025-06-11 20:11:24 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-5655d2a2 raw: {"message": "Mensaje 1 desde m\u00f3vil"}
+2025-06-11 20:11:24 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala f2696482397a4118b0365340dfb04d7a: active, Clientes: ['web-5a8bd96c', 'mobile-5655d2a2']
+2025-06-11 20:11:24 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690684.251612-4e7e553d de mobile-5655d2a2 entregado a web-5a8bd96c
+2025-06-11 20:11:24 - INFO - [appv2.py:693] - [DEBUG] on_message de web-5a8bd96c raw: {"message": "Mensaje 2 desde web"}
+2025-06-11 20:11:24 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala f2696482397a4118b0365340dfb04d7a: active, Clientes: ['web-5a8bd96c', 'mobile-5655d2a2']
+2025-06-11 20:11:24 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690684.261877-8601cdc7 de web-5a8bd96c entregado a mobile-5655d2a2
+2025-06-11 20:11:24 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-5655d2a2 raw: {"message": "Mensaje 2 desde m\u00f3vil"}
+2025-06-11 20:11:24 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala f2696482397a4118b0365340dfb04d7a: active, Clientes: ['web-5a8bd96c', 'mobile-5655d2a2']
+2025-06-11 20:11:24 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690684.268084-24091a75 de mobile-5655d2a2 entregado a web-5a8bd96c
+2025-06-11 20:11:24 - INFO - [appv2.py:693] - [DEBUG] on_message de web-5a8bd96c raw: {"message": "Mensaje 3 desde web"}
+2025-06-11 20:11:24 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala f2696482397a4118b0365340dfb04d7a: active, Clientes: ['web-5a8bd96c', 'mobile-5655d2a2']
+2025-06-11 20:11:24 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690684.271059-3bc9d890 de web-5a8bd96c entregado a mobile-5655d2a2
+2025-06-11 20:11:24 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-5a8bd96c&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNWE4YmQ5NmMiLCJyb29tX2lkIjoiZjI2OTY0ODIzOTdhNDExOGIwMzY1MzQwZGZiMDRkN2EiLCJleHAiOjE3NTAyOTU0ODEsImp0aSI6ImI2ZTRiN2YzMTc5ZDQyODlhOTkyZDI3Nzg4MTA0NTIyIn0.wjDhNh9xpSV_xZ8odrgeSHTfRC0LpGUfA3TCdN3AtW4 (::1) 0.27ms
+2025-06-11 20:11:24 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-5a8bd96c autenticado con JWT para sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:24 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-5a8bd96c reconectado/validado en sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:26 - INFO - [appv2.py:693] - [DEBUG] on_message de web-5a8bd96c raw: {"message": "Mensaje despu\u00e9s de reconexi\u00f3n web"}
+2025-06-11 20:11:26 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala f2696482397a4118b0365340dfb04d7a: active, Clientes: ['web-5a8bd96c', 'mobile-5655d2a2']
+2025-06-11 20:11:26 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690686.288894-c3b056e0 de web-5a8bd96c entregado a mobile-5655d2a2
+2025-06-11 20:11:26 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-5655d2a2 raw: {"message": "Respuesta a web reconectado"}
+2025-06-11 20:11:26 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala f2696482397a4118b0365340dfb04d7a: active, Clientes: ['web-5a8bd96c', 'mobile-5655d2a2']
+2025-06-11 20:11:26 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690686.2977972-d8c6cf02 de mobile-5655d2a2 entregado a web-5a8bd96c
+2025-06-11 20:11:26 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-5655d2a2&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtNTY1NWQyYTIiLCJyb29tX2lkIjoiZjI2OTY0ODIzOTdhNDExOGIwMzY1MzQwZGZiMDRkN2EiLCJleHAiOjE3NTAyOTU0ODEsImp0aSI6Ijg3N2VjOGFjMGZkMDQxZDk4OGU4ODFjOWM1NDI5ZGE4In0.1xbCy4KgWG5pxbmPPzfvyccbmAwATJ2d6vQKfTnUKnc (::1) 0.40ms
+2025-06-11 20:11:26 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-5655d2a2 autenticado con JWT para sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:26 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-5655d2a2 reconectado/validado en sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:28 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-5655d2a2 raw: {"message": "Mensaje despu\u00e9s de reconexi\u00f3n m\u00f3vil"}
+2025-06-11 20:11:28 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala f2696482397a4118b0365340dfb04d7a: active, Clientes: ['web-5a8bd96c', 'mobile-5655d2a2']
+2025-06-11 20:11:28 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690688.3240871-5577b23c de mobile-5655d2a2 entregado a web-5a8bd96c
+2025-06-11 20:11:28 - INFO - [appv2.py:693] - [DEBUG] on_message de web-5a8bd96c raw: {"message": "Respuesta a m\u00f3vil reconectado"}
+2025-06-11 20:11:28 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala f2696482397a4118b0365340dfb04d7a: active, Clientes: ['web-5a8bd96c', 'mobile-5655d2a2']
+2025-06-11 20:11:28 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690688.331539-b7d995f3 de web-5a8bd96c entregado a mobile-5655d2a2
+2025-06-11 20:11:28 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-5a8bd96c&jwt_token=invalid_token_123 (::1) 0.30ms
+2025-06-11 20:11:28 - WARNING - [session.py:217] - JWT inválido: Not enough segments
+2025-06-11 20:11:28 - WARNING - [appv2.py:457] - [WS-OPEN] Token JWT inválido o expirado presentado. Rechazando.
+2025-06-11 20:11:28 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-5a8bd96c&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNWE4YmQ5NmMiLCJyb29tX2lkIjoiZjI2OTY0ODIzOTdhNDExOGIwMzY1MzQwZGZiMDRkN2EiLCJleHAiOjE3NTAyOTU0ODEsImp0aSI6ImI2ZTRiN2YzMTc5ZDQyODlhOTkyZDI3Nzg4MTA0NTIyIn0.wjDhNh9xpSV_xZ8odrgeSHTfRC0LpGUfA3TCdN3AtW4 (::1) 0.21ms
+2025-06-11 20:11:28 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-5a8bd96c autenticado con JWT para sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:28 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-5a8bd96c reconectado/validado en sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:28 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-5655d2a2 (::1) 0.19ms
+2025-06-11 20:11:28 - WARNING - [appv2.py:379] - [WS-OPEN] Cliente existente mobile-5655d2a2 intentó reconectar sin JWT. Rechazando.
+2025-06-11 20:11:28 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-5655d2a2&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtNTY1NWQyYTIiLCJyb29tX2lkIjoiZjI2OTY0ODIzOTdhNDExOGIwMzY1MzQwZGZiMDRkN2EiLCJleHAiOjE3NTAyOTU0ODEsImp0aSI6Ijg3N2VjOGFjMGZkMDQxZDk4OGU4ODFjOWM1NDI5ZGE4In0.1xbCy4KgWG5pxbmPPzfvyccbmAwATJ2d6vQKfTnUKnc (::1) 0.37ms
+2025-06-11 20:11:28 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-5655d2a2 autenticado con JWT para sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:28 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-5655d2a2 reconectado/validado en sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:28 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-5a8bd96c&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNWE4YmQ5NmMiLCJyb29tX2lkIjoiZjI2OTY0ODIzOTdhNDExOGIwMzY1MzQwZGZiMDRkN2EiLCJleHAiOjE3NTAyOTU0ODEsImp0aSI6ImI2ZTRiN2YzMTc5ZDQyODlhOTkyZDI3Nzg4MTA0NTIyIn0.wjDhNh9xpSV_xZ8odrgeSHTfRC0LpGUfA3TCdN3AtW4 (::1) 0.17ms
+2025-06-11 20:11:28 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-5a8bd96c autenticado con JWT para sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:28 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-5a8bd96c reconectado/validado en sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:28 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-5655d2a2&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtNTY1NWQyYTIiLCJyb29tX2lkIjoiZjI2OTY0ODIzOTdhNDExOGIwMzY1MzQwZGZiMDRkN2EiLCJleHAiOjE3NTAyOTU0ODEsImp0aSI6Ijg3N2VjOGFjMGZkMDQxZDk4OGU4ODFjOWM1NDI5ZGE4In0.1xbCy4KgWG5pxbmPPzfvyccbmAwATJ2d6vQKfTnUKnc (::1) 0.16ms
+2025-06-11 20:11:28 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-5655d2a2 autenticado con JWT para sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:28 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-5655d2a2 reconectado/validado en sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:28 - INFO - [appv2.py:693] - [DEBUG] on_message de web-5a8bd96c raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 1"}
+2025-06-11 20:11:28 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala f2696482397a4118b0365340dfb04d7a: active, Clientes: ['web-5a8bd96c', 'mobile-5655d2a2']
+2025-06-11 20:11:28 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690688.366445-f1dac9d8 de web-5a8bd96c entregado a mobile-5655d2a2
+2025-06-11 20:11:28 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-5a8bd96c&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNWE4YmQ5NmMiLCJyb29tX2lkIjoiZjI2OTY0ODIzOTdhNDExOGIwMzY1MzQwZGZiMDRkN2EiLCJleHAiOjE3NTAyOTU0ODEsImp0aSI6ImI2ZTRiN2YzMTc5ZDQyODlhOTkyZDI3Nzg4MTA0NTIyIn0.wjDhNh9xpSV_xZ8odrgeSHTfRC0LpGUfA3TCdN3AtW4 (::1) 0.31ms
+2025-06-11 20:11:28 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-5a8bd96c autenticado con JWT para sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:28 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-5a8bd96c reconectado/validado en sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:28 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-5655d2a2&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtNTY1NWQyYTIiLCJyb29tX2lkIjoiZjI2OTY0ODIzOTdhNDExOGIwMzY1MzQwZGZiMDRkN2EiLCJleHAiOjE3NTAyOTU0ODEsImp0aSI6Ijg3N2VjOGFjMGZkMDQxZDk4OGU4ODFjOWM1NDI5ZGE4In0.1xbCy4KgWG5pxbmPPzfvyccbmAwATJ2d6vQKfTnUKnc (::1) 0.22ms
+2025-06-11 20:11:28 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-5655d2a2 autenticado con JWT para sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:28 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-5655d2a2 reconectado/validado en sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:28 - INFO - [appv2.py:693] - [DEBUG] on_message de web-5a8bd96c raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 2"}
+2025-06-11 20:11:28 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala f2696482397a4118b0365340dfb04d7a: active, Clientes: ['web-5a8bd96c', 'mobile-5655d2a2']
+2025-06-11 20:11:28 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690688.8801122-e339601e de web-5a8bd96c entregado a mobile-5655d2a2
+2025-06-11 20:11:29 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-5a8bd96c&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNWE4YmQ5NmMiLCJyb29tX2lkIjoiZjI2OTY0ODIzOTdhNDExOGIwMzY1MzQwZGZiMDRkN2EiLCJleHAiOjE3NTAyOTU0ODEsImp0aSI6ImI2ZTRiN2YzMTc5ZDQyODlhOTkyZDI3Nzg4MTA0NTIyIn0.wjDhNh9xpSV_xZ8odrgeSHTfRC0LpGUfA3TCdN3AtW4 (::1) 0.69ms
+2025-06-11 20:11:29 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-5a8bd96c autenticado con JWT para sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:29 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-5a8bd96c reconectado/validado en sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:29 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-5655d2a2&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtNTY1NWQyYTIiLCJyb29tX2lkIjoiZjI2OTY0ODIzOTdhNDExOGIwMzY1MzQwZGZiMDRkN2EiLCJleHAiOjE3NTAyOTU0ODEsImp0aSI6Ijg3N2VjOGFjMGZkMDQxZDk4OGU4ODFjOWM1NDI5ZGE4In0.1xbCy4KgWG5pxbmPPzfvyccbmAwATJ2d6vQKfTnUKnc (::1) 0.31ms
+2025-06-11 20:11:29 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-5655d2a2 autenticado con JWT para sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:29 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-5655d2a2 reconectado/validado en sala f2696482397a4118b0365340dfb04d7a
+2025-06-11 20:11:29 - INFO - [appv2.py:693] - [DEBUG] on_message de web-5a8bd96c raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 3"}
+2025-06-11 20:11:29 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala f2696482397a4118b0365340dfb04d7a: active, Clientes: ['web-5a8bd96c', 'mobile-5655d2a2']
+2025-06-11 20:11:29 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690689.410121-6aa3bed4 de web-5a8bd96c entregado a mobile-5655d2a2
+2025-06-11 20:11:43 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-a34717ab&action=create (::1) 0.21ms
+2025-06-11 20:11:43 - INFO - [appv2.py:513] - [WS-OPEN] Sala 0a09b097ecb042dca4ff7479f9695a37 creada por web-a34717ab. Contraseña: 648694. Esperando peer para generar JWT.
+2025-06-11 20:11:44 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-ead73d5c&action=join&room_id=0a09b097ecb042dca4ff7479f9695a37&room_password=648694 (::1) 0.33ms
+2025-06-11 20:11:44 - INFO - [appv2.py:618] - [WS-JOIN] Cliente mobile-ead73d5c se unió a sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:46 - INFO - [appv2.py:693] - [DEBUG] on_message de web-a34717ab raw: {"message": "Mensaje 1 desde web"}
+2025-06-11 20:11:46 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0a09b097ecb042dca4ff7479f9695a37: active, Clientes: ['web-a34717ab', 'mobile-ead73d5c']
+2025-06-11 20:11:46 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690706.896171-2d4d800e de web-a34717ab entregado a mobile-ead73d5c
+2025-06-11 20:11:46 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-ead73d5c raw: {"message": "Mensaje 1 desde m\u00f3vil"}
+2025-06-11 20:11:46 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0a09b097ecb042dca4ff7479f9695a37: active, Clientes: ['web-a34717ab', 'mobile-ead73d5c']
+2025-06-11 20:11:46 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690706.905382-8d198eb7 de mobile-ead73d5c entregado a web-a34717ab
+2025-06-11 20:11:46 - INFO - [appv2.py:693] - [DEBUG] on_message de web-a34717ab raw: {"message": "Mensaje 2 desde web"}
+2025-06-11 20:11:46 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0a09b097ecb042dca4ff7479f9695a37: active, Clientes: ['web-a34717ab', 'mobile-ead73d5c']
+2025-06-11 20:11:46 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690706.9113758-a6234e79 de web-a34717ab entregado a mobile-ead73d5c
+2025-06-11 20:11:46 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-ead73d5c raw: {"message": "Mensaje 2 desde m\u00f3vil"}
+2025-06-11 20:11:46 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0a09b097ecb042dca4ff7479f9695a37: active, Clientes: ['web-a34717ab', 'mobile-ead73d5c']
+2025-06-11 20:11:46 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690706.919062-b4038bf6 de mobile-ead73d5c entregado a web-a34717ab
+2025-06-11 20:11:46 - INFO - [appv2.py:693] - [DEBUG] on_message de web-a34717ab raw: {"message": "Mensaje 3 desde web"}
+2025-06-11 20:11:46 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0a09b097ecb042dca4ff7479f9695a37: active, Clientes: ['web-a34717ab', 'mobile-ead73d5c']
+2025-06-11 20:11:46 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690706.923434-9a973e74 de web-a34717ab entregado a mobile-ead73d5c
+2025-06-11 20:11:46 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-a34717ab&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItYTM0NzE3YWIiLCJyb29tX2lkIjoiMGEwOWIwOTdlY2IwNDJkY2E0ZmY3NDc5Zjk2OTVhMzciLCJleHAiOjE3NTAyOTU1MDQsImp0aSI6IjkyNjA0ZjU0NjY4MTRlYzk4ZDE0M2ZhZmE0MTNlYzEyIn0.ojKeX3BJXHqpO1HqXIzILLtaJcDC-AOgcEHgUMHY-E8 (::1) 0.26ms
+2025-06-11 20:11:46 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-a34717ab autenticado con JWT para sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:46 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-a34717ab reconectado/validado en sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:48 - INFO - [appv2.py:693] - [DEBUG] on_message de web-a34717ab raw: {"message": "Mensaje despu\u00e9s de reconexi\u00f3n web"}
+2025-06-11 20:11:48 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0a09b097ecb042dca4ff7479f9695a37: active, Clientes: ['web-a34717ab', 'mobile-ead73d5c']
+2025-06-11 20:11:48 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690708.938216-a4347bcc de web-a34717ab entregado a mobile-ead73d5c
+2025-06-11 20:11:48 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-ead73d5c raw: {"message": "Respuesta a web reconectado"}
+2025-06-11 20:11:48 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0a09b097ecb042dca4ff7479f9695a37: active, Clientes: ['web-a34717ab', 'mobile-ead73d5c']
+2025-06-11 20:11:48 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690708.9403992-8fb0860b de mobile-ead73d5c entregado a web-a34717ab
+2025-06-11 20:11:48 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-ead73d5c&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtZWFkNzNkNWMiLCJyb29tX2lkIjoiMGEwOWIwOTdlY2IwNDJkY2E0ZmY3NDc5Zjk2OTVhMzciLCJleHAiOjE3NTAyOTU1MDQsImp0aSI6ImE2ZWRiYjBlNjUxNDRlNDc4OTIyN2M1MDkxZDJjYTJlIn0.-iQ7pG2BU7WuC9sKdTs_63bX-EBlL4Yffx4esCiuOIk (::1) 0.24ms
+2025-06-11 20:11:48 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-ead73d5c autenticado con JWT para sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:48 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-ead73d5c reconectado/validado en sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:50 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-ead73d5c raw: {"message": "Mensaje despu\u00e9s de reconexi\u00f3n m\u00f3vil"}
+2025-06-11 20:11:50 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0a09b097ecb042dca4ff7479f9695a37: active, Clientes: ['web-a34717ab', 'mobile-ead73d5c']
+2025-06-11 20:11:50 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690710.9549282-3bbb537d de mobile-ead73d5c entregado a web-a34717ab
+2025-06-11 20:11:50 - INFO - [appv2.py:693] - [DEBUG] on_message de web-a34717ab raw: {"message": "Respuesta a m\u00f3vil reconectado"}
+2025-06-11 20:11:50 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0a09b097ecb042dca4ff7479f9695a37: active, Clientes: ['web-a34717ab', 'mobile-ead73d5c']
+2025-06-11 20:11:50 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690710.95758-d0733ab2 de web-a34717ab entregado a mobile-ead73d5c
+2025-06-11 20:11:50 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-a34717ab&jwt_token=invalid_token_123 (::1) 0.24ms
+2025-06-11 20:11:50 - WARNING - [session.py:217] - JWT inválido: Not enough segments
+2025-06-11 20:11:50 - WARNING - [appv2.py:457] - [WS-OPEN] Token JWT inválido o expirado presentado. Rechazando.
+2025-06-11 20:11:50 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-a34717ab&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItYTM0NzE3YWIiLCJyb29tX2lkIjoiMGEwOWIwOTdlY2IwNDJkY2E0ZmY3NDc5Zjk2OTVhMzciLCJleHAiOjE3NTAyOTU1MDQsImp0aSI6IjkyNjA0ZjU0NjY4MTRlYzk4ZDE0M2ZhZmE0MTNlYzEyIn0.ojKeX3BJXHqpO1HqXIzILLtaJcDC-AOgcEHgUMHY-E8 (::1) 0.22ms
+2025-06-11 20:11:50 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-a34717ab autenticado con JWT para sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:50 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-a34717ab reconectado/validado en sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:50 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-ead73d5c (::1) 0.22ms
+2025-06-11 20:11:50 - WARNING - [appv2.py:379] - [WS-OPEN] Cliente existente mobile-ead73d5c intentó reconectar sin JWT. Rechazando.
+2025-06-11 20:11:50 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-ead73d5c&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtZWFkNzNkNWMiLCJyb29tX2lkIjoiMGEwOWIwOTdlY2IwNDJkY2E0ZmY3NDc5Zjk2OTVhMzciLCJleHAiOjE3NTAyOTU1MDQsImp0aSI6ImE2ZWRiYjBlNjUxNDRlNDc4OTIyN2M1MDkxZDJjYTJlIn0.-iQ7pG2BU7WuC9sKdTs_63bX-EBlL4Yffx4esCiuOIk (::1) 0.15ms
+2025-06-11 20:11:50 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-ead73d5c autenticado con JWT para sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:50 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-ead73d5c reconectado/validado en sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:50 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-a34717ab&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItYTM0NzE3YWIiLCJyb29tX2lkIjoiMGEwOWIwOTdlY2IwNDJkY2E0ZmY3NDc5Zjk2OTVhMzciLCJleHAiOjE3NTAyOTU1MDQsImp0aSI6IjkyNjA0ZjU0NjY4MTRlYzk4ZDE0M2ZhZmE0MTNlYzEyIn0.ojKeX3BJXHqpO1HqXIzILLtaJcDC-AOgcEHgUMHY-E8 (::1) 0.16ms
+2025-06-11 20:11:50 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-a34717ab autenticado con JWT para sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:50 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-a34717ab reconectado/validado en sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:50 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-ead73d5c&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtZWFkNzNkNWMiLCJyb29tX2lkIjoiMGEwOWIwOTdlY2IwNDJkY2E0ZmY3NDc5Zjk2OTVhMzciLCJleHAiOjE3NTAyOTU1MDQsImp0aSI6ImE2ZWRiYjBlNjUxNDRlNDc4OTIyN2M1MDkxZDJjYTJlIn0.-iQ7pG2BU7WuC9sKdTs_63bX-EBlL4Yffx4esCiuOIk (::1) 0.18ms
+2025-06-11 20:11:50 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-ead73d5c autenticado con JWT para sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:50 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-ead73d5c reconectado/validado en sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:50 - INFO - [appv2.py:693] - [DEBUG] on_message de web-a34717ab raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 1"}
+2025-06-11 20:11:50 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0a09b097ecb042dca4ff7479f9695a37: active, Clientes: ['web-a34717ab', 'mobile-ead73d5c']
+2025-06-11 20:11:50 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690710.9877172-25956187 de web-a34717ab entregado a mobile-ead73d5c
+2025-06-11 20:11:51 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-a34717ab&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItYTM0NzE3YWIiLCJyb29tX2lkIjoiMGEwOWIwOTdlY2IwNDJkY2E0ZmY3NDc5Zjk2OTVhMzciLCJleHAiOjE3NTAyOTU1MDQsImp0aSI6IjkyNjA0ZjU0NjY4MTRlYzk4ZDE0M2ZhZmE0MTNlYzEyIn0.ojKeX3BJXHqpO1HqXIzILLtaJcDC-AOgcEHgUMHY-E8 (::1) 0.60ms
+2025-06-11 20:11:51 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-a34717ab autenticado con JWT para sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:51 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-a34717ab reconectado/validado en sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:51 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-ead73d5c&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtZWFkNzNkNWMiLCJyb29tX2lkIjoiMGEwOWIwOTdlY2IwNDJkY2E0ZmY3NDc5Zjk2OTVhMzciLCJleHAiOjE3NTAyOTU1MDQsImp0aSI6ImE2ZWRiYjBlNjUxNDRlNDc4OTIyN2M1MDkxZDJjYTJlIn0.-iQ7pG2BU7WuC9sKdTs_63bX-EBlL4Yffx4esCiuOIk (::1) 0.28ms
+2025-06-11 20:11:51 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-ead73d5c autenticado con JWT para sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:51 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-ead73d5c reconectado/validado en sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:51 - INFO - [appv2.py:693] - [DEBUG] on_message de web-a34717ab raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 2"}
+2025-06-11 20:11:51 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0a09b097ecb042dca4ff7479f9695a37: active, Clientes: ['web-a34717ab', 'mobile-ead73d5c']
+2025-06-11 20:11:51 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690711.516284-8828c6d8 de web-a34717ab entregado a mobile-ead73d5c
+2025-06-11 20:11:52 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-a34717ab&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItYTM0NzE3YWIiLCJyb29tX2lkIjoiMGEwOWIwOTdlY2IwNDJkY2E0ZmY3NDc5Zjk2OTVhMzciLCJleHAiOjE3NTAyOTU1MDQsImp0aSI6IjkyNjA0ZjU0NjY4MTRlYzk4ZDE0M2ZhZmE0MTNlYzEyIn0.ojKeX3BJXHqpO1HqXIzILLtaJcDC-AOgcEHgUMHY-E8 (::1) 0.75ms
+2025-06-11 20:11:52 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-a34717ab autenticado con JWT para sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:52 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-a34717ab reconectado/validado en sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:52 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-ead73d5c&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtZWFkNzNkNWMiLCJyb29tX2lkIjoiMGEwOWIwOTdlY2IwNDJkY2E0ZmY3NDc5Zjk2OTVhMzciLCJleHAiOjE3NTAyOTU1MDQsImp0aSI6ImE2ZWRiYjBlNjUxNDRlNDc4OTIyN2M1MDkxZDJjYTJlIn0.-iQ7pG2BU7WuC9sKdTs_63bX-EBlL4Yffx4esCiuOIk (::1) 0.28ms
+2025-06-11 20:11:52 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-ead73d5c autenticado con JWT para sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:52 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-ead73d5c reconectado/validado en sala 0a09b097ecb042dca4ff7479f9695a37
+2025-06-11 20:11:52 - INFO - [appv2.py:693] - [DEBUG] on_message de web-a34717ab raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 3"}
+2025-06-11 20:11:52 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0a09b097ecb042dca4ff7479f9695a37: active, Clientes: ['web-a34717ab', 'mobile-ead73d5c']
+2025-06-11 20:11:52 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690712.048115-697f44bb de web-a34717ab entregado a mobile-ead73d5c
+2025-06-11 20:13:26 - WARNING - [appv2.py:1310] - Recibida señal 2. Planificando cierre elegante.
+2025-06-11 20:13:26 - INFO - [appv2.py:1297] - Iniciando cierre elegante...
+2025-06-11 20:13:27 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-11 20:13:27 - INFO - [appv2.py:1307] - Cierre elegante completado.
+2025-06-11 20:13:27 - INFO - [appv2.py:1328] - Servidor MinkaV2 detenido.
+2025-06-11 20:13:51 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-11 20:13:51 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-11 20:13:51 - INFO - [appv2.py:1284] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-11 20:13:51 - INFO - [appv2.py:1189] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-11 20:13:51 - INFO - [appv2.py:1229] - [INIT] Cliente web-866a3553 estaba waiting. Marcando como pending_reconnect.
+2025-06-11 20:13:51 - INFO - [appv2.py:1229] - [INIT] Cliente web-bf1e55bd estaba waiting. Marcando como pending_reconnect.
+2025-06-11 20:13:51 - INFO - [appv2.py:1229] - [INIT] Cliente mobile-5655d2a2 estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:13:51 - INFO - [appv2.py:1229] - [INIT] Cliente mobile-ead73d5c estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:13:51 - INFO - [appv2.py:1229] - [INIT] Cliente web-5a8bd96c estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:13:51 - INFO - [appv2.py:1229] - [INIT] Cliente web-01aeef68 estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:13:51 - INFO - [appv2.py:1229] - [INIT] Cliente mobile-f04cafbc estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:13:51 - INFO - [appv2.py:1229] - [INIT] Cliente mobile-8dbb9995 estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:13:51 - INFO - [appv2.py:1229] - [INIT] Cliente web-7092e662 estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:13:51 - INFO - [appv2.py:1229] - [INIT] Cliente web-9d2bda79 estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:13:51 - INFO - [appv2.py:1229] - [INIT] Cliente web-a34717ab estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:13:51 - INFO - [appv2.py:1229] - [INIT] Cliente mobile-27539674 estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:13:51 - INFO - [appv2.py:1229] - [INIT] Cliente mobile-8ecc85a2 estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:13:51 - INFO - [appv2.py:1229] - [INIT] Cliente mobile-dabd5491 estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:13:51 - INFO - [appv2.py:1229] - [INIT] Cliente web-23ee3579 estaba waiting. Marcando como pending_reconnect.
+2025-06-11 20:13:51 - INFO - [appv2.py:1229] - [INIT] Cliente mobile-14e5f8fa estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:13:51 - INFO - [appv2.py:1265] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-11 20:14:01 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-e7c9a359&action=create (::1) 0.59ms
+2025-06-11 20:14:01 - INFO - [appv2.py:513] - [WS-OPEN] Sala 0005d29bf31e47a59dd14be4772632ac creada por web-e7c9a359. Contraseña: 2CD225. Esperando peer para generar JWT.
+2025-06-11 20:14:02 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-8ec063bb&action=join&room_id=0005d29bf31e47a59dd14be4772632ac&room_password=2CD225 (::1) 0.38ms
+2025-06-11 20:14:02 - INFO - [appv2.py:618] - [WS-JOIN] Cliente mobile-8ec063bb se unió a sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:05 - INFO - [appv2.py:693] - [DEBUG] on_message de web-e7c9a359 raw: {"message": "Mensaje 1 desde web"}
+2025-06-11 20:14:05 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0005d29bf31e47a59dd14be4772632ac: active, Clientes: ['web-e7c9a359', 'mobile-8ec063bb']
+2025-06-11 20:14:05 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690845.066298-8ba474d5 de web-e7c9a359 entregado a mobile-8ec063bb
+2025-06-11 20:14:05 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-8ec063bb raw: {"message": "Mensaje 1 desde m\u00f3vil"}
+2025-06-11 20:14:05 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0005d29bf31e47a59dd14be4772632ac: active, Clientes: ['web-e7c9a359', 'mobile-8ec063bb']
+2025-06-11 20:14:05 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690845.070121-8d4b5f38 de mobile-8ec063bb entregado a web-e7c9a359
+2025-06-11 20:14:05 - INFO - [appv2.py:693] - [DEBUG] on_message de web-e7c9a359 raw: {"message": "Mensaje 2 desde web"}
+2025-06-11 20:14:05 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0005d29bf31e47a59dd14be4772632ac: active, Clientes: ['web-e7c9a359', 'mobile-8ec063bb']
+2025-06-11 20:14:05 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690845.0733461-9ed495ac de web-e7c9a359 entregado a mobile-8ec063bb
+2025-06-11 20:14:05 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-8ec063bb raw: {"message": "Mensaje 2 desde m\u00f3vil"}
+2025-06-11 20:14:05 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0005d29bf31e47a59dd14be4772632ac: active, Clientes: ['web-e7c9a359', 'mobile-8ec063bb']
+2025-06-11 20:14:05 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690845.075895-b1874876 de mobile-8ec063bb entregado a web-e7c9a359
+2025-06-11 20:14:05 - INFO - [appv2.py:693] - [DEBUG] on_message de web-e7c9a359 raw: {"message": "Mensaje 3 desde web"}
+2025-06-11 20:14:05 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0005d29bf31e47a59dd14be4772632ac: active, Clientes: ['web-e7c9a359', 'mobile-8ec063bb']
+2025-06-11 20:14:05 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690845.07853-d8345b4b de web-e7c9a359 entregado a mobile-8ec063bb
+2025-06-11 20:14:05 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-e7c9a359&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItZTdjOWEzNTkiLCJyb29tX2lkIjoiMDAwNWQyOWJmMzFlNDdhNTlkZDE0YmU0NzcyNjMyYWMiLCJleHAiOjE3NTAyOTU2NDIsImp0aSI6IjZiZDRmYTBkYmU4NzQxYTk4YmNhNmJhNDkwNzg2OTc3In0.kmKbiXTOFuYGfpOl2jUF670Zw2NqD6eYfJ1RR5NkLnQ (::1) 0.38ms
+2025-06-11 20:14:05 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-e7c9a359 autenticado con JWT para sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:05 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-e7c9a359 reconectado/validado en sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:07 - INFO - [appv2.py:693] - [DEBUG] on_message de web-e7c9a359 raw: {"message": "Mensaje despu\u00e9s de reconexi\u00f3n web"}
+2025-06-11 20:14:07 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0005d29bf31e47a59dd14be4772632ac: active, Clientes: ['web-e7c9a359', 'mobile-8ec063bb']
+2025-06-11 20:14:07 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690847.0947032-84f19d25 de web-e7c9a359 entregado a mobile-8ec063bb
+2025-06-11 20:14:07 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-8ec063bb raw: {"message": "Respuesta a web reconectado"}
+2025-06-11 20:14:07 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0005d29bf31e47a59dd14be4772632ac: active, Clientes: ['web-e7c9a359', 'mobile-8ec063bb']
+2025-06-11 20:14:07 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690847.100941-68011feb de mobile-8ec063bb entregado a web-e7c9a359
+2025-06-11 20:14:07 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-8ec063bb&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtOGVjMDYzYmIiLCJyb29tX2lkIjoiMDAwNWQyOWJmMzFlNDdhNTlkZDE0YmU0NzcyNjMyYWMiLCJleHAiOjE3NTAyOTU2NDIsImp0aSI6ImRjYTViNzI2YzhhZTRiOTA5NmM1YWJjOTg1MDgzYmNkIn0.14_PWCYZd3O-cVkwNXgUSd5upMrPayH1EML_l8T8h-I (::1) 0.38ms
+2025-06-11 20:14:07 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-8ec063bb autenticado con JWT para sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:07 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-8ec063bb reconectado/validado en sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:09 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-8ec063bb raw: {"message": "Mensaje despu\u00e9s de reconexi\u00f3n m\u00f3vil"}
+2025-06-11 20:14:09 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0005d29bf31e47a59dd14be4772632ac: active, Clientes: ['web-e7c9a359', 'mobile-8ec063bb']
+2025-06-11 20:14:09 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690849.1274529-cacd9baf de mobile-8ec063bb entregado a web-e7c9a359
+2025-06-11 20:14:09 - INFO - [appv2.py:693] - [DEBUG] on_message de web-e7c9a359 raw: {"message": "Respuesta a m\u00f3vil reconectado"}
+2025-06-11 20:14:09 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0005d29bf31e47a59dd14be4772632ac: active, Clientes: ['web-e7c9a359', 'mobile-8ec063bb']
+2025-06-11 20:14:09 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690849.13665-1d944da8 de web-e7c9a359 entregado a mobile-8ec063bb
+2025-06-11 20:14:09 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-e7c9a359&jwt_token=invalid_token_123 (::1) 1.04ms
+2025-06-11 20:14:09 - WARNING - [session.py:217] - JWT inválido: Not enough segments
+2025-06-11 20:14:09 - WARNING - [appv2.py:457] - [WS-OPEN] Token JWT inválido o expirado presentado. Rechazando.
+2025-06-11 20:14:09 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-e7c9a359&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItZTdjOWEzNTkiLCJyb29tX2lkIjoiMDAwNWQyOWJmMzFlNDdhNTlkZDE0YmU0NzcyNjMyYWMiLCJleHAiOjE3NTAyOTU2NDIsImp0aSI6IjZiZDRmYTBkYmU4NzQxYTk4YmNhNmJhNDkwNzg2OTc3In0.kmKbiXTOFuYGfpOl2jUF670Zw2NqD6eYfJ1RR5NkLnQ (::1) 0.31ms
+2025-06-11 20:14:09 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-e7c9a359 autenticado con JWT para sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:09 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-e7c9a359 reconectado/validado en sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:09 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-8ec063bb (::1) 0.32ms
+2025-06-11 20:14:09 - WARNING - [appv2.py:379] - [WS-OPEN] Cliente existente mobile-8ec063bb intentó reconectar sin JWT. Rechazando.
+2025-06-11 20:14:09 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-8ec063bb&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtOGVjMDYzYmIiLCJyb29tX2lkIjoiMDAwNWQyOWJmMzFlNDdhNTlkZDE0YmU0NzcyNjMyYWMiLCJleHAiOjE3NTAyOTU2NDIsImp0aSI6ImRjYTViNzI2YzhhZTRiOTA5NmM1YWJjOTg1MDgzYmNkIn0.14_PWCYZd3O-cVkwNXgUSd5upMrPayH1EML_l8T8h-I (::1) 0.24ms
+2025-06-11 20:14:09 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-8ec063bb autenticado con JWT para sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:09 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-8ec063bb reconectado/validado en sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:09 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-e7c9a359&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItZTdjOWEzNTkiLCJyb29tX2lkIjoiMDAwNWQyOWJmMzFlNDdhNTlkZDE0YmU0NzcyNjMyYWMiLCJleHAiOjE3NTAyOTU2NDIsImp0aSI6IjZiZDRmYTBkYmU4NzQxYTk4YmNhNmJhNDkwNzg2OTc3In0.kmKbiXTOFuYGfpOl2jUF670Zw2NqD6eYfJ1RR5NkLnQ (::1) 0.16ms
+2025-06-11 20:14:09 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-e7c9a359 autenticado con JWT para sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:09 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-e7c9a359 reconectado/validado en sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:09 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-8ec063bb&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtOGVjMDYzYmIiLCJyb29tX2lkIjoiMDAwNWQyOWJmMzFlNDdhNTlkZDE0YmU0NzcyNjMyYWMiLCJleHAiOjE3NTAyOTU2NDIsImp0aSI6ImRjYTViNzI2YzhhZTRiOTA5NmM1YWJjOTg1MDgzYmNkIn0.14_PWCYZd3O-cVkwNXgUSd5upMrPayH1EML_l8T8h-I (::1) 0.17ms
+2025-06-11 20:14:09 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-8ec063bb autenticado con JWT para sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:09 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-8ec063bb reconectado/validado en sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:09 - INFO - [appv2.py:693] - [DEBUG] on_message de web-e7c9a359 raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 1"}
+2025-06-11 20:14:09 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0005d29bf31e47a59dd14be4772632ac: active, Clientes: ['web-e7c9a359', 'mobile-8ec063bb']
+2025-06-11 20:14:09 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690849.1789382-1f2dd3b7 de web-e7c9a359 entregado a mobile-8ec063bb
+2025-06-11 20:14:09 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-e7c9a359&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItZTdjOWEzNTkiLCJyb29tX2lkIjoiMDAwNWQyOWJmMzFlNDdhNTlkZDE0YmU0NzcyNjMyYWMiLCJleHAiOjE3NTAyOTU2NDIsImp0aSI6IjZiZDRmYTBkYmU4NzQxYTk4YmNhNmJhNDkwNzg2OTc3In0.kmKbiXTOFuYGfpOl2jUF670Zw2NqD6eYfJ1RR5NkLnQ (::1) 0.72ms
+2025-06-11 20:14:09 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-e7c9a359 autenticado con JWT para sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:09 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-e7c9a359 reconectado/validado en sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:09 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-8ec063bb&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtOGVjMDYzYmIiLCJyb29tX2lkIjoiMDAwNWQyOWJmMzFlNDdhNTlkZDE0YmU0NzcyNjMyYWMiLCJleHAiOjE3NTAyOTU2NDIsImp0aSI6ImRjYTViNzI2YzhhZTRiOTA5NmM1YWJjOTg1MDgzYmNkIn0.14_PWCYZd3O-cVkwNXgUSd5upMrPayH1EML_l8T8h-I (::1) 0.56ms
+2025-06-11 20:14:09 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-8ec063bb autenticado con JWT para sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:09 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-8ec063bb reconectado/validado en sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:09 - INFO - [appv2.py:693] - [DEBUG] on_message de web-e7c9a359 raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 2"}
+2025-06-11 20:14:09 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0005d29bf31e47a59dd14be4772632ac: active, Clientes: ['web-e7c9a359', 'mobile-8ec063bb']
+2025-06-11 20:14:09 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690849.709559-beace471 de web-e7c9a359 entregado a mobile-8ec063bb
+2025-06-11 20:14:10 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-e7c9a359&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItZTdjOWEzNTkiLCJyb29tX2lkIjoiMDAwNWQyOWJmMzFlNDdhNTlkZDE0YmU0NzcyNjMyYWMiLCJleHAiOjE3NTAyOTU2NDIsImp0aSI6IjZiZDRmYTBkYmU4NzQxYTk4YmNhNmJhNDkwNzg2OTc3In0.kmKbiXTOFuYGfpOl2jUF670Zw2NqD6eYfJ1RR5NkLnQ (::1) 0.59ms
+2025-06-11 20:14:10 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-e7c9a359 autenticado con JWT para sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:10 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-e7c9a359 reconectado/validado en sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:10 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-8ec063bb&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtOGVjMDYzYmIiLCJyb29tX2lkIjoiMDAwNWQyOWJmMzFlNDdhNTlkZDE0YmU0NzcyNjMyYWMiLCJleHAiOjE3NTAyOTU2NDIsImp0aSI6ImRjYTViNzI2YzhhZTRiOTA5NmM1YWJjOTg1MDgzYmNkIn0.14_PWCYZd3O-cVkwNXgUSd5upMrPayH1EML_l8T8h-I (::1) 0.44ms
+2025-06-11 20:14:10 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-8ec063bb autenticado con JWT para sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:10 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-8ec063bb reconectado/validado en sala 0005d29bf31e47a59dd14be4772632ac
+2025-06-11 20:14:10 - INFO - [appv2.py:693] - [DEBUG] on_message de web-e7c9a359 raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 3"}
+2025-06-11 20:14:10 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 0005d29bf31e47a59dd14be4772632ac: active, Clientes: ['web-e7c9a359', 'mobile-8ec063bb']
+2025-06-11 20:14:10 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749690850.242172-e6b6dfbb de web-e7c9a359 entregado a mobile-8ec063bb
+2025-06-11 20:17:51 - INFO - [appv2.py:1141] - [CLEANUP] Cliente mobile-5655d2a2 (web: False) no reconectó (200s). Limpiando.
+2025-06-11 20:17:51 - INFO - [appv2.py:1141] - [CLEANUP] Cliente mobile-ead73d5c (web: False) no reconectó (200s). Limpiando.
+2025-06-11 20:17:51 - INFO - [appv2.py:1141] - [CLEANUP] Cliente mobile-f04cafbc (web: False) no reconectó (200s). Limpiando.
+2025-06-11 20:17:51 - INFO - [appv2.py:1141] - [CLEANUP] Cliente mobile-8dbb9995 (web: False) no reconectó (200s). Limpiando.
+2025-06-11 20:17:51 - INFO - [appv2.py:1141] - [CLEANUP] Cliente mobile-27539674 (web: False) no reconectó (200s). Limpiando.
+2025-06-11 20:17:51 - INFO - [appv2.py:1141] - [CLEANUP] Cliente mobile-8ecc85a2 (web: False) no reconectó (200s). Limpiando.
+2025-06-11 20:17:51 - INFO - [appv2.py:1141] - [CLEANUP] Cliente mobile-dabd5491 (web: False) no reconectó (200s). Limpiando.
+2025-06-11 20:17:51 - INFO - [appv2.py:1141] - [CLEANUP] Cliente mobile-14e5f8fa (web: False) no reconectó (200s). Limpiando.
+2025-06-11 20:18:31 - WARNING - [appv2.py:1310] - Recibida señal 2. Planificando cierre elegante.
+2025-06-11 20:18:31 - INFO - [appv2.py:1297] - Iniciando cierre elegante...
+2025-06-11 20:18:32 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-11 20:18:32 - INFO - [appv2.py:1307] - Cierre elegante completado.
+2025-06-11 20:18:32 - INFO - [appv2.py:1328] - Servidor MinkaV2 detenido.
+2025-06-11 20:18:49 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-11 20:18:49 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-11 20:18:49 - INFO - [appv2.py:1284] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-11 20:18:49 - INFO - [appv2.py:1189] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-11 20:18:49 - INFO - [appv2.py:1229] - [INIT] Cliente web-e7c9a359 estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:18:49 - INFO - [appv2.py:1229] - [INIT] Cliente mobile-8ec063bb estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:18:49 - INFO - [appv2.py:1265] - [INIT] Inicializacion de estado del servidor desde Redis completada.
+2025-06-11 20:18:54 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-574301c6&action=create (::1) 0.52ms
+2025-06-11 20:18:54 - INFO - [appv2.py:513] - [WS-OPEN] Sala 1ed777a42bd94baca58783bd2dda7c03 creada por web-574301c6. Contraseña: 21122D. Esperando peer para generar JWT.
+2025-06-11 20:18:55 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-fcaa2aa0&action=join&room_id=1ed777a42bd94baca58783bd2dda7c03&room_password=21122D (::1) 0.41ms
+2025-06-11 20:18:55 - INFO - [appv2.py:618] - [WS-JOIN] Cliente mobile-fcaa2aa0 se unio a sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:18:57 - INFO - [appv2.py:693] - [DEBUG] on_message de web-574301c6 raw: {"message": "Mensaje 1 desde web"}
+2025-06-11 20:18:57 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 1ed777a42bd94baca58783bd2dda7c03: active, Clientes: ['web-574301c6', 'mobile-fcaa2aa0']
+2025-06-11 20:18:57 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691137.922306-11517b1e de web-574301c6 entregado a mobile-fcaa2aa0
+2025-06-11 20:18:57 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-fcaa2aa0 raw: {"message": "Mensaje 1 desde m\u00f3vil"}
+2025-06-11 20:18:57 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 1ed777a42bd94baca58783bd2dda7c03: active, Clientes: ['web-574301c6', 'mobile-fcaa2aa0']
+2025-06-11 20:18:57 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691137.929229-ed8e90be de mobile-fcaa2aa0 entregado a web-574301c6
+2025-06-11 20:18:57 - INFO - [appv2.py:693] - [DEBUG] on_message de web-574301c6 raw: {"message": "Mensaje 2 desde web"}
+2025-06-11 20:18:57 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 1ed777a42bd94baca58783bd2dda7c03: active, Clientes: ['web-574301c6', 'mobile-fcaa2aa0']
+2025-06-11 20:18:57 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691137.9390662-926c9d2f de web-574301c6 entregado a mobile-fcaa2aa0
+2025-06-11 20:18:57 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-fcaa2aa0 raw: {"message": "Mensaje 2 desde m\u00f3vil"}
+2025-06-11 20:18:57 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 1ed777a42bd94baca58783bd2dda7c03: active, Clientes: ['web-574301c6', 'mobile-fcaa2aa0']
+2025-06-11 20:18:57 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691137.942403-58565c5c de mobile-fcaa2aa0 entregado a web-574301c6
+2025-06-11 20:18:57 - INFO - [appv2.py:693] - [DEBUG] on_message de web-574301c6 raw: {"message": "Mensaje 3 desde web"}
+2025-06-11 20:18:57 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 1ed777a42bd94baca58783bd2dda7c03: active, Clientes: ['web-574301c6', 'mobile-fcaa2aa0']
+2025-06-11 20:18:57 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691137.945002-15f18cbf de web-574301c6 entregado a mobile-fcaa2aa0
+2025-06-11 20:18:57 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-574301c6&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNTc0MzAxYzYiLCJyb29tX2lkIjoiMWVkNzc3YTQyYmQ5NGJhY2E1ODc4M2JkMmRkYTdjMDMiLCJleHAiOjE3NTAyOTU5MzUsImp0aSI6Ijk2YTJlYzEwYzZhNDQzYTc5ZDZmOGIzODQ1YTk5OWFmIn0.pyOOVouBrIs0Qul67yUCdDrDN8VowSDN2T08_0i2fSQ (::1) 0.28ms
+2025-06-11 20:18:57 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-574301c6 autenticado con JWT para sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:18:57 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-574301c6 reconectado/validado en sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:18:59 - INFO - [appv2.py:693] - [DEBUG] on_message de web-574301c6 raw: {"message": "Mensaje despu\u00e9s de reconexi\u00f3n web"}
+2025-06-11 20:18:59 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 1ed777a42bd94baca58783bd2dda7c03: active, Clientes: ['web-574301c6', 'mobile-fcaa2aa0']
+2025-06-11 20:18:59 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691139.964566-7c881669 de web-574301c6 entregado a mobile-fcaa2aa0
+2025-06-11 20:18:59 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-fcaa2aa0 raw: {"message": "Respuesta a web reconectado"}
+2025-06-11 20:18:59 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 1ed777a42bd94baca58783bd2dda7c03: active, Clientes: ['web-574301c6', 'mobile-fcaa2aa0']
+2025-06-11 20:18:59 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691139.973444-30f02fe7 de mobile-fcaa2aa0 entregado a web-574301c6
+2025-06-11 20:18:59 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-fcaa2aa0&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtZmNhYTJhYTAiLCJyb29tX2lkIjoiMWVkNzc3YTQyYmQ5NGJhY2E1ODc4M2JkMmRkYTdjMDMiLCJleHAiOjE3NTAyOTU5MzUsImp0aSI6IjY1N2IxZTAwMjEwNjQ2ZDc5Njg5NTE0N2UyMTllYmNmIn0.2IP0EPETgbUlHNAbBrs-y8r7RW1mGSSm-SxklK8YhiQ (::1) 0.46ms
+2025-06-11 20:18:59 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-fcaa2aa0 autenticado con JWT para sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:18:59 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-fcaa2aa0 reconectado/validado en sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:19:01 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-fcaa2aa0 raw: {"message": "Mensaje despu\u00e9s de reconexi\u00f3n m\u00f3vil"}
+2025-06-11 20:19:02 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 1ed777a42bd94baca58783bd2dda7c03: active, Clientes: ['web-574301c6', 'mobile-fcaa2aa0']
+2025-06-11 20:19:02 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691142.002272-19f960e4 de mobile-fcaa2aa0 entregado a web-574301c6
+2025-06-11 20:19:02 - INFO - [appv2.py:693] - [DEBUG] on_message de web-574301c6 raw: {"message": "Respuesta a m\u00f3vil reconectado"}
+2025-06-11 20:19:02 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 1ed777a42bd94baca58783bd2dda7c03: active, Clientes: ['web-574301c6', 'mobile-fcaa2aa0']
+2025-06-11 20:19:02 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691142.008629-cfffa48b de web-574301c6 entregado a mobile-fcaa2aa0
+2025-06-11 20:19:02 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-574301c6&jwt_token=invalid_token_123 (::1) 0.39ms
+2025-06-11 20:19:02 - WARNING - [session.py:217] - JWT inválido: Not enough segments
+2025-06-11 20:19:02 - WARNING - [appv2.py:457] - [WS-OPEN] Token JWT inválido o expirado presentado. Rechazando.
+2025-06-11 20:19:02 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-574301c6&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNTc0MzAxYzYiLCJyb29tX2lkIjoiMWVkNzc3YTQyYmQ5NGJhY2E1ODc4M2JkMmRkYTdjMDMiLCJleHAiOjE3NTAyOTU5MzUsImp0aSI6Ijk2YTJlYzEwYzZhNDQzYTc5ZDZmOGIzODQ1YTk5OWFmIn0.pyOOVouBrIs0Qul67yUCdDrDN8VowSDN2T08_0i2fSQ (::1) 0.29ms
+2025-06-11 20:19:02 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-574301c6 autenticado con JWT para sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:19:02 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-574301c6 reconectado/validado en sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:19:02 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-fcaa2aa0 (::1) 0.30ms
+2025-06-11 20:19:02 - WARNING - [appv2.py:379] - [WS-OPEN] Cliente existente mobile-fcaa2aa0 intento reconectar sin JWT. Rechazando.
+2025-06-11 20:19:02 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-fcaa2aa0&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtZmNhYTJhYTAiLCJyb29tX2lkIjoiMWVkNzc3YTQyYmQ5NGJhY2E1ODc4M2JkMmRkYTdjMDMiLCJleHAiOjE3NTAyOTU5MzUsImp0aSI6IjY1N2IxZTAwMjEwNjQ2ZDc5Njg5NTE0N2UyMTllYmNmIn0.2IP0EPETgbUlHNAbBrs-y8r7RW1mGSSm-SxklK8YhiQ (::1) 0.33ms
+2025-06-11 20:19:02 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-fcaa2aa0 autenticado con JWT para sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:19:02 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-fcaa2aa0 reconectado/validado en sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:19:02 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-574301c6&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNTc0MzAxYzYiLCJyb29tX2lkIjoiMWVkNzc3YTQyYmQ5NGJhY2E1ODc4M2JkMmRkYTdjMDMiLCJleHAiOjE3NTAyOTU5MzUsImp0aSI6Ijk2YTJlYzEwYzZhNDQzYTc5ZDZmOGIzODQ1YTk5OWFmIn0.pyOOVouBrIs0Qul67yUCdDrDN8VowSDN2T08_0i2fSQ (::1) 0.23ms
+2025-06-11 20:19:02 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-574301c6 autenticado con JWT para sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:19:02 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-574301c6 reconectado/validado en sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:19:02 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-fcaa2aa0&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtZmNhYTJhYTAiLCJyb29tX2lkIjoiMWVkNzc3YTQyYmQ5NGJhY2E1ODc4M2JkMmRkYTdjMDMiLCJleHAiOjE3NTAyOTU5MzUsImp0aSI6IjY1N2IxZTAwMjEwNjQ2ZDc5Njg5NTE0N2UyMTllYmNmIn0.2IP0EPETgbUlHNAbBrs-y8r7RW1mGSSm-SxklK8YhiQ (::1) 0.21ms
+2025-06-11 20:19:02 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-fcaa2aa0 autenticado con JWT para sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:19:02 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-fcaa2aa0 reconectado/validado en sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:19:02 - INFO - [appv2.py:693] - [DEBUG] on_message de web-574301c6 raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 1"}
+2025-06-11 20:19:02 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 1ed777a42bd94baca58783bd2dda7c03: active, Clientes: ['web-574301c6', 'mobile-fcaa2aa0']
+2025-06-11 20:19:02 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691142.05939-61fa6efc de web-574301c6 entregado a mobile-fcaa2aa0
+2025-06-11 20:19:02 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-574301c6&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNTc0MzAxYzYiLCJyb29tX2lkIjoiMWVkNzc3YTQyYmQ5NGJhY2E1ODc4M2JkMmRkYTdjMDMiLCJleHAiOjE3NTAyOTU5MzUsImp0aSI6Ijk2YTJlYzEwYzZhNDQzYTc5ZDZmOGIzODQ1YTk5OWFmIn0.pyOOVouBrIs0Qul67yUCdDrDN8VowSDN2T08_0i2fSQ (::1) 0.55ms
+2025-06-11 20:19:02 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-574301c6 autenticado con JWT para sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:19:02 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-574301c6 reconectado/validado en sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:19:02 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-fcaa2aa0&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtZmNhYTJhYTAiLCJyb29tX2lkIjoiMWVkNzc3YTQyYmQ5NGJhY2E1ODc4M2JkMmRkYTdjMDMiLCJleHAiOjE3NTAyOTU5MzUsImp0aSI6IjY1N2IxZTAwMjEwNjQ2ZDc5Njg5NTE0N2UyMTllYmNmIn0.2IP0EPETgbUlHNAbBrs-y8r7RW1mGSSm-SxklK8YhiQ (::1) 0.25ms
+2025-06-11 20:19:02 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-fcaa2aa0 autenticado con JWT para sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:19:02 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-fcaa2aa0 reconectado/validado en sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:19:02 - INFO - [appv2.py:693] - [DEBUG] on_message de web-574301c6 raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 2"}
+2025-06-11 20:19:02 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 1ed777a42bd94baca58783bd2dda7c03: active, Clientes: ['web-574301c6', 'mobile-fcaa2aa0']
+2025-06-11 20:19:02 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691142.5909739-912898e1 de web-574301c6 entregado a mobile-fcaa2aa0
+2025-06-11 20:19:03 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-574301c6&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNTc0MzAxYzYiLCJyb29tX2lkIjoiMWVkNzc3YTQyYmQ5NGJhY2E1ODc4M2JkMmRkYTdjMDMiLCJleHAiOjE3NTAyOTU5MzUsImp0aSI6Ijk2YTJlYzEwYzZhNDQzYTc5ZDZmOGIzODQ1YTk5OWFmIn0.pyOOVouBrIs0Qul67yUCdDrDN8VowSDN2T08_0i2fSQ (::1) 0.60ms
+2025-06-11 20:19:03 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-574301c6 autenticado con JWT para sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:19:03 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-574301c6 reconectado/validado en sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:19:03 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-fcaa2aa0&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtZmNhYTJhYTAiLCJyb29tX2lkIjoiMWVkNzc3YTQyYmQ5NGJhY2E1ODc4M2JkMmRkYTdjMDMiLCJleHAiOjE3NTAyOTU5MzUsImp0aSI6IjY1N2IxZTAwMjEwNjQ2ZDc5Njg5NTE0N2UyMTllYmNmIn0.2IP0EPETgbUlHNAbBrs-y8r7RW1mGSSm-SxklK8YhiQ (::1) 0.71ms
+2025-06-11 20:19:03 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-fcaa2aa0 autenticado con JWT para sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:19:03 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-fcaa2aa0 reconectado/validado en sala 1ed777a42bd94baca58783bd2dda7c03
+2025-06-11 20:19:03 - INFO - [appv2.py:693] - [DEBUG] on_message de web-574301c6 raw: {"message": "Prueba despu\u00e9s de reconexi\u00f3n m\u00faltiple 3"}
+2025-06-11 20:19:03 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 1ed777a42bd94baca58783bd2dda7c03: active, Clientes: ['web-574301c6', 'mobile-fcaa2aa0']
+2025-06-11 20:19:03 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691143.12189-096dd05d de web-574301c6 entregado a mobile-fcaa2aa0
+2025-06-11 20:21:11 - WARNING - [appv2.py:1310] - Recibida señal 2. Planificando cierre elegante.
+2025-06-11 20:21:11 - INFO - [appv2.py:1297] - Iniciando cierre elegante...
+2025-06-11 20:21:12 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-11 20:21:12 - INFO - [appv2.py:1307] - Cierre elegante completado.
+2025-06-11 20:21:12 - INFO - [appv2.py:1328] - Servidor MinkaV2 detenido.
+2025-06-11 20:21:21 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-11 20:21:21 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-11 20:21:21 - INFO - [appv2.py:1284] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-11 20:21:21 - INFO - [appv2.py:1189] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-11 20:21:21 - INFO - [appv2.py:1229] - [INIT] Cliente web-574301c6 estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:21:21 - INFO - [appv2.py:1229] - [INIT] Cliente mobile-fcaa2aa0 estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:21:21 - INFO - [appv2.py:1265] - [INIT] Inicializacion de estado del servidor desde Redis completada.
+2025-06-11 20:21:25 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-6167a043&action=create (::1) 0.63ms
+2025-06-11 20:21:25 - INFO - [appv2.py:513] - [WS-OPEN] Sala 6f9f83eff53f410a9bae1435a0c9e915 creada por web-6167a043. Contraseña: 3D9CAD. Esperando peer para generar JWT.
+2025-06-11 20:21:26 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-a821e019&action=join&room_id=6f9f83eff53f410a9bae1435a0c9e915&room_password=3D9CAD (::1) 0.36ms
+2025-06-11 20:21:26 - INFO - [appv2.py:618] - [WS-JOIN] Cliente mobile-a821e019 se unio a sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:28 - INFO - [appv2.py:693] - [DEBUG] on_message de web-6167a043 raw: {"message": "Mensaje 1 desde web"}
+2025-06-11 20:21:28 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 6f9f83eff53f410a9bae1435a0c9e915: active, Clientes: ['web-6167a043', 'mobile-a821e019']
+2025-06-11 20:21:28 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691288.540703-f7245877 de web-6167a043 entregado a mobile-a821e019
+2025-06-11 20:21:28 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-a821e019 raw: {"message": "Mensaje 1 desde movil"}
+2025-06-11 20:21:28 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 6f9f83eff53f410a9bae1435a0c9e915: active, Clientes: ['web-6167a043', 'mobile-a821e019']
+2025-06-11 20:21:28 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691288.547534-5b4abe8b de mobile-a821e019 entregado a web-6167a043
+2025-06-11 20:21:28 - INFO - [appv2.py:693] - [DEBUG] on_message de web-6167a043 raw: {"message": "Mensaje 2 desde web"}
+2025-06-11 20:21:28 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 6f9f83eff53f410a9bae1435a0c9e915: active, Clientes: ['web-6167a043', 'mobile-a821e019']
+2025-06-11 20:21:28 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691288.5591109-aa9080e4 de web-6167a043 entregado a mobile-a821e019
+2025-06-11 20:21:28 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-a821e019 raw: {"message": "Mensaje 2 desde movil"}
+2025-06-11 20:21:28 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 6f9f83eff53f410a9bae1435a0c9e915: active, Clientes: ['web-6167a043', 'mobile-a821e019']
+2025-06-11 20:21:28 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691288.562931-ad12c9d2 de mobile-a821e019 entregado a web-6167a043
+2025-06-11 20:21:28 - INFO - [appv2.py:693] - [DEBUG] on_message de web-6167a043 raw: {"message": "Mensaje 3 desde web"}
+2025-06-11 20:21:28 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 6f9f83eff53f410a9bae1435a0c9e915: active, Clientes: ['web-6167a043', 'mobile-a821e019']
+2025-06-11 20:21:28 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691288.5676959-531c0447 de web-6167a043 entregado a mobile-a821e019
+2025-06-11 20:21:28 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-6167a043&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNjE2N2EwNDMiLCJyb29tX2lkIjoiNmY5ZjgzZWZmNTNmNDEwYTliYWUxNDM1YTBjOWU5MTUiLCJleHAiOjE3NTAyOTYwODYsImp0aSI6IjZjYjEwMjM4Mzc1MzQ5OGI4NDU0ZmFmNDViMTcyNGY1In0.35EasMRQFpN-Xqyr5nPCjaRyregkXzZnCfnbO0Jla3Q (::1) 0.34ms
+2025-06-11 20:21:28 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-6167a043 autenticado con JWT para sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:28 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-6167a043 reconectado/validado en sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:30 - INFO - [appv2.py:693] - [DEBUG] on_message de web-6167a043 raw: {"message": "Mensaje despu\u00e9s de reconexion web"}
+2025-06-11 20:21:30 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 6f9f83eff53f410a9bae1435a0c9e915: active, Clientes: ['web-6167a043', 'mobile-a821e019']
+2025-06-11 20:21:30 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691290.587618-6ca02a64 de web-6167a043 entregado a mobile-a821e019
+2025-06-11 20:21:30 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-a821e019 raw: {"message": "Respuesta a web reconectado"}
+2025-06-11 20:21:30 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 6f9f83eff53f410a9bae1435a0c9e915: active, Clientes: ['web-6167a043', 'mobile-a821e019']
+2025-06-11 20:21:30 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691290.5901859-f22899d8 de mobile-a821e019 entregado a web-6167a043
+2025-06-11 20:21:30 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-a821e019&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYTgyMWUwMTkiLCJyb29tX2lkIjoiNmY5ZjgzZWZmNTNmNDEwYTliYWUxNDM1YTBjOWU5MTUiLCJleHAiOjE3NTAyOTYwODYsImp0aSI6IjU1MDllNDQ0YmJjZTQ3ZjliNWY2MWVjOTc4ZWJkMTBhIn0.xwGmEuw1n_sh_-JO8DLKXaG_7oVaXEWnrvJNXbtKz4Y (::1) 0.33ms
+2025-06-11 20:21:30 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-a821e019 autenticado con JWT para sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:30 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-a821e019 reconectado/validado en sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:32 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-a821e019 raw: {"message": "Mensaje despu\u00e9s de reconexion movil"}
+2025-06-11 20:21:32 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 6f9f83eff53f410a9bae1435a0c9e915: active, Clientes: ['web-6167a043', 'mobile-a821e019']
+2025-06-11 20:21:32 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691292.6063411-eb9b84a1 de mobile-a821e019 entregado a web-6167a043
+2025-06-11 20:21:32 - INFO - [appv2.py:693] - [DEBUG] on_message de web-6167a043 raw: {"message": "Respuesta a movil reconectado"}
+2025-06-11 20:21:32 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 6f9f83eff53f410a9bae1435a0c9e915: active, Clientes: ['web-6167a043', 'mobile-a821e019']
+2025-06-11 20:21:32 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691292.609411-4594498d de web-6167a043 entregado a mobile-a821e019
+2025-06-11 20:21:32 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-6167a043&jwt_token=invalid_token_123 (::1) 0.37ms
+2025-06-11 20:21:32 - WARNING - [session.py:217] - JWT inválido: Not enough segments
+2025-06-11 20:21:32 - WARNING - [appv2.py:457] - [WS-OPEN] Token JWT inválido o expirado presentado. Rechazando.
+2025-06-11 20:21:32 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-6167a043&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNjE2N2EwNDMiLCJyb29tX2lkIjoiNmY5ZjgzZWZmNTNmNDEwYTliYWUxNDM1YTBjOWU5MTUiLCJleHAiOjE3NTAyOTYwODYsImp0aSI6IjZjYjEwMjM4Mzc1MzQ5OGI4NDU0ZmFmNDViMTcyNGY1In0.35EasMRQFpN-Xqyr5nPCjaRyregkXzZnCfnbO0Jla3Q (::1) 0.20ms
+2025-06-11 20:21:32 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-6167a043 autenticado con JWT para sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:32 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-6167a043 reconectado/validado en sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:32 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-a821e019 (::1) 0.19ms
+2025-06-11 20:21:32 - WARNING - [appv2.py:379] - [WS-OPEN] Cliente existente mobile-a821e019 intento reconectar sin JWT. Rechazando.
+2025-06-11 20:21:32 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-a821e019&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYTgyMWUwMTkiLCJyb29tX2lkIjoiNmY5ZjgzZWZmNTNmNDEwYTliYWUxNDM1YTBjOWU5MTUiLCJleHAiOjE3NTAyOTYwODYsImp0aSI6IjU1MDllNDQ0YmJjZTQ3ZjliNWY2MWVjOTc4ZWJkMTBhIn0.xwGmEuw1n_sh_-JO8DLKXaG_7oVaXEWnrvJNXbtKz4Y (::1) 0.21ms
+2025-06-11 20:21:32 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-a821e019 autenticado con JWT para sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:32 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-a821e019 reconectado/validado en sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:32 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-6167a043&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNjE2N2EwNDMiLCJyb29tX2lkIjoiNmY5ZjgzZWZmNTNmNDEwYTliYWUxNDM1YTBjOWU5MTUiLCJleHAiOjE3NTAyOTYwODYsImp0aSI6IjZjYjEwMjM4Mzc1MzQ5OGI4NDU0ZmFmNDViMTcyNGY1In0.35EasMRQFpN-Xqyr5nPCjaRyregkXzZnCfnbO0Jla3Q (::1) 0.17ms
+2025-06-11 20:21:32 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-6167a043 autenticado con JWT para sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:32 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-6167a043 reconectado/validado en sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:32 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-a821e019&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYTgyMWUwMTkiLCJyb29tX2lkIjoiNmY5ZjgzZWZmNTNmNDEwYTliYWUxNDM1YTBjOWU5MTUiLCJleHAiOjE3NTAyOTYwODYsImp0aSI6IjU1MDllNDQ0YmJjZTQ3ZjliNWY2MWVjOTc4ZWJkMTBhIn0.xwGmEuw1n_sh_-JO8DLKXaG_7oVaXEWnrvJNXbtKz4Y (::1) 0.17ms
+2025-06-11 20:21:32 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-a821e019 autenticado con JWT para sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:32 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-a821e019 reconectado/validado en sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:32 - INFO - [appv2.py:693] - [DEBUG] on_message de web-6167a043 raw: {"message": "Prueba despu\u00e9s de reconexion m\u00faltiple 1"}
+2025-06-11 20:21:32 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 6f9f83eff53f410a9bae1435a0c9e915: active, Clientes: ['web-6167a043', 'mobile-a821e019']
+2025-06-11 20:21:32 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691292.63998-6f586367 de web-6167a043 entregado a mobile-a821e019
+2025-06-11 20:21:33 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-6167a043&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNjE2N2EwNDMiLCJyb29tX2lkIjoiNmY5ZjgzZWZmNTNmNDEwYTliYWUxNDM1YTBjOWU5MTUiLCJleHAiOjE3NTAyOTYwODYsImp0aSI6IjZjYjEwMjM4Mzc1MzQ5OGI4NDU0ZmFmNDViMTcyNGY1In0.35EasMRQFpN-Xqyr5nPCjaRyregkXzZnCfnbO0Jla3Q (::1) 0.58ms
+2025-06-11 20:21:33 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-6167a043 autenticado con JWT para sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:33 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-6167a043 reconectado/validado en sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:33 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-a821e019&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYTgyMWUwMTkiLCJyb29tX2lkIjoiNmY5ZjgzZWZmNTNmNDEwYTliYWUxNDM1YTBjOWU5MTUiLCJleHAiOjE3NTAyOTYwODYsImp0aSI6IjU1MDllNDQ0YmJjZTQ3ZjliNWY2MWVjOTc4ZWJkMTBhIn0.xwGmEuw1n_sh_-JO8DLKXaG_7oVaXEWnrvJNXbtKz4Y (::1) 0.36ms
+2025-06-11 20:21:33 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-a821e019 autenticado con JWT para sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:33 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-a821e019 reconectado/validado en sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:33 - INFO - [appv2.py:693] - [DEBUG] on_message de web-6167a043 raw: {"message": "Prueba despu\u00e9s de reconexion m\u00faltiple 2"}
+2025-06-11 20:21:33 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 6f9f83eff53f410a9bae1435a0c9e915: active, Clientes: ['web-6167a043', 'mobile-a821e019']
+2025-06-11 20:21:33 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691293.1773922-082855fb de web-6167a043 entregado a mobile-a821e019
+2025-06-11 20:21:33 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-6167a043&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNjE2N2EwNDMiLCJyb29tX2lkIjoiNmY5ZjgzZWZmNTNmNDEwYTliYWUxNDM1YTBjOWU5MTUiLCJleHAiOjE3NTAyOTYwODYsImp0aSI6IjZjYjEwMjM4Mzc1MzQ5OGI4NDU0ZmFmNDViMTcyNGY1In0.35EasMRQFpN-Xqyr5nPCjaRyregkXzZnCfnbO0Jla3Q (::1) 0.60ms
+2025-06-11 20:21:33 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-6167a043 autenticado con JWT para sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:33 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-6167a043 reconectado/validado en sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:33 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-a821e019&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYTgyMWUwMTkiLCJyb29tX2lkIjoiNmY5ZjgzZWZmNTNmNDEwYTliYWUxNDM1YTBjOWU5MTUiLCJleHAiOjE3NTAyOTYwODYsImp0aSI6IjU1MDllNDQ0YmJjZTQ3ZjliNWY2MWVjOTc4ZWJkMTBhIn0.xwGmEuw1n_sh_-JO8DLKXaG_7oVaXEWnrvJNXbtKz4Y (::1) 0.31ms
+2025-06-11 20:21:33 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-a821e019 autenticado con JWT para sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:33 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-a821e019 reconectado/validado en sala 6f9f83eff53f410a9bae1435a0c9e915
+2025-06-11 20:21:33 - INFO - [appv2.py:693] - [DEBUG] on_message de web-6167a043 raw: {"message": "Prueba despu\u00e9s de reconexion m\u00faltiple 3"}
+2025-06-11 20:21:33 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 6f9f83eff53f410a9bae1435a0c9e915: active, Clientes: ['web-6167a043', 'mobile-a821e019']
+2025-06-11 20:21:33 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691293.7131991-3f5b44ea de web-6167a043 entregado a mobile-a821e019
+2025-06-11 20:22:21 - INFO - [appv2.py:1141] - [CLEANUP] Cliente mobile-8ec063bb (web: False) no reconecto (200s). Limpiando.
+2025-06-11 20:22:30 - WARNING - [appv2.py:1310] - Recibida señal 2. Planificando cierre elegante.
+2025-06-11 20:22:30 - INFO - [appv2.py:1297] - Iniciando cierre elegante...
+2025-06-11 20:22:31 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-11 20:22:31 - INFO - [appv2.py:1307] - Cierre elegante completado.
+2025-06-11 20:22:31 - INFO - [appv2.py:1328] - Servidor MinkaV2 detenido.
+2025-06-11 20:22:32 - INFO - [session.py:37] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-11 20:22:32 - INFO - [session.py:41] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-11 20:22:32 - INFO - [appv2.py:1284] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-11 20:22:32 - INFO - [appv2.py:1189] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-11 20:22:32 - INFO - [appv2.py:1229] - [INIT] Cliente mobile-a821e019 estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:22:32 - INFO - [appv2.py:1229] - [INIT] Cliente web-6167a043 estaba connected. Marcando como pending_reconnect.
+2025-06-11 20:22:32 - INFO - [appv2.py:1265] - [INIT] Inicializacion de estado del servidor desde Redis completada.
+2025-06-11 20:22:36 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-df154f34&action=create (::1) 0.50ms
+2025-06-11 20:22:36 - INFO - [appv2.py:513] - [WS-OPEN] Sala 9506b522f23643c5a4917badd62d9e9f creada por web-df154f34. Contraseña: E93FBE. Esperando peer para generar JWT.
+2025-06-11 20:22:37 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-a077c533&action=join&room_id=9506b522f23643c5a4917badd62d9e9f&room_password=E93FBE (::1) 0.39ms
+2025-06-11 20:22:37 - INFO - [appv2.py:618] - [WS-JOIN] Cliente mobile-a077c533 se unio a sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:39 - INFO - [appv2.py:693] - [DEBUG] on_message de web-df154f34 raw: {"message": "Mensaje 1 desde web"}
+2025-06-11 20:22:39 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 9506b522f23643c5a4917badd62d9e9f: active, Clientes: ['web-df154f34', 'mobile-a077c533']
+2025-06-11 20:22:39 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691359.8200269-7d81a668 de web-df154f34 entregado a mobile-a077c533
+2025-06-11 20:22:39 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-a077c533 raw: {"message": "Mensaje 1 desde movil"}
+2025-06-11 20:22:39 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 9506b522f23643c5a4917badd62d9e9f: active, Clientes: ['web-df154f34', 'mobile-a077c533']
+2025-06-11 20:22:39 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691359.832769-facbbbbb de mobile-a077c533 entregado a web-df154f34
+2025-06-11 20:22:39 - INFO - [appv2.py:693] - [DEBUG] on_message de web-df154f34 raw: {"message": "Mensaje 2 desde web"}
+2025-06-11 20:22:39 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 9506b522f23643c5a4917badd62d9e9f: active, Clientes: ['web-df154f34', 'mobile-a077c533']
+2025-06-11 20:22:39 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691359.8399942-b6722993 de web-df154f34 entregado a mobile-a077c533
+2025-06-11 20:22:39 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-a077c533 raw: {"message": "Mensaje 2 desde movil"}
+2025-06-11 20:22:39 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 9506b522f23643c5a4917badd62d9e9f: active, Clientes: ['web-df154f34', 'mobile-a077c533']
+2025-06-11 20:22:39 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691359.845023-328a85e0 de mobile-a077c533 entregado a web-df154f34
+2025-06-11 20:22:39 - INFO - [appv2.py:693] - [DEBUG] on_message de web-df154f34 raw: {"message": "Mensaje 3 desde web"}
+2025-06-11 20:22:39 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 9506b522f23643c5a4917badd62d9e9f: active, Clientes: ['web-df154f34', 'mobile-a077c533']
+2025-06-11 20:22:39 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691359.849036-87ebf3dc de web-df154f34 entregado a mobile-a077c533
+2025-06-11 20:22:39 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-df154f34&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItZGYxNTRmMzQiLCJyb29tX2lkIjoiOTUwNmI1MjJmMjM2NDNjNWE0OTE3YmFkZDYyZDllOWYiLCJleHAiOjE3NTAyOTYxNTcsImp0aSI6ImU5ZGM3MGQ2ZWIxNzRkNjM4Mzk3ODRmN2ZkZGFjMDk5In0.sJr9mWPOhJIYPx7YfxGl5x6Ahgo1TbOlssGgF3bE-vI (::1) 0.37ms
+2025-06-11 20:22:39 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-df154f34 autenticado con JWT para sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:39 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-df154f34 reconectado/validado en sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:41 - INFO - [appv2.py:693] - [DEBUG] on_message de web-df154f34 raw: {"message": "Mensaje despues de reconexion web"}
+2025-06-11 20:22:41 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 9506b522f23643c5a4917badd62d9e9f: active, Clientes: ['web-df154f34', 'mobile-a077c533']
+2025-06-11 20:22:41 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691361.866712-dfae801c de web-df154f34 entregado a mobile-a077c533
+2025-06-11 20:22:41 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-a077c533 raw: {"message": "Respuesta a web reconectado"}
+2025-06-11 20:22:41 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 9506b522f23643c5a4917badd62d9e9f: active, Clientes: ['web-df154f34', 'mobile-a077c533']
+2025-06-11 20:22:41 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691361.8703308-a9993fb7 de mobile-a077c533 entregado a web-df154f34
+2025-06-11 20:22:41 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-a077c533&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYTA3N2M1MzMiLCJyb29tX2lkIjoiOTUwNmI1MjJmMjM2NDNjNWE0OTE3YmFkZDYyZDllOWYiLCJleHAiOjE3NTAyOTYxNTcsImp0aSI6IjY5MDI0NDdmYjZjNzQzN2JhNDU3YWRhMjdkNWZmZWU3In0.LN9TSQ0hWZ1DIAnSeCxe1kMpFSRtE0oJi5pqtA5ChbQ (::1) 0.54ms
+2025-06-11 20:22:41 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-a077c533 autenticado con JWT para sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:41 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-a077c533 reconectado/validado en sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:43 - INFO - [appv2.py:693] - [DEBUG] on_message de mobile-a077c533 raw: {"message": "Mensaje despues de reconexion movil"}
+2025-06-11 20:22:43 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 9506b522f23643c5a4917badd62d9e9f: active, Clientes: ['web-df154f34', 'mobile-a077c533']
+2025-06-11 20:22:43 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691363.888695-c8f3d529 de mobile-a077c533 entregado a web-df154f34
+2025-06-11 20:22:43 - INFO - [appv2.py:693] - [DEBUG] on_message de web-df154f34 raw: {"message": "Respuesta a movil reconectado"}
+2025-06-11 20:22:43 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 9506b522f23643c5a4917badd62d9e9f: active, Clientes: ['web-df154f34', 'mobile-a077c533']
+2025-06-11 20:22:43 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691363.8952608-ff24e305 de web-df154f34 entregado a mobile-a077c533
+2025-06-11 20:22:43 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-df154f34&jwt_token=invalid_token_123 (::1) 0.64ms
+2025-06-11 20:22:43 - WARNING - [session.py:217] - JWT inválido: Not enough segments
+2025-06-11 20:22:43 - WARNING - [appv2.py:457] - [WS-OPEN] Token JWT inválido o expirado presentado. Rechazando.
+2025-06-11 20:22:43 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-df154f34&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItZGYxNTRmMzQiLCJyb29tX2lkIjoiOTUwNmI1MjJmMjM2NDNjNWE0OTE3YmFkZDYyZDllOWYiLCJleHAiOjE3NTAyOTYxNTcsImp0aSI6ImU5ZGM3MGQ2ZWIxNzRkNjM4Mzk3ODRmN2ZkZGFjMDk5In0.sJr9mWPOhJIYPx7YfxGl5x6Ahgo1TbOlssGgF3bE-vI (::1) 0.49ms
+2025-06-11 20:22:43 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-df154f34 autenticado con JWT para sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:43 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-df154f34 reconectado/validado en sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:43 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-a077c533 (::1) 0.29ms
+2025-06-11 20:22:43 - WARNING - [appv2.py:379] - [WS-OPEN] Cliente existente mobile-a077c533 intento reconectar sin JWT. Rechazando.
+2025-06-11 20:22:43 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-a077c533&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYTA3N2M1MzMiLCJyb29tX2lkIjoiOTUwNmI1MjJmMjM2NDNjNWE0OTE3YmFkZDYyZDllOWYiLCJleHAiOjE3NTAyOTYxNTcsImp0aSI6IjY5MDI0NDdmYjZjNzQzN2JhNDU3YWRhMjdkNWZmZWU3In0.LN9TSQ0hWZ1DIAnSeCxe1kMpFSRtE0oJi5pqtA5ChbQ (::1) 0.27ms
+2025-06-11 20:22:43 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-a077c533 autenticado con JWT para sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:43 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-a077c533 reconectado/validado en sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:43 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-df154f34&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItZGYxNTRmMzQiLCJyb29tX2lkIjoiOTUwNmI1MjJmMjM2NDNjNWE0OTE3YmFkZDYyZDllOWYiLCJleHAiOjE3NTAyOTYxNTcsImp0aSI6ImU5ZGM3MGQ2ZWIxNzRkNjM4Mzk3ODRmN2ZkZGFjMDk5In0.sJr9mWPOhJIYPx7YfxGl5x6Ahgo1TbOlssGgF3bE-vI (::1) 0.17ms
+2025-06-11 20:22:43 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-df154f34 autenticado con JWT para sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:43 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-df154f34 reconectado/validado en sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:43 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-a077c533&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYTA3N2M1MzMiLCJyb29tX2lkIjoiOTUwNmI1MjJmMjM2NDNjNWE0OTE3YmFkZDYyZDllOWYiLCJleHAiOjE3NTAyOTYxNTcsImp0aSI6IjY5MDI0NDdmYjZjNzQzN2JhNDU3YWRhMjdkNWZmZWU3In0.LN9TSQ0hWZ1DIAnSeCxe1kMpFSRtE0oJi5pqtA5ChbQ (::1) 0.16ms
+2025-06-11 20:22:43 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-a077c533 autenticado con JWT para sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:43 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-a077c533 reconectado/validado en sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:43 - INFO - [appv2.py:693] - [DEBUG] on_message de web-df154f34 raw: {"message": "Prueba despues de reconexion m\u00faltiple 1"}
+2025-06-11 20:22:43 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 9506b522f23643c5a4917badd62d9e9f: active, Clientes: ['web-df154f34', 'mobile-a077c533']
+2025-06-11 20:22:43 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691363.942135-857eb788 de web-df154f34 entregado a mobile-a077c533
+2025-06-11 20:22:44 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-df154f34&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItZGYxNTRmMzQiLCJyb29tX2lkIjoiOTUwNmI1MjJmMjM2NDNjNWE0OTE3YmFkZDYyZDllOWYiLCJleHAiOjE3NTAyOTYxNTcsImp0aSI6ImU5ZGM3MGQ2ZWIxNzRkNjM4Mzk3ODRmN2ZkZGFjMDk5In0.sJr9mWPOhJIYPx7YfxGl5x6Ahgo1TbOlssGgF3bE-vI (::1) 0.93ms
+2025-06-11 20:22:44 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-df154f34 autenticado con JWT para sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:44 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-df154f34 reconectado/validado en sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:44 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-a077c533&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYTA3N2M1MzMiLCJyb29tX2lkIjoiOTUwNmI1MjJmMjM2NDNjNWE0OTE3YmFkZDYyZDllOWYiLCJleHAiOjE3NTAyOTYxNTcsImp0aSI6IjY5MDI0NDdmYjZjNzQzN2JhNDU3YWRhMjdkNWZmZWU3In0.LN9TSQ0hWZ1DIAnSeCxe1kMpFSRtE0oJi5pqtA5ChbQ (::1) 0.50ms
+2025-06-11 20:22:44 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-a077c533 autenticado con JWT para sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:44 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-a077c533 reconectado/validado en sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:44 - INFO - [appv2.py:693] - [DEBUG] on_message de web-df154f34 raw: {"message": "Prueba despues de reconexion m\u00faltiple 2"}
+2025-06-11 20:22:44 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 9506b522f23643c5a4917badd62d9e9f: active, Clientes: ['web-df154f34', 'mobile-a077c533']
+2025-06-11 20:22:44 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691364.513674-4be953a1 de web-df154f34 entregado a mobile-a077c533
+2025-06-11 20:22:45 - INFO - [web.py:2348] - 101 GET /ws?client_id=web-df154f34&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItZGYxNTRmMzQiLCJyb29tX2lkIjoiOTUwNmI1MjJmMjM2NDNjNWE0OTE3YmFkZDYyZDllOWYiLCJleHAiOjE3NTAyOTYxNTcsImp0aSI6ImU5ZGM3MGQ2ZWIxNzRkNjM4Mzk3ODRmN2ZkZGFjMDk5In0.sJr9mWPOhJIYPx7YfxGl5x6Ahgo1TbOlssGgF3bE-vI (::1) 0.73ms
+2025-06-11 20:22:45 - INFO - [appv2.py:400] - [WS-OPEN] Cliente web-df154f34 autenticado con JWT para sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:45 - INFO - [appv2.py:442] - [WS-OPEN] Cliente web-df154f34 reconectado/validado en sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:45 - INFO - [web.py:2348] - 101 GET /ws?client_id=mobile-a077c533&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYTA3N2M1MzMiLCJyb29tX2lkIjoiOTUwNmI1MjJmMjM2NDNjNWE0OTE3YmFkZDYyZDllOWYiLCJleHAiOjE3NTAyOTYxNTcsImp0aSI6IjY5MDI0NDdmYjZjNzQzN2JhNDU3YWRhMjdkNWZmZWU3In0.LN9TSQ0hWZ1DIAnSeCxe1kMpFSRtE0oJi5pqtA5ChbQ (::1) 0.29ms
+2025-06-11 20:22:45 - INFO - [appv2.py:400] - [WS-OPEN] Cliente mobile-a077c533 autenticado con JWT para sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:45 - INFO - [appv2.py:442] - [WS-OPEN] Cliente mobile-a077c533 reconectado/validado en sala 9506b522f23643c5a4917badd62d9e9f
+2025-06-11 20:22:45 - INFO - [appv2.py:693] - [DEBUG] on_message de web-df154f34 raw: {"message": "Prueba despues de reconexion m\u00faltiple 3"}
+2025-06-11 20:22:45 - INFO - [appv2.py:757] - [MESSAGE-DEBUG] Sala 9506b522f23643c5a4917badd62d9e9f: active, Clientes: ['web-df154f34', 'mobile-a077c533']
+2025-06-11 20:22:45 - INFO - [appv2.py:1000] - [BROADCAST] Mensaje 1749691365.04093-5ff4e891 de web-df154f34 entregado a mobile-a077c533
+2025-06-11 20:23:40 - WARNING - [appv2.py:1310] - Recibida señal 2. Planificando cierre elegante.
+2025-06-11 20:23:40 - INFO - [appv2.py:1297] - Iniciando cierre elegante...
+2025-06-11 20:23:41 - INFO - [session.py:324] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-11 20:23:41 - INFO - [appv2.py:1307] - Cierre elegante completado.
+2025-06-11 20:23:41 - INFO - [appv2.py:1328] - Servidor MinkaV2 detenido.

@@ -903,3 +903,25 @@ Traceback (most recent call last):
   File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
     raise WebSocketClosedError()
 tornado.websocket.WebSocketClosedError
+2025-06-11 15:46:05 - ERROR - [session.py:43] - [REDIS_INIT] No se pudo conectar a Redis: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-11 15:46:05 - CRITICAL - [appv2.py:1211] - [MAIN] No se pudo inicializar Redis al arrancar: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.. Saliendo.
+2025-06-11 16:12:30 - ERROR - [web.py:1875] - Uncaught exception GET /ws?action=join&client_id=python-client-ded76f9d-6158-4b6d-9605-e01b23075d28&room_id=34f214a33fd143009749b66500351ef5&password=955EDB (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?action=join&client_id=python-client-ded76f9d-6158-4b6d-9605-e01b23075d28&room_id=34f214a33fd143009749b66500351ef5&password=955EDB', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 589, in open
+    'password': room_password_join,
+           ^^^^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'jwt_token_for_web_joiner' where it is not associated with a value
+2025-06-11 16:17:12 - ERROR - [web.py:1875] - Uncaught exception GET /ws?action=join&client_id=python-client-debd82d5-18aa-47e9-bae5-2ad7daa41d2f&room_id=87eafe0be0e8496488da7a590788a44b&password=3E2536 (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?action=join&client_id=python-client-debd82d5-18aa-47e9-bae5-2ad7daa41d2f&room_id=87eafe0be0e8496488da7a590788a44b&password=3E2536', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 589, in open
+    'password': room_password_join,
+           ^^^^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'jwt_token_for_web_joiner' where it is not associated with a value
+2025-06-11 19:46:34 - ERROR - [session.py:43] - [REDIS_INIT] No se pudo conectar a Redis: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-11 19:46:34 - CRITICAL - [appv2.py:1272] - [MAIN] No se pudo inicializar Redis al arrancar: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.. Saliendo.
