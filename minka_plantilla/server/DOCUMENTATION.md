@@ -93,6 +93,17 @@ El servidor se configura a través de variables de entorno definidas en `config.
 - `REDIS_PORT`: Puerto de Redis (default: 6379)
 - `MINKA_LOG_LEVEL`: Nivel de logging (default: INFO)
 
+### Ejecución del Servidor
+
+Para iniciar el servidor desde este directorio utilice:
+
+```bash
+python run.py
+```
+
+El script `run.py` es el punto de entrada principal y reemplaza al antiguo
+`run_server.py`.
+
 ## Conexión de Clientes
 
 ### Cliente Web (JavaScript)
