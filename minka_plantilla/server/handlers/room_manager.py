@@ -22,6 +22,7 @@ from utils import (
 )
 
 from handlers.jwt_manager import generate_and_distribute_jwts
+from config import MAX_CLIENTS_PER_ROOM
 
 async def send_error_and_close(handler, error_message, error_code_str, close_code=1008):
     """Envía un mensaje de error JSON al cliente y luego cierra la conexión."""
@@ -89,7 +90,7 @@ async def handle_join_room(handler, joiner_client_id, room_id_to_join, password_
         await send_error_and_close(handler, 'ID de sala o contraseña incorrectos.', 'INVALID_ROOM_CREDENTIALS')
         return
 
-    if len(session_to_join.get('clients', [])) >= 2 and not session_to_join.get('has_dozing_client'):
+    if len(session_to_join.get('clients', [])) >= MAX_CLIENTS_PER_ROOM and not session_to_join.get('has_dozing_client'):
         logging.warning(f"[WS-OPEN] {joiner_client_id} - Intento de unirse a sala {room_id_to_join} que ya está llena.")
         await send_error_and_close(handler, 'La sala ya está llena.', 'ROOM_FULL')
         return
