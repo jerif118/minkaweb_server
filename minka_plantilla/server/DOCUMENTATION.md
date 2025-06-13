@@ -22,7 +22,7 @@ El sistema Minka WebSocket proporciona una plataforma de comunicación en tiempo
 
 El sistema está compuesto por los siguientes componentes:
 
-- **Servidor WebSocket** (`appv2.py`): Implementado con Tornado, maneja las conexiones y enrutamiento de mensajes usando Redis para persistencia.
+- **Servidor WebSocket** (`main.py`, iniciado a través de `run.py`): Implementado con Tornado, maneja las conexiones y enrutamiento de mensajes usando Redis para persistencia.
 - **Redis**: Almacena el estado de sesiones, clientes y colas de mensajes de forma asíncrona.
 - **Clientes**: Aplicaciones web o móviles que se conectan al servidor.
 
@@ -34,13 +34,13 @@ El sistema está compuesto por los siguientes componentes:
 └──────────────┘         │              │         ┌─────────┐
                          │   Servidor   │◄───────►│  Redis  │
 ┌──────────────┐         │  WebSocket   │         └─────────┘
-│ Cliente Móvil│◄───────►│   (appv2.py) │
+│ Cliente Móvil│◄───────►│   (main.py)  │
 └──────────────┘         └──────────────┘
 ```
 
 ### Endpoints del Servidor
 
-El servidor principal (`appv2.py`) expone los siguientes endpoints:
+El servidor principal (`main.py`, iniciado con `run.py`) expone los siguientes endpoints:
 
 #### Endpoints Principales
 

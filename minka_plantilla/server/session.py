@@ -68,7 +68,7 @@ JWT_SECRET_KEY = CFG_JWT_SECRET_KEY
 JWT_ALGORITHM = CFG_JWT_ALGORITHM
 JWT_EXPIRATION_DELTA_SECONDS = CFG_JWT_EXPIRATION_DELTA_SECONDS
 
-# active_websockets se maneja en appv2.py, no aquí.
+# active_websockets se maneja en `handlers.websocket_handler`, no aquí.
 
 # Funciones para obtener/establecer sesiones
 async def get_session(room_id):

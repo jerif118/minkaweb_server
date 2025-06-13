@@ -12,7 +12,7 @@ redis_client = redis.StrictRedis(host='localhost', port=6379, db=0, decode_respo
 SESSION_TIMEOUT = 3 * 24 * 60 * 60  # 3 días (era 7_200 segundos / 2 horas)
 RECONNECT_GRACE_PERIOD = 120        # 2 min (para reconexiones rápidas, aumentado de 60s a 120s)
 WEB_RECONNECT_TIMEOUT = 3 * 24 * 60 * 60 # 3 días para que un cliente web se reconecte
-DOZE_TIMEOUT = 24 * 60 * 60             # 24 horas para móviles en doze (ya se usa en appv2)
+DOZE_TIMEOUT = 24 * 60 * 60             # 24 horas para móviles en doze (ya se usa en main.py)
 
 
 JWT_SECRET_KEY = "minkaweb_secret_key"  

@@ -1,7 +1,7 @@
 """
 DEPRECATED: Este archivo contiene endpoints REST heredados que ya no están en uso.
 
-El servidor principal (appv2.py) utiliza WebSockets y Redis para toda la funcionalidad.
+El servidor principal (`main.py`) utiliza WebSockets y Redis para toda la funcionalidad.
 Los endpoints REST en este archivo usan variables globales que están vacías y 
 causarán errores 403 porque no están sincronizados con el estado en Redis.
 
@@ -26,7 +26,7 @@ from tornado.ioloop import PeriodicCallback
 # import uuid
 # import time
 # import logging
-# from appv2 import WebSocketHandler
+# from handlers.websocket_handler import WebSocketHandler
 
 # logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
