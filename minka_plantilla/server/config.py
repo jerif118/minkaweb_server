@@ -20,7 +20,7 @@ ENVIRONMENT = get_env_var('MINKA_ENV', 'development')  # 'development' o 'produc
 SESSION_TIMEOUT = int(get_env_var('MINKA_SESSION_TIMEOUT', str(30 * 24 * 60 * 60)))  # 30 días por defecto
 RECONNECT_GRACE_PERIOD = int(get_env_var('MINKA_RECONNECT_GRACE_PERIOD', '200'))  # 200 segundos por defecto
 WEB_RECONNECT_TIMEOUT = int(get_env_var('MINKA_WEB_RECONNECT_TIMEOUT', str(7 * 24 * 60 * 60)))  # 7 días por defecto
-DOZE_TIMEOUT = int(get_env_var('MINKA_DOZE_TIMEOUT', str(7 * 24 * 60 * 60)))  # 7 horas por defecto
+DOZE_TIMEOUT = int(get_env_var('MINKA_DOZE_TIMEOUT', str(7 * 24 * 60 * 60)))  # 7 días por defecto
 MESSAGE_TTL_SECONDS = int(get_env_var('MINKA_MESSAGE_TTL', str(7 * 24 * 60 * 60)))  # 7 días por defecto
 MAX_QUEUE_LENGTH = int(get_env_var('MINKA_MAX_QUEUE_LENGTH', '100'))  # Máximo de mensajes por cola
 
