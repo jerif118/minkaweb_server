@@ -7,16 +7,15 @@ import time
 import sys
 import random
 import re
+import os
 
-# Configuracion de logging con más detalles
-logging.basicConfig(
-    level=logging.DEBUG,  # Cambiado a DEBUG para mostrar más informacion
-    format='%(asctime)s - %(name)s - %(levelname)s - [%(filename)s:%(lineno)d] - %(message)s',
-    handlers=[
-        logging.StreamHandler()
-    ]
-)
-logger = logging.getLogger("minka_test")
+# Asegurar acceso a los utilitarios de logging del servidor
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'server'))
+from logger_config import setup_logging, get_module_logger
+
+# Configurar el logger de forma consistente con el servidor
+setup_logging()
+logger = get_module_logger("minka_test")
 
 # URL del servidor WebSocket
 SERVER_URL = "ws://localhost:5001/ws"  # Ajustar según corresponda
