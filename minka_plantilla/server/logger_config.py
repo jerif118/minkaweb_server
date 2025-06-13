@@ -104,17 +104,24 @@ def setup_logging():
     return logger
 
 # También podemos exponer una función para obtener loggers específicos para módulos
-def get_module_logger(module_name):
-    """
-    Obtiene un logger para un módulo específico.
-    
-    Args:
-        module_name: Nombre del módulo
-        
-    Returns:
-        logging.Logger: Logger configurado para el módulo
-    """
+def get_module_logger(module_name: str) -> logging.Logger:
+    """Return a logger for a specific module."""
     return logging.getLogger(module_name)
+
+
+def get_app_logger(component: str = "server") -> logging.Logger:
+    """Return a logger for a high level application component."""
+    return get_module_logger(f"minka.{component}")
+
+
+def get_test_logger(test_name: str = "test") -> logging.Logger:
+    """Return a logger for test runs."""
+    return get_module_logger(f"minka.test.{test_name}")
+
+
+def get_client_logger(client_type: str, client_id: str) -> logging.Logger:
+    """Return a logger for a specific client."""
+    return get_module_logger(f"minka.client.{client_type}.{client_id}")
 
 if __name__ == '__main__':
     # Ejemplo de cómo usarlo y probarlo
