@@ -7,6 +7,7 @@ import time
 import jwt
 import logging
 import hashlib
+import inspect
 from typing import Union, Optional, Dict, Any
 
 # Importar configuraciones necesarias
@@ -164,7 +165,7 @@ def verificar_token_jwt(token, jti_blacklisted_checker=None):
                       None en caso contrario.
     """
     # Comprobar si el verificador es asíncrono
-    if jti_blacklisted_checker and hasattr(jti_blacklisted_checker, "__await__"):
+    if jti_blacklisted_checker and inspect.iscoroutinefunction(jti_blacklisted_checker):
         logging.warning("verificar_token_jwt recibió un verificador asíncrono pero esta función es síncrona. Use verificar_token_jwt_async en su lugar.")
         return None
         
