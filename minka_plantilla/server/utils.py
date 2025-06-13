@@ -8,6 +8,8 @@ import jwt
 import logging
 import hashlib
 import inspect
+import secrets
+import string
 from typing import Union, Optional, Dict, Any
 
 # Importar configuraciones necesarias
@@ -56,30 +58,11 @@ def generar_password_sala(longitud=6):
     Returns:
         str: Una contraseña generada aleatoriamente.
     """
-    # Utiliza os.urandom para una mejor fuente de aleatoriedad si es posible,
-    # pero para simplicidad y evitar más imports, uuid es suficiente aquí.
-    # Se usa una subcadena de un UUID y se convierte a mayúsculas.
-    # No es criptográficamente seguro para contraseñas de alta seguridad.
     if longitud <= 0:
         raise ValueError("La longitud debe ser un entero positivo")
-    
-    # Generar suficientes caracteres base (hex) para asegurar la longitud deseada
-    # Cada byte de uuid.uuid4().hex son 2 caracteres hexadecimales
-    num_bytes_needed = (longitud + 1) // 2 
-    random_hex = uuid.uuid4().hex[:num_bytes_needed * 2]
-    
-    # Filtrar para que sean solo alfanuméricos y tomar la longitud deseada
-    # Esto es un poco más complejo de lo necesario si solo queremos N caracteres
-    # Una forma más simple es tomar una subcadena y convertirla.
-    
-    # Simplificado: tomar parte de un UUID y convertir a mayúsculas
-    # y luego asegurar que solo sean letras y números (aunque UUID hex ya lo es)
-    password_base = uuid.uuid4().hex.upper()
-    
-    # Tomar los primeros `longitud` caracteres. Si se necesitan más, repetir o generar más UUIDs.
-    # Esta implementación es simple y podría no tener una distribución perfectamente uniforme
-    # de caracteres si la longitud es muy grande, pero para 6 caracteres es aceptable.
-    return password_base[:longitud]
+
+    caracteres = string.ascii_uppercase + string.digits
+    return ''.join(secrets.choice(caracteres) for _ in range(longitud))
 
 
 # ------- FUNCIONES RELACIONADAS CON JWT -------
