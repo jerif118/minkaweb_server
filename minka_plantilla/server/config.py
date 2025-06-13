@@ -23,6 +23,7 @@ WEB_RECONNECT_TIMEOUT = int(get_env_var('MINKA_WEB_RECONNECT_TIMEOUT', str(7 * 2
 DOZE_TIMEOUT = int(get_env_var('MINKA_DOZE_TIMEOUT', str(7 * 24 * 60 * 60)))  # 7 horas por defecto
 MESSAGE_TTL_SECONDS = int(get_env_var('MINKA_MESSAGE_TTL', str(7 * 24 * 60 * 60)))  # 7 días por defecto
 MAX_QUEUE_LENGTH = int(get_env_var('MINKA_MAX_QUEUE_LENGTH', '100'))  # Máximo de mensajes por cola
+MAX_CLIENTS_PER_ROOM = int(get_env_var('MINKA_MAX_CLIENTS_PER_ROOM', '2'))  # Límite de clientes por sala
 
 # Configuración de Redis
 REDIS_HOST = get_env_var('REDIS_HOST', 'localhost')
@@ -62,6 +63,7 @@ def print_config():
         "DOZE_TIMEOUT": DOZE_TIMEOUT,
         "MESSAGE_TTL_SECONDS": MESSAGE_TTL_SECONDS,
         "MAX_QUEUE_LENGTH": MAX_QUEUE_LENGTH,
+        "MAX_CLIENTS_PER_ROOM": MAX_CLIENTS_PER_ROOM,
         "REDIS_HOST": REDIS_HOST,
         "REDIS_PORT": REDIS_PORT,
         "REDIS_DB": REDIS_DB,
