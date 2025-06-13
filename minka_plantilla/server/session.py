@@ -1,9 +1,14 @@
 import asyncio # Importar asyncio
 import redis.asyncio as aioredis # Usar redis-py asyncio
-import redis # Para excepciones
-import uuid, json, time, jwt
+import redis.exceptions as redis # Para excepciones
 from datetime import datetime, timedelta, timezone
+import uuid
+import json
 import logging
+import time
+
+# Importar funciones JWT desde utils.py
+from utils import crear_token_jwt, verificar_token_jwt_async
 
 # Importar configuraciones de config.py
 from config import (
@@ -191,34 +196,26 @@ async def is_valid_jti(jti):
     if not rc: return False # Si Redis no está, considerar inválido
     return jti and not await is_jti_blacklisted(jti)
 
-# Funciones para manejar la generación de JWT (síncronas)
+# Funciones JWT - Ahora usando las de utils.py
 def generate_jwt(client_id, room_id):
-    payload = {
-        'client_id': client_id,
-        'room_id': room_id,
-        'exp': datetime.now(timezone.utc) + timedelta(seconds=JWT_EXPIRATION_DELTA_SECONDS),
-        'jti': str(uuid.uuid4().hex) 
-    }
-    return jwt.encode(payload, JWT_SECRET_KEY, algorithm=JWT_ALGORITHM)
+    """
+    Crea un token JWT para un cliente y sala específicos.
+    Esta función es un wrapper de crear_token_jwt de utils.py para mantener compatibilidad.
+    """
+    return crear_token_jwt(client_id, room_id)
 
 async def verify_jwt(token):
-    rc = await init_redis_client()
-    if not rc: return None # Si Redis no está, no se puede verificar JTI
+    """
+    Verifica un token JWT y su JTI.
+    Esta función es un wrapper de verificar_token_jwt_async de utils.py para mantener compatibilidad.
+    """
     if not token:
         return None
-    try:
-        payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_ALGORITHM])
-        jti = payload.get('jti')
-        if await is_jti_blacklisted(jti):
-            logging.warning(f"JTI {jti} está en lista negra")
-            return None
-        return payload
-    except jwt.PyJWTError as e:
-        logging.warning(f"JWT inválido: {e}")
-        return None
-    except redis.RedisError as e:
-        logging.error(f"Error de Redis en verify_jwt al verificar JTI: {e}")
-        return None # Fallar seguro
+    
+    async def check_jti_blacklisted(jti):
+        return await is_jti_blacklisted(jti)
+    
+    return await verificar_token_jwt_async(token, check_jti_blacklisted)
 
 # Funciones para manejar la cola de mensajes
 async def add_message_to_queue(client_id, message):
@@ -228,11 +225,21 @@ async def add_message_to_queue(client_id, message):
         return False
 
     client_data = await get_client(client_id)
-    if not client_data: # get_client ya maneja el log si Redis falla
-        logging.warning(f"Intento de encolar mensaje para cliente inexistente o error de Redis: {client_id}")
-        return False
+    if not client_data:
+        # Crear un registro básico del cliente si no existe
+        is_mobile = not client_id.startswith('web-')
+        logging.info(f"[QUEUE] Creando registro temporal para cliente {client_id} (móvil: {is_mobile}) para encolar mensaje")
+        client_data = {
+            'client_id': client_id,
+            'status': 'pending',
+            'created_at': time.time(),
+            'is_web': not is_mobile,
+            'is_mobile': is_mobile
+        }
+        await set_client(client_id, client_data)
     
     is_dozing = client_data.get('status') == 'dozing'
+    is_mobile = client_data.get('is_mobile', not client_id.startswith('web-'))
 
     message_id = f"{time.time()}-{uuid.uuid4().hex[:8]}"
     message_with_meta = {
@@ -241,7 +248,8 @@ async def add_message_to_queue(client_id, message):
         'timestamp': time.time(),
         'attempts': 0,
         'sender_id': message.get('sender_id', 'unknown') if isinstance(message, dict) else 'unknown',
-        'is_doze_message': is_dozing 
+        'is_doze_message': is_dozing,
+        'for_mobile': is_mobile
     }
 
     try:
@@ -264,7 +272,7 @@ async def add_message_to_queue(client_id, message):
         if current_ttl == -1:
              await rc.expire(queue_key, MESSAGE_TTL_SECONDS)
             
-        logging.info(f"Mensaje encolado para {client_id} (dozing: {is_dozing}). Cola: {await rc.llen(queue_key)}. TTL: {MESSAGE_TTL_SECONDS}s.")
+        logging.info(f"Mensaje encolado para {client_id} (móvil: {is_mobile}, dozing: {is_dozing}). Cola: {await rc.llen(queue_key)}. TTL: {MESSAGE_TTL_SECONDS}s.")
         return result > 0
     except redis.RedisError as e:
         logging.error(f"Error de Redis en add_message_to_queue para {client_id}: {e}")

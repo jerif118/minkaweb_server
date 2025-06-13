@@ -610,83 +610,85 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 except jwt.PyJWTError as e:
                     logging.error(f"[WS-JOIN] Error al decodificar JWT recién creado para {self.client_id}: {e}")
 
-                self.write_message({
+                # Notificar al cliente sobre la unión exitosa
+                respuesta_union = {
                     'event': 'joined',
                     'room_id': self.room_id,
                     'jwt_token': jwt_token_for_joiner
-                })
-                logging.info(f"[WS-JOIN] Cliente {self.client_id} se unio a sala {self.room_id}")
+                }
+                self.write_message(respuesta_union)
+                logging.info(f"[WS-JOIN] Cliente {self.client_id} se unió exitosamente a sala {self.room_id}")
 
-                for cid in current_session_join.get('clients', []):
-                    # Generar y registrar token para este peer
-                    peer_data = await get_client(cid) or {}
-                    # ¿Ya tiene JTI asignado?
-                    if peer_data.get("current_jti"):
-                        continue  # ya tiene token válido
-
-                    peer_token = generate_jwt(cid, self.room_id)
-                    try:
-                        pld = jwt.decode(peer_token, JWT_SECRET_KEY,
-                                         algorithms=[JWT_ALGORITHM],
-                                         options={"verify_exp": False})
-                        peer_data["current_jti"] = pld.get("jti")
-                        await set_client(cid, peer_data)
-                    except jwt.PyJWTError as e:
-                        logging.error(f"[WS-JOIN] Error decodificando JWT para {cid}: {e}")
-
-                    # Enviar token al peer si está conectado; si no, encolarlo
-                    if cid in active_websockets:
-                        try:
-                            active_websockets[cid].write_message({
-                                "event": "jwt_issued",
-                                "room_id": self.room_id,
-                                "jwt_token": peer_token,
-                            })
-                        except tornado.websocket.WebSocketClosedError:
-                            logging.warning(f"[WS-JOIN] WS cerrado al enviar JWT a {cid}")
-                    else:
-                        await add_message_to_queue(cid, {
-                            "event": "jwt_issued",
-                            "room_id": self.room_id,
-                            "jwt_token": peer_token,
-                            "peer_id": self.client_id
-                        })
-                # Notificar al otro peer
-                other_peers = [cid for cid in current_session_join.get('clients', []) if cid != self.client_id]
-                for peer_id in other_peers:
-                    if peer_id in active_websockets:
-                        try:
-                            active_websockets[peer_id].write_message({
-                                'event': 'joined',
-                                'peer_id': self.client_id,
-                                'room_id': self.room_id,
-                            })
-                        except tornado.websocket.WebSocketClosedError:
-                            logging.warning(f"[WS-JOIN] Error al notificar a {peer_id}: WebSocket cerrado.")
-                    else:
-                        # Si el peer no está activo (ej. movil en doze que se acaba de despertar o web desconectado)
-                        # Se podría encolar una notificacion, pero 'peer_joined' es más para conexion en tiempo real.
-                        logging.info(f"[WS-JOIN] Peer {peer_id} no tiene websocket activo. No se envio notificacion de union.")
+                # Procesar tokens para todos los participantes de la sala
+                await self._asegurar_tokens_participantes(current_session_join)
                 
-                # Enviar mensajes pendientes al cliente que se une/reconecta
-                pending_messages_join = await get_pending_messages(self.client_id, delete_queue=True)
-                if pending_messages_join:
-                    logging.info(f"[WS-JOIN] Enviando {len(pending_messages_join)} mensajes pendientes a {self.client_id}")
-                    for msg_payload in pending_messages_join:
-                        try:
-                            self.write_message(msg_payload)
-                        except tornado.websocket.WebSocketClosedError:
-                            logging.warning(f"[WS-JOIN] WebSocket cerrado para {self.client_id} al enviar mensajes pendientes. Re-encolando...")
-                            await add_message_to_queue(self.client_id, msg_payload)
-                            break
-            else:
-                self.write_message({'error': 'Sala no existe o contraseña incorrecta', 'code': 'JOIN_FAILED'})
-                self.close()
-                return
-        else:
-            self.write_message({'error': 'Accion no válida', 'code': 'INVALID_ACTION'})
-            self.close()
+    async def _asegurar_tokens_participantes(self, datos_sala):
+        """Asegura que todos los participantes de la sala tengan un token JWT válido."""
+        if not datos_sala:
             return
+            
+        # Recorrer todos los participantes para asegurar que tengan token
+        for id_participante in datos_sala.get('clients', []):
+            # Obtener datos del participante
+            datos_participante = await get_client(id_participante) or {}
+            
+            # Verificar si ya tiene un identificador JWT registrado
+            if datos_participante.get("token_id"):
+                # Este participante ya tiene un token registrado
+                continue
+                
+            # Generar nuevo token para el participante
+            token_participante = generate_jwt(id_participante, self.room_id)
+            
+            # Registrar el identificador único del token en los datos del participante
+            try:
+                # Extraer datos del token sin validar expiración
+                detalles_token = jwt.decode(
+                    token_participante, 
+                    JWT_SECRET_KEY,
+                    algorithms=[JWT_ALGORITHM],
+                    options={"verify_exp": False}
+                )
+                
+                # Guardar el identificador único del token
+                datos_participante["token_id"] = detalles_token.get("jti")
+                await set_client(id_participante, datos_participante)
+            except jwt.PyJWTError as e:
+                logging.error(f"[TOKEN] Error procesando token para {id_participante}: {e}")
+                continue
+                
+            # Entregar el token al participante
+            await self._entregar_token_participante(id_participante, token_participante)
+    
+    async def _entregar_token_participante(self, id_participante, token):
+        """Entrega un token JWT al participante, ya sea directamente o mediante cola."""
+        mensaje_token = {
+            "event": "token_actualizado",
+            "room_id": self.room_id,
+            "jwt_token": token,
+        }
+        
+        # Si el participante está conectado, enviar directamente
+        if id_participante in active_websockets:
+            try:
+                active_websockets[id_participante].write_message(mensaje_token)
+                logging.info(f"[TOKEN] Token entregado directamente a {id_participante}")
+                return True
+            except tornado.websocket.WebSocketClosedError:
+                logging.warning(f"[TOKEN] Conexión cerrada al entregar token a {id_participante}")
+            except Exception as e:
+                logging.error(f"[TOKEN] Error enviando token a {id_participante}: {str(e)}")
+        
+        # Si no se pudo entregar directamente, encolar para entrega posterior
+        mensaje_token["event"] = "token_pendiente"  # Cambiar evento para entrega posterior
+        mensaje_token["timestamp"] = time.time()
+        
+        if await add_message_to_queue(id_participante, mensaje_token):
+            logging.info(f"[TOKEN] Token encolado para entrega posterior a {id_participante}")
+            return True
+        else:
+            logging.error(f"[TOKEN] Error al encolar token para {id_participante}")
+            return False
 
     async def on_message(self, message):
         # Todas las operaciones de Redis deben ser awaited
