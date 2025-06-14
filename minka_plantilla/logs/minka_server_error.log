@@ -925,3 +925,821 @@ Traceback (most recent call last):
 UnboundLocalError: cannot access local variable 'jwt_token_for_web_joiner' where it is not associated with a value
 2025-06-11 19:46:34 - ERROR - [session.py:43] - [REDIS_INIT] No se pudo conectar a Redis: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
 2025-06-11 19:46:34 - CRITICAL - [appv2.py:1272] - [MAIN] No se pudo inicializar Redis al arrancar: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.. Saliendo.
+2025-06-11 22:49:11 - ERROR - [session.py:43] - [REDIS_INIT] No se pudo conectar a Redis: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-11 22:49:11 - CRITICAL - [appv2.py:1272] - [MAIN] No se pudo inicializar Redis al arrancar: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.. Saliendo.
+2025-06-11 22:51:19 - ERROR - [web.py:1875] - Uncaught exception GET /ws?client_id=web-client-1749700269788&action=create (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?client_id=web-client-1749700269788&action=create', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 506, in open
+    self.write_message({
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 332, in write_message
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-06-11 23:14:18 - ERROR - [web.py:1875] - Uncaught exception GET /ws?client_id=web-client-1749700477277&action=create (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?client_id=web-client-1749700477277&action=create', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 375, in open
+    existing_client = await get_client(client_id_param) if client_id_param else None
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/session.py", line 122, in get_client
+    client_json = await rc.get(f"{CLIENT_KEY_PREFIX}{client_id}")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/client.py", line 678, in execute_command
+    return await conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/retry.py", line 76, in call_with_retry
+    raise error
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/retry.py", line 71, in call_with_retry
+    return await do()
+           ^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/client.py", line 653, in _send_command_parse_response
+    return await self.parse_response(conn, command_name, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/client.py", line 699, in parse_response
+    response = await connection.read_response()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 598, in read_response
+    response = await self._parser.read_response(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/_parsers/resp2.py", line 82, in read_response
+    response = await self._read_response(disable_decoding=disable_decoding)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/_parsers/resp2.py", line 90, in _read_response
+    raw = await self._readline()
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/_parsers/base.py", line 233, in _readline
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+2025-06-11 23:31:06 - ERROR - [session.py:113] - Error de Redis en get_all_session_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-11 23:31:06 - ERROR - [session.py:163] - Error de Redis en get_all_client_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 00:59:33 - ERROR - [session.py:113] - Error de Redis en get_all_session_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 00:59:33 - ERROR - [session.py:163] - Error de Redis en get_all_client_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 02:43:07 - ERROR - [session.py:113] - Error de Redis en get_all_session_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 02:43:07 - ERROR - [session.py:163] - Error de Redis en get_all_client_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 04:11:21 - ERROR - [session.py:113] - Error de Redis en get_all_session_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 04:11:21 - ERROR - [session.py:163] - Error de Redis en get_all_client_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 05:23:41 - ERROR - [session.py:113] - Error de Redis en get_all_session_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 05:23:41 - ERROR - [session.py:163] - Error de Redis en get_all_client_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 06:40:32 - ERROR - [session.py:113] - Error de Redis en get_all_session_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 06:40:32 - ERROR - [session.py:163] - Error de Redis en get_all_client_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 06:40:56 - ERROR - [session.py:113] - Error de Redis en get_all_session_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 06:40:56 - ERROR - [session.py:163] - Error de Redis en get_all_client_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 06:41:56 - ERROR - [session.py:113] - Error de Redis en get_all_session_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 06:41:56 - ERROR - [session.py:163] - Error de Redis en get_all_client_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 06:42:56 - ERROR - [session.py:113] - Error de Redis en get_all_session_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 06:42:56 - ERROR - [session.py:163] - Error de Redis en get_all_client_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 06:43:07 - ERROR - [web.py:1875] - Uncaught exception GET /ws?client_id=web-client-1749701651541&action=create (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?client_id=web-client-1749701651541&action=create', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 302, in connect_check_health
+    await self.retry.call_with_retry(
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/retry.py", line 71, in call_with_retry
+    return await do()
+           ^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 759, in _connect
+    reader, writer = await asyncio.open_connection(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/streams.py", line 48, in open_connection
+    transport, _ = await loop.create_connection(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 1093, in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+OSError: Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 375, in open
+    existing_client = await get_client(client_id_param) if client_id_param else None
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/session.py", line 122, in get_client
+    client_json = await rc.get(f"{CLIENT_KEY_PREFIX}{client_id}")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/client.py", line 673, in execute_command
+    conn = self.connection or await pool.get_connection()
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 1145, in get_connection
+    await self.ensure_connection(connection)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 1178, in ensure_connection
+    await connection.connect()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 296, in connect
+    await self.connect_check_health(check_health=True)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 310, in connect_check_health
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 06:43:07 - ERROR - [web.py:1875] - Uncaught exception GET /ws?client_id=web-client-1749701651541&action=create (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?client_id=web-client-1749701651541&action=create', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 302, in connect_check_health
+    await self.retry.call_with_retry(
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/retry.py", line 71, in call_with_retry
+    return await do()
+           ^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 759, in _connect
+    reader, writer = await asyncio.open_connection(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/streams.py", line 48, in open_connection
+    transport, _ = await loop.create_connection(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 1093, in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+OSError: Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 375, in open
+    existing_client = await get_client(client_id_param) if client_id_param else None
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/session.py", line 122, in get_client
+    client_json = await rc.get(f"{CLIENT_KEY_PREFIX}{client_id}")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/client.py", line 673, in execute_command
+    conn = self.connection or await pool.get_connection()
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 1145, in get_connection
+    await self.ensure_connection(connection)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 1178, in ensure_connection
+    await connection.connect()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 296, in connect
+    await self.connect_check_health(check_health=True)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 310, in connect_check_health
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 06:43:17 - ERROR - [web.py:1875] - Uncaught exception GET /ws?client_id=web-client-1749728588275&action=create (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?client_id=web-client-1749728588275&action=create', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 302, in connect_check_health
+    await self.retry.call_with_retry(
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/retry.py", line 71, in call_with_retry
+    return await do()
+           ^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 759, in _connect
+    reader, writer = await asyncio.open_connection(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/streams.py", line 48, in open_connection
+    transport, _ = await loop.create_connection(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 1093, in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+OSError: Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/appv2.py", line 375, in open
+    existing_client = await get_client(client_id_param) if client_id_param else None
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/session.py", line 122, in get_client
+    client_json = await rc.get(f"{CLIENT_KEY_PREFIX}{client_id}")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/client.py", line 673, in execute_command
+    conn = self.connection or await pool.get_connection()
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 1145, in get_connection
+    await self.ensure_connection(connection)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 1178, in ensure_connection
+    await connection.connect()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 296, in connect
+    await self.connect_check_health(check_health=True)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/redis/asyncio/connection.py", line 310, in connect_check_health
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 06:43:56 - ERROR - [session.py:113] - Error de Redis en get_all_session_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 06:43:56 - ERROR - [session.py:163] - Error de Redis en get_all_client_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 06:44:56 - ERROR - [session.py:113] - Error de Redis en get_all_session_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 06:44:56 - ERROR - [session.py:163] - Error de Redis en get_all_client_keys: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 09:01:42 - ERROR - [session:init_redis_client:47] - [REDIS_INIT] No se pudo conectar a Redis: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-12 09:01:42 - CRITICAL - [main:main:45] - [MAIN] No se pudo inicializar Redis al arrancar: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.. Saliendo.
+2025-06-12 09:24:34 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-12 09:29:38 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-12 09:50:42 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-12 09:53:40 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-12 10:01:29 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-12 10:01:39 - ERROR - [web:log_exception:1875] - Uncaught exception GET /ws?client_id=web-75784ed2&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNzU3ODRlZDIiLCJyb29tX2lkIjoiaWQtZWNiYTYyYzQ5NWMwNDYzNDk3NGIzYjE3NTQ2Njc5ZTciLCJleHAiOjE3NTAzNDUyOTcuMjMwMjQyLCJpYXQiOjE3NDk3NDA0OTcuMjMwMjQzLCJqdGkiOiJhNzNjMzAyMmU3MzY0ODFmYjA1YmNmNzdjMGQyODA4ZiJ9.xdkMBBk_GgmXuEgiOZ-KB46CqeMxd4nI38J1Dvc6H00 (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?client_id=web-75784ed2&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNzU3ODRlZDIiLCJyb29tX2lkIjoiaWQtZWNiYTYyYzQ5NWMwNDYzNDk3NGIzYjE3NTQ2Njc5ZTciLCJleHAiOjE3NTAzNDUyOTcuMjMwMjQyLCJpYXQiOjE3NDk3NDA0OTcuMjMwMjQzLCJqdGkiOiJhNzNjMzAyMmU3MzY0ODFmYjA1YmNmNzdjMGQyODA4ZiJ9.xdkMBBk_GgmXuEgiOZ-KB46CqeMxd4nI38J1Dvc6H00', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/websocket_handler.py", line 72, in open
+    await handle_reconnection_with_jwt(self, jwt_token_param, client_id_param, active_websockets)
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 190, in handle_reconnection_with_jwt
+    payload = await verificar_token_jwt(token, check_jti_blacklisted)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object NoneType can't be used in 'await' expression
+2025-06-12 10:01:39 - ERROR - [web:log_exception:1875] - Uncaught exception GET /ws?client_id=mobile-c36938b9&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYzM2OTM4YjkiLCJyb29tX2lkIjoiaWQtZWNiYTYyYzQ5NWMwNDYzNDk3NGIzYjE3NTQ2Njc5ZTciLCJleHAiOjE3NTAzNDUyOTcuMjMwODgsImlhdCI6MTc0OTc0MDQ5Ny4yMzA4ODEsImp0aSI6Ijg3OGJkY2Y2ZWM0ODRhNDE5MTE1YjYyY2UxN2MzYmVhIn0.fhadzR9GJwVzMmIC-aQyg6ETn_gLk6KQ0FYuKVTYwW0 (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?client_id=mobile-c36938b9&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYzM2OTM4YjkiLCJyb29tX2lkIjoiaWQtZWNiYTYyYzQ5NWMwNDYzNDk3NGIzYjE3NTQ2Njc5ZTciLCJleHAiOjE3NTAzNDUyOTcuMjMwODgsImlhdCI6MTc0OTc0MDQ5Ny4yMzA4ODEsImp0aSI6Ijg3OGJkY2Y2ZWM0ODRhNDE5MTE1YjYyY2UxN2MzYmVhIn0.fhadzR9GJwVzMmIC-aQyg6ETn_gLk6KQ0FYuKVTYwW0', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/websocket_handler.py", line 72, in open
+    await handle_reconnection_with_jwt(self, jwt_token_param, client_id_param, active_websockets)
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 190, in handle_reconnection_with_jwt
+    payload = await verificar_token_jwt(token, check_jti_blacklisted)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object NoneType can't be used in 'await' expression
+2025-06-12 10:01:39 - ERROR - [web:log_exception:1875] - Uncaught exception GET /ws?client_id=web-75784ed2&jwt_token=invalid_token_123 (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?client_id=web-75784ed2&jwt_token=invalid_token_123', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/websocket_handler.py", line 72, in open
+    await handle_reconnection_with_jwt(self, jwt_token_param, client_id_param, active_websockets)
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 190, in handle_reconnection_with_jwt
+    payload = await verificar_token_jwt(token, check_jti_blacklisted)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object NoneType can't be used in 'await' expression
+2025-06-12 10:01:39 - ERROR - [web:log_exception:1875] - Uncaught exception GET /ws?client_id=web-75784ed2&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNzU3ODRlZDIiLCJyb29tX2lkIjoiaWQtZWNiYTYyYzQ5NWMwNDYzNDk3NGIzYjE3NTQ2Njc5ZTciLCJleHAiOjE3NTAzNDUyOTcuMjMwMjQyLCJpYXQiOjE3NDk3NDA0OTcuMjMwMjQzLCJqdGkiOiJhNzNjMzAyMmU3MzY0ODFmYjA1YmNmNzdjMGQyODA4ZiJ9.xdkMBBk_GgmXuEgiOZ-KB46CqeMxd4nI38J1Dvc6H00 (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?client_id=web-75784ed2&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItNzU3ODRlZDIiLCJyb29tX2lkIjoiaWQtZWNiYTYyYzQ5NWMwNDYzNDk3NGIzYjE3NTQ2Njc5ZTciLCJleHAiOjE3NTAzNDUyOTcuMjMwMjQyLCJpYXQiOjE3NDk3NDA0OTcuMjMwMjQzLCJqdGkiOiJhNzNjMzAyMmU3MzY0ODFmYjA1YmNmNzdjMGQyODA4ZiJ9.xdkMBBk_GgmXuEgiOZ-KB46CqeMxd4nI38J1Dvc6H00', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/websocket_handler.py", line 72, in open
+    await handle_reconnection_with_jwt(self, jwt_token_param, client_id_param, active_websockets)
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 190, in handle_reconnection_with_jwt
+    payload = await verificar_token_jwt(token, check_jti_blacklisted)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object NoneType can't be used in 'await' expression
+2025-06-12 10:04:55 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-12 10:05:15 - ERROR - [web:log_exception:1875] - Uncaught exception GET /ws?client_id=web-f84fff1f&jwt_token=invalid_token_123 (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?client_id=web-f84fff1f&jwt_token=invalid_token_123', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/websocket_handler.py", line 72, in open
+    await handle_reconnection_with_jwt(self, jwt_token_param, client_id_param, active_websockets)
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 194, in handle_reconnection_with_jwt
+    await send_error_and_close(handler, 'Token inválido o expirado.', 'INVALID_TOKEN')
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 32, in send_error_and_close
+    if handler.ws_connection and handler.ws_connection.protocol:
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'WebSocketProtocol13' object has no attribute 'protocol'
+2025-06-12 10:05:15 - ERROR - [web:log_exception:1875] - Uncaught exception GET /ws?client_id=mobile-cca34798 (::1)
+HTTPServerRequest(protocol='http', host='localhost:5001', method='GET', uri='/ws?client_id=mobile-cca34798', version='HTTP/1.1', remote_ip='::1')
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/websocket.py", line 940, in _accept_connection
+    await open_result
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/websocket_handler.py", line 78, in open
+    await send_error_and_close(self, 'Acción requerida (create o join).', 'ACTION_REQUIRED')
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 32, in send_error_and_close
+    if handler.ws_connection and handler.ws_connection.protocol:
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'WebSocketProtocol13' object has no attribute 'protocol'
+2025-06-12 10:08:56 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-12 10:18:58 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-12 10:26:22 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-12 10:32:14 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-12 10:46:15 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-12 10:56:08 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-12 10:56:18 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1043c1d50>>, <Task finished name='Task-17' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:254> exception=NameError("name 'asyncio' is not defined")>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 289, in cleanup_client_and_session
+    await asyncio.sleep(0.5)
+          ^^^^^^^
+NameError: name 'asyncio' is not defined
+2025-06-12 10:56:20 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1043c1d50>>, <Task finished name='Task-24' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:254> exception=NameError("name 'asyncio' is not defined")>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 289, in cleanup_client_and_session
+    await asyncio.sleep(0.5)
+          ^^^^^^^
+NameError: name 'asyncio' is not defined
+2025-06-12 10:56:21 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1043c1d50>>, <Task finished name='Task-31' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:254> exception=NameError("name 'asyncio' is not defined")>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 289, in cleanup_client_and_session
+    await asyncio.sleep(0.5)
+          ^^^^^^^
+NameError: name 'asyncio' is not defined
+2025-06-12 10:56:21 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1043c1d50>>, <Task finished name='Task-50' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:254> exception=NameError("name 'asyncio' is not defined")>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 289, in cleanup_client_and_session
+    await asyncio.sleep(0.5)
+          ^^^^^^^
+NameError: name 'asyncio' is not defined
+2025-06-12 10:56:21 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1043c1d50>>, <Task finished name='Task-54' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:254> exception=NameError("name 'asyncio' is not defined")>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 289, in cleanup_client_and_session
+    await asyncio.sleep(0.5)
+          ^^^^^^^
+NameError: name 'asyncio' is not defined
+2025-06-12 10:56:21 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1043c1d50>>, <Task finished name='Task-61' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:254> exception=NameError("name 'asyncio' is not defined")>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 289, in cleanup_client_and_session
+    await asyncio.sleep(0.5)
+          ^^^^^^^
+NameError: name 'asyncio' is not defined
+2025-06-12 10:56:21 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1043c1d50>>, <Task finished name='Task-65' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:254> exception=NameError("name 'asyncio' is not defined")>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 289, in cleanup_client_and_session
+    await asyncio.sleep(0.5)
+          ^^^^^^^
+NameError: name 'asyncio' is not defined
+2025-06-12 10:56:21 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1043c1d50>>, <Task finished name='Task-72' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:254> exception=NameError("name 'asyncio' is not defined")>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 289, in cleanup_client_and_session
+    await asyncio.sleep(0.5)
+          ^^^^^^^
+NameError: name 'asyncio' is not defined
+2025-06-12 10:56:21 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1043c1d50>>, <Task finished name='Task-76' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:254> exception=NameError("name 'asyncio' is not defined")>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 289, in cleanup_client_and_session
+    await asyncio.sleep(0.5)
+          ^^^^^^^
+NameError: name 'asyncio' is not defined
+2025-06-12 10:56:21 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1043c1d50>>, <Task finished name='Task-83' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:254> exception=NameError("name 'asyncio' is not defined")>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 289, in cleanup_client_and_session
+    await asyncio.sleep(0.5)
+          ^^^^^^^
+NameError: name 'asyncio' is not defined
+2025-06-12 10:56:21 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1043c1d50>>, <Task finished name='Task-87' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:254> exception=NameError("name 'asyncio' is not defined")>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 289, in cleanup_client_and_session
+    await asyncio.sleep(0.5)
+          ^^^^^^^
+NameError: name 'asyncio' is not defined
+2025-06-12 10:56:21 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1043c1d50>>, <Task finished name='Task-94' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:254> exception=NameError("name 'asyncio' is not defined")>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 289, in cleanup_client_and_session
+    await asyncio.sleep(0.5)
+          ^^^^^^^
+NameError: name 'asyncio' is not defined
+2025-06-12 10:56:21 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1043c1d50>>, <Task finished name='Task-98' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:254> exception=NameError("name 'asyncio' is not defined")>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 289, in cleanup_client_and_session
+    await asyncio.sleep(0.5)
+          ^^^^^^^
+NameError: name 'asyncio' is not defined
+2025-06-12 11:01:31 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-12 11:01:43 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1024f4fd0>>, <Task finished name='Task-33' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:255> exception=KeyError('mobile-f1e112a6')>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 291, in cleanup_client_and_session
+    await active_websockets[peer_id].write_message(disconnect_notification)
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'mobile-f1e112a6'
+2025-06-12 11:01:43 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1024f4fd0>>, <Task finished name='Task-52' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:255> exception=KeyError('mobile-f1e112a6')>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 291, in cleanup_client_and_session
+    await active_websockets[peer_id].write_message(disconnect_notification)
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'mobile-f1e112a6'
+2025-06-12 11:01:43 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1024f4fd0>>, <Task finished name='Task-56' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:255> exception=KeyError('web-4c354ac7')>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 291, in cleanup_client_and_session
+    await active_websockets[peer_id].write_message(disconnect_notification)
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'web-4c354ac7'
+2025-06-12 11:01:43 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1024f4fd0>>, <Task finished name='Task-63' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:255> exception=KeyError('mobile-f1e112a6')>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 291, in cleanup_client_and_session
+    await active_websockets[peer_id].write_message(disconnect_notification)
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'mobile-f1e112a6'
+2025-06-12 11:01:43 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1024f4fd0>>, <Task finished name='Task-67' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:255> exception=KeyError('web-4c354ac7')>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 291, in cleanup_client_and_session
+    await active_websockets[peer_id].write_message(disconnect_notification)
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'web-4c354ac7'
+2025-06-12 11:01:43 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1024f4fd0>>, <Task finished name='Task-74' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:255> exception=KeyError('mobile-f1e112a6')>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 291, in cleanup_client_and_session
+    await active_websockets[peer_id].write_message(disconnect_notification)
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'mobile-f1e112a6'
+2025-06-12 11:01:43 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1024f4fd0>>, <Task finished name='Task-78' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:255> exception=KeyError('web-4c354ac7')>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 291, in cleanup_client_and_session
+    await active_websockets[peer_id].write_message(disconnect_notification)
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'web-4c354ac7'
+2025-06-12 11:01:43 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1024f4fd0>>, <Task finished name='Task-85' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:255> exception=KeyError('mobile-f1e112a6')>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 291, in cleanup_client_and_session
+    await active_websockets[peer_id].write_message(disconnect_notification)
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'mobile-f1e112a6'
+2025-06-12 11:01:43 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1024f4fd0>>, <Task finished name='Task-89' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:255> exception=KeyError('web-4c354ac7')>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 291, in cleanup_client_and_session
+    await active_websockets[peer_id].write_message(disconnect_notification)
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'web-4c354ac7'
+2025-06-12 11:01:43 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1024f4fd0>>, <Task finished name='Task-96' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:255> exception=KeyError('mobile-f1e112a6')>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 291, in cleanup_client_and_session
+    await active_websockets[peer_id].write_message(disconnect_notification)
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'mobile-f1e112a6'
+2025-06-12 11:01:43 - ERROR - [ioloop:_run_callback:770] - Exception in callback functools.partial(<bound method IOLoop._discard_future_result of <tornado.platform.asyncio.AsyncIOMainLoop object at 0x1024f4fd0>>, <Task finished name='Task-100' coro=<cleanup_client_and_session() done, defined at /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py:255> exception=KeyError('web-4c354ac7')>)
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 750, in _run_callback
+    ret = callback()
+          ^^^^^^^^^^
+  File "/Users/jerifcornejo/Library/Python/3.11/lib/python/site-packages/tornado/ioloop.py", line 774, in _discard_future_result
+    future.result()
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/handlers/room_manager.py", line 291, in cleanup_client_and_session
+    await active_websockets[peer_id].write_message(disconnect_notification)
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'web-4c354ac7'
+2025-06-12 11:04:42 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-12 11:54:21 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-12 11:55:59 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-12 12:03:41 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-13 21:46:04 - ERROR - [session:init_redis_client:48] - [REDIS_INIT] No se pudo conectar a Redis: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-13 21:46:04 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.. Saliendo.
+2025-06-14 09:03:24 - ERROR - [session:init_redis_client:48] - [REDIS_INIT] No se pudo conectar a Redis: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-14 09:03:24 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.. Saliendo.
+2025-06-14 09:55:14 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-14 09:56:44 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-14 10:05:05 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-14 10:06:17 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-14 10:23:00 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.

@@ -2,7 +2,7 @@
 Módulo para procesamiento de mensajes en el servidor WebSocket.
 Contiene funciones para manejar diferentes tipos de mensajes y acciones.
 """
-
+import asyncio
 import logging
 import time
 import jwt
@@ -146,7 +146,7 @@ async def broadcast_message(handler, content, message_type="generic", active_web
         'event': 'new_message',
         'sender_id': handler.client_id,
         'room_id': handler.room_id,
-        'message_content': content,
+        'message': content,
         'message_type': message_type,
         'timestamp': time.time(),
         'message_id': message_id
