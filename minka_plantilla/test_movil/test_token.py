@@ -21,6 +21,32 @@ logger = logging.getLogger("minka_test")
 # URL del servidor WebSocket
 SERVER_URL = "ws://localhost:5001/ws"  # Ajustar según corresponda
 
+# Definir función extract_message_content fuera de la clase para que esté disponible globalmente
+def extract_message_content(data):
+    """
+    Extrae el contenido del mensaje desde diferentes formatos posibles
+    que el servidor puede enviar.
+    """
+    if isinstance(data, str):
+        return data
+    
+    if not isinstance(data, dict):
+        return None
+        
+    # Si es el formato de mensaje estructurado
+    if 'event' in data and data.get('event') == 'new_message':
+        return data.get('message_content')
+    
+    # Si es un mensaje directo
+    if 'message' in data:
+        return data.get('message')
+    
+    # Si es el contenido enviado directamente
+    if 'message_content' in data:
+        return data.get('message_content')
+    
+    return None
+
 # Clase para representar un cliente (web o movil)
 class MinkaClient:
     def __init__(self, client_type, client_id=None):
@@ -221,9 +247,14 @@ class MinkaClient:
             # Primero limpiar cualquier confirmacion pendiente
             if ignore_confirmations:
                 pre_message = await self.clear_delivery_confirmations(timeout=0.5)
-                if pre_message and ('message' in pre_message or not pre_message.get('event') in ['message_delivered', 'message_queued']):
-                    logger.info(f"Cliente {self.client_id} recibio: {pre_message}")
-                    return pre_message
+                if pre_message:
+                    # Extraer el contenido del mensaje si es posible
+                    message_content = extract_message_content(pre_message)
+                    if message_content:
+                        logger.info(f"Cliente {self.client_id} recibio mensaje: {message_content}")
+                    if not pre_message.get('event') in ['message_delivered', 'message_queued']:
+                        logger.info(f"Cliente {self.client_id} recibio: {pre_message}")
+                        return pre_message
             
             # Esperar un mensaje real
             start_time = time.time()
@@ -231,15 +262,30 @@ class MinkaClient:
             
             while remaining_timeout > 0:
                 response = await asyncio.wait_for(self.websocket.recv(), remaining_timeout)
-                data = json.loads(response)
-                logger.info(f"Cliente {self.client_id} recibio: {data}")
+                # Intentar procesar como JSON o como texto plano
+                try:
+                    data = json.loads(response)
+                except json.JSONDecodeError:
+                    # Si no es JSON, asumimos que es el contenido directo del mensaje
+                    logger.info(f"Cliente {self.client_id} recibio texto plano: {response}")
+                    self.messages_received.append(response)
+                    return {"message": response}
+                
+                logger.debug(f"Cliente {self.client_id} recibio JSON: {data}")
                 self.messages_received.append(data)
                 
                 # Si estamos ignorando confirmaciones y esto es una confirmacion, continuar esperando
-                if ignore_confirmations and 'event' in data and data['event'] in ['message_delivered', 'message_queued']:
+                if ignore_confirmations and 'event' in data and data['event'] in ['message_delivered', 'message_queued', 'message_sent_confirmation']:
                     logger.debug(f"Ignorando confirmacion de entrega: {data['event']}")
                     remaining_timeout = max(0.1, timeout - (time.time() - start_time))
                     continue
+                
+                # Para mensajes reales, mostramos el contenido extraído
+                message_content = extract_message_content(data)
+                if message_content:
+                    logger.info(f"Cliente {self.client_id} recibio mensaje: {message_content}")
+                else:
+                    logger.info(f"Cliente {self.client_id} recibio: {data}")
                 
                 return data
                 
@@ -380,12 +426,29 @@ async def run_test():
                 await web_client.send_message(message)
                 
                 response = await mobile_client.receive_message(timeout=5)
-                if not response or response.get('message') != message:
+                # Extraer el contenido del mensaje para comparación
+                received_content = extract_message_content(response)
+                
+                if not response:
                     exchange_success = False
-                    exchange_error = f"Movil no recibio correctamente el mensaje: {message}"
+                    exchange_error = f"Movil no recibio ningún mensaje cuando esperaba: {message}"
                     logger.error(exchange_error)
                     break
-                logger.info(f"Movil recibio correctamente: {message}")
+                
+                if received_content != message:
+                    # Si hay una estructura de evento, buscar el contenido
+                    if response.get('event') == 'new_message':
+                        received_content = response.get('message_content')
+                        if received_content == message:
+                            logger.info(f"Movil recibio correctamente en formato estructurado: {received_content}")
+                            continue
+                            
+                    exchange_success = False
+                    exchange_error = f"Movil no recibio correctamente el mensaje: {message}. Recibido: {received_content}"
+                    logger.error(exchange_error)
+                    break
+                
+                logger.info(f"Movil recibio correctamente: {received_content}")
             else:  # mobile
                 logger.info(f"Movil envia: {message}")
                 await mobile_client.send_message(message)
@@ -444,24 +507,35 @@ async def run_test():
             await web_client.send_message(test_message)
             
             response = await mobile_client.receive_message(timeout=5, ignore_confirmations=True)
+            received_content = extract_message_content(response)
             
-            if response and response.get('message') == test_message:
-                logger.info(f"Movil recibio mensaje despues de reconexion web")
-                
-                # Mobile -> Web
-                test_message_back = "Respuesta a web reconectado"
-                logger.info(f"Movil responde a web reconectada: {test_message_back}")
-                await mobile_client.send_message(test_message_back)
-                
-                response_back = await web_client.receive_message(timeout=5, ignore_confirmations=True)
-                
-                if response_back and response_back.get('message') == test_message_back:
-                    logger.info(f"Web reconectada recibio respuesta del movil")
-                    results.add_success("Comunicacion bidireccional despues de reconexion web")
+            if response:
+                # Validar el contenido directamente o a través de 'new_message'
+                if received_content == test_message or (
+                    response.get('event') == 'new_message' and 
+                    response.get('message_content') == test_message
+                ):
+                    logger.info(f"Movil recibio mensaje despues de reconexion web: {test_message}")
+                    
+                    # Mobile -> Web
+                    test_message_back = "Respuesta a web reconectado"
+                    logger.info(f"Movil responde a web reconectada: {test_message_back}")
+                    await mobile_client.send_message(test_message_back)
+                    
+                    response_back = await web_client.receive_message(timeout=5, ignore_confirmations=True)
+                    received_content_back = extract_message_content(response_back)
+                    
+                    if response_back and response_back.get('message') == test_message_back:
+                        logger.info(f"Web reconectada recibio respuesta del movil")
+                        results.add_success("Comunicacion bidireccional despues de reconexion web")
+                    else:
+                        logger.error(f"Web reconectada no recibio mensaje de movil")
+                        results.add_failure("Comunicacion bidireccional despues de reconexion web", 
+                                            "Web reconectado no recibio mensaje de movil")
                 else:
-                    logger.error(f"Web reconectada no recibio mensaje de movil")
-                    results.add_failure("Comunicacion bidireccional despues de reconexion web", 
-                                        "Web reconectado no recibio mensaje de movil")
+                    logger.error(f"Movil recibio un mensaje diferente. Esperado: {test_message}, Recibido: {received_content}")
+                    results.add_failure("Comunicacion despues de reconexion web", 
+                                       f"Movil recibio un mensaje diferente. Esperado: {test_message}, Recibido: {received_content}")
             else:
                 logger.error(f"Movil no recibio mensaje despues de reconexion web")
                 results.add_failure("Comunicacion despues de reconexion web", 
@@ -488,9 +562,10 @@ async def run_test():
             await mobile_client.send_message(test_message)
             
             response = await web_client.receive_message(timeout=5, ignore_confirmations=True)
+            received_content = extract_message_content(response)
             
-            if response and response.get('message') == test_message:
-                logger.info(f"Web recibio mensaje despues de reconexion movil")
+            if response and received_content == test_message:
+                logger.info(f"Web recibio mensaje despues de reconexion movil: {received_content}")
                 
                 # Web -> Mobile
                 test_message_back = "Respuesta a movil reconectado"
@@ -498,6 +573,7 @@ async def run_test():
                 await web_client.send_message(test_message_back)
                 
                 response_back = await mobile_client.receive_message(timeout=5, ignore_confirmations=True)
+                received_content_back = extract_message_content(response_back)
                 
                 if response_back and response_back.get('message') == test_message_back:
                     logger.info(f"Movil reconectado recibio respuesta de web")
@@ -592,7 +668,8 @@ async def run_test():
             
             logger.info("Movil esperando mensaje tras reconexion múltiple...")
             response = await mobile_client.receive_message(timeout=5, ignore_confirmations=True)
-            if not response or response.get('message') != test_message:
+            received_content = extract_message_content(response)
+            if not response or received_content != test_message:
                 reconnect_success = False
                 reconnect_error = f"Fallo la comunicacion despues de reconexion múltiple {i+1}"
                 logger.error(reconnect_error)
