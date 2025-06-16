@@ -14525,3 +14525,455 @@ RuntimeError: Event loop stopped before Future completed.
 2025-06-14 10:25:33 - INFO - [room_manager:handle_join_room:155] - [WS-JOIN] Cliente python-client-23ccb98f-48ec-44c6-b18c-2b07c8781c3c (móvil: True) se unió a sala id-4801f397cdaf45caa062bd3030446e2d.
 2025-06-14 10:25:38 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1749914738.867807-e5634a49 de python-client-23ccb98f-48ec-44c6-b18c-2b07c8781c3c enviado en sala id-4801f397cdaf45caa062bd3030446e2d.
 2025-06-14 10:26:58 - INFO - [session_cleanup:cleanup_sessions:90] - [CLEANUP] Cliente python-client-284fd310-a594-4252-85e0-64fcef3453fb (web: False) no reconectó (200s). Limpiando.
+2025-06-14 10:31:26 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1749915086.884941-a2864eb4 de python-client-23ccb98f-48ec-44c6-b18c-2b07c8781c3c enviado en sala id-4801f397cdaf45caa062bd3030446e2d.
+2025-06-14 10:31:37 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-client-1749914676217 (móvil: False) en id-4801f397cdaf45caa062bd3030446e2d. Intencional: False, Código: 1001, Razón: None
+2025-06-14 10:31:37 - INFO - [room_manager:cleanup_client_and_session:271] - [CLOSE] Cliente web-client-1749914676217 estaba en estado 'waiting_for_peer', no se marca como pending_reconnect.
+2025-06-14 10:31:37 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-client-1749914676217&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItY2xpZW50LTE3NDk5MTQ2NzYyMTciLCJyb29tX2lkIjoiaWQtNDgwMWYzOTdjZGFmNDVjYWEwNjJiZDMwMzA0NDZlMmQiLCJleHAiOjE3NTA1MTk1MzMuNjI3MTc4LCJpYXQiOjE3NDk5MTQ3MzMuNjI3MTc5LCJqdGkiOiI0NWI1NDdiMzMwZWU0MzI5OWJiZjIyYzI4NDVmMDg3YiJ9.fz8AhZkN8LS-sFG1LilGNXQd1qPXHB78Cv2QU82ua5I (::1) 1.01ms
+2025-06-14 10:31:37 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-client-1749914676217 reconectado y validado en sala id-4801f397cdaf45caa062bd3030446e2d.
+2025-06-14 10:31:49 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1749915109.74052-699f4f78 de python-client-23ccb98f-48ec-44c6-b18c-2b07c8781c3c enviado en sala id-4801f397cdaf45caa062bd3030446e2d.
+2025-06-14 10:32:14 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1749915134.388669-f25a7ff0 de python-client-23ccb98f-48ec-44c6-b18c-2b07c8781c3c enviado en sala id-4801f397cdaf45caa062bd3030446e2d.
+2025-06-14 11:24:24 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-client-1749914676217 (móvil: False) en id-4801f397cdaf45caa062bd3030446e2d. Intencional: False, Código: None, Razón: None
+2025-06-14 11:24:24 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-client-1749914676217 marcado como 'pending_reconnect'.
+2025-06-14 11:24:25 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-client-1749914676217&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItY2xpZW50LTE3NDk5MTQ2NzYyMTciLCJyb29tX2lkIjoiaWQtNDgwMWYzOTdjZGFmNDVjYWEwNjJiZDMwMzA0NDZlMmQiLCJleHAiOjE3NTA1MTk1MzMuNjI3MTc4LCJpYXQiOjE3NDk5MTQ3MzMuNjI3MTc5LCJqdGkiOiI0NWI1NDdiMzMwZWU0MzI5OWJiZjIyYzI4NDVmMDg3YiJ9.fz8AhZkN8LS-sFG1LilGNXQd1qPXHB78Cv2QU82ua5I (::1) 4.31ms
+2025-06-14 11:24:26 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-client-1749914676217 reconectado y validado en sala id-4801f397cdaf45caa062bd3030446e2d.
+2025-06-15 07:54:36 - WARNING - [main:sig_handler:90] - Recibida señal 2. Planificando cierre elegante.
+2025-06-15 07:54:36 - INFO - [main:graceful_shutdown:64] - Iniciando cierre elegante...
+2025-06-15 07:54:36 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-client-1749914676217 (móvil: False) en id-4801f397cdaf45caa062bd3030446e2d. Intencional: False, Código: 1001, Razón: Servidor apagándose
+2025-06-15 07:54:36 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para python-client-23ccb98f-48ec-44c6-b18c-2b07c8781c3c (móvil: True) en id-4801f397cdaf45caa062bd3030446e2d. Intencional: False, Código: 1000, Razón: None
+2025-06-15 07:54:36 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-client-1749914676217 marcado como 'pending_reconnect'.
+2025-06-15 07:54:36 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente python-client-23ccb98f-48ec-44c6-b18c-2b07c8781c3c marcado como 'pending_reconnect'.
+2025-06-15 07:54:37 - INFO - [session:close_redis_client:332] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-15 07:54:37 - INFO - [main:graceful_shutdown:86] - Cierre elegante completado.
+2025-06-15 07:54:37 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-15 07:54:37 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...
+2025-06-15 13:23:24 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-15 13:23:24 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-15 13:23:24 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-15 13:23:24 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-15 13:23:24 - INFO - [session:init_redis_client:42] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-15 13:23:24 - ERROR - [session:init_redis_client:48] - [REDIS_INIT] No se pudo conectar a Redis: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-15 13:23:24 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.. Saliendo.
+2025-06-15 13:23:24 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...
+2025-06-16 08:53:08 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 08:53:08 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 08:53:08 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 08:53:08 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 08:53:08 - INFO - [session:init_redis_client:42] - [REDIS_INIT] Conectando a Redis en vocal-thrush-27819.upstash.io:6379, DB: 0
+2025-06-16 08:53:09 - ERROR - [session:init_redis_client:48] - [REDIS_INIT] No se pudo conectar a Redis: Connection closed by server.
+2025-06-16 08:53:09 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Connection closed by server.. Saliendo.
+2025-06-16 08:53:09 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...
+2025-06-16 08:53:26 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 08:53:26 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 08:53:26 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 08:53:26 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 08:53:26 - INFO - [session:init_redis_client:42] - [REDIS_INIT] Conectando a Redis en vocal-thrush-27819.upstash.io:6379, DB: 0
+2025-06-16 08:53:26 - ERROR - [session:init_redis_client:48] - [REDIS_INIT] No se pudo conectar a Redis: Connection closed by server.
+2025-06-16 08:53:26 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Connection closed by server.. Saliendo.
+2025-06-16 08:53:26 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...
+2025-06-16 08:54:35 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 08:54:35 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 08:54:35 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 08:54:35 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 08:54:35 - INFO - [session:init_redis_client:42] - [REDIS_INIT] Conectando a Redis en vocal-thrush-27819.upstash.io:6379, DB: 0
+2025-06-16 08:54:36 - ERROR - [session:init_redis_client:48] - [REDIS_INIT] No se pudo conectar a Redis: Connection closed by server.
+2025-06-16 08:54:36 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Connection closed by server.. Saliendo.
+2025-06-16 08:54:36 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...
+2025-06-16 08:55:38 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 08:55:38 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 08:55:38 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 08:55:38 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 08:55:38 - INFO - [session:init_redis_client:42] - [REDIS_INIT] Conectando a Redis en vocal-thrush-27819.upstash.io:6379, DB: 0
+2025-06-16 08:55:39 - ERROR - [session:init_redis_client:48] - [REDIS_INIT] No se pudo conectar a Redis: Connection closed by server.
+2025-06-16 08:55:39 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Connection closed by server.. Saliendo.
+2025-06-16 08:55:39 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...
+2025-06-16 08:57:59 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 08:57:59 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 08:57:59 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 08:57:59 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 08:57:59 - INFO - [session:init_redis_client:42] - [REDIS_INIT] Conectando a Redis en vocal-thrush-27819.upstash.io:6379, DB: 0
+2025-06-16 08:57:59 - ERROR - [session:init_redis_client:48] - [REDIS_INIT] No se pudo conectar a Redis: Connection closed by server.
+2025-06-16 08:57:59 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Connection closed by server.. Saliendo.
+2025-06-16 08:57:59 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...
+2025-06-16 09:00:42 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:00:42 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:00:42 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:00:42 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:00:42 - INFO - [session:init_redis_client:43] - [REDIS_INIT] Conectando a Redis en vocal-thrush-27819.upstash.io:6379, DB: 0
+2025-06-16 09:00:42 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: AbstractConnection.__init__() got an unexpected keyword argument 'ssl'. Saliendo.
+2025-06-16 09:00:42 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...
+2025-06-16 09:01:01 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:01:01 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:01:01 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:01:01 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:01:01 - INFO - [session:init_redis_client:43] - [REDIS_INIT] Conectando a Redis en vocal-thrush-27819.upstash.io:6379, DB: 0
+2025-06-16 09:01:01 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: AbstractConnection.__init__() got an unexpected keyword argument 'ssl'. Saliendo.
+2025-06-16 09:01:01 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...
+2025-06-16 09:02:38 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:02:38 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:02:38 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:02:38 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:02:38 - INFO - [session:init_redis_client:44] - [REDIS_INIT] Conectando a Redis en vocal-thrush-27819.upstash.io:6379, DB: 0
+2025-06-16 09:02:39 - ERROR - [session:init_redis_client:50] - [REDIS_INIT] No se pudo conectar a Redis: Error 1 connecting to vocal-thrush-27819.upstash.io:6379. [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006).
+2025-06-16 09:02:39 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Error 1 connecting to vocal-thrush-27819.upstash.io:6379. [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006).. Saliendo.
+2025-06-16 09:02:39 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...
+2025-06-16 09:04:00 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:04:00 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:04:00 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:04:00 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:04:00 - INFO - [session:init_redis_client:51] - [REDIS_INIT] Conectando a Redis en vocal-thrush-27819.upstash.io:6379, DB: 0
+2025-06-16 09:04:00 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: AbstractConnection.__init__() got an unexpected keyword argument 'ssl'. Saliendo.
+2025-06-16 09:04:00 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...
+2025-06-16 09:07:00 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:07:00 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:07:00 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:07:00 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:07:00 - INFO - [session:init_redis_client:52] - [REDIS_INIT] Conectando a Redis en vocal-thrush-27819.upstash.io:6379, DB: 0
+2025-06-16 09:07:00 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: AbstractConnection.__init__() got an unexpected keyword argument 'ssl'. Saliendo.
+2025-06-16 09:07:00 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...
+2025-06-16 09:08:44 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:08:44 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:08:44 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:08:44 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:08:44 - INFO - [session:init_redis_client:41] - [REDIS_INIT] Conectando a Redis en vocal-thrush-27819.upstash.io:6379, DB: 0
+2025-06-16 09:08:45 - ERROR - [session:init_redis_client:47] - [REDIS_INIT] No se pudo conectar a Redis: Error 1 connecting to vocal-thrush-27819.upstash.io:6379. [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006).
+2025-06-16 09:08:45 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Error 1 connecting to vocal-thrush-27819.upstash.io:6379. [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006).. Saliendo.
+2025-06-16 09:08:45 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...
+2025-06-16 09:10:02 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:10:02 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:10:02 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:10:02 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:10:02 - INFO - [session:init_redis_client:44] - [REDIS_INIT] Conectando a Redis en vocal-thrush-27819.upstash.io:6379, DB: 0
+2025-06-16 09:10:03 - INFO - [session:init_redis_client:48] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-16 09:10:03 - INFO - [main:main:50] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-16 09:10:03 - INFO - [session_cleanup:initialize_server_state_from_redis:156] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-16 09:10:03 - INFO - [session_cleanup:initialize_server_state_from_redis:235] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-16 09:10:44 - INFO - [web:log_request:2348] - 200 GET / (::1) 0.91ms
+2025-06-16 09:10:44 - WARNING - [web:log_request:2348] - 404 GET /apple-touch-icon-precomposed.png (::1) 0.21ms
+2025-06-16 09:10:44 - WARNING - [web:log_request:2348] - 404 GET /favicon.ico (::1) 0.19ms
+2025-06-16 09:10:44 - WARNING - [web:log_request:2348] - 404 GET /apple-touch-icon.png (::1) 0.18ms
+2025-06-16 09:10:46 - INFO - [web:log_request:2348] - 200 GET /monitor (::1) 335.74ms
+2025-06-16 09:10:49 - INFO - [web:log_request:2348] - 200 GET /monitor (::1) 336.70ms
+2025-06-16 09:11:20 - INFO - [web:log_request:2348] - 200 GET /monitor (::1) 336.14ms
+2025-06-16 09:11:50 - INFO - [web:log_request:2348] - 200 GET /monitor (::1) 335.87ms
+2025-06-16 09:12:21 - INFO - [web:log_request:2348] - 200 GET /monitor (::1) 335.74ms
+2025-06-16 09:12:33 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-2dedfe7d&action=create (::1) 0.20ms
+2025-06-16 09:12:34 - INFO - [room_manager:handle_create_room:76] - [WS-OPEN] Sala id-529e8a09479f47c9b17332940931cb12 creada por web-2dedfe7d. Contraseña: 7D075D. Esperando peer.
+2025-06-16 09:12:34 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-342aed29&action=join&room_id=id-529e8a09479f47c9b17332940931cb12&room_password=7D075D (::1) 0.59ms
+2025-06-16 09:12:35 - INFO - [jwt_manager:generate_and_distribute_jwts:91] - [JWT-DIST] Token JWT actualizado y enviado a web-2dedfe7d (móvil: False) en sala id-529e8a09479f47c9b17332940931cb12.
+2025-06-16 09:12:35 - INFO - [jwt_manager:generate_and_distribute_jwts:91] - [JWT-DIST] Token JWT actualizado y enviado a mobile-342aed29 (móvil: True) en sala id-529e8a09479f47c9b17332940931cb12.
+2025-06-16 09:12:35 - INFO - [room_manager:handle_join_room:155] - [WS-JOIN] Cliente mobile-342aed29 (móvil: True) se unió a sala id-529e8a09479f47c9b17332940931cb12.
+2025-06-16 09:12:36 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750083155.912389-fe8d956e de web-2dedfe7d enviado en sala id-529e8a09479f47c9b17332940931cb12.
+2025-06-16 09:12:36 - INFO - [message_processor:handle_doze_start_action:86] - [DOZE] Cliente mobile-342aed29 entrando en modo doze en sala id-529e8a09479f47c9b17332940931cb12.
+2025-06-16 09:12:36 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-342aed29 (móvil: True) en id-529e8a09479f47c9b17332940931cb12. Intencional: True, Código: 1000, Razón: Client initiated doze mode
+2025-06-16 09:12:36 - INFO - [websocket_handler:on_close:134] - [CLOSE] Cierre fue intencional para mobile-342aed29 (móvil: True). Limpieza principal ya realizada.
+2025-06-16 09:12:36 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-342aed29&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtMzQyYWVkMjkiLCJyb29tX2lkIjoiaWQtNTI5ZThhMDk0NzlmNDdjOWIxNzMzMjk0MDkzMWNiMTIiLCJleHAiOjE3NTA2ODc5NTUuMjM5NTY1MSwiaWF0IjoxNzUwMDgzMTU1LjIzOTU2NiwianRpIjoiMzBmMThjZTAyY2U3NGMxZjhlNDE1ZDcyZTM0ZDQ1MjEifQ.j1px0z8_juKp3NSz056DoWQuozffCswTRAHjuI1JCw4 (::1) 0.16ms
+2025-06-16 09:12:37 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente mobile-342aed29 reconectado y validado en sala id-529e8a09479f47c9b17332940931cb12.
+2025-06-16 09:12:39 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750083158.92934-f03ee624 de web-2dedfe7d enviado en sala id-529e8a09479f47c9b17332940931cb12.
+2025-06-16 09:12:39 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-error-test&action=join&room_id=sala-inexistente&room_password=password-falsa (::1) 0.93ms
+2025-06-16 09:12:39 - WARNING - [room_manager:handle_join_room:88] - [WS-OPEN] web-error-test - Intento de unirse a sala sala-inexistente con ID/password incorrecto.
+2025-06-16 09:12:39 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para None (móvil: None) en None. Intencional: True, Código: 1008, Razón: INVALID_ROOM_CREDENTIALS
+2025-06-16 09:12:39 - INFO - [websocket_handler:on_close:134] - [CLOSE] Cierre fue intencional para None (móvil: None). Limpieza principal ya realizada.
+2025-06-16 09:12:39 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-2dedfe7d (móvil: False) en id-529e8a09479f47c9b17332940931cb12. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:12:39 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-342aed29 (móvil: True) en id-529e8a09479f47c9b17332940931cb12. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:12:39 - INFO - [room_manager:cleanup_client_and_session:271] - [CLOSE] Cliente web-2dedfe7d estaba en estado 'waiting_for_peer', no se marca como pending_reconnect.
+2025-06-16 09:12:39 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente mobile-342aed29 marcado como 'pending_reconnect'.
+2025-06-16 09:12:52 - INFO - [web:log_request:2348] - 200 GET /monitor (::1) 836.93ms
+2025-06-16 09:13:12 - INFO - [web:log_request:2348] - 200 GET /monitor (::1) 837.05ms
+2025-06-16 09:13:43 - INFO - [web:log_request:2348] - 200 GET /monitor (::1) 830.00ms
+2025-06-16 09:14:13 - INFO - [web:log_request:2348] - 200 GET /monitor (::1) 834.76ms
+2025-06-16 09:14:14 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-3176eb5f&action=create (::1) 0.16ms
+2025-06-16 09:14:15 - INFO - [room_manager:handle_create_room:76] - [WS-OPEN] Sala id-00bc2b2c206948e6946b20d6bf1932ec creada por web-3176eb5f. Contraseña: 8C24A4. Esperando peer.
+2025-06-16 09:14:15 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-a1ab6a78&action=join&room_id=id-00bc2b2c206948e6946b20d6bf1932ec&room_password=8C24A4 (::1) 0.50ms
+2025-06-16 09:14:16 - INFO - [jwt_manager:generate_and_distribute_jwts:91] - [JWT-DIST] Token JWT actualizado y enviado a web-3176eb5f (móvil: False) en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:16 - INFO - [jwt_manager:generate_and_distribute_jwts:91] - [JWT-DIST] Token JWT actualizado y enviado a mobile-a1ab6a78 (móvil: True) en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:16 - INFO - [room_manager:handle_join_room:155] - [WS-JOIN] Cliente mobile-a1ab6a78 (móvil: True) se unió a sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:17 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750083257.004283-ed167f08 de web-3176eb5f enviado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:17 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750083257.339784-2c90a4bc de mobile-a1ab6a78 enviado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:17 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-3176eb5f (móvil: False) en id-00bc2b2c206948e6946b20d6bf1932ec. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:14:17 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-3176eb5f&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItMzE3NmViNWYiLCJyb29tX2lkIjoiaWQtMDBiYzJiMmMyMDY5NDhlNjk0NmIyMGQ2YmYxOTMyZWMiLCJleHAiOjE3NTA2ODgwNTYuMTY0NDI1LCJpYXQiOjE3NTAwODMyNTYuMTY0NDI3LCJqdGkiOiJkOGQ1ZTliMzlhYzc0YTg1OGJhZjU3Nzk3NGRiYzIzZSJ9.NsBYDGxniRB8_RzJAMZaWyI55c_BbMtPk_4dqP_W5GE (::1) 0.48ms
+2025-06-16 09:14:17 - INFO - [room_manager:cleanup_client_and_session:271] - [CLOSE] Cliente web-3176eb5f estaba en estado 'waiting_for_peer', no se marca como pending_reconnect.
+2025-06-16 09:14:18 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-3176eb5f reconectado y validado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:20 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750083260.0218391-6cde47a6 de web-3176eb5f enviado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:20 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-a1ab6a78 (móvil: True) en id-00bc2b2c206948e6946b20d6bf1932ec. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:14:20 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-a1ab6a78&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYTFhYjZhNzgiLCJyb29tX2lkIjoiaWQtMDBiYzJiMmMyMDY5NDhlNjk0NmIyMGQ2YmYxOTMyZWMiLCJleHAiOjE3NTA2ODgwNTYuMzMyNzMzOSwiaWF0IjoxNzUwMDgzMjU2LjMzMjczNiwianRpIjoiNjU1MTg1ZmE5ODlmNDc2NmJhMzQwMGIwZWJkOWRhMWIifQ.54_7unDQGz-vUs-MXJdk1FLJwuOFC-ynpO5emgtNxUc (::1) 0.52ms
+2025-06-16 09:14:20 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente mobile-a1ab6a78 marcado como 'pending_reconnect'.
+2025-06-16 09:14:21 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente mobile-a1ab6a78 reconectado y validado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:22 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750083262.7001019-fe70704a de mobile-a1ab6a78 enviado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:22 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-3176eb5f (móvil: False) en id-00bc2b2c206948e6946b20d6bf1932ec. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:14:22 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-3176eb5f&jwt_token=invalid_token_123 (::1) 0.47ms
+2025-06-16 09:14:22 - WARNING - [room_manager:handle_reconnection_with_jwt:194] - [WS-OPEN] web-3176eb5f - Token JWT inválido o expirado al reconectar.
+2025-06-16 09:14:22 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para None (móvil: None) en None. Intencional: True, Código: 1008, Razón: INVALID_TOKEN
+2025-06-16 09:14:22 - INFO - [websocket_handler:on_close:134] - [CLOSE] Cierre fue intencional para None (móvil: None). Limpieza principal ya realizada.
+2025-06-16 09:14:22 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-3176eb5f&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItMzE3NmViNWYiLCJyb29tX2lkIjoiaWQtMDBiYzJiMmMyMDY5NDhlNjk0NmIyMGQ2YmYxOTMyZWMiLCJleHAiOjE3NTA2ODgwNTYuMTY0NDI1LCJpYXQiOjE3NTAwODMyNTYuMTY0NDI3LCJqdGkiOiJkOGQ1ZTliMzlhYzc0YTg1OGJhZjU3Nzk3NGRiYzIzZSJ9.NsBYDGxniRB8_RzJAMZaWyI55c_BbMtPk_4dqP_W5GE (::1) 0.35ms
+2025-06-16 09:14:23 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-3176eb5f marcado como 'pending_reconnect'.
+2025-06-16 09:14:23 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-3176eb5f reconectado y validado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:23 - INFO - [message_processor:handle_doze_start_action:86] - [DOZE] Cliente mobile-a1ab6a78 entrando en modo doze en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:24 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-a1ab6a78 (móvil: True) en id-00bc2b2c206948e6946b20d6bf1932ec. Intencional: True, Código: 1000, Razón: None
+2025-06-16 09:14:24 - INFO - [websocket_handler:on_close:134] - [CLOSE] Cierre fue intencional para mobile-a1ab6a78 (móvil: True). Limpieza principal ya realizada.
+2025-06-16 09:14:24 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-a1ab6a78&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYTFhYjZhNzgiLCJyb29tX2lkIjoiaWQtMDBiYzJiMmMyMDY5NDhlNjk0NmIyMGQ2YmYxOTMyZWMiLCJleHAiOjE3NTA2ODgwNTYuMzMyNzMzOSwiaWF0IjoxNzUwMDgzMjU2LjMzMjczNiwianRpIjoiNjU1MTg1ZmE5ODlmNDc2NmJhMzQwMGIwZWJkOWRhMWIifQ.54_7unDQGz-vUs-MXJdk1FLJwuOFC-ynpO5emgtNxUc (::1) 0.54ms
+2025-06-16 09:14:25 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente mobile-a1ab6a78 reconectado y validado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:25 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750083265.393934-df3402a6 de web-3176eb5f enviado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:25 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-error-test&action=join&room_id=sala-inexistente&room_password=password-falsa (::1) 0.50ms
+2025-06-16 09:14:25 - WARNING - [room_manager:handle_join_room:88] - [WS-OPEN] web-error-test - Intento de unirse a sala sala-inexistente con ID/password incorrecto.
+2025-06-16 09:14:25 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para None (móvil: None) en None. Intencional: True, Código: 1000, Razón: None
+2025-06-16 09:14:25 - INFO - [websocket_handler:on_close:134] - [CLOSE] Cierre fue intencional para None (móvil: None). Limpieza principal ya realizada.
+2025-06-16 09:14:25 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-3176eb5f (móvil: False) en id-00bc2b2c206948e6946b20d6bf1932ec. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:14:25 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-3176eb5f&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItMzE3NmViNWYiLCJyb29tX2lkIjoiaWQtMDBiYzJiMmMyMDY5NDhlNjk0NmIyMGQ2YmYxOTMyZWMiLCJleHAiOjE3NTA2ODgwNTYuMTY0NDI1LCJpYXQiOjE3NTAwODMyNTYuMTY0NDI3LCJqdGkiOiJkOGQ1ZTliMzlhYzc0YTg1OGJhZjU3Nzk3NGRiYzIzZSJ9.NsBYDGxniRB8_RzJAMZaWyI55c_BbMtPk_4dqP_W5GE (::1) 0.58ms
+2025-06-16 09:14:26 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-3176eb5f marcado como 'pending_reconnect'.
+2025-06-16 09:14:26 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-3176eb5f reconectado y validado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:26 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-a1ab6a78 (móvil: True) en id-00bc2b2c206948e6946b20d6bf1932ec. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:14:26 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-a1ab6a78&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYTFhYjZhNzgiLCJyb29tX2lkIjoiaWQtMDBiYzJiMmMyMDY5NDhlNjk0NmIyMGQ2YmYxOTMyZWMiLCJleHAiOjE3NTA2ODgwNTYuMzMyNzMzOSwiaWF0IjoxNzUwMDgzMjU2LjMzMjczNiwianRpIjoiNjU1MTg1ZmE5ODlmNDc2NmJhMzQwMGIwZWJkOWRhMWIifQ.54_7unDQGz-vUs-MXJdk1FLJwuOFC-ynpO5emgtNxUc (::1) 0.51ms
+2025-06-16 09:14:27 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente mobile-a1ab6a78 marcado como 'pending_reconnect'.
+2025-06-16 09:14:28 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente mobile-a1ab6a78 reconectado y validado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:28 - INFO - [session:add_message_to_queue:277] - Mensaje encolado para mobile-a1ab6a78 (móvil: True, dozing: False). Cola: 1. TTL: 604800s.
+2025-06-16 09:14:28 - INFO - [session:get_pending_messages:297] - Recuperando 1 mensajes pendientes para mobile-a1ab6a78
+2025-06-16 09:14:28 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750083268.48224-4a4a0964 de web-3176eb5f enviado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:28 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-3176eb5f (móvil: False) en id-00bc2b2c206948e6946b20d6bf1932ec. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:14:28 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-3176eb5f&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItMzE3NmViNWYiLCJyb29tX2lkIjoiaWQtMDBiYzJiMmMyMDY5NDhlNjk0NmIyMGQ2YmYxOTMyZWMiLCJleHAiOjE3NTA2ODgwNTYuMTY0NDI1LCJpYXQiOjE3NTAwODMyNTYuMTY0NDI3LCJqdGkiOiJkOGQ1ZTliMzlhYzc0YTg1OGJhZjU3Nzk3NGRiYzIzZSJ9.NsBYDGxniRB8_RzJAMZaWyI55c_BbMtPk_4dqP_W5GE (::1) 0.50ms
+2025-06-16 09:14:28 - INFO - [session:get_pending_messages:317] - Cola de mensajes eliminada para mobile-a1ab6a78 después de recuperar 1 mensajes
+2025-06-16 09:14:28 - INFO - [message_processor:send_pending_messages:221] - [PENDING-MSG] Enviando 1 mensajes pendientes a mobile-a1ab6a78.
+2025-06-16 09:14:28 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-3176eb5f marcado como 'pending_reconnect'.
+2025-06-16 09:14:29 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-3176eb5f reconectado y validado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:29 - INFO - [message_processor:send_pending_messages:292] - [PENDING-MSG] Finalizado envío de mensajes pendientes para mobile-a1ab6a78.
+2025-06-16 09:14:29 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-a1ab6a78 (móvil: True) en id-00bc2b2c206948e6946b20d6bf1932ec. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:14:29 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-a1ab6a78&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYTFhYjZhNzgiLCJyb29tX2lkIjoiaWQtMDBiYzJiMmMyMDY5NDhlNjk0NmIyMGQ2YmYxOTMyZWMiLCJleHAiOjE3NTA2ODgwNTYuMzMyNzMzOSwiaWF0IjoxNzUwMDgzMjU2LjMzMjczNiwianRpIjoiNjU1MTg1ZmE5ODlmNDc2NmJhMzQwMGIwZWJkOWRhMWIifQ.54_7unDQGz-vUs-MXJdk1FLJwuOFC-ynpO5emgtNxUc (::1) 0.45ms
+2025-06-16 09:14:30 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente mobile-a1ab6a78 marcado como 'pending_reconnect'.
+2025-06-16 09:14:30 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente mobile-a1ab6a78 reconectado y validado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:31 - INFO - [session:add_message_to_queue:277] - Mensaje encolado para mobile-a1ab6a78 (móvil: True, dozing: False). Cola: 1. TTL: 604800s.
+2025-06-16 09:14:31 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750083271.151781-8616573a de web-3176eb5f enviado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:31 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-3176eb5f (móvil: False) en id-00bc2b2c206948e6946b20d6bf1932ec. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:14:31 - INFO - [session:get_pending_messages:297] - Recuperando 1 mensajes pendientes para mobile-a1ab6a78
+2025-06-16 09:14:31 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-3176eb5f&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItMzE3NmViNWYiLCJyb29tX2lkIjoiaWQtMDBiYzJiMmMyMDY5NDhlNjk0NmIyMGQ2YmYxOTMyZWMiLCJleHAiOjE3NTA2ODgwNTYuMTY0NDI1LCJpYXQiOjE3NTAwODMyNTYuMTY0NDI3LCJqdGkiOiJkOGQ1ZTliMzlhYzc0YTg1OGJhZjU3Nzk3NGRiYzIzZSJ9.NsBYDGxniRB8_RzJAMZaWyI55c_BbMtPk_4dqP_W5GE (::1) 0.53ms
+2025-06-16 09:14:31 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-3176eb5f marcado como 'pending_reconnect'.
+2025-06-16 09:14:31 - INFO - [session:get_pending_messages:317] - Cola de mensajes eliminada para mobile-a1ab6a78 después de recuperar 1 mensajes
+2025-06-16 09:14:31 - INFO - [message_processor:send_pending_messages:221] - [PENDING-MSG] Enviando 1 mensajes pendientes a mobile-a1ab6a78.
+2025-06-16 09:14:31 - INFO - [message_processor:send_pending_messages:247] - [PENDING-MSG] Descartando notificación obsoleta de desconexión para web-3176eb5f (ya reconectado)
+2025-06-16 09:14:31 - INFO - [message_processor:send_pending_messages:292] - [PENDING-MSG] Finalizado envío de mensajes pendientes para mobile-a1ab6a78.
+2025-06-16 09:14:32 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-3176eb5f reconectado y validado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:32 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-a1ab6a78 (móvil: True) en id-00bc2b2c206948e6946b20d6bf1932ec. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:14:32 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-a1ab6a78&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYTFhYjZhNzgiLCJyb29tX2lkIjoiaWQtMDBiYzJiMmMyMDY5NDhlNjk0NmIyMGQ2YmYxOTMyZWMiLCJleHAiOjE3NTA2ODgwNTYuMzMyNzMzOSwiaWF0IjoxNzUwMDgzMjU2LjMzMjczNiwianRpIjoiNjU1MTg1ZmE5ODlmNDc2NmJhMzQwMGIwZWJkOWRhMWIifQ.54_7unDQGz-vUs-MXJdk1FLJwuOFC-ynpO5emgtNxUc (::1) 0.47ms
+2025-06-16 09:14:32 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente mobile-a1ab6a78 marcado como 'pending_reconnect'.
+2025-06-16 09:14:32 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente mobile-a1ab6a78 reconectado y validado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:33 - INFO - [session:add_message_to_queue:277] - Mensaje encolado para mobile-a1ab6a78 (móvil: True, dozing: False). Cola: 1. TTL: 604800s.
+2025-06-16 09:14:33 - INFO - [session:get_pending_messages:297] - Recuperando 1 mensajes pendientes para mobile-a1ab6a78
+2025-06-16 09:14:33 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750083273.1475148-8f694367 de web-3176eb5f enviado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:33 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-3176eb5f (móvil: False) en id-00bc2b2c206948e6946b20d6bf1932ec. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:14:33 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-3176eb5f&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItMzE3NmViNWYiLCJyb29tX2lkIjoiaWQtMDBiYzJiMmMyMDY5NDhlNjk0NmIyMGQ2YmYxOTMyZWMiLCJleHAiOjE3NTA2ODgwNTYuMTY0NDI1LCJpYXQiOjE3NTAwODMyNTYuMTY0NDI3LCJqdGkiOiJkOGQ1ZTliMzlhYzc0YTg1OGJhZjU3Nzk3NGRiYzIzZSJ9.NsBYDGxniRB8_RzJAMZaWyI55c_BbMtPk_4dqP_W5GE (::1) 0.18ms
+2025-06-16 09:14:33 - INFO - [session:get_pending_messages:317] - Cola de mensajes eliminada para mobile-a1ab6a78 después de recuperar 1 mensajes
+2025-06-16 09:14:33 - INFO - [message_processor:send_pending_messages:221] - [PENDING-MSG] Enviando 1 mensajes pendientes a mobile-a1ab6a78.
+2025-06-16 09:14:33 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-3176eb5f marcado como 'pending_reconnect'.
+2025-06-16 09:14:34 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-3176eb5f reconectado y validado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:34 - INFO - [message_processor:send_pending_messages:292] - [PENDING-MSG] Finalizado envío de mensajes pendientes para mobile-a1ab6a78.
+2025-06-16 09:14:34 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-a1ab6a78 (móvil: True) en id-00bc2b2c206948e6946b20d6bf1932ec. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:14:34 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-a1ab6a78&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYTFhYjZhNzgiLCJyb29tX2lkIjoiaWQtMDBiYzJiMmMyMDY5NDhlNjk0NmIyMGQ2YmYxOTMyZWMiLCJleHAiOjE3NTA2ODgwNTYuMzMyNzMzOSwiaWF0IjoxNzUwMDgzMjU2LjMzMjczNiwianRpIjoiNjU1MTg1ZmE5ODlmNDc2NmJhMzQwMGIwZWJkOWRhMWIifQ.54_7unDQGz-vUs-MXJdk1FLJwuOFC-ynpO5emgtNxUc (::1) 0.44ms
+2025-06-16 09:14:34 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente mobile-a1ab6a78 marcado como 'pending_reconnect'.
+2025-06-16 09:14:35 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente mobile-a1ab6a78 reconectado y validado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:35 - INFO - [session:add_message_to_queue:277] - Mensaje encolado para mobile-a1ab6a78 (móvil: True, dozing: False). Cola: 1. TTL: 604800s.
+2025-06-16 09:14:35 - INFO - [session:get_pending_messages:297] - Recuperando 1 mensajes pendientes para mobile-a1ab6a78
+2025-06-16 09:14:35 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750083275.3044832-d9c3631d de web-3176eb5f enviado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:35 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-3176eb5f (móvil: False) en id-00bc2b2c206948e6946b20d6bf1932ec. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:14:35 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-3176eb5f&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItMzE3NmViNWYiLCJyb29tX2lkIjoiaWQtMDBiYzJiMmMyMDY5NDhlNjk0NmIyMGQ2YmYxOTMyZWMiLCJleHAiOjE3NTA2ODgwNTYuMTY0NDI1LCJpYXQiOjE3NTAwODMyNTYuMTY0NDI3LCJqdGkiOiJkOGQ1ZTliMzlhYzc0YTg1OGJhZjU3Nzk3NGRiYzIzZSJ9.NsBYDGxniRB8_RzJAMZaWyI55c_BbMtPk_4dqP_W5GE (::1) 0.52ms
+2025-06-16 09:14:35 - INFO - [session:get_pending_messages:317] - Cola de mensajes eliminada para mobile-a1ab6a78 después de recuperar 1 mensajes
+2025-06-16 09:14:35 - INFO - [message_processor:send_pending_messages:221] - [PENDING-MSG] Enviando 1 mensajes pendientes a mobile-a1ab6a78.
+2025-06-16 09:14:35 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-3176eb5f marcado como 'pending_reconnect'.
+2025-06-16 09:14:36 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-3176eb5f reconectado y validado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:36 - INFO - [message_processor:send_pending_messages:292] - [PENDING-MSG] Finalizado envío de mensajes pendientes para mobile-a1ab6a78.
+2025-06-16 09:14:36 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-a1ab6a78 (móvil: True) en id-00bc2b2c206948e6946b20d6bf1932ec. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:14:36 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-a1ab6a78&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYTFhYjZhNzgiLCJyb29tX2lkIjoiaWQtMDBiYzJiMmMyMDY5NDhlNjk0NmIyMGQ2YmYxOTMyZWMiLCJleHAiOjE3NTA2ODgwNTYuMzMyNzMzOSwiaWF0IjoxNzUwMDgzMjU2LjMzMjczNiwianRpIjoiNjU1MTg1ZmE5ODlmNDc2NmJhMzQwMGIwZWJkOWRhMWIifQ.54_7unDQGz-vUs-MXJdk1FLJwuOFC-ynpO5emgtNxUc (::1) 0.51ms
+2025-06-16 09:14:36 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente mobile-a1ab6a78 marcado como 'pending_reconnect'.
+2025-06-16 09:14:37 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente mobile-a1ab6a78 reconectado y validado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:37 - INFO - [session:add_message_to_queue:277] - Mensaje encolado para mobile-a1ab6a78 (móvil: True, dozing: False). Cola: 1. TTL: 604800s.
+2025-06-16 09:14:37 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750083277.470409-902ba6ff de web-3176eb5f enviado en sala id-00bc2b2c206948e6946b20d6bf1932ec.
+2025-06-16 09:14:37 - INFO - [session:get_pending_messages:297] - Recuperando 1 mensajes pendientes para mobile-a1ab6a78
+2025-06-16 09:14:37 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-3176eb5f (móvil: False) en id-00bc2b2c206948e6946b20d6bf1932ec. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:14:37 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-3176eb5f marcado como 'pending_reconnect'.
+2025-06-16 09:14:37 - INFO - [session:get_pending_messages:317] - Cola de mensajes eliminada para mobile-a1ab6a78 después de recuperar 1 mensajes
+2025-06-16 09:14:37 - INFO - [message_processor:send_pending_messages:221] - [PENDING-MSG] Enviando 1 mensajes pendientes a mobile-a1ab6a78.
+2025-06-16 09:14:38 - INFO - [message_processor:send_pending_messages:292] - [PENDING-MSG] Finalizado envío de mensajes pendientes para mobile-a1ab6a78.
+2025-06-16 09:14:38 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-a1ab6a78 (móvil: True) en id-00bc2b2c206948e6946b20d6bf1932ec. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:14:38 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente mobile-a1ab6a78 marcado como 'pending_reconnect'.
+2025-06-16 09:14:45 - INFO - [web:log_request:2348] - 200 GET /monitor (::1) 1334.73ms
+2025-06-16 09:15:16 - INFO - [web:log_request:2348] - 200 GET /monitor (::1) 1331.30ms
+2025-06-16 09:15:48 - INFO - [web:log_request:2348] - 200 GET /monitor (::1) 1334.69ms
+2025-06-16 09:16:05 - INFO - [session_cleanup:cleanup_sessions:90] - [CLEANUP] Cliente mobile-342aed29 (web: False) no reconectó (200s). Limpiando.
+2025-06-16 09:16:05 - INFO - [session_cleanup:cleanup_sessions:125] - [CLEANUP] Cliente mobile-342aed29 estaba en doze antes de pending_reconnect, cola conservada.
+2025-06-16 09:16:19 - INFO - [web:log_request:2348] - 200 GET /monitor (::1) 1167.66ms
+2025-06-16 09:16:50 - INFO - [web:log_request:2348] - 200 GET /monitor (::1) 1167.23ms
+2025-06-16 09:16:54 - WARNING - [main:sig_handler:90] - Recibida señal 2. Planificando cierre elegante.
+2025-06-16 09:16:54 - INFO - [main:graceful_shutdown:64] - Iniciando cierre elegante...
+2025-06-16 09:16:55 - INFO - [session:close_redis_client:334] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-16 09:16:55 - INFO - [main:graceful_shutdown:86] - Cierre elegante completado.
+2025-06-16 09:16:55 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-16 09:16:55 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...
+2025-06-16 09:16:57 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:16:57 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:16:57 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:16:57 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:16:57 - INFO - [session:init_redis_client:43] - [REDIS_INIT] Conectando a Redis en vocal-thrush-27819.upstash.io:6379, DB: 0
+2025-06-16 09:16:57 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: AbstractConnection.__init__() got an unexpected keyword argument 'ssl'. Saliendo.
+2025-06-16 09:16:57 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...
+2025-06-16 09:17:05 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:17:05 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:17:05 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:17:05 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:17:05 - INFO - [session:init_redis_client:44] - [REDIS_INIT] Conectando a Redis en vocal-thrush-27819.upstash.io:6379, DB: 0
+2025-06-16 09:17:06 - INFO - [session:init_redis_client:48] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-16 09:17:06 - INFO - [main:main:50] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-16 09:17:06 - INFO - [session_cleanup:initialize_server_state_from_redis:156] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-16 09:17:07 - INFO - [session_cleanup:initialize_server_state_from_redis:235] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-16 09:17:21 - INFO - [web:log_request:2348] - 200 GET /monitor (::1) 1169.83ms
+2025-06-16 09:18:08 - INFO - [session_cleanup:cleanup_sessions:90] - [CLEANUP] Cliente mobile-a1ab6a78 (web: False) no reconectó (200s). Limpiando.
+2025-06-16 09:18:09 - INFO - [session_cleanup:cleanup_sessions:125] - [CLEANUP] Cliente mobile-a1ab6a78 estaba en doze antes de pending_reconnect, cola conservada.
+2025-06-16 09:31:10 - WARNING - [main:sig_handler:90] - Recibida señal 2. Planificando cierre elegante.
+2025-06-16 09:31:10 - INFO - [main:graceful_shutdown:64] - Iniciando cierre elegante...
+2025-06-16 09:31:11 - INFO - [session:close_redis_client:334] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-16 09:31:11 - INFO - [main:graceful_shutdown:86] - Cierre elegante completado.
+2025-06-16 09:31:11 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-16 09:31:11 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...
+2025-06-16 09:31:12 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:31:12 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:31:12 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-16 09:31:12 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-16 09:31:12 - INFO - [session:init_redis_client:44] - [REDIS_INIT] Conectando a Redis en vocal-thrush-27819.upstash.io:6379, DB: 0
+2025-06-16 09:31:13 - INFO - [session:init_redis_client:48] - [REDIS_INIT] Conexión a Redis establecida y verificada (ping exitoso).
+2025-06-16 09:31:13 - INFO - [main:main:50] - Servidor MinkaV2 (Async Redis) iniciado en http://localhost:5001
+2025-06-16 09:31:13 - INFO - [session_cleanup:initialize_server_state_from_redis:156] - [INIT] Inicializando estado del servidor desde Redis...
+2025-06-16 09:31:14 - INFO - [session_cleanup:initialize_server_state_from_redis:235] - [INIT] Inicialización de estado del servidor desde Redis completada.
+2025-06-16 09:31:21 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-0a60652d&action=create (::1) 0.26ms
+2025-06-16 09:31:21 - INFO - [room_manager:handle_create_room:76] - [WS-OPEN] Sala id-3ab6d804f3f54e4197ab28fbcf4baded creada por web-0a60652d. Contraseña: DF9B7C. Esperando peer.
+2025-06-16 09:31:21 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-b67c0b30&action=join&room_id=id-3ab6d804f3f54e4197ab28fbcf4baded&room_password=DF9B7C (::1) 0.66ms
+2025-06-16 09:31:22 - INFO - [jwt_manager:generate_and_distribute_jwts:91] - [JWT-DIST] Token JWT actualizado y enviado a web-0a60652d (móvil: False) en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:22 - INFO - [jwt_manager:generate_and_distribute_jwts:91] - [JWT-DIST] Token JWT actualizado y enviado a mobile-b67c0b30 (móvil: True) en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:22 - INFO - [room_manager:handle_join_room:155] - [WS-JOIN] Cliente mobile-b67c0b30 (móvil: True) se unió a sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:23 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750084283.564188-b314170c de web-0a60652d enviado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:24 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750084283.899421-4d8608b9 de mobile-b67c0b30 enviado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:24 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-0a60652d (móvil: False) en id-3ab6d804f3f54e4197ab28fbcf4baded. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:31:24 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-0a60652d&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItMGE2MDY1MmQiLCJyb29tX2lkIjoiaWQtM2FiNmQ4MDRmM2Y1NGU0MTk3YWIyOGZiY2Y0YmFkZWQiLCJleHAiOjE3NTA2ODkwODIuNzIzNDM4LCJpYXQiOjE3NTAwODQyODIuNzIzNDQwMiwianRpIjoiNTRmZmMwY2MzNmU5NGZjMzhmZDE0ZWE0YTg5ZDAwYWMifQ.nkh3xhYBwHnQUsNKqatI6ZJTtchxXK0tsTVjA17Xum4 (::1) 0.62ms
+2025-06-16 09:31:24 - INFO - [room_manager:cleanup_client_and_session:271] - [CLOSE] Cliente web-0a60652d estaba en estado 'waiting_for_peer', no se marca como pending_reconnect.
+2025-06-16 09:31:25 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-0a60652d reconectado y validado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:27 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750084287.275152-b5cbe1a1 de web-0a60652d enviado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:27 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-b67c0b30 (móvil: True) en id-3ab6d804f3f54e4197ab28fbcf4baded. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:31:27 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-b67c0b30&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYjY3YzBiMzAiLCJyb29tX2lkIjoiaWQtM2FiNmQ4MDRmM2Y1NGU0MTk3YWIyOGZiY2Y0YmFkZWQiLCJleHAiOjE3NTA2ODkwODIuODkyNDk4LCJpYXQiOjE3NTAwODQyODIuODkyNSwianRpIjoiZjNhYjA2Y2ExYzQzNGFmMWIxYjg0MThlYjZkY2FhYzcifQ.yrCyFprl6SwOKjoVkL3nb0Hp_jdwleMLCmGCatJVNoo (::1) 0.17ms
+2025-06-16 09:31:27 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente mobile-b67c0b30 marcado como 'pending_reconnect'.
+2025-06-16 09:31:28 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente mobile-b67c0b30 reconectado y validado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:30 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750084289.952171-9a50eeaa de mobile-b67c0b30 enviado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:30 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-0a60652d (móvil: False) en id-3ab6d804f3f54e4197ab28fbcf4baded. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:31:30 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-0a60652d&jwt_token=invalid_token_123 (::1) 0.61ms
+2025-06-16 09:31:30 - WARNING - [room_manager:handle_reconnection_with_jwt:194] - [WS-OPEN] web-0a60652d - Token JWT inválido o expirado al reconectar.
+2025-06-16 09:31:30 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para None (móvil: None) en None. Intencional: True, Código: 1008, Razón: INVALID_TOKEN
+2025-06-16 09:31:30 - INFO - [websocket_handler:on_close:134] - [CLOSE] Cierre fue intencional para None (móvil: None). Limpieza principal ya realizada.
+2025-06-16 09:31:30 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-0a60652d&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItMGE2MDY1MmQiLCJyb29tX2lkIjoiaWQtM2FiNmQ4MDRmM2Y1NGU0MTk3YWIyOGZiY2Y0YmFkZWQiLCJleHAiOjE3NTA2ODkwODIuNzIzNDM4LCJpYXQiOjE3NTAwODQyODIuNzIzNDQwMiwianRpIjoiNTRmZmMwY2MzNmU5NGZjMzhmZDE0ZWE0YTg5ZDAwYWMifQ.nkh3xhYBwHnQUsNKqatI6ZJTtchxXK0tsTVjA17Xum4 (::1) 0.58ms
+2025-06-16 09:31:30 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-0a60652d marcado como 'pending_reconnect'.
+2025-06-16 09:31:30 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-0a60652d reconectado y validado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:30 - INFO - [message_processor:handle_doze_start_action:86] - [DOZE] Cliente mobile-b67c0b30 entrando en modo doze en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:31 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-b67c0b30 (móvil: True) en id-3ab6d804f3f54e4197ab28fbcf4baded. Intencional: True, Código: 1000, Razón: None
+2025-06-16 09:31:31 - INFO - [websocket_handler:on_close:134] - [CLOSE] Cierre fue intencional para mobile-b67c0b30 (móvil: True). Limpieza principal ya realizada.
+2025-06-16 09:31:31 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-b67c0b30&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYjY3YzBiMzAiLCJyb29tX2lkIjoiaWQtM2FiNmQ4MDRmM2Y1NGU0MTk3YWIyOGZiY2Y0YmFkZWQiLCJleHAiOjE3NTA2ODkwODIuODkyNDk4LCJpYXQiOjE3NTAwODQyODIuODkyNSwianRpIjoiZjNhYjA2Y2ExYzQzNGFmMWIxYjg0MThlYjZkY2FhYzcifQ.yrCyFprl6SwOKjoVkL3nb0Hp_jdwleMLCmGCatJVNoo (::1) 0.45ms
+2025-06-16 09:31:32 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente mobile-b67c0b30 reconectado y validado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:32 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750084292.648001-8a1a33cf de web-0a60652d enviado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:32 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-error-test&action=join&room_id=sala-inexistente&room_password=password-falsa (::1) 0.54ms
+2025-06-16 09:31:32 - WARNING - [room_manager:handle_join_room:88] - [WS-OPEN] web-error-test - Intento de unirse a sala sala-inexistente con ID/password incorrecto.
+2025-06-16 09:31:32 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para None (móvil: None) en None. Intencional: True, Código: 1000, Razón: None
+2025-06-16 09:31:32 - INFO - [websocket_handler:on_close:134] - [CLOSE] Cierre fue intencional para None (móvil: None). Limpieza principal ya realizada.
+2025-06-16 09:31:32 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-0a60652d (móvil: False) en id-3ab6d804f3f54e4197ab28fbcf4baded. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:31:32 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-0a60652d&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItMGE2MDY1MmQiLCJyb29tX2lkIjoiaWQtM2FiNmQ4MDRmM2Y1NGU0MTk3YWIyOGZiY2Y0YmFkZWQiLCJleHAiOjE3NTA2ODkwODIuNzIzNDM4LCJpYXQiOjE3NTAwODQyODIuNzIzNDQwMiwianRpIjoiNTRmZmMwY2MzNmU5NGZjMzhmZDE0ZWE0YTg5ZDAwYWMifQ.nkh3xhYBwHnQUsNKqatI6ZJTtchxXK0tsTVjA17Xum4 (::1) 0.93ms
+2025-06-16 09:31:33 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-0a60652d marcado como 'pending_reconnect'.
+2025-06-16 09:31:33 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-0a60652d reconectado y validado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:33 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-b67c0b30 (móvil: True) en id-3ab6d804f3f54e4197ab28fbcf4baded. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:31:33 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-b67c0b30&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYjY3YzBiMzAiLCJyb29tX2lkIjoiaWQtM2FiNmQ4MDRmM2Y1NGU0MTk3YWIyOGZiY2Y0YmFkZWQiLCJleHAiOjE3NTA2ODkwODIuODkyNDk4LCJpYXQiOjE3NTAwODQyODIuODkyNSwianRpIjoiZjNhYjA2Y2ExYzQzNGFmMWIxYjg0MThlYjZkY2FhYzcifQ.yrCyFprl6SwOKjoVkL3nb0Hp_jdwleMLCmGCatJVNoo (::1) 0.47ms
+2025-06-16 09:31:35 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente mobile-b67c0b30 marcado como 'pending_reconnect'.
+2025-06-16 09:31:35 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente mobile-b67c0b30 reconectado y validado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:35 - INFO - [session:add_message_to_queue:277] - Mensaje encolado para mobile-b67c0b30 (móvil: True, dozing: False). Cola: 1. TTL: 604800s.
+2025-06-16 09:31:36 - INFO - [session:get_pending_messages:297] - Recuperando 1 mensajes pendientes para mobile-b67c0b30
+2025-06-16 09:31:36 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750084295.939834-157668dd de web-0a60652d enviado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:36 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-0a60652d (móvil: False) en id-3ab6d804f3f54e4197ab28fbcf4baded. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:31:36 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-0a60652d&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItMGE2MDY1MmQiLCJyb29tX2lkIjoiaWQtM2FiNmQ4MDRmM2Y1NGU0MTk3YWIyOGZiY2Y0YmFkZWQiLCJleHAiOjE3NTA2ODkwODIuNzIzNDM4LCJpYXQiOjE3NTAwODQyODIuNzIzNDQwMiwianRpIjoiNTRmZmMwY2MzNmU5NGZjMzhmZDE0ZWE0YTg5ZDAwYWMifQ.nkh3xhYBwHnQUsNKqatI6ZJTtchxXK0tsTVjA17Xum4 (::1) 0.61ms
+2025-06-16 09:31:36 - INFO - [session:get_pending_messages:317] - Cola de mensajes eliminada para mobile-b67c0b30 después de recuperar 1 mensajes
+2025-06-16 09:31:36 - INFO - [message_processor:send_pending_messages:221] - [PENDING-MSG] Enviando 1 mensajes pendientes a mobile-b67c0b30.
+2025-06-16 09:31:36 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-0a60652d marcado como 'pending_reconnect'.
+2025-06-16 09:31:36 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-0a60652d reconectado y validado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:37 - INFO - [message_processor:send_pending_messages:292] - [PENDING-MSG] Finalizado envío de mensajes pendientes para mobile-b67c0b30.
+2025-06-16 09:31:37 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-b67c0b30 (móvil: True) en id-3ab6d804f3f54e4197ab28fbcf4baded. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:31:37 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-b67c0b30&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYjY3YzBiMzAiLCJyb29tX2lkIjoiaWQtM2FiNmQ4MDRmM2Y1NGU0MTk3YWIyOGZiY2Y0YmFkZWQiLCJleHAiOjE3NTA2ODkwODIuODkyNDk4LCJpYXQiOjE3NTAwODQyODIuODkyNSwianRpIjoiZjNhYjA2Y2ExYzQzNGFmMWIxYjg0MThlYjZkY2FhYzcifQ.yrCyFprl6SwOKjoVkL3nb0Hp_jdwleMLCmGCatJVNoo (::1) 0.52ms
+2025-06-16 09:31:37 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente mobile-b67c0b30 marcado como 'pending_reconnect'.
+2025-06-16 09:31:37 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente mobile-b67c0b30 reconectado y validado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:38 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750084298.1210701-c476af1a de web-0a60652d enviado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:38 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-0a60652d (móvil: False) en id-3ab6d804f3f54e4197ab28fbcf4baded. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:31:38 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-0a60652d&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItMGE2MDY1MmQiLCJyb29tX2lkIjoiaWQtM2FiNmQ4MDRmM2Y1NGU0MTk3YWIyOGZiY2Y0YmFkZWQiLCJleHAiOjE3NTA2ODkwODIuNzIzNDM4LCJpYXQiOjE3NTAwODQyODIuNzIzNDQwMiwianRpIjoiNTRmZmMwY2MzNmU5NGZjMzhmZDE0ZWE0YTg5ZDAwYWMifQ.nkh3xhYBwHnQUsNKqatI6ZJTtchxXK0tsTVjA17Xum4 (::1) 0.33ms
+2025-06-16 09:31:38 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-0a60652d marcado como 'pending_reconnect'.
+2025-06-16 09:31:39 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-0a60652d reconectado y validado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:39 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-b67c0b30 (móvil: True) en id-3ab6d804f3f54e4197ab28fbcf4baded. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:31:39 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-b67c0b30&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYjY3YzBiMzAiLCJyb29tX2lkIjoiaWQtM2FiNmQ4MDRmM2Y1NGU0MTk3YWIyOGZiY2Y0YmFkZWQiLCJleHAiOjE3NTA2ODkwODIuODkyNDk4LCJpYXQiOjE3NTAwODQyODIuODkyNSwianRpIjoiZjNhYjA2Y2ExYzQzNGFmMWIxYjg0MThlYjZkY2FhYzcifQ.yrCyFprl6SwOKjoVkL3nb0Hp_jdwleMLCmGCatJVNoo (::1) 0.45ms
+2025-06-16 09:31:40 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente mobile-b67c0b30 marcado como 'pending_reconnect'.
+2025-06-16 09:31:40 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente mobile-b67c0b30 reconectado y validado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:40 - INFO - [session:get_pending_messages:297] - Recuperando 1 mensajes pendientes para mobile-b67c0b30
+2025-06-16 09:31:40 - INFO - [session:add_message_to_queue:277] - Mensaje encolado para mobile-b67c0b30 (móvil: True, dozing: False). Cola: 1. TTL: 604800s.
+2025-06-16 09:31:40 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750084300.8129542-48038fde de web-0a60652d enviado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:40 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-0a60652d (móvil: False) en id-3ab6d804f3f54e4197ab28fbcf4baded. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:31:40 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-0a60652d&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItMGE2MDY1MmQiLCJyb29tX2lkIjoiaWQtM2FiNmQ4MDRmM2Y1NGU0MTk3YWIyOGZiY2Y0YmFkZWQiLCJleHAiOjE3NTA2ODkwODIuNzIzNDM4LCJpYXQiOjE3NTAwODQyODIuNzIzNDQwMiwianRpIjoiNTRmZmMwY2MzNmU5NGZjMzhmZDE0ZWE0YTg5ZDAwYWMifQ.nkh3xhYBwHnQUsNKqatI6ZJTtchxXK0tsTVjA17Xum4 (::1) 0.57ms
+2025-06-16 09:31:41 - INFO - [session:get_pending_messages:317] - Cola de mensajes eliminada para mobile-b67c0b30 después de recuperar 1 mensajes
+2025-06-16 09:31:41 - INFO - [message_processor:send_pending_messages:221] - [PENDING-MSG] Enviando 1 mensajes pendientes a mobile-b67c0b30.
+2025-06-16 09:31:41 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-0a60652d marcado como 'pending_reconnect'.
+2025-06-16 09:31:41 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-0a60652d reconectado y validado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:41 - INFO - [message_processor:send_pending_messages:292] - [PENDING-MSG] Finalizado envío de mensajes pendientes para mobile-b67c0b30.
+2025-06-16 09:31:41 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-b67c0b30 (móvil: True) en id-3ab6d804f3f54e4197ab28fbcf4baded. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:31:41 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-b67c0b30&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYjY3YzBiMzAiLCJyb29tX2lkIjoiaWQtM2FiNmQ4MDRmM2Y1NGU0MTk3YWIyOGZiY2Y0YmFkZWQiLCJleHAiOjE3NTA2ODkwODIuODkyNDk4LCJpYXQiOjE3NTAwODQyODIuODkyNSwianRpIjoiZjNhYjA2Y2ExYzQzNGFmMWIxYjg0MThlYjZkY2FhYzcifQ.yrCyFprl6SwOKjoVkL3nb0Hp_jdwleMLCmGCatJVNoo (::1) 0.44ms
+2025-06-16 09:31:42 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente mobile-b67c0b30 marcado como 'pending_reconnect'.
+2025-06-16 09:31:42 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente mobile-b67c0b30 reconectado y validado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:42 - INFO - [session:add_message_to_queue:277] - Mensaje encolado para mobile-b67c0b30 (móvil: True, dozing: False). Cola: 1. TTL: 604800s.
+2025-06-16 09:31:43 - INFO - [session:get_pending_messages:297] - Recuperando 1 mensajes pendientes para mobile-b67c0b30
+2025-06-16 09:31:43 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750084302.9888499-014f4097 de web-0a60652d enviado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:43 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-0a60652d (móvil: False) en id-3ab6d804f3f54e4197ab28fbcf4baded. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:31:43 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-0a60652d&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItMGE2MDY1MmQiLCJyb29tX2lkIjoiaWQtM2FiNmQ4MDRmM2Y1NGU0MTk3YWIyOGZiY2Y0YmFkZWQiLCJleHAiOjE3NTA2ODkwODIuNzIzNDM4LCJpYXQiOjE3NTAwODQyODIuNzIzNDQwMiwianRpIjoiNTRmZmMwY2MzNmU5NGZjMzhmZDE0ZWE0YTg5ZDAwYWMifQ.nkh3xhYBwHnQUsNKqatI6ZJTtchxXK0tsTVjA17Xum4 (::1) 1.27ms
+2025-06-16 09:31:43 - INFO - [session:get_pending_messages:317] - Cola de mensajes eliminada para mobile-b67c0b30 después de recuperar 1 mensajes
+2025-06-16 09:31:43 - INFO - [message_processor:send_pending_messages:221] - [PENDING-MSG] Enviando 1 mensajes pendientes a mobile-b67c0b30.
+2025-06-16 09:31:43 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-0a60652d marcado como 'pending_reconnect'.
+2025-06-16 09:31:43 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-0a60652d reconectado y validado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:44 - INFO - [message_processor:send_pending_messages:292] - [PENDING-MSG] Finalizado envío de mensajes pendientes para mobile-b67c0b30.
+2025-06-16 09:31:44 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-b67c0b30 (móvil: True) en id-3ab6d804f3f54e4197ab28fbcf4baded. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:31:44 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=mobile-b67c0b30&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJtb2JpbGUtYjY3YzBiMzAiLCJyb29tX2lkIjoiaWQtM2FiNmQ4MDRmM2Y1NGU0MTk3YWIyOGZiY2Y0YmFkZWQiLCJleHAiOjE3NTA2ODkwODIuODkyNDk4LCJpYXQiOjE3NTAwODQyODIuODkyNSwianRpIjoiZjNhYjA2Y2ExYzQzNGFmMWIxYjg0MThlYjZkY2FhYzcifQ.yrCyFprl6SwOKjoVkL3nb0Hp_jdwleMLCmGCatJVNoo (::1) 0.46ms
+2025-06-16 09:31:44 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente mobile-b67c0b30 marcado como 'pending_reconnect'.
+2025-06-16 09:31:45 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente mobile-b67c0b30 reconectado y validado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:45 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1750084305.170181-a3ecd593 de web-0a60652d enviado en sala id-3ab6d804f3f54e4197ab28fbcf4baded.
+2025-06-16 09:31:45 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-0a60652d (móvil: False) en id-3ab6d804f3f54e4197ab28fbcf4baded. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:31:45 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para mobile-b67c0b30 (móvil: True) en id-3ab6d804f3f54e4197ab28fbcf4baded. Intencional: False, Código: 1000, Razón: None
+2025-06-16 09:31:45 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente mobile-b67c0b30 marcado como 'pending_reconnect'.
+2025-06-16 09:31:45 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-0a60652d marcado como 'pending_reconnect'.
+2025-06-16 09:35:16 - INFO - [session_cleanup:cleanup_sessions:90] - [CLEANUP] Cliente mobile-b67c0b30 (web: False) no reconectó (200s). Limpiando.
+2025-06-16 09:35:16 - INFO - [session_cleanup:cleanup_sessions:125] - [CLEANUP] Cliente mobile-b67c0b30 estaba en doze antes de pending_reconnect, cola conservada.

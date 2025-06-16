@@ -379,3 +379,36 @@ RuntimeError: Event loop stopped before Future completed.
 2025-06-14 10:25:33 - INFO - [room_manager:handle_join_room:155] - [WS-JOIN] Cliente python-client-23ccb98f-48ec-44c6-b18c-2b07c8781c3c (móvil: True) se unió a sala id-4801f397cdaf45caa062bd3030446e2d.
 2025-06-14 10:25:38 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1749914738.867807-e5634a49 de python-client-23ccb98f-48ec-44c6-b18c-2b07c8781c3c enviado en sala id-4801f397cdaf45caa062bd3030446e2d.
 2025-06-14 10:26:58 - INFO - [session_cleanup:cleanup_sessions:90] - [CLEANUP] Cliente python-client-284fd310-a594-4252-85e0-64fcef3453fb (web: False) no reconectó (200s). Limpiando.
+2025-06-14 10:31:26 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1749915086.884941-a2864eb4 de python-client-23ccb98f-48ec-44c6-b18c-2b07c8781c3c enviado en sala id-4801f397cdaf45caa062bd3030446e2d.
+2025-06-14 10:31:37 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-client-1749914676217 (móvil: False) en id-4801f397cdaf45caa062bd3030446e2d. Intencional: False, Código: 1001, Razón: None
+2025-06-14 10:31:37 - INFO - [room_manager:cleanup_client_and_session:271] - [CLOSE] Cliente web-client-1749914676217 estaba en estado 'waiting_for_peer', no se marca como pending_reconnect.
+2025-06-14 10:31:37 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-client-1749914676217&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItY2xpZW50LTE3NDk5MTQ2NzYyMTciLCJyb29tX2lkIjoiaWQtNDgwMWYzOTdjZGFmNDVjYWEwNjJiZDMwMzA0NDZlMmQiLCJleHAiOjE3NTA1MTk1MzMuNjI3MTc4LCJpYXQiOjE3NDk5MTQ3MzMuNjI3MTc5LCJqdGkiOiI0NWI1NDdiMzMwZWU0MzI5OWJiZjIyYzI4NDVmMDg3YiJ9.fz8AhZkN8LS-sFG1LilGNXQd1qPXHB78Cv2QU82ua5I (::1) 1.01ms
+2025-06-14 10:31:37 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-client-1749914676217 reconectado y validado en sala id-4801f397cdaf45caa062bd3030446e2d.
+2025-06-14 10:31:49 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1749915109.74052-699f4f78 de python-client-23ccb98f-48ec-44c6-b18c-2b07c8781c3c enviado en sala id-4801f397cdaf45caa062bd3030446e2d.
+2025-06-14 10:32:14 - INFO - [message_processor:broadcast_message:172] - [BROADCAST] Mensaje 1749915134.388669-f25a7ff0 de python-client-23ccb98f-48ec-44c6-b18c-2b07c8781c3c enviado en sala id-4801f397cdaf45caa062bd3030446e2d.
+2025-06-14 11:24:24 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-client-1749914676217 (móvil: False) en id-4801f397cdaf45caa062bd3030446e2d. Intencional: False, Código: None, Razón: None
+2025-06-14 11:24:24 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-client-1749914676217 marcado como 'pending_reconnect'.
+2025-06-14 11:24:25 - INFO - [web:log_request:2348] - 101 GET /ws?client_id=web-client-1749914676217&jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ3ZWItY2xpZW50LTE3NDk5MTQ2NzYyMTciLCJyb29tX2lkIjoiaWQtNDgwMWYzOTdjZGFmNDVjYWEwNjJiZDMwMzA0NDZlMmQiLCJleHAiOjE3NTA1MTk1MzMuNjI3MTc4LCJpYXQiOjE3NDk5MTQ3MzMuNjI3MTc5LCJqdGkiOiI0NWI1NDdiMzMwZWU0MzI5OWJiZjIyYzI4NDVmMDg3YiJ9.fz8AhZkN8LS-sFG1LilGNXQd1qPXHB78Cv2QU82ua5I (::1) 4.31ms
+2025-06-14 11:24:26 - INFO - [room_manager:handle_reconnection_with_jwt:249] - [WS-OPEN] Cliente web-client-1749914676217 reconectado y validado en sala id-4801f397cdaf45caa062bd3030446e2d.
+2025-06-15 07:54:36 - WARNING - [main:sig_handler:90] - Recibida señal 2. Planificando cierre elegante.
+2025-06-15 07:54:36 - INFO - [main:graceful_shutdown:64] - Iniciando cierre elegante...
+2025-06-15 07:54:36 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para web-client-1749914676217 (móvil: False) en id-4801f397cdaf45caa062bd3030446e2d. Intencional: False, Código: 1001, Razón: Servidor apagándose
+2025-06-15 07:54:36 - INFO - [websocket_handler:on_close:126] - [CLOSE] Conexión WebSocket cerrada para python-client-23ccb98f-48ec-44c6-b18c-2b07c8781c3c (móvil: True) en id-4801f397cdaf45caa062bd3030446e2d. Intencional: False, Código: 1000, Razón: None
+2025-06-15 07:54:36 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente web-client-1749914676217 marcado como 'pending_reconnect'.
+2025-06-15 07:54:36 - INFO - [room_manager:cleanup_client_and_session:269] - [CLOSE] Cliente python-client-23ccb98f-48ec-44c6-b18c-2b07c8781c3c marcado como 'pending_reconnect'.
+2025-06-15 07:54:37 - INFO - [session:close_redis_client:332] - [REDIS_CLOSE] Conexión a Redis cerrada.
+2025-06-15 07:54:37 - INFO - [main:graceful_shutdown:86] - Cierre elegante completado.
+2025-06-15 07:54:37 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-15 07:54:37 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...

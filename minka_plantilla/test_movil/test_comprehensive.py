@@ -48,7 +48,7 @@ def extract_message_content(data):
         
     # Si es el formato de mensaje estructurado
     if 'event' in data and data.get('event') == 'new_message':
-        return data.get('message_content')
+        return data.get('message')
     
     # Si es un mensaje directo
     if 'message' in data:
@@ -56,7 +56,7 @@ def extract_message_content(data):
     
     # Si es el contenido enviado directamente
     if 'message_content' in data:
-        return data.get('message_content')
+        return data.get('message')
     
     return None
 

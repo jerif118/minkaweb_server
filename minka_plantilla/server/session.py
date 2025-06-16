@@ -25,7 +25,8 @@ from config import (
     JWT_SECRET_KEY as CFG_JWT_SECRET_KEY,
     JWT_ALGORITHM as CFG_JWT_ALGORITHM,
     JWT_EXPIRATION_DELTA_SECONDS as CFG_JWT_EXPIRATION_DELTA_SECONDS,
-    MAX_QUEUE_LENGTH # Añadido para usarlo en add_message_to_queue
+    MAX_QUEUE_LENGTH, # Añadido para usarlo en add_message_to_queue
+    REDIS_SSL
 )
 
 # Variable global para el cliente Redis asíncrono
@@ -35,10 +36,11 @@ async def init_redis_client():
     """Inicializa la conexión global del cliente Redis asíncrono."""
     global redis_client
     if redis_client is None:
-        redis_url = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}"
-        if REDIS_PASSWORD:
-            redis_url = f"redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}"
-        
+        scheme = 'rediss' if REDIS_SSL else 'redis'
+        redis_url = (
+            f"{scheme}://default:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}"
+            "?ssl_cert_reqs=none"
+        )
         logging.info(f"[REDIS_INIT] Conectando a Redis en {REDIS_HOST}:{REDIS_PORT}, DB: {REDIS_DB}")
         try:
             redis_client = await aioredis.from_url(redis_url, decode_responses=True)

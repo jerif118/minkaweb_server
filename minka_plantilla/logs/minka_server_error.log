@@ -1743,3 +1743,63 @@ Traceback (most recent call last):
   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
     raise RuntimeError('Event loop stopped before Future completed.')
 RuntimeError: Event loop stopped before Future completed.
+2025-06-15 07:54:37 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-15 13:23:24 - ERROR - [session:init_redis_client:48] - [REDIS_INIT] No se pudo conectar a Redis: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-15 13:23:24 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.. Saliendo.
+2025-06-16 08:53:09 - ERROR - [session:init_redis_client:48] - [REDIS_INIT] No se pudo conectar a Redis: Connection closed by server.
+2025-06-16 08:53:09 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Connection closed by server.. Saliendo.
+2025-06-16 08:53:26 - ERROR - [session:init_redis_client:48] - [REDIS_INIT] No se pudo conectar a Redis: Connection closed by server.
+2025-06-16 08:53:26 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Connection closed by server.. Saliendo.
+2025-06-16 08:54:36 - ERROR - [session:init_redis_client:48] - [REDIS_INIT] No se pudo conectar a Redis: Connection closed by server.
+2025-06-16 08:54:36 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Connection closed by server.. Saliendo.
+2025-06-16 08:55:39 - ERROR - [session:init_redis_client:48] - [REDIS_INIT] No se pudo conectar a Redis: Connection closed by server.
+2025-06-16 08:55:39 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Connection closed by server.. Saliendo.
+2025-06-16 08:57:59 - ERROR - [session:init_redis_client:48] - [REDIS_INIT] No se pudo conectar a Redis: Connection closed by server.
+2025-06-16 08:57:59 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Connection closed by server.. Saliendo.
+2025-06-16 09:00:42 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: AbstractConnection.__init__() got an unexpected keyword argument 'ssl'. Saliendo.
+2025-06-16 09:01:01 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: AbstractConnection.__init__() got an unexpected keyword argument 'ssl'. Saliendo.
+2025-06-16 09:02:39 - ERROR - [session:init_redis_client:50] - [REDIS_INIT] No se pudo conectar a Redis: Error 1 connecting to vocal-thrush-27819.upstash.io:6379. [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006).
+2025-06-16 09:02:39 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Error 1 connecting to vocal-thrush-27819.upstash.io:6379. [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006).. Saliendo.
+2025-06-16 09:04:00 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: AbstractConnection.__init__() got an unexpected keyword argument 'ssl'. Saliendo.
+2025-06-16 09:07:00 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: AbstractConnection.__init__() got an unexpected keyword argument 'ssl'. Saliendo.
+2025-06-16 09:08:45 - ERROR - [session:init_redis_client:47] - [REDIS_INIT] No se pudo conectar a Redis: Error 1 connecting to vocal-thrush-27819.upstash.io:6379. [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006).
+2025-06-16 09:08:45 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Error 1 connecting to vocal-thrush-27819.upstash.io:6379. [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006).. Saliendo.
+2025-06-16 09:16:55 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
+2025-06-16 09:16:57 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: AbstractConnection.__init__() got an unexpected keyword argument 'ssl'. Saliendo.
+2025-06-16 09:31:11 - CRITICAL - [run:<module>:31] - Error fatal en el servidor: Event loop stopped before Future completed.
+Traceback (most recent call last):
+  File "/Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/server/run.py", line 27, in <module>
+    asyncio.run(main())
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 651, in run_until_complete
+    raise RuntimeError('Event loop stopped before Future completed.')
+RuntimeError: Event loop stopped before Future completed.
