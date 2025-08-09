@@ -19,6 +19,7 @@ import time
 import sys
 import random
 import traceback
+import ssl
 from concurrent.futures import ThreadPoolExecutor
 
 # Configuración de logging
@@ -31,8 +32,11 @@ logging.basicConfig(
 )
 logger = logging.getLogger("minka_comprehensive_test")
 
+# SSL context that skips certificate verification (use ONLY for local tests)
+SSL_CONTEXT = ssl._create_unverified_context()
+
 # URL del servidor WebSocket
-SERVER_URL = "ws://localhost:5001/ws"  # Ajustar según corresponda
+SERVER_URL = "wss://minkaweb-server-ancient-smoke-2675.fly.dev/ws"  # Dominio Fly.io hasta que el subdominio esté verificado
 
 # Definir función extract_message_content fuera de la clase para que esté disponible globalmente
 def extract_message_content(data):
@@ -92,7 +96,7 @@ class MinkaClient:
         logger.info(f"Cliente {self.client_id} creando sala...")
         try:
             url = f"{SERVER_URL}?client_id={self.client_id}&action=create"
-            self.websocket = await websockets.connect(url)
+            self.websocket = await websockets.connect(url, ssl=SSL_CONTEXT)
             self.connected = True
             
             # Esperar la respuesta con room_id y password
@@ -119,7 +123,7 @@ class MinkaClient:
         logger.info(f"Cliente {self.client_id} uniéndose a sala {room_id}...")
         try:
             url = f"{SERVER_URL}?client_id={self.client_id}&action=join&room_id={room_id}&room_password={room_password}"
-            self.websocket = await websockets.connect(url)
+            self.websocket = await websockets.connect(url, ssl=SSL_CONTEXT)
             self.connected = True
             self.room_id = room_id
             self.room_password = room_password
@@ -174,7 +178,7 @@ class MinkaClient:
             
             logger.info(f"Cliente {self.client_id} reconectando con token: {token_preview}")
             url = f"{SERVER_URL}?client_id={self.client_id}&jwt_token={token}"
-            self.websocket = await websockets.connect(url)
+            self.websocket = await websockets.connect(url, ssl=SSL_CONTEXT)
             
             # Esperar respuesta
             response = await self.websocket.recv()

@@ -13,7 +13,7 @@ def get_env_var(var_name, default_value):
 
 # Configuración del servidor
 SERVER_PORT = int(get_env_var('MINKA_PORT', '5001'))
-SERVER_HOST = get_env_var('MINKA_HOST', 'localhost')
+SERVER_HOST = get_env_var('MINKA_HOST', '0.0.0.0')
 ENVIRONMENT = get_env_var('MINKA_ENV', 'development')  # 'development' o 'production'
 
 # Tiempo de espera y timeouts

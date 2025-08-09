@@ -53,7 +53,7 @@ async def main():
     await initialize_server_state_from_redis()
     
     # Iniciar tareas periódicas
-    cleanup_task = PeriodicCallback(cleanup_sessions, 60000)  # 60 segundos
+    cleanup_task = PeriodicCallback(cleanup_sessions, 43200000)  # 60 segundos
     cleanup_task.start()
     
     # Configurar manejo de cierre elegante

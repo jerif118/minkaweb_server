@@ -70,8 +70,50 @@ async def handle_leave_action(handler, reason, jwt_token_to_invalidate=None, act
     else:
         logging.warning(f"[LEAVE-JTI] No se encontró JTI para blacklisting para {handler.client_id}.")
 
-    # Lógica de limpieza de sesión y cliente
-    await cleanup_client_and_session(handler, is_leaving_normally=True, active_websockets=active_websockets)
+    # Obtener la sesión actual
+    session_data = await get_session(handler.room_id)
+    
+    # Notificar a los demás participantes
+    if session_data:
+        other_clients = [cid for cid in session_data.get('clients', []) if cid != handler.client_id]
+        for peer_id in other_clients:
+            if peer_id in active_websockets:
+                try:
+                    active_websockets[peer_id].write_message({
+                        'event': 'peer_left_room', 
+                        'client_id': handler.client_id,
+                        'reason': reason,
+                        'message': 'El otro usuario salió de la sala.'
+                    })
+                except tornado.websocket.WebSocketClosedError:
+                    pass
+    
+    # MODIFICACIÓN: Eliminar el cliente directamente cuando se recibe leave explícito
+    # en lugar de marcarlo como pending_reconnect
+    is_mobile_client = not handler.client_id.startswith("web-")
+    
+    # Para todos los clientes que envíen explícitamente "leave", eliminarlos completamente
+    # Esto aplica tanto para móviles como para web cuando el leave es intencional
+    keep_message_queue = False
+    if reason in ["user_request", "user_logout", "doze_start"]:
+        logging.info(f"[LEAVE] Cliente {handler.client_id} envió leave con razón '{reason}'. Eliminando completamente.")
+        await delete_client(handler.client_id, keep_message_queue=keep_message_queue)
+        
+        # También eliminar de la sesión
+        if session_data:
+            if handler.client_id in session_data.get('clients', []):
+                session_data['clients'].remove(handler.client_id)
+                
+            # Si la sesión quedó vacía, eliminarla
+            if not session_data['clients']:
+                await delete_session(handler.room_id)
+                logging.info(f"[LEAVE] Sala {handler.room_id} eliminada por quedar vacía tras leave de {handler.client_id}")
+            else:
+                session_data['last_activity'] = time.time()
+                await set_session(handler.room_id, session_data)
+    else:
+        # Para otro tipo de leave, usar la lógica anterior
+        await cleanup_client_and_session(handler, is_leaving_normally=True, active_websockets=active_websockets)
     
     await handler.write_message({'event': 'left_room', 'message': 'Has salido de la sala.'})
     handler.close(code=1000, reason="Client initiated leave")
