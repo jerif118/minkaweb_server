@@ -8,21 +8,38 @@ import time
 import jwt
 import uuid
 import tornado.websocket
+import json
+from config import DOZE_TIMEOUT
 
 from session import (
     get_session, set_session, delete_session,
     get_client, set_client, delete_client,
-    add_jti_to_blacklist, add_message_to_queue, get_pending_messages
+    add_jti_to_blacklist, add_message_to_queue, get_pending_messages,
+    batch_add_messages, is_rate_limited
 )
 
 from config import JWT_ALGORITHM, JWT_SECRET_KEY, JWT_EXPIRATION_DELTA_SECONDS
 
 from handlers.room_manager import cleanup_client_and_session, send_error_and_close
+from handlers.state_model import (
+    ConnectionState, ParticipationState, PresenceState,
+    update_client_states, get_client_cached
+)
 
 async def process_message(handler, message_data, active_websockets):
     """
     Procesa un mensaje recibido del cliente y ejecuta la acción correspondiente.
     """
+    # Validación de current_jti (anti token reuse si perdió rotación)
+    provided_jti = message_data.get('current_jti') or message_data.get('jti')
+    if provided_jti and handler.client_id:
+        client_record = await get_client(handler.client_id)
+        stored_jti = client_record.get('current_jti') if client_record else None
+        if not stored_jti or stored_jti != provided_jti:
+            logging.warning(f"[ON-MSG] JTI inconsistente para {handler.client_id} (prov={provided_jti} stored={stored_jti}). Rechazando mensaje")
+            await handler.write_message({'error': 'Token no vigente.', 'code': 'STALE_JWT'} )
+            return
+
     action = message_data.get('action')
     content = message_data.get('message')
 
@@ -118,6 +135,13 @@ async def handle_leave_action(handler, reason, jwt_token_to_invalidate=None, act
     await handler.write_message({'event': 'left_room', 'message': 'Has salido de la sala.'})
     handler.close(code=1000, reason="Client initiated leave")
 
+    # Actualizar modelo unificado: participation -> left, connection -> closed
+    try:
+        if handler.client_id:
+            await update_client_states(handler.client_id, participation_state=ParticipationState.left, connection_state=ConnectionState.closed, touch_last_seen=False)
+    except Exception as e:
+        logging.error(f"[LEAVE] Error actualizando estados unificados: {e}")
+
 async def handle_doze_start_action(handler, active_websockets=None):
     """Maneja la acción de un cliente (móvil) para entrar en modo 'doze'."""
     if not handler.client_id or handler.client_id.startswith("web-"):
@@ -134,11 +158,20 @@ async def handle_doze_start_action(handler, active_websockets=None):
         handler.close(code=1008, reason="Internal server error processing doze")
         return
     
-    client_data['status'] = 'dozing'
+    # Calcular deadline
+    deadline = time.time() + DOZE_TIMEOUT
+    client_data['status'] = 'dozing'  # legacy
     client_data['dozing'] = True
     client_data['doze_start'] = time.time()
     client_data['doze_id'] = uuid.uuid4().hex
-    await set_client(handler.client_id, client_data)
+    client_data['doze_deadline'] = deadline
+    await set_client(handler.client_id, client_data)  # Mantener para compatibilidad legacy mínima
+
+    # Actualizar nuevo modelo de estados
+    try:
+        await update_client_states(handler.client_id, presence_state=PresenceState.doze, connection_state=ConnectionState.closed, touch_last_seen=False, extra_updates={'doze_deadline': deadline})
+    except Exception as e:
+        logging.error(f"[DOZE] Error actualizando estados unificados: {e}")
 
     session_data = await get_session(handler.room_id)
     if not session_data:
@@ -173,9 +206,30 @@ async def handle_doze_start_action(handler, active_websockets=None):
     handler.close(code=1000, reason="Client initiated doze mode")
 
 async def broadcast_message(handler, content, message_type="generic", active_websockets=None):
-    """Envía un mensaje a los otros participantes en la sala."""
+    """Envía un mensaje a los otros participantes en la sala con optimizaciones de E/S."""
     if not handler.client_id or not handler.room_id:
         return
+
+    # Rate limit simple (protege recursos)
+    if await is_rate_limited(f"bc:{handler.client_id}", limit=60, window_seconds=10):
+        await handler.write_message({'error': 'Rate limit excedido.', 'code': 'RATE_LIMITED'})
+        return
+
+    # Validar tamaño
+    try:
+        serialized_len = len(json.dumps(content)) if not isinstance(content, str) else len(content)
+    except Exception:
+        serialized_len = 0
+    MAX_MESSAGE_BYTES = 16_384
+    if serialized_len > MAX_MESSAGE_BYTES:
+        logging.warning(f"[BROADCAST] Mensaje demasiado grande ({serialized_len}B) de {handler.client_id}")
+        await handler.write_message({'error': 'Mensaje demasiado grande.', 'code': 'MESSAGE_TOO_LARGE'})
+        return
+
+    # Normalizar tipo
+    ALLOWED_TYPES = {'generic','text','image','control'}
+    if message_type not in ALLOWED_TYPES:
+        message_type = 'generic'
 
     session_data = await get_session(handler.room_id)
     if not session_data:
@@ -183,8 +237,17 @@ async def broadcast_message(handler, content, message_type="generic", active_web
         await handler.write_message({'error': 'Sala no encontrada.', 'code': 'ROOM_NOT_FOUND_FOR_BROADCAST'})
         return
 
+    if handler.client_id not in session_data.get('clients', []):
+        logging.warning(f"[BROADCAST] Cliente {handler.client_id} no pertenece ya a sala {handler.room_id}. Abortando envío.")
+        await handler.write_message({'error': 'No perteneces a la sala.', 'code': 'NOT_IN_ROOM'})
+        return
+
+    recipients = [cid for cid in session_data.get('clients', []) if cid != handler.client_id]
+    if not recipients:
+        return
+
     message_id = f"{time.time()}-{uuid.uuid4().hex[:8]}"
-    payload_to_send = {
+    base_payload = {
         'event': 'new_message',
         'sender_id': handler.client_id,
         'room_id': handler.room_id,
@@ -194,26 +257,55 @@ async def broadcast_message(handler, content, message_type="generic", active_web
         'message_id': message_id
     }
 
-    recipients_notified = 0
-    for recipient_id in session_data.get('clients', []):
-        if recipient_id == handler.client_id:
+    # Prefetch estados de destinatarios (concurrencia)
+    states = await asyncio.gather(*[get_client_cached(rid) for rid in recipients])
+    direct_targets = []
+    queue_targets = []
+    for rid, st in zip(recipients, states):
+        if not st:
+            queue_targets.append(rid)
             continue
+        if active_websockets and rid in active_websockets and st.presence_state != PresenceState.doze:
+            direct_targets.append(rid)
+        else:
+            queue_targets.append(rid)
 
-        delivered = await send_message_to_peer(handler.client_id, recipient_id, payload_to_send, active_websockets)
-        if delivered:
-            recipients_notified += 1
-    
-    if recipients_notified > 0:
-        await handler.write_message({
-            'event': 'message_sent_confirmation',
-            'message_id': message_id,
-            'recipients_attempted': len(session_data.get('clients', [])) - 1,
-            'recipients_delivered_directly': recipients_notified,
-            'info': 'Mensaje enviado a los participantes conectados.'
-        })
-        logging.info(f"[BROADCAST] Mensaje {message_id} de {handler.client_id} enviado en sala {handler.room_id}.")
-    else:
-        logging.info(f"[BROADCAST] Mensaje {message_id} de {handler.client_id} en sala {handler.room_id}. No hubo destinatarios directos.")
+    delivered = 0
+    # Envío directo concurrente limitado
+    async def _send_direct(rid):
+        nonlocal delivered
+        try:
+            await active_websockets[rid].write_message(base_payload)
+            delivered += 1
+        except Exception as e:
+            logging.debug(f"[BROADCAST] Falló envío directo a {rid}: {e}. Se pasará a cola.")
+            queue_targets.append(rid)
+
+    if active_websockets and direct_targets:
+        # Limitar concurrencia para no bloquear loop con demasiados tasks
+        SEM_LIMIT = 20
+        sem = asyncio.Semaphore(SEM_LIMIT)
+        async def _guarded_send(r):
+            async with sem:
+                await _send_direct(r)
+        await asyncio.gather(*[_guarded_send(r) for r in direct_targets])
+
+    # Encolar restantes en lote
+    if queue_targets:
+        mapping = {rid: [base_payload] for rid in queue_targets}
+        await batch_add_messages(mapping)
+        logging.debug(f"[BROADCAST] Encolados {len(queue_targets)} destinatarios para mensaje {message_id}")
+
+    # Confirmación al emisor
+    direct_attempts = len(recipients)
+    await handler.write_message({
+        'event': 'message_sent_confirmation',
+        'message_id': message_id,
+        'recipients_attempted': direct_attempts,
+        'recipients_delivered_directly': delivered,
+        'queued_recipients': len(queue_targets)
+    })
+    logging.info(f"[BROADCAST] Mensaje {message_id} de {handler.client_id}: directos={delivered} cola={len(queue_targets)} total={len(recipients)}")
 
 async def send_message_to_peer(sender_id, recipient_id, message_payload, active_websockets=None):
     """
@@ -226,12 +318,12 @@ async def send_message_to_peer(sender_id, recipient_id, message_payload, active_
         message_payload: Objeto completo del mensaje
         active_websockets: Diccionario de websockets activos
     """
-    recipient_data = await get_client(recipient_id)
+    recipient_data = await get_client_cached(recipient_id)
     if not recipient_data:
         logging.warning(f"[SEND-PEER] Destinatario {recipient_id} no encontrado en Redis.")
         return False
 
-    is_recipient_dozing = recipient_data.get('status') == 'dozing'
+    is_recipient_dozing = recipient_data.presence_state == PresenceState.doze
     
     if active_websockets and recipient_id in active_websockets and not is_recipient_dozing:
         try:
@@ -254,81 +346,82 @@ async def send_pending_messages(handler):
     """
     Envía mensajes pendientes al cliente recién conectado/reconectado.
     Prioriza mensajes de usuario sobre notificaciones del sistema.
+    Optimizado: envío concurrente limitado para media/baja prioridad y requeue batch en fallo.
     """
     if not handler.client_id:
         return
 
     pending_messages = await get_pending_messages(handler.client_id, delete_queue=True)
-    if pending_messages:
-        logging.info(f"[PENDING-MSG] Enviando {len(pending_messages)} mensajes pendientes a {handler.client_id}.")
-        
-        # Clasificar mensajes por tipo y prioridad
-        high_priority_msgs = []  # Mensajes de usuario y contenido real
-        medium_priority_msgs = []  # Confirmaciones y eventos de sistema importantes
-        low_priority_msgs = []  # Notificaciones que pueden esperar (ej: desconexiones)
-        
-        for msg_payload in pending_messages:
-            if not isinstance(msg_payload, dict):
-                high_priority_msgs.append(msg_payload)
-                continue
-                
-            event_type = msg_payload.get('event', '')
-            
-            # Mensajes de usuario tienen máxima prioridad
-            if event_type == 'new_message':
-                high_priority_msgs.append(msg_payload)
-            # Notificaciones de desconexión tienen baja prioridad
-            elif event_type in ['peer_disconnected_unexpectedly', 'peer_reconnect_failed']:
-                # Solo incluir si la desconexión aún es relevante (peer no reconectado)
-                peer_id = msg_payload.get('client_id')
-                if peer_id:
-                    peer_data = await get_client(peer_id)
-                    if peer_data and peer_data.get('status') == 'pending_reconnect':
-                        low_priority_msgs.append(msg_payload)
-                    else:
-                        logging.info(f"[PENDING-MSG] Descartando notificación obsoleta de desconexión para {peer_id} (ya reconectado)")
-                else:
+    if not pending_messages:
+        return
+
+    logging.info(f"[PENDING-MSG] Enviando {len(pending_messages)} mensajes pendientes a {handler.client_id}.")
+
+    high_priority_msgs: list = []
+    medium_priority_msgs: list = []
+    low_priority_msgs: list = []
+
+    for msg_payload in pending_messages:
+        if not isinstance(msg_payload, dict):
+            high_priority_msgs.append(msg_payload); continue
+        event_type = msg_payload.get('event', '')
+        if event_type == 'new_message':
+            high_priority_msgs.append(msg_payload)
+        elif event_type in ['peer_disconnected_unexpectedly', 'peer_reconnect_failed']:
+            peer_id = msg_payload.get('client_id')
+            if peer_id:
+                peer_data = await get_client_cached(peer_id)
+                if peer_data and getattr(peer_data, 'connection_state', None) == ConnectionState.disconnected:
                     low_priority_msgs.append(msg_payload)
-            # Actualización de JWT y eventos importantes en prioridad media
-            elif event_type in ['jwt_updated', 'room_updated', 'peer_joined']:
-                medium_priority_msgs.append(msg_payload)
-            # Otros eventos en prioridad media por defecto
+                else:
+                    logging.info(f"[PENDING-MSG] Descartando notificación obsoleta de desconexión para {peer_id}")
             else:
-                medium_priority_msgs.append(msg_payload)
-        
-        # Log detallado de la clasificación
-        logging.debug(f"[PENDING-MSG] Clasificación para {handler.client_id}: {len(high_priority_msgs)} alta, " +
-                     f"{len(medium_priority_msgs)} media, {len(low_priority_msgs)} baja prioridad.")
-        
-        # Función para enviar mensajes con manejo de errores
-        async def send_with_error_handling(messages, priority_name):
-            for msg in messages:
-                try:
-                    await handler.write_message(msg)
-                    logging.debug(f"[PENDING-MSG] Enviado mensaje {priority_name} prioridad a {handler.client_id}")
-                except tornado.websocket.WebSocketClosedError:
-                    logging.warning(f"[PENDING-MSG] WebSocket cerrado para {handler.client_id} enviando {priority_name} prioridad")
-                    # Reencolar los mensajes no entregados
-                    remaining = [msg] + [m for m in messages if m != msg]
-                    for remaining_msg in remaining:
-                        await add_message_to_queue(handler.client_id, remaining_msg)
-                    return False
-                except Exception as e:
-                    logging.error(f"[PENDING-MSG] Error enviando a {handler.client_id}: {e}")
-                    return False
+                low_priority_msgs.append(msg_payload)
+        elif event_type in ['jwt_updated', 'room_updated', 'peer_joined']:
+            medium_priority_msgs.append(msg_payload)
+        else:
+            medium_priority_msgs.append(msg_payload)
+
+    logging.debug(f"[PENDING-MSG] Clasificación para {handler.client_id}: {len(high_priority_msgs)} alta, {len(medium_priority_msgs)} media, {len(low_priority_msgs)} baja.")
+
+    # Envío secuencial de alta prioridad (preserva orden)
+    for msg in high_priority_msgs:
+        try:
+            await handler.write_message(msg)
+        except Exception as e:
+            logging.warning(f"[PENDING-MSG] Fallo enviando alta prioridad; reencolando resto: {e}")
+            # Reencolar mensaje fallido + restantes altas + todas medias/bajas
+            to_requeue = [msg] + high_priority_msgs[high_priority_msgs.index(msg)+1:] + medium_priority_msgs + low_priority_msgs
+            if to_requeue:
+                await batch_add_messages({handler.client_id: to_requeue})
+            return
+
+    # Función envío concurrente limitado
+    async def _send_group(messages, label, concurrency=10):
+        if not messages:
             return True
-        
-        # Enviar en orden de prioridad
-        if not await send_with_error_handling(high_priority_msgs, "alta"):
-            return
-        
-        if not await send_with_error_handling(medium_priority_msgs, "media"):
-            return
-            
-        # Pequeña pausa antes de enviar mensajes de baja prioridad
-        # para evitar que interfieran con la interacción inmediata
-        if low_priority_msgs:
-            await asyncio.sleep(0.5)
-            await send_with_error_handling(low_priority_msgs, "baja")
-            
-        logging.info(f"[PENDING-MSG] Finalizado envío de mensajes pendientes para {handler.client_id}.")
+        sem = asyncio.Semaphore(concurrency)
+        failed: list = []
+        async def _send_one(m):
+            async with sem:
+                try:
+                    await handler.write_message(m)
+                except Exception as e:
+                    failed.append(m)
+        await asyncio.gather(*[_send_one(m) for m in messages])
+        if failed:
+            logging.warning(f"[PENDING-MSG] {len(failed)}/{len(messages)} mensajes {label} fallaron; se reencolan.")
+            await batch_add_messages({handler.client_id: failed})
+            return False
+        return True
+
+    if not await _send_group(medium_priority_msgs, 'media'):
+        # Si fallan medias, no intentamos bajas (ya reencoladas)
+        return
+
+    # Pausa ligera antes de bajas
+    if low_priority_msgs:
+        await asyncio.sleep(0.3)
+        await _send_group(low_priority_msgs, 'baja')
+
+    logging.info(f"[PENDING-MSG] Finalizado envío de pendientes para {handler.client_id} (high={len(high_priority_msgs)}, med={len(medium_priority_msgs)}, low={len(low_priority_msgs)}).")

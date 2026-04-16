@@ -22,6 +22,10 @@ from utils import (
 )
 
 from handlers.jwt_manager import generate_and_distribute_jwts
+from handlers.state_model import (
+    ConnectionState, ParticipationState, PresenceState,
+    update_client_states, get_client_cached
+)
 
 async def send_error_and_close(handler, error_message, error_code_str, close_code=1008):
     """Envía un mensaje de error JSON al cliente y luego cierra la conexión."""
@@ -44,13 +48,18 @@ async def handle_create_room(handler, creator_client_id, active_websockets):
     client_data = {
         'client_id': handler.client_id,
         'room_id': handler.room_id,
-        'status': 'waiting_for_peer',
+        # 'status': 'waiting_for_peer',  # gestionado ahora por legacy_status derivado
         'is_initiator': True,
         'is_web': handler.client_id.startswith("web-"),
         'last_seen': time.time(),
         'current_jti': None
     }
-    await set_client(handler.client_id, client_data)
+    # Eliminado set_client directo; usar modelo de estados
+    await update_client_states(handler.client_id,
+                               connection_state=ConnectionState.connected,
+                               participation_state=ParticipationState.waiting_peer,
+                               presence_state=PresenceState.foreground,
+                               extra_updates={'room_id': handler.room_id, 'is_initiator': True})
 
     session_data = {
         'room_id': handler.room_id,
@@ -66,6 +75,9 @@ async def handle_create_room(handler, creator_client_id, active_websockets):
     
     active_websockets[handler.client_id] = handler
     handler.is_authenticated = True
+
+    # Actualizar nuevo modelo de estados
+    await update_client_states(handler.client_id, connection_state=ConnectionState.connected, participation_state=ParticipationState.waiting_peer, presence_state=PresenceState.foreground, extra_updates={'room_id': handler.room_id, 'is_initiator': True})
 
     await handler.write_message({
         'event': 'room_created',
@@ -132,12 +144,19 @@ async def handle_join_room(handler, joiner_client_id, room_id_to_join, password_
     session_to_join['status'] = 'active'
     session_to_join['last_activity'] = time.time()
     
-    # Guardar los datos antes de generar JWTs
-    await set_client(handler.client_id, client_data)
+    # Guardar sesión primero
     await set_session(handler.room_id, session_to_join)
+    # Actualizar modelo de estados unificado (elimina necesidad de set_client)
+    await update_client_states(handler.client_id,
+                               connection_state=ConnectionState.connected,
+                               participation_state=ParticipationState.active,
+                               presence_state=PresenceState.foreground,
+                               extra_updates={'room_id': handler.room_id, 'is_initiator': client_data.get('is_initiator', False), 'is_mobile': is_mobile, 'is_web': not is_mobile})
     
+    # Obtener datos normalizados para JWT distribution
+    refreshed_client = await get_client(handler.client_id)
     # Generar y distribuir JWTs para ambos clientes
-    await generate_and_distribute_jwts(session_to_join, client_data_of_joiner=client_data, active_websockets=active_websockets)
+    await generate_and_distribute_jwts(session_to_join, client_data_of_joiner=refreshed_client, active_websockets=active_websockets)
     
     # Mensaje de confirmación universal para ambos tipos de cliente
     join_confirmation = {
@@ -248,6 +267,9 @@ async def handle_reconnection_with_jwt(handler, token, client_id_from_param, act
     await handler.write_message({'event': 'reconnected', 'client_id': handler.client_id, 'room_id': handler.room_id})
     logging.info(f"[WS-OPEN] Cliente {handler.client_id} reconectado y validado en sala {handler.room_id}.")
 
+    # Actualizar modelo de estados
+    await update_client_states(handler.client_id, connection_state=ConnectionState.connected, presence_state=PresenceState.foreground, extra_updates={'room_id': handler.room_id})
+
     # Enviar mensajes pendientes
     from handlers.message_processor import send_pending_messages
     await send_pending_messages(handler)
@@ -312,3 +334,10 @@ async def cleanup_client_and_session(handler, is_leaving_normally=False, active_
                         await add_message_to_queue(peer_id, disconnect_notification)
     else:
         logging.warning(f"[CLOSE] No se encontraron datos para {handler.client_id} tras desconexión inesperada.")
+
+    # Marcar estado desconectado en nuevo modelo (si no es cierre intencional)
+    try:
+        if handler.client_id and not is_leaving_normally:
+            await update_client_states(handler.client_id, connection_state=ConnectionState.disconnected)
+    except Exception as e:
+        logging.error(f"[CLEANUP-CS] Error actualizando connection_state unificado: {e}")

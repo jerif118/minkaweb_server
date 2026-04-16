@@ -6,9 +6,8 @@ import datetime
 
 # Importar funciones para acceso a Redis
 from session import (
-    get_session, get_all_session_keys,
-    get_client, get_all_client_keys,
-    init_redis_client
+    init_redis_client, get_session, get_all_session_keys,
+    get_client, get_all_client_keys, get_redis_metrics_summary
 )
 
 # Importar configuraciones
@@ -18,6 +17,11 @@ from config import (
 
 # Importar active_websockets desde websocket_handler
 from handlers.websocket_handler import active_websockets
+from handlers.state_model import (
+    ConnectionState, ParticipationState, PresenceState
+)
+
+SCHEMA_VERSION = 1
 
 class MainHandler(tornado.web.RequestHandler):
     """Manejador principal para la ruta raíz del servidor."""
@@ -30,6 +34,7 @@ class HealthHandler(tornado.web.RequestHandler):
         health_data = {
             "status": "ok",
             "timestamp": time.time(),
+            "schema_version": SCHEMA_VERSION,
             "server_info": {
                 "version": "MinkaV2 (Redis-based)",
                 "port": SERVER_PORT,
@@ -61,37 +66,51 @@ class HealthHandler(tornado.web.RequestHandler):
             }
         
         health_data["redis"] = redis_info
+        rm = get_redis_metrics_summary()
+        # Cálculo simple p90/p99 aproximado si hay latencias (requiere extender métricas para almacenar muestras en el futuro)
+        health_data["redis_metrics"] = rm
         
         # Obtener estadísticas del servidor
         try:
             session_keys = await get_all_session_keys()
             client_keys = await get_all_client_keys()
-            
-            # Contar sesiones activas y clientes conectados
             active_sessions = 0
-            active_clients = 0
-            dozing_clients = 0
-            
+            buckets = {
+                'conn_connected': 0,
+                'conn_disconnected': 0,
+                'conn_closed': 0,
+                'presence_doze': 0,
+                'presence_foreground': 0,
+                'presence_offline': 0,
+                'participation_active': 0,
+                'participation_waiting': 0,
+                'participation_left': 0
+            }
             for session_key in session_keys:
                 session_data = await get_session(session_key)
                 if session_data:
                     active_sessions += 1
-            
             for client_key in client_keys:
                 client_data = await get_client(client_key)
-                if client_data:
-                    active_clients += 1
-                    if client_data.get('status') == 'dozing':
-                        dozing_clients += 1
-            
+                if not client_data:
+                    continue
+                cs = client_data.get('connection_state')
+                ps = client_data.get('participation_state')
+                prs = client_data.get('presence_state')
+                if cs == 'connected': buckets['conn_connected'] += 1
+                elif cs == 'disconnected': buckets['conn_disconnected'] += 1
+                elif cs == 'closed': buckets['conn_closed'] += 1
+                if prs == 'doze': buckets['presence_doze'] += 1
+                elif prs == 'foreground': buckets['presence_foreground'] += 1
+                elif prs == 'offline': buckets['presence_offline'] += 1
+                if ps == 'active': buckets['participation_active'] += 1
+                elif ps == 'waiting_peer': buckets['participation_waiting'] += 1
+                elif ps in ['left', 'removed', 'terminated']: buckets['participation_left'] += 1
             health_data["server_stats"] = {
                 "active_sessions": active_sessions,
-                "active_clients": active_clients,
-                "dozing_clients": dozing_clients,
+                **buckets,
                 "active_websockets": len(active_websockets),
-                "websocket_connections": list(active_websockets.keys())
             }
-            
         except Exception as e:
             logging.error(f"[HEALTH] Error obteniendo estadísticas: {e}")
             health_data["server_stats"] = {
@@ -107,6 +126,13 @@ class HealthHandler(tornado.web.RequestHandler):
 
 class MonitorHandler(tornado.web.RequestHandler):
     """Manejador para monitorear las sesiones y clientes activos."""
+    def prepare(self):
+        token = self.get_argument('token', None)
+        expected = self.application.settings.get('monitor_token') if self.application else None
+        if expected and token != expected:
+            self.set_status(403)
+            self.finish({"error": "Forbidden"})
+    
     async def get(self):
         # Esta función debe ser asíncrona debido a las llamadas a Redis
         sessions = []
@@ -243,16 +269,20 @@ class MonitorHandler(tornado.web.RequestHandler):
         for client_dict in clients:
             for client_id, client_data in client_dict.items():
                 room_id = client_data.get('room_id', 'N/A')
-                status = client_data.get('status', 'unknown')
+                # Determinar estado visual principal usando nuevos campos
+                status = client_data.get('status') or client_data.get('connection_state') or 'unknown'
+                cs = client_data.get('connection_state')
+                ps = client_data.get('participation_state')
+                prs = client_data.get('presence_state')
+                composite = f"c:{cs}|p:{ps}|pr:{prs}"
                 last_seen = client_data.get('last_seen', 0)
                 last_seen_str = datetime.datetime.fromtimestamp(last_seen).strftime('%Y-%m-%d %H:%M:%S') if last_seen else 'N/A'
-                
                 status_class = ""
-                if status == 'connected':
+                if cs == 'connected' and prs == 'foreground':
                     status_class = "status-connected"
-                elif status == 'dozing':
+                elif prs == 'doze':
                     status_class = "status-dozing"
-                elif status == 'pending_reconnect':
+                elif cs == 'disconnected':
                     status_class = "status-pending"
                 
                 html += f"""
@@ -260,7 +290,7 @@ class MonitorHandler(tornado.web.RequestHandler):
                 <td>{tornado.escape.xhtml_escape(client_id)}</td>
                 <td>{tornado.escape.xhtml_escape(room_id)}</td>
                 <td class="{status_class}">{tornado.escape.xhtml_escape(status)}</td>
-                <td>{last_seen_str}</td>
+                <td>{last_seen_str}<br/><small>{tornado.escape.xhtml_escape(composite)}</small></td>
                 <td><details><summary>Ver datos</summary><div class="json-data">{tornado.escape.xhtml_escape(str(client_data))}</div></details></td>
               </tr>"""
         
