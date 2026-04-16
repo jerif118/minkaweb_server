@@ -5,6 +5,7 @@ import json
 import time
 import logging
 import asyncio  # Añadir esta importación
+from config import RECONNECT_GRACE_PERIOD  # Nuevo import para deadlines
 
 # Importaciones de módulos de la aplicación
 from session import (
@@ -21,6 +22,10 @@ from handlers.room_manager import (
 )
 from handlers.message_processor import process_message, send_pending_messages
 from handlers.jwt_manager import generate_and_distribute_jwts
+from handlers.state_model import (
+    ConnectionState, ParticipationState, PresenceState,
+    update_client_states, get_client_cached
+)
 
 # Diccionario global para mantener los websockets activos
 active_websockets = {}
@@ -78,12 +83,20 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             await send_error_and_close(self, 'Acción requerida (create o join).', 'ACTION_REQUIRED')
             return
 
+        # Al inicio marcamos estado connecting
+        if client_id_param:
+            await update_client_states(client_id_param, connection_state=ConnectionState.connecting, participation_state=ParticipationState.joining, presence_state=PresenceState.foreground, touch_last_seen=True)
+
         if action_param == "create":
+            # Tras crear sala, actualizar estados unificados
             await handle_create_room(self, client_id_param, active_websockets)
+            await update_client_states(client_id_param, connection_state=ConnectionState.connected, participation_state=ParticipationState.waiting_peer, presence_state=PresenceState.foreground, extra_updates={'room_id': self.room_id, 'reconnect_deadline': time.time() +  RECONNECT_GRACE_PERIOD})
         elif action_param == "join":
+            # Unirse a sala
             room_id_join = self.get_argument("room_id", None)
             room_password_join = self.get_argument("room_password", None) or self.get_argument("password", None)
             await handle_join_room(self, client_id_param, room_id_join, room_password_join, active_websockets)
+            await update_client_states(client_id_param, connection_state=ConnectionState.connected, participation_state=ParticipationState.active, presence_state=PresenceState.foreground, extra_updates={'room_id': self.room_id, 'reconnect_deadline': time.time() +  RECONNECT_GRACE_PERIOD})
         else:
             logging.warning(f"[WS-OPEN] {client_id_param} - Acción desconocida: {action_param}.")
             await send_error_and_close(self, f"Acción desconocida: {action_param}.", 'UNKNOWN_ACTION')
@@ -104,6 +117,10 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             logging.warning(f"[ON-MSG] JSON inválido de {self.client_id}: {message_str[:100]}")
             await send_error_and_close(self, 'JSON inválido.', 'INVALID_JSON_FORMAT')
             return
+
+        # Touch last_seen de forma liviana sin recalcular (solo si autenticado)
+        if self.client_id:
+            asyncio.create_task(update_client_states(self.client_id, touch_last_seen=True))
 
         # Procesar el mensaje usando el módulo especializado
         await process_message(self, message_data, active_websockets)
@@ -138,6 +155,15 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         if not self.client_id or not self.room_id:
             logging.warning(f"[CLOSE] Desconexión inesperada ANTES de asignación completa de client/room.")
             return
+
+        # Actualizar estados unificados según tipo de cierre
+        if self.client_id:
+            if self.intentional_disconnect_flag:
+                # Cierre voluntario -> connection_state.closed (participation se mantiene si leave ya lo cambió)
+                asyncio.create_task(update_client_states(self.client_id, connection_state=ConnectionState.closed, touch_last_seen=False))
+            else:
+                # Desconexión inesperada -> disconnected
+                asyncio.create_task(update_client_states(self.client_id, connection_state=ConnectionState.disconnected, touch_last_seen=False, extra_updates={'reconnect_deadline': time.time() + RECONNECT_GRACE_PERIOD}))
 
         # Crear una tarea separada para la limpieza asíncrona con prioridad equivalente para ambos tipos
         tornado.ioloop.IOLoop.current().add_callback(

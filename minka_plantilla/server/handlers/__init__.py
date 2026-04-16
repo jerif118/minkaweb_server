@@ -23,6 +23,13 @@ from handlers.message_processor import process_message, send_pending_messages, b
 # Importar funciones de manejo de JWT
 from handlers.jwt_manager import generate_and_distribute_jwts
 
+# Nuevo: modelo de estados unificado
+from handlers.state_model import (
+    ConnectionState, ParticipationState, PresenceState,
+    ClientState, update_client_states, get_client_cached,
+    derive_legacy_status, compute_state_compact, validate_transition
+)
+
 __all__ = [
     # Handlers base y HTTP
     'BaseHandler', 'MainHandler', 'HealthHandler', 'MonitorHandler',
@@ -40,5 +47,10 @@ __all__ = [
     'process_message', 'send_pending_messages', 'broadcast_message',
     
     # Funciones de manejo de JWT
-    'generate_and_distribute_jwts'
+    'generate_and_distribute_jwts',
+    
+    # Exponer helpers de modelo de estado
+    'ConnectionState', 'ParticipationState', 'PresenceState',
+    'ClientState', 'update_client_states', 'get_client_cached',
+    'derive_legacy_status', 'compute_state_compact', 'validate_transition'
 ]

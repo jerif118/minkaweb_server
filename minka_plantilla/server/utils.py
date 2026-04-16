@@ -14,6 +14,10 @@ from config import (
     JWT_SECRET_KEY, JWT_ALGORITHM, JWT_EXPIRATION_DELTA_SECONDS
 )
 
+ISSUER = 'minka_server'
+AUDIENCE = 'minka_clients'
+CLOCK_SKEW = 5  # segundos permitidos de desfase reloj
+
 # ------- GENERACIÓN DE IDENTIFICADORES Y VALIDACIONES -------
 
 def generar_identificador_unico(prefijo="id"):
@@ -99,16 +103,19 @@ def crear_token_jwt(client_id, room_id, jti=None):
     payload = {
         'client_id': client_id,
         'room_id': room_id,
-        'exp': time.time() + JWT_EXPIRATION_DELTA_SECONDS,
-        'iat': time.time(),
-        'jti': jti or uuid.uuid4().hex # Identificador único del token
+        'exp': int(time.time() + JWT_EXPIRATION_DELTA_SECONDS),
+        'iat': int(time.time()),
+        'nbf': int(time.time()) - 1,  # leve margen
+        'iss': ISSUER,
+        'aud': AUDIENCE,
+        'jti': jti or uuid.uuid4().hex
     }
+    headers = {'alg': JWT_ALGORITHM, 'typ': 'JWT'}
     try:
-        token = jwt.encode(payload, JWT_SECRET_KEY, algorithm=JWT_ALGORITHM)
+        token = jwt.encode(payload, JWT_SECRET_KEY, algorithm=JWT_ALGORITHM, headers=headers)
         return token
     except Exception as e:
-        # En una aplicación real, loguear este error
-        print(f"Error al crear JWT: {e}")
+        logging.error(f"Error al crear JWT: {e}")
         return None
 
 async def verificar_token_jwt_async(token, jti_blacklisted_checker=None):
@@ -126,21 +133,21 @@ async def verificar_token_jwt_async(token, jti_blacklisted_checker=None):
                       None en caso contrario.
     """
     try:
-        payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_ALGORITHM])
-        
-        # Verificar si el JTI está en la lista negra, si se proporciona un verificador
-        if jti_blacklisted_checker:
-            jti = payload.get('jti')
-            if not jti:
-                # Considerar esto un error o una política de seguridad: token sin JTI
-                pass  # Por ahora, permitir si no hay JTI y no hay checker
-            elif await jti_blacklisted_checker(jti):  # Await aquí para la función asíncrona
-                return None  # Token revocado
-                
+        payload = jwt.decode(
+            token,
+            JWT_SECRET_KEY,
+            algorithms=[JWT_ALGORITHM],
+            audience=AUDIENCE,
+            issuer=ISSUER,
+            leeway=CLOCK_SKEW
+        )
+        jti = payload.get('jti')
+        if not jti:
+            return None
+        if jti_blacklisted_checker and await jti_blacklisted_checker(jti):
+            return None
         return payload
-    except jwt.ExpiredSignatureError:
-        return None
-    except jwt.InvalidTokenError as e:
+    except jwt.PyJWTError as e:
         return None
     except Exception as e:
         logging.error(f"Error inesperado al verificar JWT: {e}")
@@ -165,25 +172,24 @@ def verificar_token_jwt(token, jti_blacklisted_checker=None):
     """
     # Comprobar si el verificador es asíncrono
     if jti_blacklisted_checker and hasattr(jti_blacklisted_checker, "__await__"):
-        logging.warning("verificar_token_jwt recibió un verificador asíncrono pero esta función es síncrona. Use verificar_token_jwt_async en su lugar.")
+        logging.warning("verificar_token_jwt recibió verificador async. Usar versión async.")
         return None
-        
     try:
-        payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_ALGORITHM])
-        
-        # Verificar si el JTI está en la lista negra, si se proporciona un verificador
-        if jti_blacklisted_checker:
-            jti = payload.get('jti')
-            if not jti:
-                # Considerar esto un error o una política de seguridad: token sin JTI
-                pass  # Por ahora, permitir si no hay JTI y no hay checker
-            elif jti_blacklisted_checker(jti):
-                return None  # Token revocado
-                
+        payload = jwt.decode(
+            token,
+            JWT_SECRET_KEY,
+            algorithms=[JWT_ALGORITHM],
+            audience=AUDIENCE,
+            issuer=ISSUER,
+            leeway=CLOCK_SKEW
+        )
+        jti = payload.get('jti')
+        if not jti:
+            return None
+        if jti_blacklisted_checker and jti_blacklisted_checker(jti):
+            return None
         return payload
-    except jwt.ExpiredSignatureError:
-        return None
-    except jwt.InvalidTokenError as e:
+    except jwt.PyJWTError:
         return None
     except Exception as e:
         logging.error(f"Error inesperado al verificar JWT: {e}")

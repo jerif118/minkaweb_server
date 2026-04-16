@@ -1,0 +1,8 @@
+2025-06-15 13:23:24 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-15 13:23:24 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-15 13:23:24 - INFO - [logger_config:setup_logging:97] - Logs configurados en: /Users/jerifcornejo/minka_project/minkaweb_server/minka_plantilla/logs
+2025-06-15 13:23:24 - INFO - [logger_config:setup_logging:103] - Sistema de logging inicializado con nivel INFO
+2025-06-15 13:23:24 - INFO - [session:init_redis_client:42] - [REDIS_INIT] Conectando a Redis en localhost:6379, DB: 0
+2025-06-15 13:23:24 - ERROR - [session:init_redis_client:48] - [REDIS_INIT] No se pudo conectar a Redis: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-06-15 13:23:24 - CRITICAL - [main:main:36] - [MAIN] No se pudo inicializar Redis al arrancar: Error Multiple exceptions: [Errno 61] Connect call failed ('::1', 6379, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.. Saliendo.
+2025-06-15 13:23:24 - INFO - [run:<module>:34] - Servidor Minka detenido. Saliendo...

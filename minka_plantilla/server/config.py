@@ -13,7 +13,7 @@ def get_env_var(var_name, default_value):
 
 # Configuración del servidor
 SERVER_PORT = int(get_env_var('MINKA_PORT', '5001'))
-SERVER_HOST = get_env_var('MINKA_HOST', 'localhost')
+SERVER_HOST = get_env_var('MINKA_HOST', '0.0.0.0')
 ENVIRONMENT = get_env_var('MINKA_ENV', 'development')  # 'development' o 'production'
 
 # Tiempo de espera y timeouts
@@ -25,13 +25,14 @@ MESSAGE_TTL_SECONDS = int(get_env_var('MINKA_MESSAGE_TTL', str(7 * 24 * 60 * 60)
 MAX_QUEUE_LENGTH = int(get_env_var('MINKA_MAX_QUEUE_LENGTH', '100'))  # Máximo de mensajes por cola
 
 # Configuración de Redis
-REDIS_HOST = get_env_var('REDIS_HOST', 'localhost')
+REDIS_HOST = get_env_var('REDIS_HOST', 'vocal-thrush-27819.upstash.io')
 REDIS_PORT = int(get_env_var('REDIS_PORT', '6379'))
 REDIS_DB = int(get_env_var('REDIS_DB', '0'))
-REDIS_PASSWORD = get_env_var('REDIS_PASSWORD', None)
+REDIS_PASSWORD = get_env_var('REDIS_PASSWORD', 'AWyrAAIjcDFiOTZiMmM0ODYxNjg0NDkyYWNmYWQ5OTE3ZGYzYTg5NXAxMA')
+REDIS_SSL = get_env_var('REDIS_SSL', 'true').lower() == 'true' 
 
 # Configuración de JWT
-JWT_SECRET_KEY = get_env_var('MINKA_JWT_SECRET', 'minkaweb_secret_key')  # ¡Cambiar en producción!
+JWT_SECRET_KEY = get_env_var('MINKA_JWT_SECRET', 'hs;1dDek?n@(7)`hvUoxz|OspiM90meLA,%hO9Nm')  # ¡Cambiar en producción!
 JWT_ALGORITHM = get_env_var('MINKA_JWT_ALGORITHM', 'HS256')
 JWT_EXPIRATION_DELTA_SECONDS = int(get_env_var('MINKA_JWT_EXPIRATION', str(WEB_RECONNECT_TIMEOUT)))
 

@@ -58,7 +58,7 @@ if __name__ == "__main__":
         f"?action=join"
         f"&client_id={client_id}"
         f"&room_id={room_id}"
-        f"&password={password}"
+        f"&room_password={password}"  # Asegúrate que este parámetro coincide con lo esperado
     )
 
     print("Conectando al servidor con URL:", ws_url)

@@ -23,6 +23,10 @@ from config import (
 # Referencia a active_websockets
 # Nota: Esto crea una referencia circular, pero es necesario para notificar a clientes activos
 from handlers.websocket_handler import active_websockets
+from handlers.state_model import (
+    ConnectionState, ParticipationState, PresenceState,
+    get_client_cached, update_client_states
+)
 
 async def cleanup_sessions():
     """
@@ -77,75 +81,25 @@ async def cleanup_sessions():
     # Expirar clientes que no se reconectaron
     all_c_keys = await get_all_client_keys()
     for client_id_key in all_c_keys:
-        client_info_cleanup = await get_client(client_id_key)
+        client_info_cleanup = await get_client_cached(client_id_key)
         if not client_info_cleanup:
             continue
+        conn_state = client_info_cleanup.connection_state.value if hasattr(client_info_cleanup, 'connection_state') else None
+        part_state = client_info_cleanup.participation_state.value if hasattr(client_info_cleanup, 'participation_state') else None
+        presence_state = client_info_cleanup.presence_state.value if hasattr(client_info_cleanup, 'presence_state') else None
 
-        if client_info_cleanup.get('status') == 'pending_reconnect':
-            is_web_cleanup = client_info_cleanup.get('is_web', False)
-            timeout_for_client_cleanup = WEB_RECONNECT_TIMEOUT if is_web_cleanup else RECONNECT_GRACE_PERIOD
-            
-            # Verificar si expiró el tiempo de reconexión
-            if now - client_info_cleanup.get('pending_since', now) > timeout_for_client_cleanup:
-                logging.info(f'[CLEANUP] Cliente {client_id_key} (web: {is_web_cleanup}) no reconectó ({timeout_for_client_cleanup}s). Limpiando.')
-                room_id_of_client = client_info_cleanup.get('room_id')
-                
-                # Actualizar sesión si existe
-                if room_id_of_client:
-                    session_info_of_client = await get_session(room_id_of_client)
-                    if session_info_of_client:
-                        # Notificar al peer si está activo
-                        for peer_cid in session_info_of_client.get('clients', []):
-                            if peer_cid != client_id_key and peer_cid in active_websockets:
-                                try:
-                                    active_websockets[peer_cid].write_message({
-                                        'event': 'peer_reconnect_failed', 
-                                        'client_id': client_id_key
-                                    })
-                                except Exception:
-                                    pass
-                        
-                        # Remover cliente de la sesión
-                        if client_id_key in session_info_of_client.get('clients', []):
-                            session_info_of_client['clients'].remove(client_id_key)
-                            session_info_of_client['last_activity'] = now
-                            
-                            # Si la sesión queda vacía, marcarla para eliminar
-                            if not session_info_of_client['clients']:
-                                if room_id_of_client not in expired_session_ids:
-                                    expired_session_ids.append(room_id_of_client)
-                                logging.info(f"[CLEANUP] Sesión {room_id_of_client} marcada para expirar (último cliente {client_id_key} no reconectó).")
-                            else:
-                                await set_session(room_id_of_client, session_info_of_client)
-                
-                # Determinar si se debe conservar la cola de mensajes
-                was_dozing_before_pending = client_info_cleanup.get('dozing', False)
-                await delete_client(client_id_key, keep_message_queue=was_dozing_before_pending)
-                if was_dozing_before_pending:
-                    logging.info(f"[CLEANUP] Cliente {client_id_key} estaba en doze antes de pending_reconnect, cola conservada.")
+        # Usar deadlines preferidos
+        if conn_state == 'disconnected' and part_state in ['active', 'waiting_peer']:
+            deadline = client_info_cleanup.reconnect_deadline or (getattr(client_info_cleanup, 'last_seen', time.time()) + RECONNECT_GRACE_PERIOD)
+            if time.time() > deadline:
+                logging.info(f"[CLEANUP] Cliente {client_id_key} no reconectó (deadline alcanzado). Cerrando y marcando left/offline.")
+                await update_client_states(client_id_key, connection_state=ConnectionState.closed, participation_state=ParticipationState.left, presence_state=PresenceState.offline, touch_last_seen=False)
+        elif presence_state == 'doze':
+            d_deadline = client_info_cleanup.doze_deadline or (getattr(client_info_cleanup, 'last_seen', time.time()) + DOZE_TIMEOUT)
+            if time.time() > d_deadline:
+                logging.info(f"[CLEANUP] Cliente {client_id_key} excedió doze_deadline. Marcando offline.")
+                await update_client_states(client_id_key, presence_state=PresenceState.offline, connection_state=ConnectionState.closed, touch_last_seen=False)
     
-    # Limpiar las sesiones marcadas como expiradas
-    for rid_to_delete in set(expired_session_ids):  # Usar set para evitar duplicados
-        logging.info(f'[CLEANUP] Eliminando sesión expirada {rid_to_delete} y sus clientes restantes.')
-        session_being_deleted = await get_session(rid_to_delete)
-        if session_being_deleted:
-            for cid_in_del_session in session_being_deleted.get('clients', []):
-                if cid_in_del_session in active_websockets:
-                    try:
-                        active_websockets[cid_in_del_session].write_message({
-                            'info': 'Sesión expirada por inactividad o limpieza.',
-                            'code': 'SESSION_EXPIRED'
-                        })
-                        active_websockets[cid_in_del_session].close(code=1000, reason="Sesión expirada")
-                    except Exception:
-                        pass  # Ignorar errores al cerrar
-                
-                # Eliminar cliente (sin conservar cola)
-                await delete_client(cid_in_del_session, keep_message_queue=False)
-                
-        # Finalmente eliminar la sesión
-        await delete_session(rid_to_delete)
-
 async def initialize_server_state_from_redis():
     """
     Inicializa el estado del servidor desde Redis al arrancar.
